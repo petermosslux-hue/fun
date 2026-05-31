@@ -125,7 +125,7 @@ function drawChart(res){
   const wrap=document.getElementById('chart-wrap');
   const canvas=document.getElementById('cc');
   const dpr=window.devicePixelRatio||1;
-  const W=wrap.offsetWidth||720;
+  const W=Math.max(wrap.offsetWidth,wrap.getBoundingClientRect().width,window.innerWidth-48,400);
   const H=320;
   canvas.width=W*dpr;
   canvas.height=H*dpr;
@@ -234,7 +234,9 @@ function update(){
 }
 
 window.addEventListener('resize',update);
-window.addEventListener('load',update);
+window.addEventListener('load',function(){update();setTimeout(update,300);setTimeout(update,800);});
+setTimeout(update,100);
+setTimeout(update,500);
 update();
 </script>
 </body>
