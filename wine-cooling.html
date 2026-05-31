@@ -7,159 +7,104 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0;font-family:system-ui,sans-serif}
 body{background:#f9f8f5;color:#1a1a1a;padding:1.5rem}
-.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0}
 .wrap{max-width:760px;margin:0 auto}
 .title{font-size:20px;font-weight:500;margin:0 0 4px}
 .subtitle{font-size:13px;color:#666;margin:0 0 1.5rem}
 .cols{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.5rem}
-.card{background:#fff;border:0.5px solid rgba(0,0,0,0.12);border-radius:12px;padding:1rem}
+.card{background:#fff;border:1px solid rgba(0,0,0,0.12);border-radius:12px;padding:1rem}
 .card-title{font-size:11px;font-weight:500;color:#888;text-transform:uppercase;letter-spacing:.04em;margin:0 0 12px;display:flex;align-items:center;gap:6px}
 .dot{width:8px;height:8px;border-radius:50%;display:inline-block;flex-shrink:0}
-.shared-card{background:#fff;border:0.5px solid rgba(0,0,0,0.12);border-radius:12px;padding:1rem;margin-bottom:1.5rem}
+.shared-card{background:#fff;border:1px solid rgba(0,0,0,0.12);border-radius:12px;padding:1rem;margin-bottom:1.5rem}
 .shared-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px 1rem}
 .sl-row{margin-bottom:10px}
 .sl-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:3px}
 .sl-label{font-size:12px;color:#555}
-.sl-val{font-size:13px;font-weight:500;color:#111;min-width:48px;text-align:right}
+.sl-val{font-size:13px;font-weight:500;color:#111;min-width:60px;text-align:right}
 input[type=range]{width:100%;accent-color:#378ADD}
 .mg{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:1.5rem}
 .mc{background:#f1efe8;border-radius:8px;padding:10px 12px}
 .ml{font-size:11px;color:#666;margin:0 0 3px}
 .mv{font-size:17px;font-weight:500;color:#111;margin:0}
 .ms{font-size:10px;color:#888;margin:2px 0 0}
-.leg{display:flex;gap:14px;margin-bottom:6px;font-size:11px;color:#666;flex-wrap:wrap}
+.leg{display:flex;gap:14px;margin-bottom:8px;font-size:11px;color:#555;flex-wrap:wrap;align-items:center}
 .li{display:flex;align-items:center;gap:4px}
-.reset-btn{font-size:12px;color:#555;background:none;border:0.5px solid rgba(0,0,0,0.2);border-radius:6px;padding:4px 12px;cursor:pointer;margin-bottom:1rem}
+.reset-btn{font-size:12px;color:#555;background:none;border:1px solid rgba(0,0,0,0.2);border-radius:6px;padding:4px 12px;cursor:pointer;margin-bottom:1rem}
 .reset-btn:hover{background:#f1efe8}
+#chart-wrap{width:100%;background:#fff;border:1px solid rgba(0,0,0,0.08);border-radius:8px;overflow:hidden}
+#cc{display:block}
 @media(max-width:520px){.cols{grid-template-columns:1fr}.shared-grid{grid-template-columns:1fr}.mg{grid-template-columns:1fr 1fr}}
 </style>
 </head>
 <body>
 <div class="wrap">
-<h2 class="sr-only">Interactive wine cooling calculator comparing partial ice versus ice-water bath scenarios.</h2>
 <p class="title">Wine cooling calculator</p>
 <p class="subtitle">Adjust the parameters to compare two cooling scenarios.</p>
-
-<button class="reset-btn" onclick="resetAll()">↺ Reset to defaults</button>
+<button class="reset-btn" onclick="resetAll()">&#8635; Reset to defaults</button>
 
 <div class="shared-card">
   <p class="card-title">Shared parameters</p>
   <div class="shared-grid">
-    <div class="sl-row">
-      <div class="sl-top"><span class="sl-label">Starting wine temp</span><span class="sl-val" id="v-tstart">20°C</span></div>
-      <input type="range" min="5" max="35" step="1" value="20" id="s-tstart" oninput="update()">
-    </div>
-    <div class="sl-row">
-      <div class="sl-top"><span class="sl-label">Target serving temp</span><span class="sl-val" id="v-ttgt">13°C</span></div>
-      <input type="range" min="6" max="20" step="1" value="13" id="s-ttgt" oninput="update()">
-    </div>
-    <div class="sl-row">
-      <div class="sl-top"><span class="sl-label">Wine mass</span><span class="sl-val" id="v-mass">0.75 kg</span></div>
-      <input type="range" min="0.35" max="1.5" step="0.05" value="0.75" id="s-mass" oninput="update()">
-    </div>
-    <div class="sl-row">
-      <div class="sl-top"><span class="sl-label">Bottle surface area</span><span class="sl-val" id="v-area">0.05 m²</span></div>
-      <input type="range" min="0.03" max="0.10" step="0.005" value="0.05" id="s-area" oninput="update()">
-    </div>
+    <div class="sl-row"><div class="sl-top"><span class="sl-label">Starting wine temp</span><span class="sl-val" id="v-tstart">20°C</span></div><input type="range" min="5" max="35" step="1" value="20" id="s-tstart" oninput="update()"></div>
+    <div class="sl-row"><div class="sl-top"><span class="sl-label">Target serving temp</span><span class="sl-val" id="v-ttgt">13°C</span></div><input type="range" min="6" max="20" step="1" value="13" id="s-ttgt" oninput="update()"></div>
+    <div class="sl-row"><div class="sl-top"><span class="sl-label">Wine mass</span><span class="sl-val" id="v-mass">0.75 kg</span></div><input type="range" min="0.35" max="1.5" step="0.05" value="0.75" id="s-mass" oninput="update()"></div>
+    <div class="sl-row"><div class="sl-top"><span class="sl-label">Bottle surface area</span><span class="sl-val" id="v-area">0.050 m²</span></div><input type="range" min="0.03" max="0.10" step="0.005" value="0.05" id="s-area" oninput="update()"></div>
   </div>
 </div>
 
 <div class="cols">
   <div class="card">
     <p class="card-title"><span class="dot" style="background:#378ADD"></span>Scenario 1 — partial ice</p>
-    <div class="sl-row">
-      <div class="sl-top"><span class="sl-label">Air temp</span><span class="sl-val" id="v-tair">28°C</span></div>
-      <input type="range" min="10" max="45" step="1" value="28" id="s-tair" oninput="update()">
-    </div>
-    <div class="sl-row">
-      <div class="sl-top"><span class="sl-label">Initial ice fraction φ</span><span class="sl-val" id="v-phi">0.50</span></div>
-      <input type="range" min="0.1" max="1.0" step="0.05" value="0.5" id="s-phi" oninput="update()">
-    </div>
-    <div class="sl-row">
-      <div class="sl-top"><span class="sl-label">Ice mass (exposed side)</span><span class="sl-val" id="v-mice">150 g</span></div>
-      <input type="range" min="50" max="500" step="10" value="150" id="s-mice" oninput="update()">
-    </div>
-    <div class="sl-row">
-      <div class="sl-top"><span class="sl-label">h ice</span><span class="sl-val" id="v-hice">400 W/m²K</span></div>
-      <input type="range" min="50" max="800" step="10" value="400" id="s-hice" oninput="update()">
-    </div>
-    <div class="sl-row">
-      <div class="sl-top"><span class="sl-label">h air</span><span class="sl-val" id="v-hair">10 W/m²K</span></div>
-      <input type="range" min="2" max="50" step="1" value="10" id="s-hair" oninput="update()">
-    </div>
+    <div class="sl-row"><div class="sl-top"><span class="sl-label">Air temp</span><span class="sl-val" id="v-tair">28°C</span></div><input type="range" min="10" max="45" step="1" value="28" id="s-tair" oninput="update()"></div>
+    <div class="sl-row"><div class="sl-top"><span class="sl-label">Initial ice fraction &#966;</span><span class="sl-val" id="v-phi">0.50</span></div><input type="range" min="0.1" max="1.0" step="0.05" value="0.5" id="s-phi" oninput="update()"></div>
+    <div class="sl-row"><div class="sl-top"><span class="sl-label">Ice mass (exposed side)</span><span class="sl-val" id="v-mice">150 g</span></div><input type="range" min="50" max="500" step="10" value="150" id="s-mice" oninput="update()"></div>
+    <div class="sl-row"><div class="sl-top"><span class="sl-label">h ice</span><span class="sl-val" id="v-hice">400 W/m²K</span></div><input type="range" min="50" max="800" step="10" value="400" id="s-hice" oninput="update()"></div>
+    <div class="sl-row"><div class="sl-top"><span class="sl-label">h air</span><span class="sl-val" id="v-hair">10 W/m²K</span></div><input type="range" min="2" max="50" step="1" value="10" id="s-hair" oninput="update()"></div>
   </div>
-
   <div class="card">
     <p class="card-title"><span class="dot" style="background:#1D9E75"></span>Scenario 2 — ice-water bath</p>
-    <div class="sl-row">
-      <div class="sl-top"><span class="sl-label">Bath temperature</span><span class="sl-val" id="v-tbath">10°C</span></div>
-      <input type="range" min="0" max="20" step="1" value="10" id="s-tbath" oninput="update()">
-    </div>
-    <div class="sl-row">
-      <div class="sl-top"><span class="sl-label">h water</span><span class="sl-val" id="v-hwat">500 W/m²K</span></div>
-      <input type="range" min="100" max="1000" step="10" value="500" id="s-hwat" oninput="update()">
-    </div>
+    <div class="sl-row"><div class="sl-top"><span class="sl-label">Bath temperature</span><span class="sl-val" id="v-tbath">10°C</span></div><input type="range" min="0" max="20" step="1" value="10" id="s-tbath" oninput="update()"></div>
+    <div class="sl-row"><div class="sl-top"><span class="sl-label">h water</span><span class="sl-val" id="v-hwat">500 W/m²K</span></div><input type="range" min="100" max="1000" step="10" value="500" id="s-hwat" oninput="update()"></div>
     <div style="height:10px"></div>
-    <p style="font-size:11px;color:#888;line-height:1.6">Full surface contact (φ=1.0). Bath temperature stays stable — water acts as a thermal reservoir.</p>
+    <p style="font-size:11px;color:#888;line-height:1.6">Full surface contact (&#966;=1.0). Bath stays stable — water acts as a thermal reservoir.</p>
   </div>
 </div>
 
 <div id="rc" class="mg"></div>
 
 <div class="leg">
-  <span class="li"><span style="width:20px;height:2px;background:#378ADD;display:inline-block"></span>S1 wine temp</span>
-  <span class="li"><span style="width:20px;height:0;border-top:2px dashed #1D9E75;display:inline-block"></span>S2 wine temp</span>
-  <span class="li"><span style="width:20px;height:0;border-top:2px dotted #BA7517;display:inline-block"></span>S1 ice fraction φ →</span>
+  <span class="li"><canvas width="24" height="12" id="leg1"></canvas>S1 wine temp</span>
+  <span class="li"><canvas width="24" height="12" id="leg2"></canvas>S2 wine temp</span>
+  <span class="li"><canvas width="24" height="12" id="leg3"></canvas>S1 ice fraction &#966;</span>
   <span class="li"><span style="width:10px;height:10px;border-radius:50%;background:#378ADD;display:inline-block"></span>S1 hits target</span>
   <span class="li"><span style="width:10px;height:10px;border-radius:50%;background:#1D9E75;display:inline-block"></span>S2 hits target</span>
 </div>
 
-<div style="position:relative;width:100%;height:320px">
-  <canvas id="cc" role="img" aria-label="Wine temperature over time for both cooling scenarios.">Interactive wine cooling comparison chart.</canvas>
+<div id="chart-wrap"><canvas id="cc"></canvas></div>
+<p style="font-size:11px;color:#888;margin-top:8px">Euler integration dt=1s. c_wine=3800 J/kg·K. Ice melt: Q=h_air·A_exposed·T_air. &#966; decays as ice depletes.</p>
 </div>
 
-<p style="font-size:11px;color:#888;margin-top:8px">Euler integration dt=1s. c_wine=3800 J/kg·K. Ice melt rate Q=h_air·A_exposed·T_air. φ decays as ice mass depletes.</p>
-</div>
-
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 <script>
 const DEFAULTS={tstart:20,ttgt:13,mass:0.75,area:0.05,tair:28,phi:0.5,mice:150,hice:400,hair:10,tbath:10,hwat:500};
-const cw=3800,L=334000,dt=1,maxT=3600,displayMax=60;
-
+const CW=3800,L=334000,DT=1,MAXT=3600,DMAX=60;
 function g(id){return parseFloat(document.getElementById(id).value)}
-
-function resetAll(){
-  Object.entries(DEFAULTS).forEach(([k,v])=>{
-    const el=document.getElementById('s-'+k);
-    if(el)el.value=v;
-  });
-  update();
-}
-
-function fmt(m){
-  if(m===null)return'never';
-  const mm=Math.floor(m),ss=Math.round((m-mm)*60);
-  return ss>0?mm+'m '+ss+'s':mm+'m';
-}
+function resetAll(){Object.entries(DEFAULTS).forEach(([k,v])=>{const e=document.getElementById('s-'+k);if(e)e.value=v});update()}
+function fmt(m){if(m===null)return'never';const mm=Math.floor(m),ss=Math.round((m-mm)*60);return ss>0?mm+'m '+ss+'s':mm+'m'}
 
 function runSim(){
   const tstart=g('tstart'),ttgt=g('ttgt'),mass=g('mass'),area=g('area');
   const tair=g('tair'),phi0=g('phi'),mice0=g('mice')/1000,hice=g('hice'),hair=g('hair');
   const tbath=g('tbath'),hwat=g('hwat');
-  const N=maxT/dt;
+  const N=MAXT/DT,keep=DMAX*60;
   let T1=tstart,phi=phi0,mice=mice0;
-  const keep=Math.floor(displayMax*60/dt)+1;
-  const times=[],d1=[],d2=[],dp=[];
+  const d1=[],d2=[],dp=[];
   let t1hit=null,t1exit=null,t2hit=null,icegone=null;
-  const tau2=(mass*cw)/(hwat*area);
+  const tau2=(mass*CW)/(hwat*area);
   for(let i=0;i<=N;i++){
-    const tsec=i*dt,tmin=tsec/60;
-    if(i%10===0&&i<keep){
-      times.push(tmin.toFixed(1));
-      d1.push(+T1.toFixed(2));
-      dp.push(+phi.toFixed(3));
+    const tsec=i*DT,tmin=tsec/60;
+    if(i<=keep){
+      d1.push(T1);dp.push(phi);
       const T2=tbath+(tstart-tbath)*Math.exp(-tsec/tau2);
-      d2.push(+T2.toFixed(2));
+      d2.push(T2);
       if(t2hit===null&&T2<=ttgt)t2hit=tmin;
       if(t1hit===null&&T1<=ttgt)t1hit=tmin;
       if(t1hit!==null&&t1exit===null&&T1>ttgt)t1exit=tmin;
@@ -168,128 +113,128 @@ function runSim(){
     if(i<N){
       const heff=phi*hice+(1-phi)*hair;
       const tc=heff>0?(phi*hice*0+(1-phi)*hair*tair)/heff:tair;
-      T1+=-(heff*area*(T1-tc))/(mass*cw)*dt;
-      if(mice>0){
-        const Qmelt=hair*area*(1-phi)*Math.max(0,tair)*dt;
-        mice=Math.max(0,mice-Qmelt/L);
-        phi=(mice/mice0)*phi0;
-      } else { phi=0; }
+      T1+=-(heff*area*(T1-tc))/(mass*CW)*DT;
+      if(mice>0){const Qm=hair*area*(1-phi)*Math.max(0,tair)*DT;mice=Math.max(0,mice-Qm/L);phi=(mice/mice0)*phi0;}
+      else phi=0;
     }
   }
-  return{times,d1,d2,dp,t1hit,t1exit,t2hit,icegone,ttgt};
+  return{d1,d2,dp,t1hit,t1exit,t2hit,icegone,ttgt};
 }
 
-let myChart=null;
+function drawChart(res){
+  const wrap=document.getElementById('chart-wrap');
+  const canvas=document.getElementById('cc');
+  const dpr=window.devicePixelRatio||1;
+  const W=wrap.offsetWidth||720;
+  const H=320;
+  canvas.width=W*dpr;
+  canvas.height=H*dpr;
+  canvas.style.width=W+'px';
+  canvas.style.height=H+'px';
+  const ctx=canvas.getContext('2d');
+  ctx.scale(dpr,dpr);
+  const {d1,d2,dp,t1hit,t1exit,t2hit,ttgt}=res;
+  const pad={l:54,r:54,t:24,b:38};
+  const cw=W-pad.l-pad.r,ch=H-pad.t-pad.b;
+  const allT=[...d1,...d2];
+  const ymin=Math.max(0,Math.floor(Math.min(...allT)-2));
+  const ymax=Math.ceil(Math.max(...allT)+2);
+  function px(m){return pad.l+(m/DMAX)*cw}
+  function py(t){return pad.t+ch-(t-ymin)/(ymax-ymin)*ch}
+  function py2(p){return pad.t+ch-(p/1.1)*ch}
+  ctx.fillStyle='#fff';ctx.fillRect(0,0,W,H);
+  ctx.strokeStyle='rgba(0,0,0,0.06)';ctx.lineWidth=1;
+  for(let t=0;t<=DMAX;t+=10){const x=px(t);ctx.beginPath();ctx.moveTo(x,pad.t);ctx.lineTo(x,pad.t+ch);ctx.stroke()}
+  for(let t=ymin;t<=ymax;t+=2){const y=py(t);ctx.beginPath();ctx.moveTo(pad.l,y);ctx.lineTo(pad.l+cw,y);ctx.stroke()}
+  const yt=py(ttgt);
+  ctx.strokeStyle='#E24B4A';ctx.lineWidth=1.5;ctx.setLineDash([5,4]);
+  ctx.beginPath();ctx.moveTo(pad.l,yt);ctx.lineTo(pad.l+cw,yt);ctx.stroke();
+  ctx.setLineDash([]);
+  ctx.fillStyle='#E24B4A';ctx.font='11px system-ui';ctx.textAlign='right';
+  ctx.fillText(ttgt+'\u00b0C target',pad.l+cw-4,yt-4);
+  if(t1hit!==null&&t1exit!==null){
+    const x1=px(t1hit),x2=px(t1exit);
+    ctx.fillStyle='rgba(55,138,221,0.13)';
+    ctx.fillRect(x1,pad.t,Math.max(x2-x1,2),ch);
+    ctx.strokeStyle='rgba(55,138,221,0.4)';ctx.lineWidth=1;
+    ctx.beginPath();ctx.moveTo(x1,pad.t);ctx.lineTo(x1,pad.t+ch);ctx.stroke();
+    ctx.beginPath();ctx.moveTo(x2,pad.t);ctx.lineTo(x2,pad.t+ch);ctx.stroke();
+    ctx.fillStyle='#185FA5';ctx.font='bold 10px system-ui';ctx.textAlign='left';
+    ctx.fillText('drink S1',x1+3,pad.t+14);
+  }
+  if(t2hit!==null){
+    const x2=px(t2hit);
+    ctx.strokeStyle='rgba(29,158,117,0.5)';ctx.lineWidth=1;
+    ctx.beginPath();ctx.moveTo(x2,pad.t);ctx.lineTo(x2,pad.t+ch);ctx.stroke();
+    ctx.fillStyle='#0F6E56';ctx.font='bold 10px system-ui';ctx.textAlign='left';
+    ctx.fillText('drink S2',x2+3,pad.t+26);
+  }
+  ctx.strokeStyle='#BA7517';ctx.lineWidth=1.5;ctx.setLineDash([2,4]);
+  ctx.beginPath();
+  for(let i=0;i<dp.length;i+=10){const x=px(i/60),y=py2(dp[i]);i===0?ctx.moveTo(x,y):ctx.lineTo(x,y)}
+  ctx.stroke();ctx.setLineDash([]);
+  ctx.strokeStyle='#1D9E75';ctx.lineWidth=2.5;ctx.setLineDash([8,5]);
+  ctx.beginPath();
+  for(let i=0;i<d2.length;i+=10){const x=px(i/60),y=py(d2[i]);i===0?ctx.moveTo(x,y):ctx.lineTo(x,y)}
+  ctx.stroke();ctx.setLineDash([]);
+  ctx.strokeStyle='#378ADD';ctx.lineWidth=2.5;
+  ctx.beginPath();
+  for(let i=0;i<d1.length;i+=10){const x=px(i/60),y=py(d1[i]);i===0?ctx.moveTo(x,y):ctx.lineTo(x,y)}
+  ctx.stroke();
+  function dot(x,y,c){ctx.beginPath();ctx.arc(x,y,6,0,Math.PI*2);ctx.fillStyle=c;ctx.fill();ctx.strokeStyle='#fff';ctx.lineWidth=2;ctx.stroke()}
+  if(t1hit!==null){const i=Math.round(t1hit*60);if(i<d1.length)dot(px(t1hit),py(d1[i]),'#378ADD')}
+  if(t2hit!==null){const i=Math.round(t2hit*60);if(i<d2.length)dot(px(t2hit),py(d2[i]),'#1D9E75')}
+  ctx.strokeStyle='rgba(0,0,0,0.2)';ctx.lineWidth=1;
+  ctx.beginPath();ctx.moveTo(pad.l,pad.t);ctx.lineTo(pad.l,pad.t+ch);ctx.lineTo(pad.l+cw,pad.t+ch);ctx.stroke();
+  ctx.fillStyle='#888';ctx.font='11px system-ui';ctx.textAlign='center';
+  for(let t=0;t<=DMAX;t+=10)ctx.fillText(t,px(t),pad.t+ch+16);
+  ctx.fillText('Time (minutes)',pad.l+cw/2,pad.t+ch+32);
+  ctx.textAlign='right';
+  for(let t=ymin;t<=ymax;t+=2)ctx.fillText(t+'\u00b0C',pad.l-6,py(t)+4);
+  ctx.fillStyle='#BA7517';ctx.textAlign='left';
+  for(let p=0;p<=1.0;p+=0.25)ctx.fillText(p.toFixed(2),pad.l+cw+6,py2(p)+4);
+  ctx.save();ctx.fillStyle='#888';ctx.translate(13,pad.t+ch/2);ctx.rotate(-Math.PI/2);ctx.textAlign='center';ctx.font='11px system-ui';ctx.fillText('Wine temp (\u00b0C)',0,0);ctx.restore();
+  ctx.save();ctx.fillStyle='#BA7517';ctx.translate(W-10,pad.t+ch/2);ctx.rotate(-Math.PI/2);ctx.textAlign='center';ctx.font='11px system-ui';ctx.fillText('Ice fraction \u03c6',0,0);ctx.restore();
+}
+
+function drawLegends(){
+  function line(id,color,dash){
+    const c=document.getElementById(id);if(!c)return;
+    const ctx=c.getContext('2d');ctx.clearRect(0,0,24,12);
+    ctx.strokeStyle=color;ctx.lineWidth=2;
+    if(dash)ctx.setLineDash(dash);
+    ctx.beginPath();ctx.moveTo(0,6);ctx.lineTo(24,6);ctx.stroke();ctx.setLineDash([]);
+  }
+  line('leg1','#378ADD');line('leg2','#1D9E75',[8,4]);line('leg3','#BA7517',[2,3]);
+}
 
 function update(){
-  document.getElementById('v-tstart').textContent=g('tstart')+'°C';
-  document.getElementById('v-ttgt').textContent=g('ttgt')+'°C';
+  document.getElementById('v-tstart').textContent=g('tstart')+'\u00b0C';
+  document.getElementById('v-ttgt').textContent=g('ttgt')+'\u00b0C';
   document.getElementById('v-mass').textContent=g('mass').toFixed(2)+' kg';
-  document.getElementById('v-area').textContent=g('area').toFixed(3)+' m²';
-  document.getElementById('v-tair').textContent=g('tair')+'°C';
+  document.getElementById('v-area').textContent=g('area').toFixed(3)+' m\u00b2';
+  document.getElementById('v-tair').textContent=g('tair')+'\u00b0C';
   document.getElementById('v-phi').textContent=g('phi').toFixed(2);
   document.getElementById('v-mice').textContent=g('mice')+' g';
-  document.getElementById('v-hice').textContent=g('hice')+' W/m²K';
-  document.getElementById('v-hair').textContent=g('hair')+' W/m²K';
-  document.getElementById('v-tbath').textContent=g('tbath')+'°C';
-  document.getElementById('v-hwat').textContent=g('hwat')+' W/m²K';
-
-  const {times,d1,d2,dp,t1hit,t1exit,t2hit,icegone,ttgt}=runSim();
-  const s1win=t1hit!==null&&t1exit!==null?Math.round((t1exit-t1hit)*60)+'s window':t1hit?'stays cold':'never';
-  const winner=t1hit!==null&&t2hit!==null
-    ?(t1hit<t2hit?'S1 by '+fmt(t2hit-t1hit):'S2 by '+fmt(t1hit-t2hit))
-    :(t2hit?'S2 only':'S1 only');
-
+  document.getElementById('v-hice').textContent=g('hice')+' W/m\u00b2K';
+  document.getElementById('v-hair').textContent=g('hair')+' W/m\u00b2K';
+  document.getElementById('v-tbath').textContent=g('tbath')+'\u00b0C';
+  document.getElementById('v-hwat').textContent=g('hwat')+' W/m\u00b2K';
+  const res=runSim();
+  const {t1hit,t1exit,t2hit,icegone,ttgt}=res;
+  const s1win=t1hit!==null&&t1exit!==null?Math.round((t1exit-t1hit)*60)+'s window':t1hit?'stays cold':'never reaches';
+  const winner=t1hit!==null&&t2hit!==null?(t1hit<t2hit?'S1 by '+fmt(t2hit-t1hit):'S2 by '+fmt(t1hit-t2hit)):(t2hit?'S2 only':'neither');
   document.getElementById('rc').innerHTML=
-    `<div class="mc"><p class="ml">S1 hits ${ttgt}°C</p><p class="mv">${fmt(t1hit)}</p><p class="ms">${s1win}</p></div>`+
-    `<div class="mc"><p class="ml">S2 hits ${ttgt}°C</p><p class="mv">${fmt(t2hit)}</p><p class="ms">keeps cooling</p></div>`+
-    `<div class="mc"><p class="ml">First to target</p><p class="mv" style="font-size:15px">${winner}</p><p class="ms"> </p></div>`+
-    `<div class="mc"><p class="ml">S1 ice gone</p><p class="mv">${fmt(icegone)}</p><p class="ms">then warms to air</p></div>`;
-
-  const t1hitIdx=t1hit!==null?Math.round(t1hit*60/dt/10):null;
-  const t2hitIdx=t2hit!==null?Math.round(t2hit*60/dt/10):null;
-  const s1Dot=d1.map((v,i)=>i===t1hitIdx?v:null);
-  const s2Dot=d2.map((v,i)=>i===t2hitIdx?v:null);
-  const ymin=Math.max(0,Math.min(...d1,...d2)-2);
-  const ymax=Math.max(...d1,...d2)+2;
-
-  if(myChart){
-    myChart.data.labels=times;
-    myChart.data.datasets[0].data=d1;
-    myChart.data.datasets[1].data=d2;
-    myChart.data.datasets[2].data=dp;
-    myChart.data.datasets[3].data=s1Dot;
-    myChart.data.datasets[3].pointRadius=d1.map((_,i)=>i===t1hitIdx?7:0);
-    myChart.data.datasets[4].data=s2Dot;
-    myChart.data.datasets[4].pointRadius=d2.map((_,i)=>i===t2hitIdx?7:0);
-    myChart.options.scales.y.min=Math.floor(ymin);
-    myChart.options.scales.y.max=Math.ceil(ymax);
-    myChart._ttgt=ttgt;myChart._t1hit=t1hit;myChart._t1exit=t1exit;myChart._t2hit=t2hit;
-    myChart.update('none');
-  } else {
-    myChart=new Chart(document.getElementById('cc'),{
-      type:'line',
-      data:{labels:times,datasets:[
-        {label:'S1 wine',data:d1,borderColor:'#378ADD',borderWidth:2,pointRadius:0,tension:0.2,yAxisID:'y'},
-        {label:'S2 wine',data:d2,borderColor:'#1D9E75',borderWidth:2,pointRadius:0,tension:0.2,borderDash:[6,4],yAxisID:'y'},
-        {label:'phi',data:dp,borderColor:'#BA7517',borderWidth:1.5,pointRadius:0,tension:0.2,borderDash:[2,3],yAxisID:'y2'},
-        {label:'S1 hit',data:s1Dot,borderColor:'#378ADD',backgroundColor:'#378ADD',borderWidth:2,pointRadius:s1Dot.map(v=>v!==null?7:0),showLine:false,yAxisID:'y'},
-        {label:'S2 hit',data:s2Dot,borderColor:'#1D9E75',backgroundColor:'#1D9E75',borderWidth:2,pointRadius:s2Dot.map(v=>v!==null?7:0),showLine:false,yAxisID:'y'}
-      ]},
-      options:{
-        responsive:true,maintainAspectRatio:false,animation:{duration:200},
-        plugins:{legend:{display:false},tooltip:{filter:i=>i.dataset.label!=='S1 hit'&&i.dataset.label!=='S2 hit',
-          callbacks:{title:c=>Math.round(parseFloat(c[0].label))+' min',
-            label:c=>c.dataset.label==='phi'?'φ: '+c.parsed.y.toFixed(2):c.dataset.label+': '+c.parsed.y.toFixed(1)+'°C'}}},
-        scales:{
-          x:{title:{display:true,text:'Time (minutes)',font:{size:11},color:'#888'},
-             ticks:{maxTicksLimit:13,callback:(v,i)=>{const val=parseFloat(times[i]||0);return val%5<0.2?Math.round(val)+'':''}},
-             grid:{color:'rgba(128,128,128,0.1)'}},
-          y:{title:{display:true,text:'Wine temp (°C)',font:{size:11},color:'#888'},min:Math.floor(ymin),max:Math.ceil(ymax),position:'left',
-             grid:{color:'rgba(128,128,128,0.1)'},ticks:{callback:v=>v+'°C'}},
-          y2:{title:{display:true,text:'φ',font:{size:11},color:'#BA7517'},min:0,max:1.1,position:'right',
-              grid:{drawOnChartArea:false},ticks:{color:'#BA7517',maxTicksLimit:5,callback:v=>v.toFixed(1)}}
-        }
-      },
-      plugins:[{afterDraw(chart){
-        const ctx=chart.ctx,ys=chart.scales.y,xs=chart.scales.x;
-        const ttgt=chart._ttgt||13,t1hit=chart._t1hit,t1exit=chart._t1exit,t2hit=chart._t2hit;
-        const y=ys.getPixelForValue(ttgt);
-        if(y<ys.top||y>ys.bottom)return;
-        ctx.save();
-        ctx.strokeStyle='#E24B4A';ctx.lineWidth=1;ctx.setLineDash([4,4]);
-        ctx.beginPath();ctx.moveTo(xs.left,y);ctx.lineTo(xs.right,y);ctx.stroke();
-        ctx.fillStyle='#E24B4A';ctx.font='11px sans-serif';
-        ctx.fillText(ttgt+'°C target',xs.right-70,y-4);
-        if(t1hit!==null&&t1exit!==null){
-          const x1=xs.getPixelForValue(t1hit.toFixed(1));
-          const x2=xs.getPixelForValue(t1exit.toFixed(1));
-          if(x1&&x2&&x2>x1){
-            ctx.fillStyle='rgba(55,138,221,0.12)';
-            ctx.fillRect(x1,ys.top,x2-x1,ys.bottom-ys.top);
-            ctx.strokeStyle='rgba(55,138,221,0.35)';ctx.lineWidth=1;ctx.setLineDash([]);
-            ctx.beginPath();ctx.moveTo(x1,ys.top);ctx.lineTo(x1,ys.bottom);ctx.stroke();
-            ctx.beginPath();ctx.moveTo(x2,ys.top);ctx.lineTo(x2,ys.bottom);ctx.stroke();
-            ctx.fillStyle='#185FA5';ctx.font='500 10px sans-serif';
-            ctx.fillText('drink S1',x1+3,ys.top+13);
-          }
-        }
-        if(t2hit!==null){
-          const x2=xs.getPixelForValue(t2hit.toFixed(1));
-          if(x2){
-            ctx.strokeStyle='rgba(29,158,117,0.5)';ctx.lineWidth=1;ctx.setLineDash([]);
-            ctx.beginPath();ctx.moveTo(x2,ys.top);ctx.lineTo(x2,ys.bottom);ctx.stroke();
-            ctx.fillStyle='#0F6E56';ctx.font='500 10px sans-serif';
-            ctx.fillText('drink S2',x2+3,ys.top+13);
-          }
-        }
-        ctx.restore();
-      }}]
-    });
-    myChart._ttgt=ttgt;myChart._t1hit=t1hit;myChart._t1exit=t1exit;myChart._t2hit=t2hit;
-  }
+    '<div class="mc"><p class="ml">S1 hits '+ttgt+'\u00b0C</p><p class="mv">'+fmt(t1hit)+'</p><p class="ms">'+s1win+'</p></div>'+
+    '<div class="mc"><p class="ml">S2 hits '+ttgt+'\u00b0C</p><p class="mv">'+fmt(t2hit)+'</p><p class="ms">keeps cooling</p></div>'+
+    '<div class="mc"><p class="ml">First to target</p><p class="mv" style="font-size:15px">'+winner+'</p><p class="ms">&nbsp;</p></div>'+
+    '<div class="mc"><p class="ml">S1 ice gone</p><p class="mv">'+fmt(icegone)+'</p><p class="ms">then warms to air</p></div>';
+  drawChart(res);
+  drawLegends();
 }
 
+window.addEventListener('resize',update);
+window.addEventListener('load',update);
 update();
 </script>
 </body>
