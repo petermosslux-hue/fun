@@ -91,9 +91,9 @@ function resetAll(){Object.entries(DEFAULTS).forEach(([k,v])=>{const e=document.
 function fmt(m){if(m===null)return'never';const mm=Math.floor(m),ss=Math.round((m-mm)*60);return ss>0?mm+'m '+ss+'s':mm+'m'}
 
 function runSim(){
-  const tstart=g('tstart'),ttgt=g('ttgt'),mass=g('mass'),area=g('area');
-  const tair=g('tair'),phi0=g('phi'),mice0=g('mice')/1000,hice=g('hice'),hair=g('hair');
-  const tbath=g('tbath'),hwat=g('hwat');
+  const tstart=g('s-tstart'),ttgt=g('s-ttgt'),mass=g('s-mass'),area=g('s-area');
+  const tair=g('s-tair'),phi0=g('s-phi'),mice0=g('s-mice')/1000,hice=g('s-hice'),hair=g('s-hair');
+  const tbath=g('s-tbath'),hwat=g('s-hwat');
   const N=MAXT/DT,keep=DMAX*60;
   let T1=tstart,phi=phi0,mice=mice0;
   const d1=[],d2=[],dp=[];
@@ -209,17 +209,17 @@ function drawLegends(){
 }
 
 function update(){
-  document.getElementById('v-tstart').textContent=g('tstart')+'\u00b0C';
-  document.getElementById('v-ttgt').textContent=g('ttgt')+'\u00b0C';
-  document.getElementById('v-mass').textContent=g('mass').toFixed(2)+' kg';
-  document.getElementById('v-area').textContent=g('area').toFixed(3)+' m\u00b2';
-  document.getElementById('v-tair').textContent=g('tair')+'\u00b0C';
-  document.getElementById('v-phi').textContent=g('phi').toFixed(2);
-  document.getElementById('v-mice').textContent=g('mice')+' g';
-  document.getElementById('v-hice').textContent=g('hice')+' W/m\u00b2K';
-  document.getElementById('v-hair').textContent=g('hair')+' W/m\u00b2K';
-  document.getElementById('v-tbath').textContent=g('tbath')+'\u00b0C';
-  document.getElementById('v-hwat').textContent=g('hwat')+' W/m\u00b2K';
+  document.getElementById('v-tstart').textContent=g('s-tstart')+'\u00b0C';
+  document.getElementById('v-ttgt').textContent=g('s-ttgt')+'\u00b0C';
+  document.getElementById('v-mass').textContent=g('s-mass').toFixed(2)+' kg';
+  document.getElementById('v-area').textContent=g('s-area').toFixed(3)+' m\u00b2';
+  document.getElementById('v-tair').textContent=g('s-tair')+'\u00b0C';
+  document.getElementById('v-phi').textContent=g('s-phi').toFixed(2);
+  document.getElementById('v-mice').textContent=g('s-mice')+' g';
+  document.getElementById('v-hice').textContent=g('s-hice')+' W/m\u00b2K';
+  document.getElementById('v-hair').textContent=g('s-hair')+' W/m\u00b2K';
+  document.getElementById('v-tbath').textContent=g('s-tbath')+'\u00b0C';
+  document.getElementById('v-hwat').textContent=g('s-hwat')+' W/m\u00b2K';
   const res=runSim();
   const {t1hit,t1exit,t2hit,icegone,ttgt}=res;
   const s1win=t1hit!==null&&t1exit!==null?Math.round((t1exit-t1hit)*60)+'s window':t1hit?'stays cold':'never reaches';
@@ -233,11 +233,12 @@ function update(){
   drawLegends();
 }
 
-window.addEventListener('resize',update);
-window.addEventListener('load',function(){update();setTimeout(update,300);setTimeout(update,800);});
-setTimeout(update,100);
-setTimeout(update,500);
-update();
+document.addEventListener('DOMContentLoaded', function() {
+  update();
+  setTimeout(update, 200);
+  setTimeout(update, 600);
+  window.addEventListener('resize', update);
+});
 </script>
 </body>
 </html>
