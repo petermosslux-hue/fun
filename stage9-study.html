@@ -28,6 +28,7 @@
   --img: #13806f;
   --img-soft: rgba(19, 128, 111, 0.18);
   --sN: #2851a3; --sA: #7445c0; --sG: #13806f; --sS: #b5700c;
+  --sB: #2f8a3a; --sC: #b8456b; --sP: #2851a3; --sE: #9a6a12; --sW: #5b6478;
   --f-display: "Bricolage Grotesque", "Avenir Next", "Segoe UI", system-ui, sans-serif;
   --f-body: "Atkinson Hyperlegible", "Verdana", "Segoe UI", system-ui, sans-serif;
   --f-hand: "Caveat", "Segoe Print", "Comic Sans MS", cursive;
@@ -38,14 +39,14 @@
     --paper: #121822; --rule: rgba(150, 185, 245, 0.06); --sheet: #1a2230; --ink: #e8edf6; --ink-2: #9ba7be; --line: #2d3849;
     --accent: #93b2f6; --accent-ink: #0e1626; --accent-soft: #223152; --pen: #ff8b81; --pen-soft: #3b2426; --ok: #7fd5a1; --ok-soft: #1c3327;
     --hl: #4a421a; --margin: #6e3b3b; --fig-fill: #222c3d; --fig-fill-2: #2a3549; --fig-fill-3: #334058; --img: #5fd0bd; --img-soft: rgba(95, 208, 189, 0.2);
-    --sN: #93b2f6; --sA: #b99af0; --sG: #5fd0bd; --sS: #f0b65a; color-scheme: dark;
+    --sN: #93b2f6; --sA: #b99af0; --sG: #5fd0bd; --sS: #f0b65a; --sB: #7ccf86; --sC: #f08fb0; --sP: #93b2f6; --sE: #e2b45f; --sW: #a8b2c6; color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
   --paper: #121822; --rule: rgba(150, 185, 245, 0.06); --sheet: #1a2230; --ink: #e8edf6; --ink-2: #9ba7be; --line: #2d3849;
   --accent: #93b2f6; --accent-ink: #0e1626; --accent-soft: #223152; --pen: #ff8b81; --pen-soft: #3b2426; --ok: #7fd5a1; --ok-soft: #1c3327;
   --hl: #4a421a; --margin: #6e3b3b; --fig-fill: #222c3d; --fig-fill-2: #2a3549; --fig-fill-3: #334058; --img: #5fd0bd; --img-soft: rgba(95, 208, 189, 0.2);
-  --sN: #93b2f6; --sA: #b99af0; --sG: #5fd0bd; --sS: #f0b65a; color-scheme: dark;
+  --sN: #93b2f6; --sA: #b99af0; --sG: #5fd0bd; --sS: #f0b65a; --sB: #7ccf86; --sC: #f08fb0; --sP: #93b2f6; --sE: #e2b45f; --sW: #a8b2c6; color-scheme: dark;
 }
 html { height: 100%; }
 body {
@@ -66,7 +67,14 @@ button { cursor: pointer; }
 .brand { font-family: var(--f-display); font-weight: 800; font-size: 1.7rem; letter-spacing: -0.02em; line-height: 1; margin: 0; }
 .brand span { color: var(--accent); }
 .subjects { display: flex; gap: 6px; }
-.subj { border: 1.5px solid var(--ink); background: var(--ink); color: var(--paper); border-radius: 999px; padding: 3px 12px; font-size: 0.85rem; font-weight: 700; }
+.subj { border: 1.5px solid var(--ink); background: var(--sheet); color: var(--ink); border-radius: 999px; padding: 4px 14px; font-size: 0.88rem; font-weight: 700; }
+.subj[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+.subj:hover { background: var(--accent-soft); }
+.subj[aria-pressed="true"]:hover { background: var(--ink); }
+.figrow { display: flex; flex-wrap: wrap; gap: 8px 16px; }
+sub { font-size: 0.7em; line-height: 0; }
+.nuclide { display: inline-flex; align-items: center; gap: 2px; vertical-align: middle; font-size: 1.1em; }
+.nuclide .nm { display: inline-flex; flex-direction: column; font-size: 0.62em; line-height: 1.15; text-align: right; }
 .mastmeta { font-size: 0.85rem; color: var(--ink-2); text-align: right; font-variant-numeric: tabular-nums; }
 
 h1, h2, h3 { font-family: var(--f-display); letter-spacing: -0.015em; text-wrap: balance; margin: 0; }
@@ -268,13 +276,13 @@ svg.fig .shlbl { font-size: 13px; font-weight: 700; }
   <header class="mast">
     <div class="stack" style="gap:8px">
       <p class="brand">Stage 9 <span>Study</span></p>
-      <div class="subjects" aria-label="Subject"><span class="subj">Maths</span></div>
+      <div class="subjects" role="group" aria-label="Subject"><button type="button" class="subj" data-subj="maths" aria-pressed="true">Maths</button><button type="button" class="subj" data-subj="science" aria-pressed="false">Science</button></div>
     </div>
     <p class="mastmeta" id="mastmeta"></p>
   </header>
   <main id="view"></main>
   <footer>
-    <p>Topics follow the Cambridge Lower Secondary Mathematics curriculum framework (0862), Stage 9. Every question is generated fresh, so you can practise as often as you like.</p>
+    <p>Topics follow the Cambridge Lower Secondary curriculum frameworks for Stage 9: Mathematics (0862) and Science (0893). Many questions are generated fresh, so you can practise as often as you like.</p>
     <p id="syncnote"></p>
     <div class="confirm"><button class="btn quiet" id="reset" type="button">Reset my progress</button>
       <span id="confirm" hidden class="confirm"><span>This clears every topic score. Reset?</span><button class="btn" id="yesreset" type="button">Yes, reset</button><button class="btn quiet" id="nokeep" type="button">Keep my progress</button></span></div>
@@ -1983,9 +1991,837 @@ topic({
     }
   ]
 });
+/* ===== STAGE 9 SCIENCE (Cambridge Lower Secondary Science 0893) ===== */
+function sci(t) { t.subject = 'science'; topic(t); }
+function chem(f) { return f.replace(/([A-Za-z\)])(\d+)/g, '$1<sub>$2</sub>'); }
+function ion(sym, ch) { return sym + '<sup>' + (Math.abs(ch) === 1 ? '' : Math.abs(ch)) + (ch > 0 ? '+' : '−') + '</sup>'; }
+function arrow() { return ' → '; }
+
+/* ---------- figures ---------- */
+function waveFig(waves) {
+  var W = 260, H = 96, b = '', out = '';
+  waves.forEach(function (w, k) {
+    var y0 = H / 2, pts = [];
+    for (var x = 0; x <= W - 20; x += 2) pts.push((x + 10) + ',' + (y0 - w.a * Math.sin(2 * Math.PI * w.f * x / (W - 20))).toFixed(1));
+    b = L(10, y0, W - 10, y0, 'gl') + L(10, 8, 10, H - 8, 'axis') + '<polyline class="plot" fill="none" points="' + pts.join(' ') + '"/>' + T(W - 6, 14, w.label, 'lbl strong', 'end');
+    out += svgWrap(W, H, b, 'Waveform ' + w.label);
+  });
+  return '<div class="figrow">' + out + '</div>';
+}
+function cellSym(x, y) { return L(x - 4, y - 14, x - 4, y + 14, 'ln') + '<line x1="' + (x + 4) + '" y1="' + (y - 8) + '" x2="' + (x + 4) + '" y2="' + (y + 8) + '" class="ln" style="stroke-width:4"/>'; }
+function meterSym(x, y, ch, lab) { return '<circle cx="' + x + '" cy="' + y + '" r="12" class="hole"/>' + T(x, y + 1, ch, 'lbl strong') + (lab ? T(x, y - 22, lab, 'lbl') : ''); }
+function lampSym(x, y) { return '<circle cx="' + x + '" cy="' + y + '" r="11" class="hole"/>' + L(x - 8, y - 8, x + 8, y + 8, 'ln') + L(x - 8, y + 8, x + 8, y - 8, 'ln'); }
+function wire(pts) { return '<polyline class="ln" fill="none" points="' + pts.map(function (p) { return p.join(','); }).join(' ') + '"/>'; }
+function parallelCircuit(l1, l2, l3) {
+  var b = wire([[110, 40], [40, 40], [40, 180], [300, 180], [300, 40], [170, 40]]) + wire([[40, 110], [300, 110]]);
+  b += '<rect x="112" y="28" width="56" height="24" fill="var(--sheet)"/>' + L(110, 40, 136, 40, 'ln') + L(144, 40, 170, 40, 'ln') + cellSym(140, 40);
+  b += '<rect x="218" y="26" width="28" height="28" fill="var(--sheet)"/>' + meterSym(232, 40, 'A', l1);
+  b += '<rect x="96" y="96" width="28" height="28" fill="var(--sheet)"/>' + lampSym(110, 110) + '<rect x="218" y="96" width="28" height="28" fill="var(--sheet)"/>' + meterSym(232, 110, 'A', l2);
+  b += '<rect x="96" y="166" width="28" height="28" fill="var(--sheet)"/>' + lampSym(110, 180) + '<rect x="218" y="166" width="28" height="28" fill="var(--sheet)"/>' + meterSym(232, 180, 'A', l3);
+  b += '<circle cx="40" cy="110" r="3" class="dot"/><circle cx="300" cy="110" r="3" class="dot"/>';
+  return svgWrap(340, 200, b, 'Parallel circuit with three ammeters');
+}
+function seriesCircuit(n, labA) {
+  var b = wire([[40, 40], [40, 140], [300, 140], [300, 40], [40, 40]]);
+  b += '<rect x="152" y="28" width="16" height="24" fill="var(--sheet)"/>' + cellSym(160, 40);
+  for (var i = 0; i < n; i++) { var x = n === 1 ? 170 : 90 + i * 160 / (n - 1); b += '<rect x="' + (x - 14) + '" y="126" width="28" height="28" fill="var(--sheet)"/>' + lampSym(x, 140) + T(x, 166, 'Lamp ' + (i + 1), 'tick'); }
+  b += '<rect x="286" y="76" width="28" height="28" fill="var(--sheet)"/>' + meterSym(300, 90, 'A', '');
+  if (labA) b += T(322, 90, labA, 'lbl', 'start');
+  return svgWrap(370, 176, b, 'Series circuit');
+}
+
+/* ================= BIOLOGY ================= */
+sci({
+  id: 'sci-planttransport', strand: 'B', title: 'Transport in plants', codes: ['9Bs.01'], calc: false,
+  blurb: 'How water and mineral salts travel from the roots to the leaves of a flowering plant.',
+  learn: {
+    ideas: [
+      '<b>Root hair cells</b> have a large surface area. They take in water from the soil by <b>osmosis</b>, and absorb mineral salts.',
+      'Water and mineral salts travel up the stem in long hollow tubes called <b>xylem</b> vessels.',
+      'Water evaporates from the leaves through tiny pores called <b>stomata</b>. This is <b>transpiration</b>, and it pulls more water up the xylem, like sucking through a straw.',
+      '<b>Phloem</b> is a different tube: it carries sugars made in the leaves to the rest of the plant.'
+    ],
+    example: { q: 'Why does a plant lose more water on a hot, windy day?', steps: ['Heat gives water molecules more energy, so more evaporate from the leaves.', 'Wind carries water vapour away from the leaf, so evaporation keeps going quickly.', 'More transpiration pulls more water up through the xylem.'] },
+    watch: 'Xylem carries water and minerals; phloem carries sugars. They are easy to mix up.'
+  },
+  gens: [bank([
+    { q: 'Which cells take in most of the water a plant needs?', a: 'Root hair cells', w: ['Guard cells', 'Palisade cells', 'Phloem cells'], s: ['Root hair cells have a large surface area for absorbing water and mineral salts from the soil.'] },
+    { q: 'Which tissue carries water and mineral salts up the stem?', a: 'Xylem', w: ['Phloem', 'Root hairs', 'Chloroplasts'], s: ['Xylem vessels carry water and dissolved mineral salts from the roots to the leaves.'] },
+    { q: 'What is transpiration?', a: 'The loss of water vapour from the leaves', w: ['The making of sugar in the leaves', 'The movement of sugar to the roots', 'The uptake of minerals by the roots'], s: ['Water evaporates from inside the leaf and escapes through the stomata as water vapour.'] },
+    { q: 'Through which openings does water vapour leave a leaf?', a: 'Stomata', w: ['Root hairs', 'Xylem vessels', 'Chloroplasts'], s: ['Stomata are small pores, mostly on the underside of the leaf.'] },
+    { q: 'How does water get from the soil into a root hair cell?', a: 'By osmosis', w: ['By photosynthesis', 'By transpiration', 'By combustion'], s: ['Water moves into the root hair cell by osmosis, from the dilute soil water into the more concentrated cell.'] },
+    { q: 'Which change would make a plant transpire most slowly?', a: 'Cool, still, humid air', w: ['Hot, dry, windy air', 'Bright sunshine and wind', 'Warm, dry air'], s: ['Cool, humid and still conditions slow evaporation from the leaves, so transpiration slows down.'] },
+    { q: 'A stick of celery stands in coloured water. After a few hours, where does the colour appear in the stalk?', a: 'In small dots: the xylem vessels', w: ['Evenly through the whole stalk', 'Only in the leaves’ phloem', 'Nowhere: water cannot move up'], s: ['The coloured water travels up the xylem, which shows up as dots in a cross-section.'] },
+    { q: 'What is the job of the phloem?', a: 'To carry sugars around the plant', w: ['To carry water up from the roots', 'To let gases in and out of the leaf', 'To absorb light'], s: ['Phloem carries sugars made in the leaves to other parts of the plant.'] }
+  ])]
+});
+
+sci({
+  id: 'sci-photosynthesis', strand: 'B', title: 'Photosynthesis and plant minerals', codes: ['9Bp.05', '9Bp.06', '9Bp.07'], calc: false,
+  blurb: 'How plants make food in chloroplasts, the word equation, and why plants need magnesium and nitrates.',
+  learn: {
+    ideas: [
+      'Photosynthesis happens in <b>chloroplasts</b>, which contain green <b>chlorophyll</b>. Chlorophyll absorbs light energy.',
+      'Word equation: <b>carbon dioxide + water → glucose + oxygen</b>, using light energy and chlorophyll.',
+      'Glucose is a carbohydrate. Plants use it for energy (respiration) or store it as starch.',
+      'Plants need minerals from the soil: <b>magnesium</b> to make chlorophyll, and <b>nitrates</b> to make proteins for growth.'
+    ],
+    example: { q: 'A plant grows in soil with no magnesium. What would you expect to see?', steps: ['Magnesium is needed to make chlorophyll.', 'With less chlorophyll the leaves turn yellow.', 'The plant photosynthesises less, so it grows poorly.'] },
+    watch: 'Oxygen is a product of photosynthesis, not a reactant. Plants take in carbon dioxide.'
+  },
+  gens: [
+    function () {
+      var parts = [['carbon dioxide', 'reactant'], ['water', 'reactant'], ['glucose', 'product'], ['oxygen', 'product']], i = ri(0, 3);
+      var shown = parts.map(function (p, k) { return k === i ? '<span class="blank">?</span>' : p[0]; });
+      var eq = shown[0] + ' + ' + shown[1] + arrow() + shown[2] + ' + ' + shown[3];
+      var opts = ['carbon dioxide', 'water', 'glucose', 'oxygen', 'nitrogen', 'starch'].filter(function (x) { return x !== parts[i][0]; });
+      return mc('Which substance is missing from the word equation for photosynthesis?<p class="data">' + eq + '</p>', parts[i][0], shuffle(opts).slice(0, 3), { hint: 'Plants take in a gas from the air and water from the soil. They make a sugar and give out a gas.', steps: ['carbon dioxide + water → glucose + oxygen.', parts[i][0].charAt(0).toUpperCase() + parts[i][0].slice(1) + ' is a ' + parts[i][1] + '.'] });
+    },
+    bank([
+      { q: 'Where in a plant cell does photosynthesis happen?', a: 'In the chloroplasts', w: ['In the nucleus', 'In the cell wall', 'In the vacuole'], s: ['Chloroplasts contain chlorophyll, which absorbs light energy for photosynthesis.'] },
+      { q: 'What does chlorophyll do?', a: 'It absorbs light energy', w: ['It stores glucose', 'It carries water up the stem', 'It releases oxygen into the soil'], s: ['Chlorophyll absorbs light energy, which is used to make glucose.'] },
+      { q: 'Why do plants need nitrates?', a: 'To make proteins for growth', w: ['To make chlorophyll', 'To absorb light', 'To make the leaves waterproof'], s: ['Nitrates provide the nitrogen needed to make proteins. Without them, growth is stunted.'] },
+      { q: 'Why do plants need magnesium?', a: 'To make chlorophyll', w: ['To make proteins', 'To make the cell wall', 'To take in water'], s: ['Magnesium is part of the chlorophyll molecule. Without it, leaves turn yellow.'] },
+      { q: 'Which type of energy does photosynthesis use?', a: 'Light energy', w: ['Sound energy', 'Chemical energy from the soil', 'Electrical energy'], s: ['Chlorophyll absorbs light energy and uses it to make glucose.'] },
+      { q: 'What does a plant do with some of the glucose it makes?', a: 'Stores it as starch', w: ['Turns it into carbon dioxide for the air', 'Sends it out through the roots as nitrates', 'Changes it into chlorophyll'], s: ['Glucose can be used in respiration, or stored as starch.'] },
+      { q: 'A plant has stunted growth but its leaves are a normal green. Which mineral is it most likely short of?', a: 'Nitrates', w: ['Magnesium', 'Oxygen', 'Glucose'], s: ['Shortage of nitrates means too little protein, so the plant grows poorly. Magnesium shortage would turn the leaves yellow.'] },
+      { q: 'Which gas is a product of photosynthesis?', a: 'Oxygen', w: ['Carbon dioxide', 'Nitrogen', 'Hydrogen'], s: ['carbon dioxide + water → glucose + oxygen.'] }
+    ])
+  ]
+});
+
+sci({
+  id: 'sci-kidneys', strand: 'B', title: 'The kidneys and renal system', codes: ['9Bs.02'], calc: false,
+  blurb: 'How the kidneys filter the blood to remove urea, and the parts of the renal system.',
+  learn: {
+    ideas: [
+      'The <b>kidneys</b> filter the blood. They remove <b>urea</b>, extra water and extra salts, which leave the body as <b>urine</b>.',
+      'Urea is a waste made in the liver when the body breaks down extra protein.',
+      'Blood enters each kidney through the <b>renal artery</b> and leaves, cleaned, through the <b>renal vein</b>.',
+      'Urine travels from each kidney down a <b>ureter</b> to the <b>bladder</b>, where it is stored, then leaves through the <b>urethra</b>.'
+    ],
+    example: { q: 'Put these in order for the path of urine: bladder, kidney, urethra, ureter.', steps: ['Urine is made in the kidney.', 'It flows down the ureter into the bladder.', 'It leaves the body through the urethra.', 'Kidney → ureter → bladder → urethra.'] },
+    watch: 'Ureter and urethra sound alike. Ureters run from the kidneys to the bladder; the urethra leads out of the body.'
+  },
+  gens: [bank([
+    { q: 'Which waste substance do the kidneys remove from the blood?', a: 'Urea', w: ['Oxygen', 'Glucose', 'Red blood cells'], s: ['The kidneys filter urea out of the blood. It leaves the body in urine.'] },
+    { q: 'Which tube carries urine from a kidney to the bladder?', a: 'The ureter', w: ['The urethra', 'The renal artery', 'The renal vein'], s: ['Each kidney has a ureter leading to the bladder.'] },
+    { q: 'Which tube carries urine out of the body?', a: 'The urethra', w: ['The ureter', 'The renal vein', 'The oesophagus'], s: ['The urethra leads from the bladder to outside the body.'] },
+    { q: 'Which blood vessel carries blood into the kidney?', a: 'The renal artery', w: ['The renal vein', 'The ureter', 'The urethra'], s: ['Arteries carry blood to organs. The renal artery brings blood to the kidney to be filtered.'] },
+    { q: 'Where is urea made?', a: 'In the liver', w: ['In the kidneys', 'In the bladder', 'In the lungs'], s: ['The liver makes urea from extra protein. The kidneys remove it from the blood.'] },
+    { q: 'What is the job of the bladder?', a: 'To store urine', w: ['To filter the blood', 'To make urea', 'To carry blood to the kidneys'], s: ['The bladder stores urine until it is released.'] },
+    { q: 'Compared with blood in the renal artery, blood in the renal vein contains…', a: 'less urea', w: ['more urea', 'the same amount of urea', 'no water at all'], s: ['The kidney has removed urea, so blood leaving in the renal vein has less of it.'] },
+    { q: 'On a very hot day you sweat a lot. What happens to your urine?', a: 'There is less of it, and it is more concentrated', w: ['There is more of it, and it is more dilute', 'It contains no urea', 'Nothing changes'], s: ['The kidneys keep back more water when you lose water by sweating, so you make less, more concentrated urine.'] }
+  ])]
+});
+
+sci({
+  id: 'sci-genes', strand: 'B', title: 'Genes, reproduction and inheritance', codes: ['9Bs.03', '9Bp.01', '9Bp.02', '9Bp.08'], calc: false,
+  blurb: 'Genes, DNA and chromosomes, fertilisation, how sex is inherited, and how a mother’s health affects her baby.',
+  learn: {
+    ideas: [
+      '<b>Chromosomes</b> are found in the nucleus. They are made of <b>DNA</b>. A <b>gene</b> is a section of DNA that influences a characteristic, such as eye colour.',
+      'Human body cells have 46 chromosomes in 23 pairs. Gametes (sperm and egg cells) have 23, one from each pair.',
+      'At <b>fertilisation</b> the nucleus of a sperm fuses with the nucleus of an egg. The fertilised egg has a new combination of DNA, half from each parent.',
+      'Females have two X chromosomes (XX). Males have an X and a Y (XY). Every egg carries an X; a sperm carries an X or a Y, so the father’s sperm decides the baby’s sex. The chance of a boy is ' + fr(1, 2) + '.',
+      'The placenta passes oxygen and food to the fetus, but harmful substances can cross too. Smoking, alcohol and some drugs can harm the baby’s growth; a healthy diet helps it develop.'
+    ],
+    example: { q: 'Why is the chance of a baby being a girl one half?', steps: ['The egg always carries an X chromosome.', 'Half of the father’s sperm carry an X, and half carry a Y.', 'X from the sperm gives XX (girl); Y gives XY (boy). Each is equally likely: ' + fr(1, 2) + '.'] },
+    watch: 'Each pregnancy is separate. A family with three boys still has a ' + fr(1, 2) + ' chance of a girl next time.'
+  },
+  gens: [
+    function () {
+      var t = pick([0, 1, 2]);
+      if (t === 0) return { kind: 'num', prompt: 'A human body cell has 46 chromosomes. How many chromosomes are in a human sperm cell?', answer: 23, ans: '23', hint: 'Gametes have one chromosome from each pair.', steps: ['46 chromosomes make 23 pairs.', 'A gamete has one from each pair: 23.'] };
+      if (t === 1) return { kind: 'frac', prompt: 'A couple are expecting a baby. What is the probability that the baby is a boy? Give your answer as a fraction.', answer: R(1, 2), ans: fr(1, 2), hint: 'The egg always carries X. What can the sperm carry?', steps: ['Half the sperm carry X and half carry Y.', 'P(boy, XY) = ' + fr(1, 2) + '.'] };
+      var n = ri(2, 4);
+      return { kind: 'frac', prompt: 'A family already has ' + n + ' girls. What is the probability that their next baby is a boy? Give your answer as a fraction.', answer: R(1, 2), ans: fr(1, 2), hint: 'Do earlier babies affect which sperm fertilises the next egg?', steps: ['Each pregnancy is independent of the ones before.', 'The probability is still ' + fr(1, 2) + '.'] };
+    },
+    bank([
+      { q: 'What is a gene?', a: 'A section of DNA that influences a characteristic', w: ['A whole cell nucleus', 'A type of protein in the blood', 'A pair of chromosomes'], s: ['Genes are sections of DNA, found on chromosomes, that influence characteristics.'] },
+      { q: 'Where are chromosomes found in a cell?', a: 'In the nucleus', w: ['In the cell membrane', 'In the cytoplasm only', 'In the cell wall'], s: ['Chromosomes, made of DNA, are in the nucleus.'] },
+      { q: 'Which sex chromosomes does a human male have?', a: 'XY', w: ['XX', 'YY', 'X only'], s: ['Males are XY; females are XX.'] },
+      { q: 'Whose gamete decides whether a baby is a boy or a girl?', a: 'The father’s sperm', w: ['The mother’s egg', 'Both equally', 'Neither: it is decided after birth'], s: ['Every egg carries X. A sperm carries X or Y, so the sperm decides.'] },
+      { q: 'What happens at fertilisation?', a: 'The nucleus of a sperm fuses with the nucleus of an egg', w: ['A sperm divides into two', 'The egg doubles its chromosomes', 'Two eggs join together'], s: ['The nuclei fuse, giving a fertilised egg with a new combination of DNA.'] },
+      { q: 'Why do brothers and sisters look different from each other?', a: 'Each fertilised egg gets a different combination of DNA from the parents', w: ['They have different parents', 'Only environment affects appearance', 'Their DNA is identical'], s: ['Each sperm and egg carries a different mix of the parent’s chromosomes, so each child gets a new combination.'] },
+      { q: 'How can smoking during pregnancy harm the fetus?', a: 'Less oxygen reaches the baby, so it may be born small', w: ['It makes the baby grow too quickly', 'It changes the baby’s sex', 'It has no effect because of the placenta'], s: ['Chemicals in smoke reduce the oxygen carried in the mother’s blood, which can lead to low birth weight.'] },
+      { q: 'Why is a healthy diet important during pregnancy?', a: 'The fetus gets its nutrients from the mother’s blood', w: ['The fetus makes its own food', 'It decides the baby’s eye colour', 'It stops the baby’s DNA changing'], s: ['Nutrients pass from the mother’s blood across the placenta to the fetus.'] },
+      { q: 'How do alcohol and drugs taken by a pregnant woman reach the fetus?', a: 'They cross the placenta from the mother’s blood', w: ['Through the baby’s lungs', 'They cannot reach the fetus', 'Through the umbilical cord from the outside'], s: ['Many harmful substances can cross the placenta into the fetus’s blood.'] }
+    ])
+  ]
+});
+
+sci({
+  id: 'sci-evolution', strand: 'B', title: 'Variation, natural selection and extinction', codes: ['9Bp.03', '9Bp.04', '9Be.01'], calc: false,
+  blurb: 'Why individuals in a species vary, how natural selection changes a population, and how environmental change can cause extinction.',
+  learn: {
+    ideas: [
+      'Individuals of the same species are different: this is <b>variation</b>. Some variation comes from genes; some comes from the environment.',
+      '<b>Natural selection</b>: individuals vary; those best suited to their environment are more likely to survive and reproduce; they pass their genes on; over many generations the population changes.',
+      'If the environment changes, a population may shrink. If no individuals are suited to the new conditions, or the change is too fast, the species can become <b>extinct</b>.',
+      'Causes of change include new diseases, new predators or competitors, climate change and habitat destruction.'
+    ],
+    example: { q: 'Before factories, most peppered moths in England were pale. After soot darkened the trees, dark moths became common. Explain why.', steps: ['There was variation: some moths were dark, some pale.', 'On dark trees, birds spotted and ate more pale moths.', 'Dark moths survived and reproduced more, passing on the genes for dark colour.', 'Over many generations, dark moths became more common.'] },
+    watch: 'Individuals do not change to suit their environment. The population changes because the better-suited ones leave more offspring.'
+  },
+  gens: [bank([
+    { q: 'What is variation?', a: 'Differences between individuals of the same species', w: ['Differences between two species', 'A change in the weather', 'A type of reproduction'], s: ['Variation means individuals of the same species are not identical.'] },
+    { q: 'Which characteristic is caused only by the environment?', a: 'A scar from an accident', w: ['Blood group', 'Natural eye colour', 'Biological sex'], s: ['A scar is not inherited; it comes from something that happened to the person.'] },
+    { q: 'Which characteristic is mainly caused by genes?', a: 'Blood group', w: ['Speaking French', 'A suntan', 'A broken arm'], s: ['Blood group is inherited and is not changed by the environment.'] },
+    { q: 'Which statement describes natural selection?', a: 'Individuals best suited to their environment survive and reproduce more, passing on their genes', w: ['Animals change their bodies on purpose to fit their environment', 'Every individual has an equal chance of surviving', 'Humans choose which animals breed'], s: ['Better-suited individuals leave more offspring, so their genes become more common.'] },
+    { q: 'Rabbits in a cold area vary in fur thickness. A run of very cold winters arrives. What happens over many generations?', a: 'More rabbits have thick fur', w: ['All the rabbits grow thick fur straight away', 'More rabbits have thin fur', 'Nothing changes'], s: ['Thick-furred rabbits survive the cold better and have more young, so the genes for thick fur spread.'] },
+    { q: 'Some bacteria survive an antibiotic and multiply. What happens to the bacteria population over time?', a: 'It becomes resistant to the antibiotic', w: ['It becomes weaker', 'It disappears completely', 'It stops reproducing'], s: ['The resistant bacteria survive and reproduce, so the whole population becomes resistant: natural selection.'] },
+    { q: 'Which change is most likely to make a species extinct?', a: 'Its environment changes quickly and none of the population is suited to the new conditions', w: ['A slow change that some individuals can survive', 'An increase in its food supply', 'A fall in the number of its predators'], s: ['If no individuals can survive and reproduce in the new conditions, the species dies out.'] },
+    { q: 'Why does variation help a species survive environmental change?', a: 'Some individuals may have features that suit the new conditions', w: ['It makes every individual identical', 'It stops the environment changing', 'It makes predators leave'], s: ['With variation, some individuals are likely to survive the change and reproduce.'] },
+    { q: 'A new disease spreads through a population of frogs. What happens?', a: 'The population falls; frogs with natural resistance survive and breed', w: ['All frogs instantly become resistant', 'The population grows', 'Only the oldest frogs survive'], s: ['Frogs with resistance are more likely to survive and pass on their genes.'] }
+  ])]
+});
+
+/* ================= CHEMISTRY ================= */
+var ELEMENTS = [[1, 'H', 'hydrogen', 1], [2, 'He', 'helium', 4], [3, 'Li', 'lithium', 7], [4, 'Be', 'beryllium', 9], [5, 'B', 'boron', 11], [6, 'C', 'carbon', 12], [7, 'N', 'nitrogen', 14], [8, 'O', 'oxygen', 16], [9, 'F', 'fluorine', 19], [10, 'Ne', 'neon', 20], [11, 'Na', 'sodium', 23], [12, 'Mg', 'magnesium', 24], [13, 'Al', 'aluminium', 27], [14, 'Si', 'silicon', 28], [15, 'P', 'phosphorus', 31], [16, 'S', 'sulfur', 32], [17, 'Cl', 'chlorine', 35], [18, 'Ar', 'argon', 40], [19, 'K', 'potassium', 39], [20, 'Ca', 'calcium', 40]];
+function shells(z) { var a = [], cap = [2, 8, 8, 2]; for (var i = 0; z > 0; i++) { var c = Math.min(z, cap[i]); a.push(c); z -= c; } return a; }
+function groupOf(z) { var s = shells(z), o = s[s.length - 1]; if (z === 2) return 0; return o === 8 ? 0 : o; }
+function nucFig(e) { return '<span class="nuclide"><span class="nm"><span>' + e[3] + '</span><span>' + e[0] + '</span></span><b>' + e[1] + '</b></span>'; }
+
+sci({
+  id: 'sci-atoms', strand: 'C', title: 'Atoms and the Periodic Table', codes: ['9Cm.01'], calc: false,
+  blurb: 'Protons, neutrons and electrons, electron shells, and how an element’s place in the Periodic Table links to its atoms.',
+  learn: {
+    ideas: [
+      'An atom has a tiny <b>nucleus</b> of protons (charge +1) and neutrons (charge 0), surrounded by electrons (charge −1) in shells.',
+      'The <b>atomic number</b> is the number of protons. In an atom, the number of electrons equals the number of protons.',
+      'The <b>mass number</b> is protons + neutrons. So neutrons = mass number − atomic number.',
+      'Electrons fill shells: 2 in the first, then 8, then 8. Sodium (11 electrons) is 2,8,1.',
+      'The <b>group</b> number (1 to 7) is the number of electrons in the outer shell; the <b>period</b> is the number of shells. Elements in the same group react in similar ways. Group 0 atoms have full outer shells and are unreactive.'
+    ],
+    example: { q: 'Chlorine has atomic number 17 and mass number 35. Find its protons, neutrons and electrons.', steps: ['Protons = atomic number = 17.', 'Electrons = protons = 17.', 'Neutrons = 35 − 17 = 18.'] },
+    watch: 'The mass number counts protons and neutrons. Do not add the electrons.'
+  },
+  gens: [
+    function () {
+      var e = pick(ELEMENTS.slice(2)), what = pick(['protons', 'neutrons', 'electrons']), ans = what === 'neutrons' ? e[3] - e[0] : e[0];
+      return { kind: 'num', prompt: 'An atom of ' + e[2] + ' is shown as ' + nucFig(e) + '. How many <b>' + what + '</b> does it have?', answer: ans, ans: '' + ans, hint: 'The bottom number is the atomic number (protons). The top number is the mass number (protons + neutrons).', steps: ['Atomic number ' + e[0] + ', mass number ' + e[3] + '.', what === 'neutrons' ? 'Neutrons = ' + e[3] + ' − ' + e[0] + ' = ' + ans + '.' : what === 'protons' ? 'Protons = atomic number = ' + ans + '.' : 'In an atom, electrons = protons = ' + ans + '.'] };
+    },
+    function () {
+      var e = pick(ELEMENTS.slice(2)), s = shells(e[0]), t = pick(['outer', 'shells']);
+      if (t === 'outer') return { kind: 'num', prompt: e[2].charAt(0).toUpperCase() + e[2].slice(1) + ' has atomic number ' + e[0] + '. How many electrons are in its outer shell?', answer: s[s.length - 1], ans: '' + s[s.length - 1], hint: 'Fill the shells: 2, then 8, then 8.', steps: ['Electron arrangement: ' + s.join(', ') + '.', 'Outer shell: ' + s[s.length - 1] + ' electrons.'] };
+      return { kind: 'num', prompt: e[2].charAt(0).toUpperCase() + e[2].slice(1) + ' has atomic number ' + e[0] + '. In which period of the Periodic Table is it?', answer: s.length, ans: 'Period ' + s.length, hint: 'The period number is the number of occupied electron shells.', steps: ['Electron arrangement: ' + s.join(', ') + '.', 'That is ' + s.length + ' shells, so period ' + s.length + '.'] };
+    },
+    function () {
+      var g = pick([1, 2, 7, 0]), same = ELEMENTS.filter(function (e) { return e[0] > 2 && groupOf(e[0]) === g; }), a = pick(same), b = pick(same.filter(function (x) { return x !== a; }));
+      var others = shuffle(ELEMENTS.filter(function (e) { return e[0] > 2 && groupOf(e[0]) !== g; })).slice(0, 3);
+      return mc('Which element would you expect to react in a similar way to ' + a[2] + '?', b[2].charAt(0).toUpperCase() + b[2].slice(1), others.map(function (e) { return e[2].charAt(0).toUpperCase() + e[2].slice(1); }), { hint: 'Elements in the same group have the same number of outer electrons.', steps: [a[2].charAt(0).toUpperCase() + a[2].slice(1) + ' and ' + b[2] + ' are both in group ' + g + '.', 'They have the same number of outer-shell electrons, so they react in similar ways.'] });
+    },
+    bank([
+      { q: 'Which particle has a negative charge?', a: 'Electron', w: ['Proton', 'Neutron', 'Nucleus'], s: ['Electrons are −1, protons +1, neutrons 0.'] },
+      { q: 'What does the atomic number tell you?', a: 'The number of protons in an atom', w: ['The number of neutrons', 'The protons plus neutrons', 'The number of shells'], s: ['Atomic number = number of protons. It defines the element.'] },
+      { q: 'Why is neon very unreactive?', a: 'Its outer shell is full', w: ['It has no electrons', 'It is a metal', 'Its nucleus has no protons'], s: ['Neon (2,8) has a full outer shell, like the other group 0 noble gases.'] },
+      { q: 'Where are most of an atom’s mass and all its positive charge?', a: 'In the nucleus', w: ['In the outer shell', 'Spread evenly through the atom', 'In the electrons'], s: ['Protons and neutrons are in the nucleus. Electrons have very little mass.'] }
+    ])
+  ]
+});
+
+var ION_EL = [['sodium', 'Na', 1], ['potassium', 'K', 1], ['lithium', 'Li', 1], ['magnesium', 'Mg', 2], ['calcium', 'Ca', 2], ['aluminium', 'Al', 3], ['chlorine', 'Cl', -1], ['fluorine', 'F', -1], ['oxygen', 'O', -2], ['sulfur', 'S', -2]];
+sci({
+  id: 'sci-bonding', strand: 'C', title: 'Ions, bonds and structures', codes: ['9Cm.02', '9Cm.03', '9Cm.04', '9Cm.05', '9Cp.04'], calc: false,
+  blurb: 'How ions form, ionic and covalent bonds, and how simple and giant structures affect properties.',
+  learn: {
+    ideas: [
+      'An <b>ion</b> is an atom that has gained or lost electrons. Metals lose electrons to form positive ions (Na⁺). Non-metals gain electrons to form negative ions (Cl⁻).',
+      'An <b>ionic bond</b> is the strong attraction between oppositely charged ions, as in sodium chloride. It forms between a metal and a non-metal.',
+      'A <b>covalent bond</b> is a shared pair of electrons between two non-metal atoms. Atoms joined by covalent bonds form a <b>molecule</b>, such as H₂O.',
+      '<b>Simple molecular</b> substances (water, carbon dioxide) have low melting and boiling points. <b>Giant</b> structures, ionic (salt) or covalent (diamond), have very high melting points because many strong bonds must break.'
+    ],
+    example: { q: 'A magnesium atom loses 2 electrons. What is the charge on the ion?', steps: ['Losing 2 negative electrons leaves 2 more protons than electrons.', 'The ion is Mg²⁺, with a charge of +2.'] },
+    watch: 'Losing electrons makes a positive ion, because electrons are negative.'
+  },
+  gens: [
+    function () {
+      var e = pick(ION_EL), z = ELEMENTS.filter(function (x) { return x[1] === e[1]; })[0][0], lose = e[2] > 0, k = Math.abs(e[2]), t = pick([0, 1]);
+      if (t === 0) return { kind: 'num', prompt: 'A ' + e[0] + ' atom ' + (lose ? 'loses ' : 'gains ') + plural(k, 'electron') + ' to form an ion. What is the charge on the ion? Use a negative number for a negative charge.', answer: e[2], ans: (e[2] > 0 ? '+' : '') + sn(e[2]) + ' (' + ion(e[1], e[2]) + ')', hint: 'Electrons are negative. Losing them makes the atom positive; gaining them makes it negative.', steps: [(lose ? 'Losing ' : 'Gaining ') + plural(k, 'negative electron') + ' gives a charge of ' + (e[2] > 0 ? '+' : '') + sn(e[2]) + '.', 'The ion is ' + ion(e[1], e[2]) + '.'] };
+      return { kind: 'num', prompt: 'A ' + e[0] + ' atom has ' + z + ' electrons. It forms the ion ' + ion(e[1], e[2]) + '. How many electrons does the ion have?', answer: z - e[2], ans: '' + (z - e[2]), hint: lose ? 'A positive ion has lost electrons.' : 'A negative ion has gained electrons.', steps: [lose ? 'It has lost ' + plural(k, 'electron') + ': ' + z + ' − ' + k + ' = ' + (z - k) + '.' : 'It has gained ' + plural(k, 'electron') + ': ' + z + ' + ' + k + ' = ' + (z + k) + '.'] };
+    },
+    function () {
+      var pairs = [['sodium chloride', 'ionic'], ['magnesium oxide', 'ionic'], ['calcium chloride', 'ionic'], ['potassium fluoride', 'ionic'], ['water', 'covalent'], ['carbon dioxide', 'covalent'], ['methane', 'covalent'], ['ammonia', 'covalent'], ['hydrogen chloride', 'covalent'], ['chlorine gas', 'covalent']];
+      var p = pick(pairs), q = mc('What type of bonding is in ' + p[0] + '?', p[1] === 'ionic' ? 'Ionic' : 'Covalent', [p[1] === 'ionic' ? 'Covalent' : 'Ionic'], { hint: 'Metal with non-metal: ionic. Only non-metals: covalent.', steps: [p[1] === 'ionic' ? p[0].charAt(0).toUpperCase() + p[0].slice(1) + ' is made from a metal and a non-metal, so the bonding is ionic.' : p[0].charAt(0).toUpperCase() + p[0].slice(1) + ' is made only from non-metals, so the atoms share electrons: covalent.'] });
+      q.options = ['Ionic', 'Covalent']; q.correct = p[1] === 'ionic' ? 0 : 1; return q;
+    },
+    bank([
+      { q: 'What is a covalent bond?', a: 'A shared pair of electrons between two atoms', w: ['The attraction between oppositely charged ions', 'A transfer of protons', 'The attraction between two nuclei'], s: ['In a covalent bond, two non-metal atoms share a pair of electrons.'] },
+      { q: 'What is an ionic bond?', a: 'The attraction between oppositely charged ions', w: ['A shared pair of electrons', 'Two atoms sharing neutrons', 'A bond only found in gases'], s: ['Positive and negative ions attract each other strongly.'] },
+      { q: 'Why does water have a low boiling point?', a: 'It is a simple molecular substance, so little energy is needed to separate the molecules', w: ['It is a giant ionic structure', 'Its covalent bonds are very weak', 'It is a metal'], s: ['The forces between water molecules are weak, so it boils at only 100 °C. The covalent bonds inside each molecule do not break.'] },
+      { q: 'Why does diamond have a very high melting point?', a: 'It is a giant covalent structure with many strong bonds to break', w: ['It is made of small molecules', 'It contains ions', 'It is a liquid at room temperature'], s: ['In diamond every carbon atom is covalently bonded to others in a giant network.'] },
+      { q: 'Sodium chloride melts at 801 °C. Which structure explains this?', a: 'A giant ionic lattice with strong attractions between ions', w: ['Small molecules with weak forces between them', 'Single atoms with no bonds', 'A giant metallic structure'], s: ['Many strong ionic bonds must be broken to melt it.'] },
+      { q: 'Which type of particle is formed when atoms join by covalent bonds?', a: 'A molecule', w: ['An ion', 'A proton', 'An isotope'], s: ['Covalently bonded atoms make molecules, such as H₂O and CO₂.'] },
+      { q: 'When does sodium chloride conduct electricity?', a: 'When it is melted or dissolved in water', w: ['When it is a solid crystal', 'Never', 'Only when it is cold'], s: ['The ions must be free to move to carry charge. In the solid they are held in place.'] }
+    ])
+  ]
+});
+
+sci({
+  id: 'sci-group1', strand: 'C', title: 'Group 1: the alkali metals', codes: ['9Cp.01'], calc: false,
+  blurb: 'Trends in the properties and reactions of lithium, sodium and potassium.',
+  learn: {
+    ideas: [
+      'Group 1 metals (lithium, sodium, potassium, …) have one electron in their outer shell. They are soft and can be cut with a knife.',
+      'They react with water to make a <b>metal hydroxide</b> and <b>hydrogen</b>: sodium + water → sodium hydroxide + hydrogen. The solution is alkaline.',
+      'Going <b>down</b> the group, the metals get <b>more reactive</b> and their melting points get <b>lower</b>.',
+      'Lithium fizzes steadily on water; sodium melts into a ball and whizzes around; potassium bursts into a lilac flame.'
+    ],
+    example: { q: 'Predict how rubidium, below potassium, reacts with water.', steps: ['Reactivity increases down the group.', 'Rubidium is even more reactive than potassium, so it reacts violently, possibly exploding.'] },
+    watch: 'The trend is opposite for reactivity and melting point: down the group, more reactive but lower melting point.'
+  },
+  gens: [
+    function () {
+      var m = pick([['lithium', 'lithium hydroxide'], ['sodium', 'sodium hydroxide'], ['potassium', 'potassium hydroxide']]), i = pick([1, 2]);
+      var eq = m[0] + ' + water' + arrow() + (i === 1 ? '<span class="blank">?</span>' : m[1]) + ' + ' + (i === 2 ? '<span class="blank">?</span>' : 'hydrogen');
+      var right = i === 1 ? m[1] : 'hydrogen', w = i === 1 ? [m[0] + ' oxide', m[0] + ' chloride', 'water'] : ['oxygen', 'carbon dioxide', 'chlorine'];
+      return mc('What is missing from this word equation?<p class="data">' + eq + '</p>', right, w, { hint: 'Group 1 metals react with water to make a metal hydroxide and a gas.', steps: [m[0] + ' + water → ' + m[1] + ' + hydrogen.'] });
+    },
+    function () {
+      var els = [['lithium', 1], ['sodium', 2], ['potassium', 3], ['rubidium', 4], ['caesium', 5]], two = shuffle(els).slice(0, 2), prop = pick(['more reactive', 'lower melting point']);
+      var winner = two[0][1] > two[1][1] ? two[0] : two[1], loser = winner === two[0] ? two[1] : two[0];
+      return mc('Which has the ' + (prop === 'more reactive' ? 'higher reactivity' : 'lower melting point') + ': ' + two[0][0] + ' or ' + two[1][0] + '?', winner[0].charAt(0).toUpperCase() + winner[0].slice(1), [loser[0].charAt(0).toUpperCase() + loser[0].slice(1), 'They are the same', 'You cannot tell'], { hint: 'Order down group 1: lithium, sodium, potassium, rubidium, caesium.', steps: [winner[0].charAt(0).toUpperCase() + winner[0].slice(1) + ' is further down group 1.', 'Down the group, reactivity increases and melting point decreases.'] });
+    },
+    bank([
+      { q: 'Why are lithium, sodium and potassium in the same group?', a: 'They each have one electron in their outer shell', w: ['They have the same mass number', 'They are all gases', 'They have the same number of shells'], s: ['Group 1 elements all have one outer electron, so they react in similar ways.'] },
+      { q: 'Universal indicator is added to the water after sodium reacts with it. What colour does it turn?', a: 'Purple or blue: the solution is alkaline', w: ['Red: the solution is acidic', 'Green: the solution is neutral', 'It stays colourless'], s: ['Sodium hydroxide is an alkali, so the indicator turns blue or purple.'] },
+      { q: 'Why are group 1 metals stored under oil?', a: 'To stop them reacting with air and water', w: ['To keep them warm', 'Because they are liquids', 'To make them shiny'], s: ['They react quickly with oxygen and water vapour in the air.'] },
+      { q: 'Which gas is given off when potassium reacts with water?', a: 'Hydrogen', w: ['Oxygen', 'Carbon dioxide', 'Chlorine'], s: ['potassium + water → potassium hydroxide + hydrogen.'] }
+    ])
+  ]
+});
+
+var DENS = [['cork', 0.24], ['oak wood', 0.75], ['ice', 0.92], ['olive oil', 0.92], ['water', 1.0], ['seawater', 1.03], ['glass', 2.5], ['aluminium', 2.7], ['iron', 7.9], ['copper', 8.9], ['lead', 11.3], ['gold', 19.3]];
+sci({
+  id: 'sci-density', strand: 'C', title: 'Density, floating and sinking', codes: ['9Cp.02', '9Cp.03', '9Pf.01'], calc: true,
+  blurb: 'Calculate density from mass and volume, compare solids, liquids and gases, and explain why things float or sink.',
+  learn: {
+    ideas: [
+      '<b>Density</b> = ' + fr('mass', 'volume') + '. With mass in g and volume in cm³, density is in g/cm³.',
+      'Rearranged: mass = density × volume, and volume = ' + fr('mass', 'density') + '.',
+      'Solids and liquids are much denser than gases, because their particles are packed closely together. Water is 1 g/cm³; air is about 0.0012 g/cm³.',
+      'An object <b>floats</b> in a liquid if it is less dense than the liquid, and <b>sinks</b> if it is denser.',
+      'To find the volume of an irregular object, lower it into water and measure how much the water level rises (displacement).'
+    ],
+    example: { q: 'A stone has a mass of 156 g. When dropped into a measuring cylinder, the water rises from 40 cm³ to 100 cm³. Find its density.', steps: ['Volume = 100 − 40 = 60 cm³.', 'Density = 156 ÷ 60 = 2.6 g/cm³.'] },
+    watch: 'Heavy things do not always sink. A huge steel ship floats because its overall density, including the air inside, is less than water’s.'
+  },
+  gens: [
+    function () {
+      var m = pick(DENS.filter(function (d) { return d[0] !== 'water' && d[0] !== 'seawater' && d[0] !== 'olive oil'; })), V = ri(5, 60), mass = clean(m[1] * V), t = pick([0, 1, 2]);
+      if (t === 0) return { kind: 'num', prompt: 'A block of ' + m[0] + ' has a mass of ' + fmt(mass) + ' g and a volume of ' + V + ' cm³. Find its density in g/cm³.', answer: m[1], dp: 2, ans: fmt(m[1]) + ' g/cm³', hint: 'Density = mass ÷ volume.', steps: [fmt(mass) + ' ÷ ' + V + ' = ' + fmt(m[1]) + ' g/cm³.'] };
+      if (t === 1) return { kind: 'num', prompt: m[0].charAt(0).toUpperCase() + m[0].slice(1) + ' has a density of ' + fmt(m[1]) + ' g/cm³. Find the mass of ' + V + ' cm³ of it, in grams.', answer: mass, dp: 2, ans: fmt(mass) + ' g', hint: 'Mass = density × volume.', steps: [fmt(m[1]) + ' × ' + V + ' = ' + fmt(mass) + ' g.'] };
+      return { kind: 'num', prompt: m[0].charAt(0).toUpperCase() + m[0].slice(1) + ' has a density of ' + fmt(m[1]) + ' g/cm³. A piece has a mass of ' + fmt(mass) + ' g. What is its volume, in cm³?', answer: V, dp: 1, ans: V + ' cm³', hint: 'Volume = mass ÷ density.', steps: [fmt(mass) + ' ÷ ' + fmt(m[1]) + ' = ' + V + ' cm³.'] };
+    },
+    function () {
+      var mass = ri(20, 200), start = pick([20, 30, 40, 50]), V = ri(5, 40), d = mass / V;
+      return { kind: 'num', prompt: 'An irregular stone has a mass of ' + mass + ' g. When it is placed in a measuring cylinder, the water level rises from ' + start + ' cm³ to ' + (start + V) + ' cm³. Find the density of the stone, to 2 decimal places.', answer: d, dp: 2, ans: fmt(d, 2) + ' g/cm³', hint: 'The rise in water level is the volume of the stone.', steps: ['Volume = ' + (start + V) + ' − ' + start + ' = ' + V + ' cm³.', 'Density = ' + mass + ' ÷ ' + V + ' = ' + fmt(d, 2) + ' g/cm³.'] };
+    },
+    function () {
+      var liq = pick([['water', 1.0], ['seawater', 1.03], ['olive oil', 0.92]]), obj = pick(DENS.filter(function (d) { return d[1] !== liq[1] && Math.abs(d[1] - liq[1]) > 0.05 && d[0] !== 'seawater' && d[0] !== 'water' && d[0] !== 'olive oil'; })), floats = obj[1] < liq[1];
+      var q = mc('A piece of ' + obj[0] + ' (density ' + fmt(obj[1]) + ' g/cm³) is placed in ' + liq[0] + ' (density ' + fmt(liq[1]) + ' g/cm³). Does it float or sink?', floats ? 'Floats' : 'Sinks', [floats ? 'Sinks' : 'Floats'], { hint: 'Compare the two densities.', steps: [fmt(obj[1]) + ' is ' + (floats ? 'less' : 'more') + ' than ' + fmt(liq[1]) + ', so it ' + (floats ? 'floats' : 'sinks') + '.'] });
+      q.options = ['Floats', 'Sinks']; q.correct = floats ? 0 : 1; return q;
+    },
+    bank([
+      { q: 'Why are gases much less dense than solids?', a: 'Their particles are much further apart', w: ['Their particles are heavier', 'Gases have no mass', 'Their particles are smaller'], s: ['The same mass of gas takes up far more space, so its density is much lower.'] },
+      { q: 'Ice floats on water. What does this tell you?', a: 'Ice is less dense than liquid water', w: ['Ice is denser than water', 'Ice has no mass', 'Ice and water have the same density'], s: ['Objects less dense than the liquid float.'] },
+      { q: 'A steel ship floats, but a steel nail sinks. Why?', a: 'The ship contains a lot of air, so its overall density is less than water’s', w: ['Steel becomes lighter in big pieces', 'Seawater is denser than steel', 'Ships are made of a different metal'], s: ['The ship’s average density, including the air inside, is less than water’s.'] }
+    ])
+  ]
+});
+
+var FORMULAE = [['H2O', 'water', { H: 2, O: 1 }], ['CO2', 'carbon dioxide', { C: 1, O: 2 }], ['CH4', 'methane', { C: 1, H: 4 }], ['NaCl', 'sodium chloride', { Na: 1, Cl: 1 }], ['H2SO4', 'sulfuric acid', { H: 2, S: 1, O: 4 }], ['CaCO3', 'calcium carbonate', { Ca: 1, C: 1, O: 3 }], ['NH3', 'ammonia', { N: 1, H: 3 }], ['C6H12O6', 'glucose', { C: 6, H: 12, O: 6 }], ['HCl', 'hydrochloric acid', { H: 1, Cl: 1 }], ['MgO', 'magnesium oxide', { Mg: 1, O: 1 }], ['NaOH', 'sodium hydroxide', { Na: 1, O: 1, H: 1 }], ['CuSO4', 'copper sulfate', { Cu: 1, S: 1, O: 4 }], ['HNO3', 'nitric acid', { H: 1, N: 1, O: 3 }]];
+sci({
+  id: 'sci-equations', strand: 'C', title: 'Equations and conservation of mass', codes: ['9Cc.01', '9Cc.05'], calc: false,
+  blurb: 'Read chemical formulae, write word and symbol equations, and use the fact that mass is conserved.',
+  learn: {
+    ideas: [
+      'A formula shows the atoms in a substance. ' + chem('H2SO4') + ' has 2 hydrogen, 1 sulfur and 4 oxygen atoms: 7 atoms in total.',
+      'A word equation names the reactants and products: magnesium + oxygen → magnesium oxide.',
+      'A symbol equation uses formulae: Mg + ' + chem('O2') + ' → MgO. (At this stage you do not need to balance them.)',
+      'In a chemical reaction, atoms are rearranged, not created or destroyed, so <b>mass is conserved</b>: total mass of reactants = total mass of products.',
+      'Energy is also conserved. It moves between the chemicals and the surroundings.'
+    ],
+    example: { q: '2.4 g of magnesium burns completely in oxygen to make 4.0 g of magnesium oxide. What mass of oxygen reacted?', steps: ['Mass is conserved: magnesium + oxygen = magnesium oxide.', '4.0 − 2.4 = 1.6 g of oxygen.'] },
+    watch: 'If a gas escapes from an open container, the mass on the balance falls, but no mass has been destroyed. It has gone into the air.'
+  },
+  gens: [
+    function () {
+      var f = pick(FORMULAE), els = Object.keys(f[2]), t = pick([0, 1, 2]);
+      if (t === 0) { var tot = els.reduce(function (s, k) { return s + f[2][k]; }, 0); return { kind: 'num', prompt: 'How many atoms are there in total in one ' + chem(f[0]) + ' (' + f[1] + ')?', answer: tot, ans: '' + tot, hint: 'Add up the small numbers. A symbol with no number counts as 1.', steps: [els.map(function (k) { return f[2][k] + ' ' + k; }).join(' + ') + ' = ' + tot + ' atoms.'] }; }
+      if (t === 1) return { kind: 'num', prompt: 'How many different elements are in ' + chem(f[0]) + ' (' + f[1] + ')?', answer: els.length, ans: '' + els.length, hint: 'Count the different symbols. A capital letter starts a new symbol.', steps: ['The elements are ' + els.join(', ') + ': ' + els.length + '.'] };
+      var k = pick(els); return { kind: 'num', prompt: 'How many ' + k + ' atoms are in one ' + chem(f[0]) + '?', answer: f[2][k], ans: '' + f[2][k], hint: 'Look at the small number straight after ' + k + '.', steps: ['There ' + (f[2][k] === 1 ? 'is 1 ' : 'are ' + f[2][k] + ' ') + k + ' atom' + (f[2][k] === 1 ? '' : 's') + '.'] };
+    },
+    function () {
+      var t = pick([0, 1, 2]);
+      if (t === 0) { var a = clean(ri(12, 60) / 10), b = clean(ri(8, 40) / 10); return { kind: 'num', prompt: a + ' g of iron reacts completely with ' + b + ' g of sulfur to make iron sulfide. What mass of iron sulfide is made?', answer: clean(a + b), ans: fmt(clean(a + b)) + ' g', hint: 'Mass is conserved.', steps: ['Total mass of reactants = total mass of products.', fmt(a) + ' + ' + fmt(b) + ' = ' + fmt(clean(a + b)) + ' g.'] }; }
+      if (t === 1) { var m = clean(ri(12, 48) / 10), ox = clean(m * 2 / 3); return { kind: 'num', prompt: fmt(m) + ' g of magnesium burns completely to make ' + fmt(clean(m + ox)) + ' g of magnesium oxide. What mass of oxygen reacted?', answer: ox, ans: fmt(ox) + ' g', hint: 'Mass of magnesium + mass of oxygen = mass of magnesium oxide.', steps: [fmt(clean(m + ox)) + ' − ' + fmt(m) + ' = ' + fmt(ox) + ' g.'] }; }
+      var start = clean(ri(800, 1200) / 10), co2 = clean(ri(20, 60) / 10);
+      return { kind: 'num', prompt: 'A flask of acid and marble chips has a mass of ' + fmt(start) + ' g on an open balance. Carbon dioxide gas escapes and the mass falls to ' + fmt(clean(start - co2)) + ' g. What mass of carbon dioxide escaped?', answer: co2, ans: fmt(co2) + ' g', hint: 'The missing mass left as gas.', steps: [fmt(start) + ' − ' + fmt(clean(start - co2)) + ' = ' + fmt(co2) + ' g.', 'The mass has not been destroyed: it went into the air.'] };
+    },
+    bank([
+      { q: 'Which is the symbol equation for magnesium + oxygen → magnesium oxide (unbalanced)?', a: 'Mg + ' + chem('O2') + ' → MgO', w: ['Mn + O → MnO', 'Mg + ' + chem('O2') + ' → ' + chem('MgO2') + ' + ' + chem('H2'), 'MgO → Mg + ' + chem('O2')], s: ['Magnesium is Mg, oxygen gas is ' + chem('O2') + ', magnesium oxide is MgO.'] },
+      { q: 'Which is the word equation for ' + chem('CH4') + ' + ' + chem('O2') + ' → ' + chem('CO2') + ' + ' + chem('H2O') + '?', a: 'methane + oxygen → carbon dioxide + water', w: ['carbon + hydrogen → methane', 'methane → carbon dioxide + hydrogen', 'methane + water → carbon dioxide + oxygen'], s: [chem('CH4') + ' is methane, ' + chem('O2') + ' oxygen, ' + chem('CO2') + ' carbon dioxide, ' + chem('H2O') + ' water.'] },
+      { q: 'Why is mass conserved in a chemical reaction?', a: 'Atoms are rearranged, not created or destroyed', w: ['The products are always heavier', 'Energy turns into mass', 'Gases have no mass'], s: ['The same atoms are there before and after; they are just joined differently.'] },
+      { q: 'Magnesium ribbon gets heavier when it burns. Why?', a: 'It combines with oxygen from the air', w: ['Mass is created by the flame', 'The magnesium absorbs light', 'It loses electrons'], s: ['magnesium + oxygen → magnesium oxide. The extra mass is the oxygen.'] }
+    ])
+  ]
+});
+
+var REACT = ['magnesium', 'zinc', 'iron', 'copper', 'silver'];
+var SALT = { magnesium: 'magnesium sulfate', zinc: 'zinc sulfate', iron: 'iron sulfate', copper: 'copper sulfate', silver: 'silver nitrate' };
+function saltOf(metal, anion) { return metal + ' ' + anion; }
+sci({
+  id: 'sci-displacement', strand: 'C', title: 'Displacement reactions', codes: ['9Cc.02'], calc: false,
+  blurb: 'Use the reactivity series to predict whether a metal will displace another from a salt solution.',
+  learn: {
+    ideas: [
+      'Reactivity series (most to least reactive): <b>magnesium, zinc, iron, copper, silver</b>.',
+      'A more reactive metal <b>displaces</b> a less reactive metal from a solution of its salt: zinc + copper sulfate → zinc sulfate + copper.',
+      'If the metal added is less reactive than the metal in the salt, there is no reaction.',
+      'You may see the added metal coated with the displaced metal, a colour change in the solution, and the mixture warming up.'
+    ],
+    example: { q: 'Iron is added to copper sulfate solution. What happens?', steps: ['Iron is more reactive than copper.', 'Iron displaces copper: iron + copper sulfate → iron sulfate + copper.', 'Pink-brown copper coats the iron and the blue solution fades.'] },
+    watch: 'The metal that ends up in the salt is always the more reactive one.'
+  },
+  gens: [
+    function () {
+      var a = pick(REACT), b = pick(REACT.filter(function (x) { return x !== a; }));
+      var anion = b === 'silver' ? 'nitrate' : 'sulfate', reacts = REACT.indexOf(a) < REACT.indexOf(b);
+      var right = reacts ? saltOf(a, anion) + ' + ' + b : 'No reaction';
+      var w = uniq([reacts ? 'No reaction' : saltOf(a, anion) + ' + ' + b, saltOf(b, anion) + ' + ' + a, a + ' oxide + ' + b, 'hydrogen + ' + saltOf(b, anion)]).filter(function (x) { return x !== right; }).slice(0, 3);
+      return mc('What are the products when ' + a + ' is added to ' + saltOf(b, anion) + ' solution?', right, w, { hint: 'Order of reactivity: magnesium, zinc, iron, copper, silver. Is ' + a + ' above ' + b + '?', steps: [reacts ? a.charAt(0).toUpperCase() + a.slice(1) + ' is more reactive than ' + b + ', so it displaces it: ' + a + ' + ' + saltOf(b, anion) + ' → ' + saltOf(a, anion) + ' + ' + b + '.' : a.charAt(0).toUpperCase() + a.slice(1) + ' is less reactive than ' + b + ', so it cannot displace it. No reaction.'] });
+    },
+    function () {
+      var a = pick(REACT.slice(0, 4)), b = pick(REACT.slice(REACT.indexOf(a) + 1)), anion = b === 'silver' ? 'nitrate' : 'sulfate';
+      var q = mc('Will ' + b + ' react with ' + saltOf(a, a === 'silver' ? 'nitrate' : 'sulfate') + ' solution?', 'No', ['Yes'], { hint: 'Is ' + b + ' more reactive than ' + a + '?', steps: [b.charAt(0).toUpperCase() + b.slice(1) + ' is less reactive than ' + a + ', so it cannot displace it. No reaction.'] });
+      q.options = ['Yes', 'No']; q.correct = 1; return q;
+    },
+    bank([
+      { q: 'Metal X displaces copper from copper sulfate but does not displace zinc from zinc sulfate. Where is X in the reactivity series?', a: 'Between zinc and copper', w: ['Above magnesium', 'Below silver', 'Between copper and silver'], s: ['X is more reactive than copper but less reactive than zinc.'] },
+      { q: 'Zinc is put in blue copper sulfate solution. What would you see?', a: 'A brown coating on the zinc and the blue colour fading', w: ['No change at all', 'The zinc turning blue', 'A white gas and a smell of chlorine'], s: ['Copper is displaced and coats the zinc. Blue copper sulfate is replaced by colourless zinc sulfate.'] },
+      { q: 'Which metal could displace iron from iron sulfate solution?', a: 'Magnesium', w: ['Copper', 'Silver', 'Gold'], s: ['Only a metal more reactive than iron can displace it. Magnesium is above iron.'] }
+    ])
+  ]
+});
+
+var ACIDS = [['hydrochloric acid', 'chloride'], ['sulfuric acid', 'sulfate'], ['nitric acid', 'nitrate']];
+sci({
+  id: 'sci-salts', strand: 'C', title: 'Making salts', codes: ['9Cc.03'], calc: false,
+  blurb: 'Name the salts made when metals and metal carbonates react with acids, and know how to make a pure, dry salt.',
+  learn: {
+    ideas: [
+      'The acid decides the end of the salt’s name: hydrochloric acid makes <b>chlorides</b>, sulfuric acid makes <b>sulfates</b>, nitric acid makes <b>nitrates</b>.',
+      '<b>metal + acid → salt + hydrogen</b>: zinc + hydrochloric acid → zinc chloride + hydrogen.',
+      '<b>metal carbonate + acid → salt + water + carbon dioxide</b>: copper carbonate + sulfuric acid → copper sulfate + water + carbon dioxide.',
+      'To make a pure, dry salt: add the solid to the acid until no more reacts (it is in excess); filter off the extra solid; heat the solution gently to evaporate some water; leave it to crystallise; dry the crystals.'
+    ],
+    example: { q: 'Name the salt made when magnesium reacts with sulfuric acid.', steps: ['The metal gives the first part of the name: magnesium.', 'Sulfuric acid gives sulfate.', 'Magnesium sulfate (and hydrogen gas).'] },
+    watch: 'Carbonates make carbon dioxide, not hydrogen. Fizzing alone does not tell you which gas it is.'
+  },
+  gens: [
+    function () {
+      var carbonate = Math.random() < 0.5, metal = carbonate ? pick(['calcium', 'copper', 'magnesium', 'zinc', 'sodium']) : pick(['magnesium', 'zinc', 'iron']), acid = pick(ACIDS);
+      var salt = metal + ' ' + acid[1], reactant = carbonate ? metal + ' carbonate' : metal;
+      var w = shuffle(ACIDS.filter(function (a) { return a !== acid; }).map(function (a) { return metal + ' ' + a[1]; }).concat([metal + ' oxide', metal + ' hydroxide'])).slice(0, 3);
+      return mc('Which salt is made when ' + reactant + ' reacts with ' + acid[0] + '?', salt, w, { hint: acid[0].charAt(0).toUpperCase() + acid[0].slice(1) + ' makes ' + acid[1] + 's.', steps: [reactant + ' + ' + acid[0] + ' → ' + salt + ' + ' + (carbonate ? 'water + carbon dioxide' : 'hydrogen') + '.'] });
+    },
+    function () {
+      var carbonate = Math.random() < 0.5, metal = carbonate ? pick(['calcium', 'copper', 'zinc']) : pick(['magnesium', 'zinc']), acid = pick(ACIDS);
+      var right = carbonate ? 'Carbon dioxide' : 'Hydrogen';
+      return mc('Which gas is given off when ' + (carbonate ? metal + ' carbonate' : metal) + ' reacts with ' + acid[0] + '?', right, [carbonate ? 'Hydrogen' : 'Carbon dioxide', 'Oxygen', 'Chlorine'], { hint: 'Metal + acid gives one gas; carbonate + acid gives another.', steps: [carbonate ? 'carbonate + acid → salt + water + carbon dioxide.' : 'metal + acid → salt + hydrogen.'] });
+    },
+    function () {
+      var steps = ['Add copper carbonate to the acid until no more reacts', 'Filter to remove the extra copper carbonate', 'Heat the solution gently to evaporate some of the water', 'Leave it to cool so crystals form, then dry them'];
+      var k = ri(0, 3), others = steps.filter(function (_, i) { return i !== k; });
+      return mc('You are making pure copper sulfate crystals from copper carbonate and sulfuric acid. Which step comes ' + ['first', 'second', 'third', 'last'][k] + '?', steps[k], others, { hint: 'React, remove the extra solid, concentrate, crystallise.', steps: steps.map(function (s, i) { return (i + 1) + '. ' + s + '.'; }) });
+    },
+    bank([
+      { q: 'Why is the solid added in excess when making a salt?', a: 'To make sure all the acid has reacted', w: ['To make more hydrogen', 'To speed up evaporation', 'To change the colour of the salt'], s: ['Excess solid uses up all the acid; the leftover solid is then filtered off.'] },
+      { q: 'Why is the mixture filtered?', a: 'To remove the unreacted solid', w: ['To remove the salt', 'To remove the water', 'To add more acid'], s: ['The salt is dissolved and passes through the filter; the extra solid stays behind.'] },
+      { q: 'How can you test for carbon dioxide?', a: 'Bubble it through limewater, which turns milky', w: ['Hold a glowing splint in it, which relights', 'Hold a lit splint in it, which gives a squeaky pop', 'It turns blue litmus red instantly'], s: ['Carbon dioxide turns limewater milky. A squeaky pop is the test for hydrogen.'] }
+    ])
+  ]
+});
+
+sci({
+  id: 'sci-rates', strand: 'C', title: 'Rates of reaction', codes: ['9Cc.04'], calc: false,
+  blurb: 'How concentration, surface area and temperature change the rate of a reaction, explained with particles.',
+  learn: {
+    ideas: [
+      'Particles must <b>collide</b> to react. The more often they collide, the faster the reaction.',
+      '<b>Higher concentration</b>: more particles in the same volume, so more frequent collisions.',
+      '<b>Larger surface area</b> (smaller pieces or powder): more particles are exposed to collide.',
+      '<b>Higher temperature</b>: particles move faster, so they collide more often and with more energy.',
+      'You can measure rate by timing how long it takes to make a fixed amount of gas, or by how fast the mass falls as gas escapes.'
+    ],
+    example: { q: 'Why does powdered marble react faster with acid than marble chips?', steps: ['Powder has a much larger surface area.', 'More marble particles are exposed to the acid particles.', 'Collisions happen more often, so the reaction is faster.'] },
+    watch: 'Changing these factors changes how fast the reaction goes, not how much product you finally make (if the amounts of reactants are the same).'
+  },
+  gens: [
+    function () {
+      var f = pick([['the acid is made more concentrated', 'faster', 'There are more acid particles in the same volume, so collisions happen more often.'], ['the marble chips are crushed into powder', 'faster', 'The surface area increases, so more particles are exposed to collide.'], ['the acid is warmed up', 'faster', 'Particles move faster, so they collide more often and with more energy.'], ['the acid is diluted with water', 'slower', 'There are fewer acid particles in the same volume, so fewer collisions.'], ['the reaction is cooled in ice', 'slower', 'Particles move more slowly, so they collide less often and with less energy.'], ['larger lumps of marble are used', 'slower', 'The surface area is smaller, so fewer particles are exposed.']]);
+      var q = mc('Marble chips react with hydrochloric acid. What happens to the rate if ' + f[0] + '?', f[1] === 'faster' ? 'It gets faster' : 'It gets slower', [f[1] === 'faster' ? 'It gets slower' : 'It gets faster', 'It stays the same'], { hint: 'Think about how often the particles collide.', steps: [f[2]] });
+      q.options = ['It gets faster', 'It gets slower', 'It stays the same']; q.correct = f[1] === 'faster' ? 0 : 1; return q;
+    },
+    function () {
+      var a = ri(20, 60), b = ri(20, 60); while (Math.abs(a - b) < 6) b = ri(20, 60);
+      var vol = pick([20, 30, 40, 50]), ex = pick([['at 20 °C', 'at 40 °C'], ['with marble chips', 'with marble powder'], ['with dilute acid', 'with concentrated acid']]);
+      var fast = Math.min(a, b), slow = Math.max(a, b);
+      return mc('Two experiments each collect ' + vol + ' cm³ of gas. Experiment A, ' + ex[0] + ', takes ' + slow + ' s. Experiment B, ' + ex[1] + ', takes ' + fast + ' s. Which statement is correct?', 'B has the faster rate, because it made the same gas in less time', ['A has the faster rate, because it took longer', 'Both have the same rate because they made the same volume', 'You cannot compare them'], { hint: 'Less time for the same amount of gas means a faster rate.', steps: ['B made ' + vol + ' cm³ in ' + fast + ' s, A in ' + slow + ' s.', 'B is faster.'] });
+    },
+    bank([
+      { q: 'Using the particle model, why does increasing temperature speed up a reaction?', a: 'Particles move faster, so they collide more often and with more energy', w: ['Particles get bigger', 'More particles are made', 'Particles stop moving'], s: ['Faster particles have more frequent and more energetic collisions.'] },
+      { q: 'Why do sugar cubes dissolve and react more slowly than granulated sugar?', a: 'Cubes have a smaller surface area', w: ['Cubes are a different chemical', 'Cubes are hotter', 'Cubes have more particles on the surface'], s: ['Smaller pieces expose more particles, so granulated sugar reacts faster.'] },
+      { q: 'Why does food last longer in a fridge?', a: 'The low temperature slows down the reactions that make food go off', w: ['Cold air contains no oxygen', 'The fridge removes bacteria', 'Cold increases the surface area'], s: ['At low temperatures, reactions (including those caused by microbes) go more slowly.'] }
+    ])
+  ]
+});
+
+/* ================= PHYSICS ================= */
+sci({
+  id: 'sci-energy', strand: 'P', title: 'Heat, temperature and energy', codes: ['9Pf.02', '9Pf.03', '9Pf.04'], calc: false,
+  blurb: 'The difference between heat and temperature, conservation of energy, and why thermal energy flows from hot to cold.',
+  learn: {
+    ideas: [
+      '<b>Temperature</b> measures how hot something is, in °C. It depends on how fast the particles are moving on average.',
+      '<b>Thermal energy</b> (heat) is energy, in joules (J). It depends on the temperature <i>and</i> on how much material there is. A warm bath has more thermal energy than a cup of boiling water.',
+      'Energy is <b>conserved</b>: it cannot be created or destroyed, only transferred. Energy in = useful energy out + wasted energy.',
+      'Thermal energy always flows from a hotter place to a colder place, until both are at the same temperature. Wasted energy usually spreads out (dissipates) as heat.'
+    ],
+    example: { q: 'A light bulb uses 100 J of electrical energy. 20 J comes out as light. How much is wasted as heat?', steps: ['Energy is conserved: 100 J in = 100 J out.', '100 − 20 = 80 J wasted as heat.'] },
+    watch: 'Cold does not flow into things. When your hand feels cold on metal, thermal energy is flowing out of your hand.'
+  },
+  gens: [
+    function () {
+      var dev = pick([['A lamp', 'light', 'heat'], ['A motor', 'kinetic energy', 'heat and sound'], ['A speaker', 'sound', 'heat'], ['A kettle', 'heat in the water', 'heat in the air around it'], ['A phone charger', 'chemical energy in the battery', 'heat']]), tot = ri(5, 40) * 20, use = ri(1, tot / 20 - 1) * 20, t = pick([0, 1]);
+      if (t === 0) return { kind: 'num', prompt: dev[0] + ' is given ' + tot + ' J of energy. ' + use + ' J is transferred usefully as ' + dev[1] + '. How much energy is wasted (as ' + dev[2] + ')?', answer: tot - use, ans: (tot - use) + ' J', hint: 'Energy is conserved: energy in = useful + wasted.', steps: [tot + ' − ' + use + ' = ' + (tot - use) + ' J wasted.'] };
+      return { kind: 'num', prompt: dev[0] + ' transfers ' + use + ' J usefully as ' + dev[1] + ' and wastes ' + (tot - use) + ' J as ' + dev[2] + '. How much energy was supplied to it?', answer: tot, ans: tot + ' J', hint: 'Add the useful and wasted energy.', steps: [use + ' + ' + (tot - use) + ' = ' + tot + ' J.'] };
+    },
+    function () {
+      var a = ri(10, 90), b = ri(10, 90); while (Math.abs(a - b) < 15) b = ri(10, 90);
+      var hot = a > b ? 'A' : 'B';
+      return mc('Block A is at ' + a + ' °C and block B is at ' + b + ' °C. They are placed touching each other. Which way does thermal energy flow?', 'From ' + hot + ' to ' + (hot === 'A' ? 'B' : 'A') + ', until they reach the same temperature', ['From ' + (hot === 'A' ? 'B' : 'A') + ' to ' + hot, 'It does not flow between them', 'Both ways equally, so nothing changes'], { hint: 'Thermal energy flows from hotter to colder.', steps: ['Block ' + hot + ' is hotter, so energy flows from it to the other block.', 'The flow stops when both are at the same temperature.'] });
+    },
+    bank([
+      { q: 'Which has more thermal energy: a bath of warm water at 40 °C, or a cup of tea at 90 °C?', a: 'The bath, because it has much more water', w: ['The tea, because it is hotter', 'They have the same', 'Neither has any thermal energy'], s: ['Thermal energy depends on mass as well as temperature. The bath has far more particles.'] },
+      { q: 'What is temperature a measure of?', a: 'How hot something is: the average energy of its particles', w: ['The total energy stored in an object', 'How much an object weighs', 'How fast heat is lost'], s: ['Temperature is measured in °C and depends on the average speed of the particles.'] },
+      { q: 'Which unit is used to measure energy?', a: 'Joule (J)', w: ['Degree Celsius (°C)', 'Newton (N)', 'Watt-metre (Wm)'], s: ['Energy is measured in joules.'] },
+      { q: 'Which statement about energy is correct?', a: 'Energy cannot be created or destroyed, only transferred', w: ['Energy is used up by machines', 'Machines create energy', 'Wasted energy disappears completely'], s: ['This is the law of conservation of energy. Wasted energy still exists, usually as heat spread into the surroundings.'] },
+      { q: 'A hot drink left on a table cools down. Where does its thermal energy go?', a: 'Into the surrounding air and table', w: ['It is destroyed', 'It turns into cold', 'It stays in the cup'], s: ['The energy spreads out into the cooler surroundings. It is dissipated, not destroyed.'] }
+    ])
+  ]
+});
+
+sci({
+  id: 'sci-thermal', strand: 'P', title: 'Conduction, convection, radiation and evaporation', codes: ['9Pf.05', '9Pf.06'], calc: false,
+  blurb: 'The three ways thermal energy is transferred, and why evaporation cools things down.',
+  learn: {
+    ideas: [
+      '<b>Conduction</b>: particles vibrate and pass energy to their neighbours. It works best in solids, especially metals. Air and plastic are poor conductors (insulators).',
+      '<b>Convection</b>: in liquids and gases, warmer fluid expands, becomes less dense and rises; cooler, denser fluid sinks. This makes a convection current.',
+      '<b>Radiation</b>: energy travels as infrared waves. It needs no particles, so it can cross the vacuum of space. Dark, matt surfaces absorb and give out radiation best; shiny, light surfaces are worst.',
+      '<b>Evaporation</b> cools: the most energetic particles escape from the surface of a liquid, so the average energy of those left behind falls. That is why sweating cools you.'
+    ],
+    example: { q: 'Why is a radiator usually placed low down in a room?', steps: ['Air next to the radiator warms up, expands and becomes less dense.', 'The warm air rises and cooler air sinks to take its place.', 'This convection current spreads warmth around the whole room.'] },
+    watch: 'Convection cannot happen in solids, because the particles cannot move from place to place.'
+  },
+  gens: [
+    function () {
+      var s = pick([['A metal spoon in hot soup gets hot at the handle', 'Conduction'], ['Warm air rises above a radiator and cool air sinks', 'Convection'], ['You feel the Sun’s warmth on your face', 'Radiation'], ['A pan handle made of metal gets too hot to hold', 'Conduction'], ['Water at the bottom of a heated pan rises to the top', 'Convection'], ['You feel warmth from a campfire several metres away', 'Radiation'], ['Wet clothes on a washing line cool down as they dry', 'Evaporation'], ['Sweat on your skin makes you feel cooler', 'Evaporation'], ['Energy from the Sun reaches Earth through space', 'Radiation'], ['A sea breeze blows from the sea to the warm land in the daytime', 'Convection']]);
+      return mc('Which process is mainly involved?<span class="quote">' + s[0] + '.</span>', s[1], ['Conduction', 'Convection', 'Radiation', 'Evaporation'].filter(function (x) { return x !== s[1]; }), { hint: 'Solid touching: conduction. Moving fluid: convection. Waves, no particles needed: radiation. Liquid turning to gas: evaporation.', steps: [s[0] + ': ' + s[1].toLowerCase() + '.'] });
+    },
+    bank([
+      { q: 'Why can energy from the Sun reach Earth only by radiation?', a: 'Space is a vacuum, and radiation is the only transfer that needs no particles', w: ['Space is too cold for conduction', 'The Sun is a liquid', 'Convection only works at night'], s: ['Conduction and convection need particles. Radiation travels as waves through empty space.'] },
+      { q: 'Why does warm air rise?', a: 'It expands, so it becomes less dense than the cooler air around it', w: ['It loses mass', 'Heat is lighter than air', 'Its particles get smaller'], s: ['Less dense fluid rises; denser fluid sinks.'] },
+      { q: 'Which surface is best at absorbing infrared radiation?', a: 'Dull black', w: ['Shiny silver', 'Shiny white', 'Glossy light grey'], s: ['Dark, matt surfaces are the best absorbers and emitters of radiation.'] },
+      { q: 'Why does sweating cool you down?', a: 'The most energetic water particles evaporate, lowering the average energy of what is left', w: ['Sweat is colder than your blood', 'Water conducts heat into the body', 'Sweat reflects sunlight'], s: ['Evaporation removes the fastest particles, so the remaining liquid and your skin cool.'] },
+      { q: 'Why are saucepan handles often made of plastic or wood?', a: 'They are poor conductors (insulators)', w: ['They are good conductors', 'They reflect radiation', 'They help convection'], s: ['Insulators slow down conduction, so the handle stays cool enough to hold.'] },
+      { q: 'Why do metals conduct heat so well?', a: 'They have free electrons that carry energy quickly through the metal', w: ['Their particles move from place to place like a liquid', 'They are always hot', 'They are shiny'], s: ['As well as vibrating particles, metals have free electrons that transfer energy quickly.'] },
+      { q: 'Wind helps wet washing dry faster. Why?', a: 'It carries water vapour away, so evaporation continues quickly', w: ['Wind is always warm', 'Wind adds energy by radiation', 'Wind makes the water denser'], s: ['Removing the vapour near the surface lets more water evaporate.'] }
+    ])
+  ]
+});
+
+sci({
+  id: 'sci-sound', strand: 'P', title: 'Sound waves', codes: ['9Ps.01', '9Ps.02'], calc: false,
+  blurb: 'Read waveforms: amplitude and loudness, frequency and pitch, and how waves add together or cancel out.',
+  learn: {
+    ideas: [
+      'A waveform shows a sound wave. The <b>amplitude</b> is the height from the middle line to the top of a wave. A bigger amplitude means a <b>louder</b> sound.',
+      'The <b>frequency</b> is the number of waves per second, measured in hertz (Hz). More waves squashed into the same time means a higher frequency and a <b>higher pitch</b>.',
+      'When two waves meet <b>in step</b> (peak with peak), they add up to a bigger wave: louder.',
+      'When they meet <b>out of step</b> (peak with trough), they cancel out: quieter, or silence. Noise-cancelling headphones use this.'
+    ],
+    example: { q: 'Two waveforms are drawn on the same scale. A has taller waves; B has more waves across the screen. Compare the sounds.', steps: ['A has the bigger amplitude, so A is louder.', 'B has the higher frequency, so B has the higher pitch.'] },
+    watch: 'Amplitude is loudness and frequency is pitch. A tall wave is not a high note.'
+  },
+  gens: [
+    function () {
+      var a1 = ri(14, 38), a2 = ri(14, 38); while (Math.abs(a1 - a2) < 8) a2 = ri(14, 38);
+      var f1 = ri(2, 7), f2 = ri(2, 7); while (f1 === f2) f2 = ri(2, 7);
+      var ask = pick(['louder', 'higher pitch']), A = ask === 'louder' ? (a1 > a2 ? 'A' : 'B') : (f1 > f2 ? 'A' : 'B');
+      var q = mc('These waveforms are drawn on the same scale. Which sound is ' + ask + '?', 'Sound ' + A, ['Sound ' + (A === 'A' ? 'B' : 'A'), 'They are the same'], { fig: waveFig([{ a: a1, f: f1, label: 'A' }, { a: a2, f: f2, label: 'B' }]), hint: ask === 'louder' ? 'Compare how tall the waves are (amplitude).' : 'Compare how many waves fit across the screen (frequency).', steps: [ask === 'louder' ? 'Sound ' + A + ' has the bigger amplitude, so it is louder.' : 'Sound ' + A + ' has more waves in the same time: higher frequency, higher pitch.'] });
+      q.options = ['Sound A', 'Sound B', 'They are the same']; q.correct = A === 'A' ? 0 : 1; return q;
+    },
+    function () {
+      var f = ri(2, 6), a = ri(16, 30), inStep = Math.random() < 0.5;
+      return mc('Two identical sound waves meet ' + (inStep ? '<b>in step</b>: peaks line up with peaks' : '<b>out of step</b>: peaks line up with troughs') + '. What happens?', inStep ? 'They add together to make a louder sound' : 'They cancel out, making the sound quieter or silent', [inStep ? 'They cancel out, making the sound quieter or silent' : 'They add together to make a louder sound', 'The pitch doubles', 'Nothing changes'], { fig: waveFig([{ a: a, f: f, label: 'Wave 1' }, { a: inStep ? a : -a, f: f, label: 'Wave 2' }]), hint: 'Add the two waves point by point.', steps: [inStep ? 'Peaks add to peaks, so the combined wave has double the amplitude: louder.' : 'Each peak meets a trough, so they add to zero: the sound cancels.'] });
+    },
+    bank([
+      { q: 'What does the frequency of a sound wave tell you?', a: 'How many waves pass each second, which sets the pitch', w: ['How loud the sound is', 'How fast sound travels', 'How long the sound lasts'], s: ['Frequency (Hz) is the number of waves per second. Higher frequency, higher pitch.'] },
+      { q: 'A guitar string is plucked harder. What changes on the waveform?', a: 'The amplitude gets bigger', w: ['The frequency gets higher', 'The waves get further apart', 'Nothing changes'], s: ['Plucking harder makes the sound louder, so the amplitude increases.'] },
+      { q: 'How do noise-cancelling headphones work?', a: 'They play a sound wave that is out of step with the noise, so the two cancel', w: ['They block all air from the ear', 'They make the noise higher pitched', 'They add a louder sound on top'], s: ['A wave out of step with the noise cancels it out.'] },
+      { q: 'What is the unit of frequency?', a: 'Hertz (Hz)', w: ['Decibel (dB)', 'Joule (J)', 'Metre (m)'], s: ['Frequency is measured in hertz: waves per second.'] }
+    ])
+  ]
+});
+
+sci({
+  id: 'sci-circuits', strand: 'P', title: 'Series and parallel circuits', codes: ['9Pe.01', '9Pe.02', '9Pe.04'], calc: true,
+  blurb: 'How current and voltage behave in series and parallel circuits, using circuit symbols and diagrams.',
+  learn: {
+    ideas: [
+      'In a <b>series</b> circuit there is one path. The current is the same everywhere. The voltage of the supply is shared between the components.',
+      'In a <b>parallel</b> circuit the current splits at a junction and joins up again. The currents in the branches add up to the total current. Each branch gets the full supply voltage.',
+      'An <b>ammeter</b> measures current in amps (A) and is connected in series. A <b>voltmeter</b> measures voltage in volts (V) and is connected in parallel across a component.',
+      'Adding more cells in series increases the voltage, so lamps get brighter. Adding more lamps in series makes each lamp dimmer. Lamps added in parallel each stay as bright as one lamp alone.'
+    ],
+    example: { q: 'In a parallel circuit, the total current is 0.9 A. One branch carries 0.4 A. What is the current in the other branch?', steps: ['Branch currents add up to the total.', '0.9 − 0.4 = 0.5 A.'] },
+    watch: 'Current is not used up by a lamp. In a series circuit, the reading is the same before and after each lamp.'
+  },
+  gens: [
+    function () {
+      var a2 = clean(ri(1, 9) / 10), a3 = clean(ri(1, 9) / 10), tot = clean(a2 + a3), ask = pick([1, 2, 3]);
+      var labs = ['A₁ = ' + (ask === 1 ? '?' : fmt(tot) + ' A'), 'A₂ = ' + (ask === 2 ? '?' : fmt(a2) + ' A'), 'A₃ = ' + (ask === 3 ? '?' : fmt(a3) + ' A')];
+      var ans = ask === 1 ? tot : ask === 2 ? a2 : a3;
+      return { kind: 'num', fig: parallelCircuit(labs[0], labs[1], labs[2]), prompt: 'In this parallel circuit, what is the reading on ammeter A' + ['', '₁', '₂', '₃'][ask] + ', in amps?', answer: ans, ans: fmt(ans) + ' A', hint: 'The current in the main wire equals the sum of the currents in the branches.', steps: [ask === 1 ? fmt(a2) + ' + ' + fmt(a3) + ' = ' + fmt(tot) + ' A.' : fmt(tot) + ' − ' + fmt(ask === 2 ? a3 : a2) + ' = ' + fmt(ans) + ' A.'] };
+    },
+    function () {
+      var V = pick([3, 4.5, 6, 9, 12]), v1 = clean(ri(1, V * 2 - 1) / 2), t = pick([0, 1]);
+      if (t === 0) return { kind: 'num', prompt: 'Two lamps are in series with a ' + fmt(V) + ' V battery. A voltmeter across the first lamp reads ' + fmt(v1) + ' V. What does a voltmeter across the second lamp read?', answer: clean(V - v1), ans: fmt(clean(V - v1)) + ' V', hint: 'In series, the supply voltage is shared between the components.', steps: [fmt(V) + ' − ' + fmt(v1) + ' = ' + fmt(clean(V - v1)) + ' V.'] };
+      return { kind: 'num', prompt: 'Two lamps are connected in parallel to a ' + fmt(V) + ' V battery. What is the voltage across each lamp?', answer: V, ans: fmt(V) + ' V', hint: 'Each parallel branch gets the full supply voltage.', steps: ['In parallel, each branch has the full ' + fmt(V) + ' V.'] };
+    },
+    function () {
+      var I = clean(ri(1, 9) / 10), n = ri(2, 3), pos = ri(1, n);
+      return { kind: 'num', fig: seriesCircuit(n, fmt(I) + ' A'), prompt: 'The ammeter in this series circuit reads ' + fmt(I) + ' A. What is the current through lamp ' + pos + '?', answer: I, ans: fmt(I) + ' A', hint: 'In a series circuit there is only one path.', steps: ['The current is the same everywhere in a series circuit: ' + fmt(I) + ' A.'] };
+    },
+    bank([
+      { q: 'A second identical lamp is added in series with the first. What happens to the brightness?', a: 'Both lamps are dimmer than one lamp alone', w: ['Both are brighter', 'The first lamp goes out', 'Nothing changes'], s: ['The voltage is now shared between two lamps, and the current is smaller, so both are dimmer.'] },
+      { q: 'A second identical lamp is added in parallel with the first. How bright is each lamp?', a: 'As bright as one lamp on its own', w: ['Half as bright', 'Twice as bright', 'Both go out'], s: ['Each parallel branch gets the full supply voltage.'] },
+      { q: 'How should a voltmeter be connected to measure the voltage across a lamp?', a: 'In parallel, across the lamp', w: ['In series, next to the lamp', 'Anywhere in the circuit', 'Instead of the lamp'], s: ['Voltmeters go across a component, in parallel.'] },
+      { q: 'How should an ammeter be connected?', a: 'In series', w: ['In parallel across a lamp', 'Across the battery only', 'It does not need to be connected'], s: ['The current must flow through the ammeter, so it goes in series.'] },
+      { q: 'A circuit symbol is a circle with a cross inside. What does it represent?', a: 'A lamp', w: ['An ammeter', 'A switch', 'A cell'], s: ['A circle with an X is a lamp. A circle with A is an ammeter; with V, a voltmeter.'] },
+      { q: 'What does the symbol of a long thin line next to a short thick line represent?', a: 'A cell', w: ['A resistor', 'A lamp', 'A voltmeter'], s: ['That is the cell symbol. The long line is the positive terminal.'] },
+      { q: 'Why are the lights in a house wired in parallel?', a: 'Each can be switched on and off on its own, and each gets the full voltage', w: ['It uses less wire', 'So all the lights go off together', 'Because series circuits do not work at home'], s: ['Parallel branches work independently and each gets the full supply voltage.'] },
+      { q: 'An extra cell is added in series to a circuit with one lamp. What happens?', a: 'The voltage increases and the lamp gets brighter', w: ['The lamp gets dimmer', 'Nothing changes', 'The current falls'], s: ['More cells in series give a bigger voltage, which pushes a bigger current.'] }
+    ])
+  ]
+});
+
+sci({
+  id: 'sci-resistance', strand: 'P', title: 'Resistance', codes: ['9Pe.03'], calc: true,
+  blurb: 'Calculate resistance from voltage and current, and describe how resistance affects the current.',
+  learn: {
+    ideas: [
+      '<b>Resistance</b> is how much a component opposes the flow of current. It is measured in ohms (Ω).',
+      'Resistance = ' + fr('voltage', 'current') + ': <i>R</i> = ' + fr('<i>V</i>', '<i>I</i>') + '. Rearranged: <i>V</i> = <i>I</i> × <i>R</i> and <i>I</i> = ' + fr('<i>V</i>', '<i>R</i>') + '.',
+      'For the same voltage, a bigger resistance means a smaller current.',
+      'A longer or thinner wire has more resistance.'
+    ],
+    example: { q: 'A lamp has 6 V across it and a current of 0.3 A through it. Find its resistance.', steps: ['<i>R</i> = <i>V</i> ÷ <i>I</i>.', '6 ÷ 0.3 = 20 Ω.'] },
+    watch: 'Divide voltage by current, not the other way round.'
+  },
+  gens: [
+    function () {
+      var Rv = pick([2, 4, 5, 6, 8, 10, 12, 15, 20, 24, 30, 40, 50, 60]), I = pick([0.1, 0.2, 0.25, 0.3, 0.4, 0.5, 0.6, 0.75, 1, 1.5, 2]), V = clean(Rv * I), t = pick([0, 1, 2]);
+      if (t === 0) return { kind: 'num', prompt: 'A component has a voltage of ' + fmt(V) + ' V across it and a current of ' + fmt(I) + ' A through it. Find its resistance in ohms.', answer: Rv, ans: Rv + ' Ω', hint: '<i>R</i> = <i>V</i> ÷ <i>I</i>.', steps: [fmt(V) + ' ÷ ' + fmt(I) + ' = ' + Rv + ' Ω.'] };
+      if (t === 1) return { kind: 'num', prompt: 'A ' + Rv + ' Ω resistor has a current of ' + fmt(I) + ' A through it. What is the voltage across it?', answer: V, ans: fmt(V) + ' V', hint: '<i>V</i> = <i>I</i> × <i>R</i>.', steps: [fmt(I) + ' × ' + Rv + ' = ' + fmt(V) + ' V.'] };
+      return { kind: 'num', prompt: 'A ' + Rv + ' Ω resistor is connected to ' + fmt(V) + ' V. What current flows through it, in amps?', answer: I, ans: fmt(I) + ' A', hint: '<i>I</i> = <i>V</i> ÷ <i>R</i>.', steps: [fmt(V) + ' ÷ ' + Rv + ' = ' + fmt(I) + ' A.'] };
+    },
+    function () {
+      var V = pick([6, 9, 12]), r1 = pick([2, 3, 4, 6]), r2 = r1 * pick([2, 3]);
+      return mc('Two resistors, ' + r1 + ' Ω and ' + r2 + ' Ω, are each connected on their own to a ' + V + ' V supply. Which statement is correct?', 'The ' + r1 + ' Ω resistor has the larger current', ['The ' + r2 + ' Ω resistor has the larger current', 'They have the same current', 'Neither has any current'], { hint: 'Same voltage: more resistance, less current.', steps: ['Current through ' + r1 + ' Ω: ' + V + ' ÷ ' + r1 + ' = ' + fmt(clean(V / r1)) + ' A.', 'Current through ' + r2 + ' Ω: ' + V + ' ÷ ' + r2 + ' = ' + fmt(clean(V / r2)) + ' A.'] });
+    },
+    bank([
+      { q: 'What is the unit of resistance?', a: 'Ohm (Ω)', w: ['Amp (A)', 'Volt (V)', 'Watt (W)'], s: ['Resistance is measured in ohms.'] },
+      { q: 'A wire is replaced by a longer wire of the same material and thickness. What happens to the current, if the voltage stays the same?', a: 'It decreases, because the resistance is higher', w: ['It increases', 'It stays the same', 'It reverses direction'], s: ['A longer wire has more resistance, so less current flows.'] },
+      { q: 'Which pair of meters do you need to find the resistance of a lamp?', a: 'An ammeter and a voltmeter', w: ['Two ammeters', 'A thermometer and a voltmeter', 'A ruler and an ammeter'], s: ['Measure the current (ammeter) and the voltage (voltmeter), then use <i>R</i> = <i>V</i> ÷ <i>I</i>.'] }
+    ])
+  ]
+});
+
+/* ================= EARTH AND SPACE ================= */
+sci({
+  id: 'sci-plates', strand: 'E', title: 'Plate tectonics', codes: ['9ESp.01', '9ESp.02', '9SIC.01'], calc: false,
+  blurb: 'Why tectonic plates move, and the evidence that supports the theory.',
+  learn: {
+    ideas: [
+      'Earth’s crust and the top of the mantle are broken into large <b>tectonic plates</b>. They move a few centimetres each year.',
+      'Heat from the core makes rock in the mantle move slowly in <b>convection currents</b>. Hot rock rises, spreads out and cools, then sinks. This drags the plates along.',
+      '<b>Evidence</b>: the coastlines of South America and Africa fit together like a jigsaw; the same fossils (such as <i>Mesosaurus</i>) are found on continents now far apart; most volcanoes and earthquakes happen along plate boundaries; rocks on the sea floor either side of mid-ocean ridges show matching stripes of magnetic alignment.',
+      'Alfred Wegener suggested continental drift in 1912. Many scientists rejected it because he could not explain how continents moved. It was accepted in the 1960s when new evidence was found, showing how scientific ideas change.'
+    ],
+    example: { q: 'Fossils of the same freshwater reptile are found in South America and Africa. How does this support plate tectonics?', steps: ['A freshwater reptile could not swim across an ocean.', 'So the two continents must once have been joined, then moved apart.'] },
+    watch: 'The plates are moved by convection currents in the mantle, not by the oceans or the wind.'
+  },
+  gens: [bank([
+    { q: 'What causes tectonic plates to move?', a: 'Convection currents in the mantle', w: ['Ocean currents', 'The Moon’s gravity', 'Winds in the atmosphere'], s: ['Heat from the core drives slow convection currents in the mantle, which drag the plates.'] },
+    { q: 'Where do most earthquakes and volcanoes happen?', a: 'Along plate boundaries', w: ['In the middle of plates', 'Only near the equator', 'Randomly all over Earth'], s: ['Plates meeting, separating or sliding past each other cause earthquakes and volcanoes.'] },
+    { q: 'Which observation first suggested that South America and Africa were once joined?', a: 'Their coastlines fit together like a jigsaw', w: ['They have the same climate', 'They are both in the southern hemisphere', 'They have the same languages'], s: ['The matching shapes of the coastlines suggested the continents had split apart.'] },
+    { q: 'What do the magnetic stripes on the ocean floor show?', a: 'New rock forms at mid-ocean ridges and spreads outwards', w: ['The ocean floor never changes', 'Earth’s magnetic field is always the same', 'Volcanoes only form on land'], s: ['Matching stripes either side of the ridge show new sea floor forming and moving apart, recording changes in Earth’s magnetic field.'] },
+    { q: 'How fast do tectonic plates move?', a: 'A few centimetres a year', w: ['A few metres a day', 'A few kilometres a year', 'They do not move'], s: ['Plates move about as fast as your fingernails grow.'] },
+    { q: 'Why did most scientists reject Wegener’s idea of continental drift at first?', a: 'He could not explain what made the continents move', w: ['He had no evidence at all', 'He said the Earth was flat', 'He was not a scientist'], s: ['He had evidence, but no mechanism. Convection currents and sea-floor evidence later explained it.'] },
+    { q: 'In a mantle convection current, what happens to hot rock?', a: 'It rises because it is less dense, then cools and sinks', w: ['It sinks because it is denser', 'It stays still', 'It turns into water'], s: ['Hotter rock is less dense and rises; cooler, denser rock sinks.'] }
+  ])]
+});
+
+sci({
+  id: 'sci-carbon', strand: 'E', title: 'The carbon cycle and climate change', codes: ['9ESc.01', '9ESc.02', '9SIC.05'], calc: false,
+  blurb: 'How carbon moves between the air, living things and fossil fuels, and the effects of climate change.',
+  learn: {
+    ideas: [
+      '<b>Photosynthesis</b> takes carbon dioxide out of the air. <b>Respiration</b> by plants, animals and decomposers puts it back.',
+      '<b>Feeding</b> passes carbon along food chains. When living things die, <b>decomposers</b> (bacteria and fungi) break them down, releasing carbon dioxide.',
+      '<b>Combustion</b> (burning) of fuels releases carbon dioxide. Fossil fuels store carbon that was locked away millions of years ago.',
+      'More carbon dioxide in the air traps more heat (the greenhouse effect), so Earth warms. Effects include rising sea levels, flooding, droughts and more extreme weather. Earth’s climate has changed in the past too, for example in ice ages.'
+    ],
+    example: { q: 'Explain how cutting down and burning a rainforest increases carbon dioxide in the air.', steps: ['Burning the trees (combustion) releases carbon dioxide.', 'Fewer trees means less photosynthesis to remove carbon dioxide.'] },
+    watch: 'Plants respire too, day and night. In daylight they photosynthesise faster than they respire, so overall they take in carbon dioxide.'
+  },
+  gens: [
+    function () {
+      var p = pick([['Photosynthesis', 'removes'], ['Respiration', 'adds'], ['Combustion', 'adds'], ['Decomposition', 'adds']]);
+      var q = mc(p[0] + ': does this process add carbon dioxide to the air or remove it?', p[1] === 'adds' ? 'Adds carbon dioxide' : 'Removes carbon dioxide', [p[1] === 'adds' ? 'Removes carbon dioxide' : 'Adds carbon dioxide'], { hint: 'Only one process in the carbon cycle takes carbon dioxide out of the air.', steps: [p[1] === 'adds' ? p[0] + ' releases carbon dioxide into the air.' : 'Photosynthesis uses carbon dioxide to make glucose, removing it from the air.'] });
+      q.options = ['Adds carbon dioxide', 'Removes carbon dioxide']; q.correct = p[1] === 'adds' ? 0 : 1; return q;
+    },
+    bank([
+      { q: 'How does carbon pass from a plant to a rabbit?', a: 'By feeding: the rabbit eats the plant', w: ['By photosynthesis', 'By combustion', 'Through the soil'], s: ['Carbon compounds in the plant become part of the rabbit when it eats.'] },
+      { q: 'What do decomposers do in the carbon cycle?', a: 'Break down dead material and release carbon dioxide by respiration', w: ['Take in carbon dioxide by photosynthesis', 'Turn carbon into oxygen', 'Store carbon as fossil fuels straight away'], s: ['Bacteria and fungi feed on dead material and respire, releasing carbon dioxide.'] },
+      { q: 'Why does burning fossil fuels increase carbon dioxide in the air?', a: 'It releases carbon that was stored underground for millions of years', w: ['Fossil fuels contain no carbon', 'Burning removes carbon dioxide', 'It increases photosynthesis'], s: ['Coal, oil and gas are ancient carbon stores. Burning them adds that carbon to the air as CO₂.'] },
+      { q: 'Why does global warming make sea levels rise?', a: 'Ice on land melts and warmer water expands', w: ['It rains more over the sea', 'The Moon pulls harder', 'Fish populations grow'], s: ['Melting glaciers and ice sheets add water, and warmer water takes up more space.'] },
+      { q: 'Which is a predicted effect of climate change?', a: 'More frequent droughts and extreme weather', w: ['Earth’s gravity getting weaker', 'The Sun getting colder', 'No more seasons'], s: ['Warming changes rainfall patterns and makes extreme weather more likely.'] },
+      { q: 'Which action helps reduce the amount of carbon dioxide in the air?', a: 'Planting trees', w: ['Burning more coal', 'Cutting down forests', 'Driving more petrol cars'], s: ['Trees remove carbon dioxide by photosynthesis.'] },
+      { q: 'What is the greenhouse effect?', a: 'Gases such as carbon dioxide trap heat in the atmosphere', w: ['Plants growing faster in greenhouses', 'The ozone layer blocking sunlight', 'The Sun getting hotter'], s: ['Greenhouse gases absorb heat given off by Earth, keeping the planet warmer.'] }
+    ])
+  ]
+});
+
+sci({
+  id: 'sci-space', strand: 'E', title: 'Asteroids, the Moon and nebulae', codes: ['9ESs.01', '9ESs.02', '9ESs.03'], calc: false,
+  blurb: 'What happens when an asteroid hits Earth, how the Moon probably formed, and where stars are born.',
+  learn: {
+    ideas: [
+      'A large <b>asteroid</b> impact throws huge amounts of dust and debris into the atmosphere. This blocks sunlight, so the climate cools and plants die. Food chains collapse and many species die out: a <b>mass extinction</b>. An impact about 66 million years ago is linked to the extinction of the dinosaurs.',
+      'The <b>collision theory</b>: the Moon formed when a Mars-sized body hit the young Earth. Debris from the collision came together to form the Moon.',
+      'Evidence: Moon rocks are very similar to rocks in Earth’s mantle; the Moon has only a small iron core; the Moon’s surface was once molten.',
+      'A <b>nebula</b> is a huge cloud of dust and gas, mostly hydrogen and helium. Gravity pulls parts of it together to form new stars, so nebulae are called stellar nurseries.'
+    ],
+    example: { q: 'Why might an asteroid impact cause plants far from the crater to die?', steps: ['Dust from the impact spreads through the atmosphere around the world.', 'It blocks sunlight, so plants cannot photosynthesise.', 'The climate also cools.'] },
+    watch: 'Most of the damage from a huge impact comes from the worldwide change in climate, not just the explosion itself.'
+  },
+  gens: [bank([
+    { q: 'How can a large asteroid impact cause a mass extinction?', a: 'Dust blocks sunlight, the climate cools, plants die and food chains collapse', w: ['It makes Earth spin faster', 'It adds oxygen to the air', 'It only affects the area of the crater'], s: ['The global effects on sunlight and climate harm living things everywhere.'] },
+    { q: 'Which event is linked to the extinction of the dinosaurs?', a: 'An asteroid impact about 66 million years ago', w: ['The formation of the Moon', 'The last ice age', 'A nebula forming near Earth'], s: ['A large impact crater in Mexico dates from that time.'] },
+    { q: 'What does the collision theory say about how the Moon formed?', a: 'A Mars-sized body hit the young Earth, and the debris formed the Moon', w: ['The Moon was a passing planet captured by Earth’s gravity', 'The Moon formed from a nebula at the same time as the Sun', 'The Moon broke off from the Sun'], s: ['The giant impact threw out material that came together as the Moon.'] },
+    { q: 'Which evidence supports the collision theory of the Moon’s formation?', a: 'Moon rocks are very similar to rocks in Earth’s mantle', w: ['The Moon is covered in water', 'The Moon has a larger iron core than Earth', 'The Moon gives out its own light'], s: ['Similar rocks suggest the Moon formed largely from Earth material thrown out by the impact.'] },
+    { q: 'What is a nebula?', a: 'A huge cloud of dust and gas in space', w: ['A type of planet', 'A dead star that has stopped shining', 'A group of galaxies'], s: ['Nebulae are clouds of dust and gas, mostly hydrogen and helium.'] },
+    { q: 'Why are nebulae called stellar nurseries?', a: 'New stars form in them when gravity pulls gas and dust together', w: ['Old stars go there to die', 'They are full of baby planets only', 'They are lit up by the Sun'], s: ['Clumps of gas and dust collapse under gravity and heat up to form stars.'] },
+    { q: 'Which force pulls the gas and dust in a nebula together to make stars?', a: 'Gravity', w: ['Magnetism', 'Friction', 'Air resistance'], s: ['Gravity pulls the material together until it is hot and dense enough to become a star.'] }
+  ])]
+});
+
+/* ================= WORKING SCIENTIFICALLY ================= */
+sci({
+  id: 'sci-enquiry', strand: 'W', title: 'Planning investigations', codes: ['9TWSp.01', '9TWSp.04', '9TWSp.05', '9TWSc.03', '9TWSc.04', '9TWSm.01', '9SIC.04'], calc: false,
+  blurb: 'Hypotheses, variables, fair tests, risk assessments, accuracy and precision, and how scientific ideas are checked and change.',
+  learn: {
+    ideas: [
+      'A <b>hypothesis</b> is a testable idea based on science, such as “Increasing the temperature will increase the rate of reaction, because particles collide more often.”',
+      'The <b>independent variable</b> is what you change. The <b>dependent variable</b> is what you measure. <b>Control variables</b> are kept the same so the test is fair.',
+      '<b>Repeating</b> measurements helps you spot odd results and makes your data more reliable. <b>Accurate</b> measurements are close to the true value; <b>precise</b> ones are close to each other.',
+      'A <b>risk assessment</b> lists the hazards, how likely harm is, and how to reduce the risk (for example, wearing eye protection).',
+      'Scientists share their work for <b>peer review</b> by other experts. Models and theories change when new evidence is found.'
+    ],
+    example: { q: 'Mia tests how the length of a wire affects its resistance. Name the variables.', steps: ['Independent: the length of the wire (what she changes).', 'Dependent: the resistance (what she measures).', 'Control: the material and thickness of the wire, the temperature, and the voltage.'] },
+    watch: 'Change only one variable at a time. If two things change, you cannot tell which one caused the result.'
+  },
+  gens: [
+    function () {
+      var inv = pick([
+        { d: 'how the temperature of acid affects how fast magnesium reacts', iv: 'The temperature of the acid', dv: 'The time taken for the magnesium to react', cv: 'The concentration of the acid' },
+        { d: 'how the length of a wire affects its resistance', iv: 'The length of the wire', dv: 'The resistance of the wire', cv: 'The thickness of the wire' },
+        { d: 'how light intensity affects the rate of photosynthesis in pondweed', iv: 'The distance of the lamp from the pondweed', dv: 'The number of oxygen bubbles per minute', cv: 'The temperature of the water' },
+        { d: 'how the height a ball is dropped from affects how high it bounces', iv: 'The drop height', dv: 'The bounce height', cv: 'The type of ball' },
+        { d: 'how the mass of sugar affects the time it takes to dissolve', iv: 'The mass of sugar', dv: 'The time taken to dissolve', cv: 'The volume and temperature of the water' }
+      ]), kind = pick(['iv', 'dv', 'cv']);
+      var right = inv[kind], names = { iv: 'independent variable (the one you change)', dv: 'dependent variable (the one you measure)', cv: 'control variable (one you keep the same)' };
+      return mc('A student investigates ' + inv.d + '. Which is a <b>' + names[kind] + '</b>?', right, ['iv', 'dv', 'cv'].filter(function (k) { return k !== kind; }).map(function (k) { return inv[k]; }).concat(['The colour of the bench']), { hint: 'Change one thing, measure one thing, keep everything else the same.', steps: ['Independent: ' + inv.iv.toLowerCase() + '.', 'Dependent: ' + inv.dv.toLowerCase() + '.', 'Control: ' + inv.cv.toLowerCase() + '.'] });
+    },
+    bank([
+      { q: 'Which is a testable hypothesis?', a: 'Seeds kept warmer will germinate faster, because enzymes work faster when warm', w: ['Plants are nice', 'Seeds grow', 'Science is about seeds'], s: ['A hypothesis is a specific, testable prediction with a scientific reason.'] },
+      { q: 'Why do scientists repeat measurements?', a: 'To spot anomalous results and make the results more reliable', w: ['To make the experiment take longer', 'To change the independent variable', 'Because the first result is always wrong'], s: ['Repeats show whether results are consistent, and help find odd ones.'] },
+      { q: 'Four readings are 5.1, 5.0, 5.1 and 5.2, but the true value is 6.0. How would you describe them?', a: 'Precise but not accurate', w: ['Accurate but not precise', 'Accurate and precise', 'Neither, because they are all different'], s: ['They are close to each other (precise) but far from the true value (not accurate).'] },
+      { q: 'What should a risk assessment include?', a: 'The hazards, the risks, and how to reduce them', w: ['Only the results', 'The hypothesis and conclusion', 'A list of equipment prices'], s: ['A risk assessment identifies hazards and the precautions that lower the risk of harm.'] },
+      { q: 'What is peer review?', a: 'Other scientists checking work before it is published', w: ['Students marking each other’s homework', 'Repeating your own experiment', 'Writing a hypothesis'], s: ['Experts check the methods and conclusions so that flawed work is caught.'] },
+      { q: 'Why do scientific models sometimes change?', a: 'New evidence is found that the old model cannot explain', w: ['Scientists get bored of them', 'Models are always guesses', 'They never change'], s: ['Models reflect current evidence. The model of the atom has changed several times as new evidence appeared.'] },
+      { q: 'When is secondary data (from books or the internet) more suitable than doing your own experiment?', a: 'When the experiment would be too dangerous, slow or expensive to do yourself', w: ['Always', 'Never', 'Only when you already know the answer'], s: ['For example, data about earthquakes or space comes from other scientists’ measurements.'] },
+      { q: 'Which piece of equipment gives the most precise measurement of 25 cm³ of acid?', a: 'A 50 cm³ measuring cylinder with 1 cm³ divisions', w: ['A 250 cm³ beaker', 'A 1 litre jug', 'A teaspoon'], s: ['Choose equipment with a suitable range and small divisions.'] }
+    ])
+  ]
+});
+
+sci({
+  id: 'sci-analysis', strand: 'W', title: 'Analysing results', codes: ['9TWSa.01', '9TWSa.02', '9TWSa.03', '9TWSa.05', '9TWSc.07'], calc: true,
+  blurb: 'Spot anomalous results, calculate means, describe trends, read between data points and judge conclusions.',
+  learn: {
+    ideas: [
+      'An <b>anomalous result</b> does not fit the pattern of the others. Check it, and leave it out when you calculate a mean.',
+      'The <b>mean</b> of repeat readings is the sum of the readings divided by how many there are.',
+      'Describe a <b>trend</b> in words: “As the temperature increases, the time taken decreases.”',
+      'You can <b>interpolate</b>: estimate a value between two measured points by reading from a line graph or using the pattern.',
+      'A conclusion should say whether the evidence supports the prediction, and explain any limits, such as too few readings.'
+    ],
+    example: { q: 'Three repeat times are 24 s, 25 s and 41 s. Find the mean.', steps: ['41 s is anomalous: it is far from the others.', 'Leave it out: (24 + 25) ÷ 2 = 24.5 s.'] },
+    watch: 'Do not include an anomalous result in the mean. It will drag the average away from the true value.'
+  },
+  gens: [
+    function () {
+      var base = ri(15, 60), r = [base + ri(-2, 2), base + ri(-2, 2), base + ri(-2, 2)], bad = Math.random() < 0.6, an;
+      if (bad) { an = ri(0, 2); r[an] = base + pick([1, -1]) * ri(12, 20); if (r[an] < 1) r[an] = base + 15; }
+      var good = r.filter(function (_, i) { return !bad || i !== an; }), mean = good.reduce(function (s, x) { return s + x; }, 0) / good.length;
+      return { kind: 'num', prompt: 'A student times a reaction three times:' + table(['Repeat', '1', '2', '3'], [['Time (s)', r[0], r[1], r[2]]]) + 'Calculate the mean time, leaving out any anomalous result. Give your answer to 1 decimal place if needed.', answer: mean, dp: 1, ans: fmt(mean, mean % 1 ? 1 : null) + ' s', hint: 'Check whether one reading is far away from the others.', steps: (bad ? [r[an] + ' s is anomalous: it is far from the other readings, so leave it out.'] : ['The readings are all close together, so use all three.']).concat(['(' + good.join(' + ') + ') ÷ ' + good.length + ' = ' + fmt(mean, mean % 1 ? 1 : null) + ' s.']) };
+    },
+    function () {
+      var start = ri(15, 25), step = pick([4, 5, 6, 8]), xs = [0, 2, 4, 6, 8], ys = xs.map(function (x) { return start + step * x / 2; }), k = ri(0, 3), x = xs[k] + 1, y = start + step * x / 2;
+      return { kind: 'num', prompt: 'Water is heated steadily. The table shows its temperature.' + table(['Time (minutes)'].concat(xs.map(String)), [['Temperature (°C)'].concat(ys.map(String))]) + 'Estimate the temperature at ' + x + ' minutes.', answer: y, ans: y + ' °C', hint: 'The temperature rises by the same amount every 2 minutes. Find the value halfway between.', steps: ['Every 2 minutes the temperature rises by ' + step + ' °C, so ' + step / 2 + ' °C each minute.', 'At ' + x + ' minutes: ' + ys[k] + ' + ' + step / 2 + ' = ' + y + ' °C.'] };
+    },
+    function () {
+      var xs = [10, 20, 30, 40, 50], dir = pick([1, -1]), base = dir > 0 ? 20 : 90, ys = xs.map(function (x, i) { return base + dir * i * pick([12, 14]); }), ai = ri(1, 3); ys[ai] = ys[ai] + dir * -ri(18, 25);
+      return mc('A student measured how the volume of gas made changes with temperature. Which reading is anomalous?' + table(['Temperature (°C)'].concat(xs.map(String)), [['Gas (cm³)'].concat(ys.map(String))]), 'The reading at ' + xs[ai] + ' °C', xs.filter(function (_, i) { return i !== ai; }).slice(0, 3).map(function (x) { return 'The reading at ' + x + ' °C'; }), { hint: 'Look for the value that breaks the steady pattern.', steps: ['The values ' + (dir > 0 ? 'rise' : 'fall') + ' steadily, except at ' + xs[ai] + ' °C.', 'That reading (' + ys[ai] + ' cm³) does not fit the pattern, so it is anomalous.'] });
+    },
+    bank([
+      { q: 'A student tested only one type of ball and says “All balls bounce higher when dropped from higher.” What is the main limitation?', a: 'The conclusion goes beyond the evidence: only one type of ball was tested', w: ['There is no limitation', 'Balls do not bounce', 'The heights were too small to see'], s: ['To support a general conclusion, the student should test more types of ball.'] },
+      { q: 'Results show that as the length of a wire increases, its resistance increases steadily. Which describes this trend?', a: 'Resistance increases as length increases', w: ['Resistance decreases as length increases', 'There is no pattern', 'Length depends on resistance'], s: ['Both increase together: a positive relationship.'] },
+      { q: 'A prediction said the rate would double when temperature rose by 10 °C. The results show it increased by only a little. What should the conclusion say?', a: 'The evidence does not fully support the prediction', w: ['The prediction was proved correct', 'The experiment must be wrong', 'Temperature has no effect'], s: ['A good conclusion compares the results honestly with the prediction.'] },
+      { q: 'How could a student improve an experiment where the repeat readings were very spread out?', a: 'Take more repeats and use more precise measuring equipment', w: ['Only record the highest reading', 'Change the independent variable each time', 'Stop repeating readings'], s: ['More repeats and better equipment reduce the effect of random errors.'] }
+    ])
+  ]
+});
 /* ===== APP ===== */
 (function () {
-  var STRANDS = [{ id: 'N', name: 'Number' }, { id: 'A', name: 'Algebra' }, { id: 'G', name: 'Geometry and measure' }, { id: 'S', name: 'Statistics and probability' }];
+  var SUBJECTS = {
+    maths: { name: 'Maths', strands: [{ id: 'N', name: 'Number' }, { id: 'A', name: 'Algebra' }, { id: 'G', name: 'Geometry and measure' }, { id: 'S', name: 'Statistics and probability' }] },
+    science: { name: 'Science', strands: [{ id: 'B', name: 'Biology' }, { id: 'C', name: 'Chemistry' }, { id: 'P', name: 'Physics' }, { id: 'E', name: 'Earth and space' }, { id: 'W', name: 'Working scientifically' }] }
+  };
+  TOPICS.forEach(function (t) { if (!t.subject) t.subject = 'maths'; });
+  var subj = 'maths';
+  try { var sv = localStorage.getItem('stage9study.subject'); if (SUBJECTS[sv]) subj = sv; } catch (e) {}
+  function STR() { return SUBJECTS[subj].strands; }
+  function TOPS() { return TOPICS.filter(function (t) { return t.subject === subj; }); }
+  function setSubj(s) { subj = s; try { localStorage.setItem('stage9study.subject', s); } catch (e) {} markSubj(); }
+  function markSubj() { Array.prototype.forEach.call(document.querySelectorAll('[data-subj]'), function (b) { b.setAttribute('aria-pressed', b.getAttribute('data-subj') === subj ? 'true' : 'false'); }); }
   var LEVELS = ['Not started', 'Started', 'Getting there', 'Secure'];
   var byId = {}; TOPICS.forEach(function (t) { byId[t.id] = t; });
   var KEY = 'stage9study.v1';
@@ -2059,13 +2895,13 @@ topic({
   }
   function totals() {
     var a = 0, c = 0, secure = 0;
-    TOPICS.forEach(function (t) { var r = rec(t.id); a += r.a; c += r.c; if (level(t.id) === 3) secure++; });
+    TOPS().forEach(function (t) { var r = rec(t.id); a += r.a; c += r.c; if (level(t.id) === 3) secure++; });
     return { a: a, c: c, secure: secure };
   }
   function suggestion() {
-    var started = TOPICS.filter(function (t) { var l = level(t.id); return l === 1 || l === 2; });
+    var started = TOPS().filter(function (t) { var l = level(t.id); return l === 1 || l === 2; });
     if (started.length) { started.sort(function (x, y) { return recentAcc(x.id) - recentAcc(y.id) || (rec(y.id).last || 0) - (rec(x.id).last || 0); }); return { t: started[0], why: 'You have started this topic. A few more questions will make it secure.' }; }
-    var fresh = TOPICS.filter(function (t) { return level(t.id) === 0; });
+    var fresh = TOPS().filter(function (t) { return level(t.id) === 0; });
     if (fresh.length) return { t: fresh[0], why: totals().a ? 'Next topic you have not tried yet.' : 'A good place to begin. Read the key ideas, then try 10 questions.' };
     return null;
   }
@@ -2079,7 +2915,7 @@ topic({
   }
   function strandColor(s) { return 'var(--s' + s + ')'; }
   function meter(l, s) { return '<span class="meter" data-l="' + l + '" style="--sc:' + strandColor(s) + '" aria-hidden="true"><i></i><i></i><i></i></span>'; }
-  function updateMast() { var t = totals(); mastMeta.innerHTML = t.secure + ' of ' + TOPICS.length + ' topics secure'; }
+  function updateMast() { var t = totals(); mastMeta.innerHTML = t.secure + ' of ' + TOPS().length + ' ' + SUBJECTS[subj].name.toLowerCase() + ' topics secure'; }
   var current = { name: 'home' };
   function rerender() { updateMast(); if (current.name === 'home') home(); else if (current.name === 'topic') topicPage(current.id, current.tab); }
   function go(fn) { window.scrollTo(0, 0); fn(); var h = view.querySelector('h1'); if (h) { h.setAttribute('tabindex', '-1'); h.focus({ preventScroll: true }); } }
@@ -2096,9 +2932,10 @@ topic({
       h += '<section class="next"><p class="lab">All topics secure</p><h2>Keep it fresh with a mixed test</h2><p class="muted">Mixed tests pull questions from every topic, like a real exam.</p><div class="row"><button class="btn primary" data-go="test">Start a mixed test</button></div></section>';
     }
     h += '<div class="tally"><span><b>' + t.a + '</b> questions answered</span>' + (t.a ? '<span><b>' + Math.round(100 * t.c / t.a) + '%</b> correct</span>' : '') + '</div>';
-    h += '<div class="row"><button class="btn" data-go="test">Mixed test</button>' + (prog.tests.length ? '<span class="small">Last test: ' + prog.tests[prog.tests.length - 1].score + ' out of ' + prog.tests[prog.tests.length - 1].n + '</span>' : '') + '</div>';
-    STRANDS.forEach(function (st) {
-      var ts = TOPICS.filter(function (x) { return x.strand === st.id; }), sec = ts.filter(function (x) { return level(x.id) === 3; }).length;
+    var myTests = prog.tests.filter(function (x) { return (x.subject || 'maths') === subj; }), lastT = myTests[myTests.length - 1];
+    h += '<div class="row"><button class="btn" data-go="test">Mixed ' + SUBJECTS[subj].name.toLowerCase() + ' test</button>' + (lastT ? '<span class="small">Last test: ' + lastT.score + ' out of ' + lastT.n + '</span>' : '') + '</div>';
+    STR().forEach(function (st) {
+      var ts = TOPS().filter(function (x) { return x.strand === st.id; }), sec = ts.filter(function (x) { return level(x.id) === 3; }).length;
       h += '<section class="strand" style="--sc:' + strandColor(st.id) + '" aria-labelledby="s' + st.id + '"><div class="strandhead"><h2 id="s' + st.id + '">' + st.name + '</h2><span class="small">' + sec + ' of ' + ts.length + ' secure</span></div><div class="topics">';
       ts.forEach(function (x) { var l = level(x.id); h += '<button class="trow" data-go="topic" data-id="' + x.id + '"><span class="tt">' + x.title + '</span><span class="codes">' + x.codes.join(', ') + '</span><span class="st">' + meter(l, st.id) + '<span class="stl" data-l="' + l + '">' + LEVELS[l] + '</span></span></button>'; });
       h += '</div></section>';
@@ -2126,7 +2963,7 @@ topic({
     tab = tab || 'learn'; current = { name: 'topic', id: id, tab: tab };
     var l = level(id), r = rec(id);
     var h = '<div class="stack"><div><button class="back" data-go="home">All topics</button></div>';
-    h += '<header class="topichead" style="--sc:' + strandColor(t.strand) + '"><h1>' + t.title + '</h1><p class="muted">' + t.blurb + '</p><div class="chips">' + t.codes.map(function (c) { return '<span class="chip">' + c + '</span>'; }).join('') + '<span class="chip ' + (t.calc ? 'calc' : 'nocalc') + '">' + (t.calc ? 'Calculator allowed' : 'No calculator') + '</span></div>';
+    h += '<header class="topichead" style="--sc:' + strandColor(t.strand) + '"><h1>' + t.title + '</h1><p class="muted">' + t.blurb + '</p><div class="chips">' + t.codes.map(function (c) { return '<span class="chip">' + c + '</span>'; }).join('') + (t.subject === 'maths' || t.calc ? '<span class="chip ' + (t.calc ? 'calc' : 'nocalc') + '">' + (t.calc ? 'Calculator allowed' : 'No calculator') + '</span>' : '') + '</div>';
     h += '<div class="row">' + meter(l, t.strand) + '<span class="small">' + LEVELS[l] + (r.a ? '. ' + r.c + ' of ' + r.a + ' answered correctly so far.' : '.') + '</span></div></header>';
     h += '<div class="ex stack"><h2>Key ideas</h2><ul class="ideas">' + t.learn.ideas.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ul>';
     h += '<h2>Worked example</h2><div class="sheet"><p class="prompt">' + t.learn.example.q + '</p><ol class="steps">' + t.learn.example.steps.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ol></div>';
@@ -2283,8 +3120,8 @@ topic({
   function testSetup() {
     current = { name: 'testsetup' };
     var scope = 'all', len = 15;
-    var h = '<div class="stack"><div><button class="back" data-go="home">All topics</button></div><h1>Mixed test</h1><p class="muted" style="max-width:65ch">Questions come from different topics, like an exam. You see your marks and worked solutions at the end.</p>';
-    h += '<h2>What to cover</h2><div class="choice" role="radiogroup" aria-label="What to cover" id="scope"><button type="button" role="radio" aria-checked="true" data-v="all">All of Stage 9<span>' + TOPICS.length + ' topics</span></button>' + STRANDS.map(function (s) { return '<button type="button" role="radio" aria-checked="false" data-v="' + s.id + '">' + s.name + '<span>' + TOPICS.filter(function (t) { return t.strand === s.id; }).length + ' topics</span></button>'; }).join('') + '</div>';
+    var h = '<div class="stack"><div><button class="back" data-go="home">All topics</button></div><h1>Mixed ' + SUBJECTS[subj].name.toLowerCase() + ' test</h1><p class="muted" style="max-width:65ch">Questions come from different topics, like an exam. You see your marks and worked solutions at the end.</p>';
+    h += '<h2>What to cover</h2><div class="choice" role="radiogroup" aria-label="What to cover" id="scope"><button type="button" role="radio" aria-checked="true" data-v="all">All of Stage 9 ' + SUBJECTS[subj].name.toLowerCase() + '<span>' + TOPS().length + ' topics</span></button>' + STR().map(function (s) { return '<button type="button" role="radio" aria-checked="false" data-v="' + s.id + '">' + s.name + '<span>' + TOPS().filter(function (t) { return t.strand === s.id; }).length + ' topics</span></button>'; }).join('') + '</div>';
     h += '<h2>How many questions</h2><div class="choice" role="radiogroup" aria-label="How many questions" id="len"><button type="button" role="radio" aria-checked="false" data-v="10">10 questions<span>About 15 minutes</span></button><button type="button" role="radio" aria-checked="true" data-v="15">15 questions<span>About 25 minutes</span></button><button type="button" role="radio" aria-checked="false" data-v="25">25 questions<span>About 40 minutes</span></button></div>';
     h += '<div class="row"><button class="btn primary" id="start">Start the test</button></div></div>';
     view.innerHTML = h; wireGo();
@@ -2294,7 +3131,7 @@ topic({
   }
   function runTest(scope, len) {
     current = { name: 'test' };
-    var pool = TOPICS.filter(function (t) { return scope === 'all' || t.strand === scope; }).map(function (t) { return t.id; });
+    var pool = TOPS().filter(function (t) { return scope === 'all' || t.strand === scope; }).map(function (t) { return t.id; });
     var order = []; while (order.length < len) order = order.concat(shuffle(pool)); order = order.slice(0, len);
     var make = maker(pool), qs = order.map(function (id) { return make(id); }), resp = new Array(len), i = 0;
     view.innerHTML = '<div class="stack"><div class="practhead"><h1 style="font-size:1.35rem">Mixed test</h1><div class="dots" id="dots" aria-hidden="true"></div></div><p class="small" id="pcount"></p><div id="qhost"></div><div class="row"><button class="btn quiet" id="quit">Stop and mark what I have done</button></div></div>';
@@ -2324,7 +3161,7 @@ topic({
         record(q._topic, m.ok);
         items += '<div class="rv"><div class="rvh"><span class="m ' + (m.ok ? 'ok' : 'no') + '" aria-label="' + (m.ok ? 'correct' : 'incorrect') + '">' + (m.ok ? '✓' : '✗') + '</span><b>Question ' + (k + 1) + '</b><span class="small">' + byId[q._topic].title + '</span></div><div class="prompt">' + q.prompt + '</div>' + (q.fig ? '<div class="figwrap">' + q.fig + '</div>' : '') + '<p><b>Your answer:</b> ' + (r === null ? 'skipped' : respText(q, r)) + '</p>' + (m.ok ? '' : '<p><b>Correct answer:</b> ' + q.ans + '</p>') + solutionHTML(q, false) + '</div>';
       });
-      if (done) { prog.tests.push({ at: Date.now(), n: done, score: score, scope: scope }); prog.tests = prog.tests.slice(-12); save(); }
+      if (done) { prog.tests.push({ at: Date.now(), n: done, score: score, scope: scope, subject: subj }); prog.tests = prog.tests.slice(-12); save(); }
       var weakList = Object.keys(weak).sort(function (a, b) { return weak[b] - weak[a]; }).slice(0, 4);
       var h = '<div class="stack"><div><button class="back" data-go="home">All topics</button></div><h1>Test results</h1><div class="sheet"><span class="score">' + score + '/' + done + '</span><p>' + (done ? (score / done >= 0.8 ? 'A strong result.' : score / done >= 0.5 ? 'A solid base. Focus on the topics below.' : 'Work through the topics below one at a time, starting with the key ideas.') : 'You did not answer any questions, so there is nothing to mark.') + '</p></div>';
       if (weakList.length) h += '<h2>Topics to practise next</h2><div class="topics">' + weakList.map(function (id) { var t = byId[id]; return '<button class="trow" style="--sc:' + strandColor(t.strand) + '" data-go="topic" data-id="' + id + '"><span class="tt">' + t.title + '</span><span class="codes">' + weak[id] + ' wrong in this test</span><span class="st">' + meter(level(id), t.strand) + '<span class="stl" data-l="' + level(id) + '">' + LEVELS[level(id)] + '</span></span></button>'; }).join('') + '</div>';
@@ -2343,7 +3180,9 @@ topic({
   document.getElementById('yesreset').addEventListener('click', function () { prog = blank(); save(); confirmBox.hidden = true; resetBtn.hidden = false; go(home); });
 
   /* ---------- start ---------- */
+  Array.prototype.forEach.call(document.querySelectorAll('[data-subj]'), function (b) { b.addEventListener('click', function () { setSubj(b.getAttribute('data-subj')); go(home); }); });
   var startHash = (location.hash || '').replace('#', '');
+  if (byId[startHash]) setSubj(byId[startHash].subject); else if (startHash === 'science' || startHash === 'maths') setSubj(startHash); else markSubj();
   if (byId[startHash]) topicPage(startHash); else if (startHash === 'test') testSetup(); else home();
   updateMast();
 })();
