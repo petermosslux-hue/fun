@@ -29,6 +29,7 @@
   --img-soft: rgba(19, 128, 111, 0.18);
   --sN: #2851a3; --sA: #7445c0; --sG: #13806f; --sS: #b5700c;
   --sB: #2f8a3a; --sC: #b8456b; --sP: #2851a3; --sE: #9a6a12; --sW: #5b6478;
+  --sR: #2851a3; --sK: #7445c0; --sV: #13806f; --sY: #b5700c; --sF: #2851a3; --sL: #b8456b; --sO: #13806f; --sU: #9a6a12;
   --f-display: "Bricolage Grotesque", "Avenir Next", "Segoe UI", system-ui, sans-serif;
   --f-body: "Atkinson Hyperlegible", "Verdana", "Segoe UI", system-ui, sans-serif;
   --f-hand: "Caveat", "Segoe Print", "Comic Sans MS", cursive;
@@ -39,14 +40,14 @@
     --paper: #121822; --rule: rgba(150, 185, 245, 0.06); --sheet: #1a2230; --ink: #e8edf6; --ink-2: #9ba7be; --line: #2d3849;
     --accent: #93b2f6; --accent-ink: #0e1626; --accent-soft: #223152; --pen: #ff8b81; --pen-soft: #3b2426; --ok: #7fd5a1; --ok-soft: #1c3327;
     --hl: #4a421a; --margin: #6e3b3b; --fig-fill: #222c3d; --fig-fill-2: #2a3549; --fig-fill-3: #334058; --img: #5fd0bd; --img-soft: rgba(95, 208, 189, 0.2);
-    --sN: #93b2f6; --sA: #b99af0; --sG: #5fd0bd; --sS: #f0b65a; --sB: #7ccf86; --sC: #f08fb0; --sP: #93b2f6; --sE: #e2b45f; --sW: #a8b2c6; color-scheme: dark;
+    --sN: #93b2f6; --sA: #b99af0; --sG: #5fd0bd; --sS: #f0b65a; --sB: #7ccf86; --sC: #f08fb0; --sP: #93b2f6; --sE: #e2b45f; --sW: #a8b2c6; --sR: #93b2f6; --sK: #b99af0; --sV: #5fd0bd; --sY: #f0b65a; --sF: #93b2f6; --sL: #f08fb0; --sO: #5fd0bd; --sU: #e2b45f; color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
   --paper: #121822; --rule: rgba(150, 185, 245, 0.06); --sheet: #1a2230; --ink: #e8edf6; --ink-2: #9ba7be; --line: #2d3849;
   --accent: #93b2f6; --accent-ink: #0e1626; --accent-soft: #223152; --pen: #ff8b81; --pen-soft: #3b2426; --ok: #7fd5a1; --ok-soft: #1c3327;
   --hl: #4a421a; --margin: #6e3b3b; --fig-fill: #222c3d; --fig-fill-2: #2a3549; --fig-fill-3: #334058; --img: #5fd0bd; --img-soft: rgba(95, 208, 189, 0.2);
-  --sN: #93b2f6; --sA: #b99af0; --sG: #5fd0bd; --sS: #f0b65a; --sB: #7ccf86; --sC: #f08fb0; --sP: #93b2f6; --sE: #e2b45f; --sW: #a8b2c6; color-scheme: dark;
+  --sN: #93b2f6; --sA: #b99af0; --sG: #5fd0bd; --sS: #f0b65a; --sB: #7ccf86; --sC: #f08fb0; --sP: #93b2f6; --sE: #e2b45f; --sW: #a8b2c6; --sR: #93b2f6; --sK: #b99af0; --sV: #5fd0bd; --sY: #f0b65a; --sF: #93b2f6; --sL: #f08fb0; --sO: #5fd0bd; --sU: #e2b45f; color-scheme: dark;
 }
 html { height: 100%; }
 body {
@@ -66,7 +67,7 @@ button { cursor: pointer; }
 .mast { display: flex; align-items: flex-end; justify-content: space-between; gap: 12px; flex-wrap: wrap; padding-bottom: 14px; margin-bottom: 18px; border-bottom: 2px solid var(--ink); }
 .brand { font-family: var(--f-display); font-weight: 800; font-size: 1.7rem; letter-spacing: -0.02em; line-height: 1; margin: 0; }
 .brand span { color: var(--accent); }
-.subjects { display: flex; gap: 6px; }
+.subjects { display: flex; gap: 6px; flex-wrap: wrap; }
 .subj { border: 1.5px solid var(--ink); background: var(--sheet); color: var(--ink); border-radius: 999px; padding: 4px 14px; font-size: 0.88rem; font-weight: 700; }
 .subj[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
 .subj:hover { background: var(--accent-soft); }
@@ -276,18 +277,25 @@ svg.fig .shlbl { font-size: 13px; font-weight: 700; }
 .dkey li { display: grid; gap: 2px; }
 .dkey li span:first-child { font-weight: 700; }
 .dkey li span + span { padding-left: 12px; color: var(--ink-2); }
+
+.inp.words { width: 15em; }
+.passage { background: var(--paper); border-left: 3px solid var(--line); padding: 10px 14px; border-radius: 4px; max-width: 65ch; display: grid; gap: 8px; font-size: 1rem; line-height: 1.6; }
+.passage .src { font-size: 0.8rem; color: var(--ink-2); }
+.passage.poem { white-space: pre-line; font-style: italic; }
+.passage mark { background: var(--hl); color: inherit; padding: 0 2px; }
+.gap { display: inline-block; min-width: 4em; border-bottom: 2px solid var(--ink-2); text-align: center; color: var(--ink-2); font-size: 0.85em; }
 </style></head><body>
 <div class="wrap">
   <header class="mast">
     <div class="stack" style="gap:8px">
       <p class="brand">Stage 7 <span>Study</span></p>
-      <div class="subjects" role="group" aria-label="Subject"><button type="button" class="subj" data-subj="maths" aria-pressed="true">Maths</button><button type="button" class="subj" data-subj="science" aria-pressed="false">Science</button></div>
+      <div class="subjects" role="group" aria-label="Subject"><button type="button" class="subj" data-subj="maths" aria-pressed="true">Maths</button><button type="button" class="subj" data-subj="science" aria-pressed="false">Science</button><button type="button" class="subj" data-subj="english" aria-pressed="false">English</button><button type="button" class="subj" data-subj="french" aria-pressed="false">French</button></div>
     </div>
     <p class="mastmeta" id="mastmeta"></p>
   </header>
   <main id="view"></main>
   <footer>
-    <p>Topics follow the Cambridge Lower Secondary curriculum frameworks for Stage 7: Mathematics (0862) and Science (0893). Many questions are generated fresh, so you can practise as often as you like.</p>
+    <p>Maths, Science and English follow the Cambridge Lower Secondary curriculum frameworks for Stage 7: Mathematics (0862), Science (0893) and English (0861). French is pitched at CEFR level B1. Reading passages are original texts written for this app.</p>
     <p id="syncnote"></p>
     <div class="confirm"><button class="btn quiet" id="reset" type="button">Reset my progress</button>
       <span id="confirm" hidden class="confirm"><span>This clears every topic score. Reset?</span><button class="btn" id="yesreset" type="button">Yes, reset</button><button class="btn quiet" id="nokeep" type="button">Keep my progress</button></span></div>
@@ -380,7 +388,8 @@ function mc(prompt, correct, wrongs, extra) {
   return q;
 }
 function uniq(arr) { var seen = {}, out = []; arr.forEach(function (a) { var k = String(a); if (!seen[k]) { seen[k] = 1; out.push(a); } }); return out; }
-function bank(items) { return function () { var it = pick(items); return mc(it.q, it.a, it.w.slice(0, 3), { steps: it.s, hint: it.h, fig: it.fig }); }; }
+function gapify(s) { return String(s).replace(/___/g, '<span class="gap">?</span>'); }
+function bank(items) { return function () { var it = pick(items); return mc(gapify(it.q), it.a, it.w.slice(0, 3), { steps: it.s, hint: it.h, fig: it.fig }); }; }
 
 /* ===== input parsing and marking ===== */
 function parseInput(str) {
@@ -426,8 +435,19 @@ function close(x, ans, f) {
   return Math.abs(x - ans) <= tol;
 }
 /* mark one answer spec against one response; returns {ok, note} */
+function normText(s) { return String(s == null ? '' : s).replace(/[\u2018\u2019\u02bc`]/g, "'").replace(/[\u201c\u201d]/g, '"').replace(/\s+/g, ' ').replace(/\s*'\s*/g, "'").trim().replace(/[.!?;,]+$/, '').toLowerCase().normalize('NFC').replace(/\u0153/g, 'oe').replace(/\u00e6/g, 'ae'); }
+function stripAccents(s) { return s.normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\u0153/g, 'oe').replace(/\u00e6/g, 'ae'); }
+function markText(f, resp) {
+  var r = normText(resp); if (!r) return { ok: false, blank: true };
+  var accepts = [].concat(f.answer).concat(f.also || []).map(normText);
+  if (accepts.indexOf(r) >= 0) return { ok: true };
+  var bare = stripAccents(r);
+  for (var i = 0; i < accepts.length; i++) if (stripAccents(accepts[i]) === bare) return { ok: false, note: 'Nearly: the letters are right, but check the accents.' };
+  return { ok: false };
+}
 function markOne(f, resp) {
   if (f.kind === 'select') return { ok: String(resp) === String(f.answer) };
+  if (f.kind === 'text') return markText(f, resp);
   var p = parseInput(resp);
   if (!p) return { ok: false, blank: resp == null || String(resp).trim() === '' , bad: true };
   if (f.kind === 'frac') {
@@ -2721,16 +2741,758 @@ sci({
     ])
   ]
 });
+/* ===== ENGLISH (Cambridge Lower Secondary English 0861), Stages 7 and 9 ===== */
+function eng(t) { t.subject = 'english'; topic(t); }
+function ucf(s) { return s.charAt(0).toUpperCase() + s.slice(1); }
+function passageBox(p) { return '<div class="passage' + (p.poem ? ' poem' : '') + '"><b>' + p.title + '</b>' + (p.poem ? '<div>' + p.text + '</div>' : p.text.split('\n\n').map(function (x) { return '<p>' + x + '</p>'; }).join('')) + (p.src ? '<span class="src">' + p.src + '</span>' : '') + '</div>'; }
+function passageGen(p) {
+  return function () {
+    var it = pick(p.qs);
+    return mc(passageBox(p) + '<p style="margin-top:12px">' + it.q + '</p>', it.a, it.w.slice(0, 3), { hint: it.h || 'Find the part of the text the question is about, and read it again carefully.', steps: [it.s] });
+  };
+}
+function listGen(items, ask, labelOf, all, hint, explain) {
+  return function () {
+    var it = pick(items), right = labelOf(it), others = shuffle(all.filter(function (x) { return x !== right; })).slice(0, 3);
+    return mc(ask(it), right, others, { hint: hint, steps: [explain(it)] });
+  };
+}
+
+/* ---------------- STAGE 7 DATA ---------------- */
+var E7 = {
+  fiction: [
+    { title: 'The Lighthouse Key', text: 'Mara had been told never to go up to the lighthouse after dark. Her grandfather said it so often that the words had worn smooth, like the pebbles on the beach below. Tonight, though, the beam had stopped turning. From her bedroom window she could see the tower standing black against the sky, blind and silent, and the fishing boats were still out.\n\nShe pulled on her boots without lacing them. The key hung on its nail by the back door, cold and heavier than she remembered. Outside, the wind shoved at her as if it wanted to send her home. Mara bent her head and kept walking.',
+      qs: [
+        { q: 'Why does Mara go out to the lighthouse?', a: 'The light has stopped and the fishing boats are still at sea', w: ['She wants to disobey her grandfather', 'She has lost the key', 'Her grandfather has asked her to fix it'], s: 'The text says the beam “had stopped turning” and “the fishing boats were still out”, so the boats are in danger.' },
+        { q: 'What does the simile “the words had worn smooth, like the pebbles on the beach” suggest?', a: 'The warning has been repeated so often that it has lost its force', w: ['Her grandfather speaks very softly', 'Mara collects pebbles from the beach', 'The lighthouse is made of smooth stones'], s: 'Pebbles are worn smooth by the sea over time; the warning has been repeated so many times that it no longer has sharp edges.' },
+        { q: 'What does “She pulled on her boots without lacing them” suggest about Mara?', a: 'She is in a hurry', w: ['She is careless with her clothes', 'Her boots are too small', 'She does not know how to tie laces'], s: 'Not stopping to lace her boots shows urgency.' },
+        { q: 'Which technique is used in “the wind shoved at her as if it wanted to send her home”?', a: 'Personification', w: ['Alliteration', 'Onomatopoeia', 'Rhetorical question'], s: 'The wind is given human actions and wishes (“shoved”, “wanted”), which is personification.' },
+        { q: 'Why does the writer describe the lighthouse as “blind and silent”?', a: 'It makes the lighthouse seem lifeless, because it is not doing its job', w: ['It shows the lighthouse is very old', 'It tells us Mara cannot see well', 'It shows the lighthouse is being repaired'], s: 'A lighthouse should shine and guide; describing it as blind and silent shows it has failed.' }
+      ] },
+    { title: 'Three Rules', text: 'There are three rules for surviving your first day at a new school, and I broke all of them before lunch. Rule one: don’t get lost. I got lost twice, once in a cupboard. Rule two: don’t stand out. My blazer, bought ‘to grow into’, reached my knees. Rule three: don’t talk to anyone until you know who’s who. I asked a tall girl where the science labs were, and she turned out to be Ms Okafor, my science teacher.\n\n“Follow me,” she said, and I swear she was trying not to laugh.',
+      qs: [
+        { q: 'How would you describe the narrator’s voice?', a: 'Humorous and able to laugh at themselves', w: ['Angry and bitter', 'Formal and serious', 'Sad and lonely'], s: 'The narrator jokes about getting lost “once in a cupboard” and about the huge blazer, laughing at their own mistakes.' },
+        { q: 'Who was the “tall girl”?', a: 'Ms Okafor, the narrator’s science teacher', w: ['A new student', 'The narrator’s sister', 'A girl who worked in the science labs'], s: 'The text says “she turned out to be Ms Okafor, my science teacher.”' },
+        { q: 'Why does the writer organise the story around three rules?', a: 'It gives a clear structure, and each rule is set up so that breaking it is funny', w: ['To teach readers the school rules', 'Because the story is a set of instructions', 'To make the story longer'], s: 'Each rule is followed straight away by how the narrator broke it, which creates comedy.' },
+        { q: 'Why is “to grow into” in quotation marks?', a: 'The narrator is repeating an adult’s words and does not agree with them', w: ['It is the title of a book', 'It is a question', 'It shows the narrator is shouting'], s: 'The quotation marks show these are someone else’s words, probably a parent’s, used with a hint of sarcasm.' },
+        { q: 'What does “I swear she was trying not to laugh” suggest about Ms Okafor?', a: 'She found the mistake funny but was being kind', w: ['She was angry with the narrator', 'She did not hear the question', 'She was laughing at someone else'], s: 'Trying not to laugh shows amusement, but holding it back shows kindness.' }
+      ] },
+    { title: 'Market Morning', text: 'By seven o’clock the market had woken up. Stallholders hauled crates of oranges into pyramids, and the fish counter glittered with ice. Somewhere a radio was playing, half-drowned by the clatter of shutters and the shouts of a man selling “Three for a euro! Three for a euro!” Ilyas walked slowly, letting the smells reach him one at a time: coffee, warm bread, then something sharp and sweet he could not name.\n\nHe had a coin in his pocket and a whole hour before school. It felt like being rich.',
+      qs: [
+        { q: 'Which technique is used in “the market had woken up”?', a: 'Personification', w: ['Simile', 'Onomatopoeia', 'Hyperbole'], s: 'A market cannot really wake up; it is described as if it were a person.' },
+        { q: 'Which word is an example of onomatopoeia?', a: 'Clatter', w: ['Pyramids', 'Glittered', 'Slowly'], s: '“Clatter” sounds like the noise it describes.' },
+        { q: 'Which senses does the writer appeal to?', a: 'Sight, sound and smell', w: ['Only sight', 'Touch and taste only', 'Sound only'], s: 'We see the pyramids of oranges, hear the radio and shouting, and smell coffee and bread.' },
+        { q: 'What does “It felt like being rich” suggest about Ilyas?', a: 'He feels free and happy with his time, even though he has little money', w: ['He has a lot of money', 'He wants to buy the whole market', 'He is worried about being late'], s: 'He only has one coin, so “rich” refers to the freedom and pleasure of a whole hour to himself.' },
+        { q: 'Why does the writer list the smells “one at a time”?', a: 'It slows the pace and lets the reader experience the market as Ilyas does', w: ['To show Ilyas has a cold', 'Because the market only sells three things', 'To explain how to cook'], s: 'Listing them in order mirrors Ilyas noticing each smell slowly.' }
+      ] }
+  ],
+  nonfiction: [
+    { title: 'Save Our Swifts', src: 'Leaflet', text: 'Every May, swifts fly thousands of kilometres from Africa to nest in our towns. They eat, sleep and even drink on the wing, landing only to raise their chicks. But their numbers have fallen in recent years, partly because modern buildings have no gaps for nests.\n\nYou can help. A swift box costs less than a pizza and takes ten minutes to fix under the edge of a roof. Ask your school to put one up. Tell your neighbours. Together, we can make sure the sky above our streets still screams with swifts every summer.',
+      qs: [
+        { q: 'What is the main purpose of this leaflet?', a: 'To persuade readers to help swifts by putting up nest boxes', w: ['To tell a story about a swift', 'To explain how to build a house', 'To advertise pizza'], s: 'It explains the problem, then tells readers what to do: “You can help.”' },
+        { q: 'According to the leaflet, why have swift numbers fallen?', a: 'Modern buildings have no gaps for nests', w: ['Swifts cannot find food in Africa', 'People keep swifts as pets', 'Swifts no longer fly'], s: 'The text says numbers have fallen “partly because modern buildings have no gaps for nests.”' },
+        { q: 'Why does the writer say a swift box “costs less than a pizza”?', a: 'To show that helping is cheap and easy', w: ['To suggest swifts eat pizza', 'To sell pizza', 'To show swift boxes are expensive'], s: 'Comparing it with something familiar and cheap makes the action seem easy.' },
+        { q: 'What is the effect of the short sentence “You can help.”?', a: 'It speaks directly to the reader and makes the message clear and personal', w: ['It describes what swifts look like', 'It asks a question', 'It shows the writer is unsure'], s: 'Direct address (“you”) in a short sentence grabs attention.' },
+        { q: 'Which technique is used in “screams with swifts”?', a: 'Alliteration', w: ['Simile', 'Rhetorical question', 'Personification'], s: 'The repeated “s” sound is alliteration; it also echoes the birds’ calls.' }
+      ] },
+    { title: 'Pupils’ Robot Wins Regional Prize', src: 'News report', text: 'A team of five pupils from Riverside School has won first prize at the regional young engineers’ competition with a robot that sorts recycling.\n\nThe robot, nicknamed “Binny”, uses a camera to recognise plastic, metal and paper, and drops each item into the right container. “We were really nervous during the demonstration,” said team captain Sofia, 13. “Binny dropped a can on the judge’s shoe, but luckily she laughed.”\n\nThe team will now go on to the national final in March.',
+      qs: [
+        { q: 'What type of text is this?', a: 'A newspaper report', w: ['A diary entry', 'A set of instructions', 'A poem'], s: 'It has a headline, gives facts about a recent event and includes a quotation.' },
+        { q: 'What does the robot do?', a: 'Sorts recycling into the right containers', w: ['Takes photographs of judges', 'Builds other robots', 'Cleans the school'], s: 'It “uses a camera to recognise plastic, metal and paper, and drops each item into the right container.”' },
+        { q: 'Why does the writer include Sofia’s words?', a: 'To add personal detail and make the report feel real', w: ['To give instructions for building a robot', 'To show the report is fiction', 'To argue against robots'], s: 'Quotations from people involved add interest and a human voice.' },
+        { q: 'Which of these is a fact, not an opinion?', a: 'The team will go on to the national final in March', w: ['Binny is the best robot ever built', 'Robots are more fun than people', 'The judge should have been more careful'], s: 'This can be checked and proved; the others are opinions.' },
+        { q: 'What is the job of the first paragraph?', a: 'To sum up the key facts: who, what and where', w: ['To describe the robot in detail', 'To give an opinion', 'To end the story'], s: 'News reports open with the main facts so readers get the story quickly.' }
+      ] },
+    { title: 'Ban Homework Now', src: 'Blog post', text: 'Homework should be banned. Every evening, millions of students waste hours copying out answers they barely understand, while their parents nag and their pets go unwalked. Teachers claim homework “builds independence”, but what it really builds is stress.\n\nSome studies suggest that for younger students, homework makes little difference to results. Surely our evenings would be better spent reading, playing sport or simply talking to our families?',
+      qs: [
+        { q: 'What is the writer’s viewpoint?', a: 'Homework does more harm than good and should be stopped', w: ['Homework should be doubled', 'Teachers should set more homework for younger students', 'The writer has no opinion'], s: 'The first sentence states the view clearly: “Homework should be banned.”' },
+        { q: 'Which phrase is a humorous exaggeration?', a: '“their pets go unwalked”', w: ['“Some studies suggest”', '“Homework should be banned”', '“reading, playing sport”'], s: 'Blaming homework for unwalked pets is an exaggeration used for humour.' },
+        { q: 'Which sentence uses evidence rather than just opinion?', a: '“Some studies suggest that for younger students, homework makes little difference to results.”', w: ['“Homework should be banned.”', '“What it really builds is stress.”', '“Surely our evenings would be better spent reading”'], s: 'This sentence refers to studies; the others are opinions.' },
+        { q: 'Why does the writer end with a rhetorical question?', a: 'To make the reader feel they must agree', w: ['Because the writer does not know the answer', 'To ask teachers for information', 'To change the subject'], s: 'A rhetorical question does not expect an answer; it pushes the reader towards the writer’s view.' },
+        { q: 'How does the writer show bias against teachers’ views?', a: 'By quoting their claim and then dismissing it', w: ['By giving several reasons teachers are right', 'By interviewing a teacher', 'By ignoring homework completely'], s: '“Teachers claim … but what it really builds is stress” presents the opposite view only to reject it.' }
+      ] }
+  ],
+  poems: [
+    { title: 'Night Bus', poem: true, text: 'The night bus hums along the street,\na lit-up fish in a dark-blue sea;\nits windows hold a row of faces,\ntired as moths, and one is me.\n\nThe driver whistles half a tune,\nthe engine coughs at every light,\nand through the glass the town slides past,\nasleep, and folded up for night.',
+      qs: [
+        { q: 'Which technique is “a lit-up fish in a dark-blue sea”?', a: 'Metaphor', w: ['Simile', 'Onomatopoeia', 'Alliteration'], s: 'The bus is described as if it were a fish, without using “like” or “as”: a metaphor.' },
+        { q: 'Which technique is “tired as moths”?', a: 'Simile', w: ['Metaphor', 'Personification', 'Rhetorical question'], s: 'It compares the faces to moths using “as”.' },
+        { q: 'What is the rhyme pattern in each verse?', a: 'The second and fourth lines rhyme', w: ['Every line rhymes', 'There is no rhyme', 'The first and second lines rhyme'], s: '“sea” rhymes with “me”, and “light” with “night”.' },
+        { q: 'Which line contains personification?', a: '“the engine coughs at every light”', w: ['“The night bus hums along the street”', '“its windows hold a row of faces”', '“tired as moths, and one is me”'], s: 'Coughing is a human action given to the engine.' },
+        { q: 'What is the mood of the poem?', a: 'Calm and sleepy', w: ['Angry and violent', 'Excited and noisy', 'Frightening'], s: 'Words such as “hums”, “tired”, “asleep” and “folded up for night” create a quiet, drowsy mood.' }
+      ] },
+    { title: 'Grandmother’s Hands', poem: true, text: 'Her hands are maps of every year:\nthe ridges where the rivers ran,\nthe scar from when the kettle spilled,\nthe ring she’s worn since life began.\n\nThey knead the dough, they thread the beads,\nthey never seem to want to rest,\nand when I’m sad they hold my face\nas if it’s something they love best.',
+      qs: [
+        { q: 'What does the metaphor “Her hands are maps of every year” suggest?', a: 'Her hands show the history of her life', w: ['She is good at reading maps', 'Her hands are very large', 'She travels a lot'], s: 'Like a map, her hands record where her life has been: scars, ridges, a ring.' },
+        { q: 'What is the effect of starting several lines with “they”?', a: 'It emphasises how busy and active her hands are', w: ['It shows the poet forgot other words', 'It makes the poem sad', 'It shows there are many grandmothers'], s: 'The repetition builds a list of actions, showing hands that “never seem to want to rest”.' },
+        { q: 'What is the main theme of the poem?', a: 'Love and memory within a family', w: ['The dangers of cooking', 'Travel and adventure', 'The importance of jewellery'], s: 'The poem celebrates the grandmother’s life and her love for the speaker.' },
+        { q: 'How does the speaker feel about their grandmother?', a: 'Loving and admiring', w: ['Frightened', 'Jealous', 'Bored'], s: 'The tender final lines show the speaker feels deeply loved and loves her in return.' }
+      ] }
+  ],
+  techniques: [
+    ['The classroom was as quiet as a library at midnight.', 'Simile', 'It compares two things using “as”.'], ['Her smile was a ray of sunshine.', 'Metaphor', 'It says one thing is another, without “like” or “as”.'],
+    ['The old car groaned up the hill.', 'Personification', 'Groaning is a human action given to a car.'], ['Seven slippery snakes slid silently south.', 'Alliteration', 'Several words start with the same sound.'],
+    ['Bang! The door slammed shut.', 'Onomatopoeia', '“Bang” sounds like the noise it describes.'], ['I’ve told you a million times to tidy your room.', 'Hyperbole', 'It is a deliberate exaggeration.'],
+    ['Do we really want to live in a world without trees?', 'Rhetorical question', 'It is asked for effect, not to get an answer.'], ['He ran like the wind.', 'Simile', 'It compares using “like”.'],
+    ['The leaves danced in the breeze.', 'Personification', 'Dancing is a human action.'], ['My bag weighs a tonne!', 'Hyperbole', 'It is an exaggeration for effect.'],
+    ['The thunder was a drum beating in the sky.', 'Metaphor', 'It says the thunder is a drum.'], ['The bees buzzed around the hive.', 'Onomatopoeia', '“Buzzed” imitates the sound.'],
+    ['Never give up. Never give in. Never stop believing.', 'Repetition', '“Never” is repeated to emphasise the message.'], ['Big brown bears bounced on the bed.', 'Alliteration', 'Repeated “b” sounds.'],
+    ['Isn’t it time we listened to young people?', 'Rhetorical question', 'It expects the reader to agree rather than answer.']
+  ],
+  techNames: ['Simile', 'Metaphor', 'Personification', 'Alliteration', 'Onomatopoeia', 'Hyperbole', 'Rhetorical question', 'Repetition'],
+  sentences: [
+    ['The dog barked.', 'Simple', 'It has one main clause.'], ['Maya opened the window and a cold wind blew in.', 'Compound', 'Two main clauses are joined by “and”.'],
+    ['Although it was raining, we went to the beach.', 'Complex', 'A main clause with a subordinate clause starting “Although”.'], ['When the bell rang, the students left, but the teacher stayed behind.', 'Compound-complex', 'Two main clauses joined by “but”, plus a subordinate clause starting “When”.'],
+    ['We waited for hours.', 'Simple', 'One main clause.'], ['I wanted to play outside, but my homework was not finished.', 'Compound', 'Two main clauses joined by “but”.'],
+    ['The boy who lives next door has a new bike.', 'Complex', 'It contains a relative clause, “who lives next door”.'], ['Because the bus was late, Sam missed the start of the film, so he watched it again later.', 'Compound-complex', 'A subordinate clause plus two main clauses joined by “so”.'],
+    ['After the storm had passed, the village was silent.', 'Complex', 'A subordinate clause starting “After”, then a main clause.'], ['You can have pasta or you can have rice.', 'Compound', 'Two main clauses joined by “or”.'],
+    ['The tiny, frightened kitten hid under the old wooden shed.', 'Simple', 'Even with lots of description, it has only one main clause.']
+  ],
+  standard: [
+    ['We was late for school.', 'We were late for school.'], ['I done my homework.', 'I did my homework.'], ['You should of told me.', 'You should have told me.'],
+    ['Pass me them books.', 'Pass me those books.'], ['Me and him went to the park.', 'He and I went to the park.'], ['She don’t like spiders.', 'She doesn’t like spiders.'],
+    ['I ain’t got any money.', 'I haven’t got any money.'], ['They was playing football.', 'They were playing football.'], ['He could of won the race.', 'He could have won the race.'],
+    ['I seen that film last week.', 'I saw that film last week.']
+  ],
+  roots: [['bio', 'life', 'biology'], ['graph', 'write or draw', 'autograph'], ['port', 'carry', 'transport'], ['aqua', 'water', 'aquarium'], ['photo', 'light', 'photograph'], ['phon', 'sound', 'telephone'], ['geo', 'earth', 'geography'], ['therm', 'heat', 'thermometer'], ['spect', 'look', 'spectator'], ['dict', 'say', 'dictionary'], ['tele', 'far', 'television'], ['micro', 'very small', 'microscope']],
+  prefixes: [['un-', 'not', 'unhappy'], ['dis-', 'not, or the opposite of', 'disagree'], ['mis-', 'wrongly', 'misunderstand'], ['pre-', 'before', 'preview'], ['re-', 'again', 'rewrite'], ['sub-', 'under', 'submarine'], ['inter-', 'between', 'international'], ['anti-', 'against', 'antiseptic'], ['bi-', 'two', 'bicycle'], ['tri-', 'three', 'triangle'], ['auto-', 'self', 'autobiography'], ['-less', 'without', 'fearless'], ['-ful', 'full of', 'hopeful']],
+  context: [
+    ['The path was so <b>narrow</b> that we had to walk in single file.', 'Not wide', ['Very long', 'Dangerous', 'Muddy']], ['Leo was <b>reluctant</b> to jump into the cold lake.', 'Unwilling', ['Excited', 'Quick', 'Able']],
+    ['After the long race, the runners were <b>exhausted</b>.', 'Very tired', ['Very happy', 'Hungry', 'Angry']], ['The instructions were <b>vague</b>, so nobody knew what to do.', 'Unclear', ['Very detailed', 'Too long', 'Written in pencil']],
+    ['The ancient castle was <b>enormous</b>, with over a hundred rooms.', 'Very big', ['Very old', 'Very cold', 'Ruined']], ['She was <b>furious</b> when she found her phone broken.', 'Very angry', ['Very sad', 'Surprised', 'Calm']],
+    ['The puppy was <b>timid</b> and hid behind the sofa whenever visitors came.', 'Shy and easily frightened', ['Playful', 'Noisy', 'Hungry']], ['The food at the party was <b>plentiful</b>; there was far more than we could eat.', 'More than enough', ['Delicious', 'Spicy', 'Expensive']]
+  ],
+  spelling: [['because', ['becuase', 'becos', 'beacause']], ['separate', ['seperate', 'separete', 'seprate']], ['definitely', ['definately', 'definitly', 'defanitely']], ['believe', ['beleive', 'belive', 'beleave']], ['receive', ['recieve', 'receve', 'resieve']], ['beginning', ['begining', 'beggining', 'beginnig']], ['different', ['diffrent', 'differant', 'diferent']], ['February', ['Febuary', 'Februery', 'Febrary']], ['library', ['libary', 'liberry', 'librery']], ['interesting', ['intresting', 'interisting', 'interessting']], ['disappear', ['dissappear', 'disapear', 'dissapear']], ['beautiful', ['beutiful', 'beautifull', 'beatiful']], ['Wednesday', ['Wensday', 'Wednsday', 'Wendesday']], ['tomorrow', ['tommorow', 'tomorow', 'tommorrow']], ['environment', ['enviroment', 'envirnment', 'environmant']], ['government', ['goverment', 'govermant', 'governmant']], ['immediately', ['immediatly', 'imediately', 'immediatley']], ['knowledge', ['knowlege', 'knowladge', 'nolledge']]],
+  homophones: [
+    ['The students left ___ bags in the classroom.', 'their', ['there', 'they’re']], ['___ going to be late if you don’t hurry.', 'You’re', ['Your', 'Yore']], ['Put the box over ___, by the door.', 'there', ['their', 'they’re']],
+    ['The dog wagged ___ tail.', 'its', ['it’s', 'its’']], ['I ate ___ much cake.', 'too', ['to', 'two']], ['___ coat is this?', 'Whose', ['Who’s', 'Whos']],
+    ['The cold weather will ___ the crops.', 'affect', ['effect', 'afect']], ['Can you tell me ___ the station is?', 'where', ['were', 'wear']], ['Would you like a ___ of cake?', 'piece', ['peace', 'peice']],
+    ['Please ___ my apology.', 'accept', ['except', 'acept']], ['I don’t know ___ it will rain or not.', 'whether', ['weather', 'wether']]
+  ],
+  connectives: [
+    ['It was raining heavily. ___, the match went ahead.', 'However', 'contrast'], ['Plastic harms sea life. ___, it takes hundreds of years to break down.', 'Furthermore', 'adding a point'],
+    ['The road was icy. ___, the school closed early.', 'As a result', 'cause and effect'], ['___, heat the oven. Then mix the flour and sugar.', 'First', 'sequence'],
+    ['Many animals are endangered. ___, the snow leopard has very few left in the wild.', 'For example', 'giving an example'], ['Mo was cooking dinner. ___, his sister was setting the table.', 'Meanwhile', 'time'],
+    ['The tickets were expensive. ___, we decided to go.', 'Nevertheless', 'contrast'], ['We had practised for weeks. ___, we won the competition.', 'Therefore', 'cause and effect']
+  ],
+  connAll: ['However', 'Furthermore', 'As a result', 'First', 'For example', 'Meanwhile', 'Nevertheless', 'Therefore', 'In addition', 'Finally']
+};
+
+/* ---------------- STAGE 9 DATA ---------------- */
+var E9 = {
+  fiction: [
+    { title: 'The Inheritance', text: 'The house had been empty for three years, but it had not been idle. Damp had crept up the wallpaper in brown tidemarks, and in the kitchen a fern had pushed its way between the floorboards, pale and curious, as though it had been waiting for someone to notice. Elena stood in the doorway with the solicitor’s letter still folded in her hand. This was hers now: a house she had visited once, at the age of six, and remembered only as a smell of oranges and an argument behind a closed door.\n\nShe had expected to feel something. Grief, perhaps, or guilt. Instead there was only the steady drip of the tap, counting the seconds she had not yet decided how to spend.',
+      qs: [
+        { q: 'What does the phrase “it had not been idle” suggest about the empty house?', a: 'Decay has been actively at work while nobody was there', w: ['People have secretly been living there', 'The house has been well looked after', 'The solicitor visited regularly'], s: 'The writer plays on the idea of an empty house being busy: damp has “crept” and a fern has “pushed”, so neglect has been at work.' },
+        { q: 'What is the effect of describing the fern as “pale and curious, as though it had been waiting for someone to notice”?', a: 'It personifies the fern, making the abandoned house feel lonely and expectant', w: ['It shows the fern is dying from too much light', 'It suggests Elena is a gardener', 'It creates a humorous tone'], s: 'Giving the fern human feelings (“curious”, “waiting”) reflects the loneliness of the neglected house.' },
+        { q: 'What can you infer from Elena’s memory of “an argument behind a closed door”?', a: 'There was tension in the family that she did not fully understand as a child', w: ['Elena caused the argument', 'The house had very thick doors', 'Elena enjoyed her visit'], s: 'A child hearing an argument through a door suggests hidden conflict she was not part of.' },
+        { q: 'Why does the writer end with the tap “counting the seconds”?', a: 'It suggests time passing and Elena’s uncertainty about her future', w: ['It shows the plumbing needs fixing', 'It is a flashback to her childhood', 'It shows she is in a hurry to leave'], s: 'The drip measures time like a clock, highlighting that Elena has not decided what to do.' },
+        { q: 'How does the writer subvert the reader’s expectations in the final paragraph?', a: 'We expect Elena to feel grief, but she feels almost nothing', w: ['Elena decides to sell the house', 'The house turns out to belong to someone else', 'Elena finds a hidden letter'], s: '“She had expected to feel something… Instead there was only the steady drip” undercuts the expected emotion.' },
+        { q: 'What does the metaphor “brown tidemarks” suggest about the damp?', a: 'It has risen slowly and steadily, like water leaving marks on a shore', w: ['The house is beside the sea', 'Someone has painted the walls brown', 'The damp is about to disappear'], s: 'Tidemarks are left by rising water, implying slow, creeping damage.' }
+      ] },
+    { title: 'The Interview', text: 'The interviewer did not look up. “Tell me about a time you failed,” he said, and turned a page.\n\nJonah had prepared for this. He had a story ready, polished smooth: the science project, the late night, the lesson learned. He opened his mouth and heard himself say something else entirely.\n\n“Last week. I failed last week.”\n\nNow the man looked up.\n\nOutside, a bus sighed at the stop. Somewhere down the corridor, a printer began to chatter. Jonah waited for the panic to arrive, but it didn’t. For the first time that morning, he felt as if the room had enough air in it.',
+      qs: [
+        { q: 'What is the effect of the one-line paragraph “Now the man looked up.”?', a: 'It creates a dramatic pause and marks a turning point in the scene', w: ['It shows the interviewer has finished reading', 'It describes the setting', 'It introduces a new character'], s: 'Isolating the sentence slows the pace and signals that Jonah’s honesty has changed the power balance.' },
+        { q: 'What does “polished smooth” suggest about Jonah’s prepared story?', a: 'It was rehearsed so much that it may not have felt genuine', w: ['It was written on shiny paper', 'It was very short', 'It was about polishing shoes'], s: 'Something polished smooth has had its rough, real edges removed.' },
+        { q: 'What does “the room had enough air in it” suggest?', a: 'Jonah feels relief, as if he can finally breathe and be himself', w: ['A window has been opened', 'The room is very large', 'Jonah is feeling ill'], s: 'The metaphor shows tension lifting once he speaks honestly.' },
+        { q: 'Why does the writer describe small sounds such as the bus and the printer?', a: 'They emphasise the silence and tension in the room', w: ['To show the office is noisy and busy', 'To explain how Jonah travelled', 'To suggest the interview is over'], s: 'Focusing on distant sounds highlights how quiet and charged the moment is.' },
+        { q: 'What does the interviewer’s behaviour at the start suggest?', a: 'He is uninterested and holds the power in the conversation', w: ['He is nervous about the interview', 'He knows Jonah well', 'He is friendly and welcoming'], s: 'Not looking up and turning a page shows indifference and control.' }
+      ] },
+    { title: 'Rising Water', text: 'For nine days the rain did not stop. It came sideways off the hills, filled the gutters, swallowed the lane, and on the tenth morning it reached the bottom step of the Patels’ house and sat there, brown and patient, like a dog that knew it would be let in eventually.\n\nAnjali watched it from the landing. Her father had stacked sandbags against the door with grim, wordless care; her mother was carrying the photo albums upstairs, two at a time, as if they were the only things in the house that could drown.',
+      qs: [
+        { q: 'What is the effect of the simile “like a dog that knew it would be let in eventually”?', a: 'It makes the water seem calm but threatening, as if its entry is inevitable', w: ['It shows the family owns a dog', 'It suggests the flood is friendly', 'It shows the water is moving quickly'], s: 'A patient dog waiting to be let in suggests quiet, certain arrival: the flood will get in.' },
+        { q: 'What is the effect of the list “filled the gutters, swallowed the lane”?', a: 'It shows the rain’s power growing steadily', w: ['It explains how to stop a flood', 'It slows the story down to show nothing is happening', 'It describes the hills'], s: 'Each verb shows the water taking over more space, building a sense of threat.' },
+        { q: 'What does the mother carrying photo albums upstairs suggest?', a: 'The family’s memories are what they value most', w: ['She is tidying the house', 'The photographs are very heavy', 'She wants to sell the albums'], s: 'Of everything in the house, she saves the irreplaceable memories first.' },
+        { q: 'What does “grim, wordless care” suggest about the father?', a: 'He is worried but determined, and is hiding his fear', w: ['He is angry with his family', 'He does not care about the house', 'He is enjoying the work'], s: '“Grim” and “wordless” show seriousness and suppressed emotion; “care” shows his commitment.' }
+      ] }
+  ],
+  nonfiction: [
+    { title: 'Enough Is Enough', src: 'Opinion column', text: 'Europeans buy more clothes than ever, and many garments are worn only a handful of times before they are thrown away. We are told this is choice. It is not choice; it is a treadmill, and we are paying to run on it.\n\nEvery cheap T-shirt has a hidden price: water drained from rivers, dyes poured into them, and workers paid too little to buy what they make. Of course, nobody wants to return to an age when new clothes were a luxury. But there is a difference between having enough and having too much.\n\nBuy less. Choose well. Make it last.',
+      qs: [
+        { q: 'What is the writer’s main argument?', a: 'Fast fashion is harmful, and people should buy fewer, better-made clothes', w: ['Clothes should be more expensive for everyone', 'Nobody should buy new clothes again', 'Fashion is a harmless form of choice'], s: 'The column criticises over-consumption and ends with a call to “Buy less. Choose well. Make it last.”' },
+        { q: 'What does the metaphor of a “treadmill” suggest?', a: 'An exhausting cycle that never gets us anywhere', w: ['Shopping is good exercise', 'Clothes are made in gyms', 'People enjoy buying clothes'], s: 'On a treadmill you keep moving but go nowhere, like endlessly buying and discarding.' },
+        { q: 'Why does the writer include “Of course, nobody wants to return to an age when new clothes were a luxury”?', a: 'To acknowledge an opposing view and appear reasonable before rejecting it', w: ['To change their mind', 'To praise the fashion industry', 'To give a statistic'], s: 'Conceding a counter-argument makes the writer seem fair, which strengthens the argument that follows.' },
+        { q: 'Which technique is used in “a difference between having enough and having too much”?', a: 'Antithesis: placing contrasting ideas side by side', w: ['Onomatopoeia', 'Simile', 'Alliteration'], s: '“Enough” and “too much” are balanced opposites.' },
+        { q: 'What is the effect of the final line, “Buy less. Choose well. Make it last.”?', a: 'Three short commands give a memorable call to action', w: ['It summarises the history of fashion', 'It shows the writer is unsure', 'It introduces a new argument'], s: 'A rule of three with imperatives is punchy and easy to remember.' },
+        { q: 'How does “We are told this is choice. It is not choice” reveal the writer’s bias?', a: 'It dismisses the opposing view directly instead of exploring it', w: ['It gives evidence from several sources', 'It shows the writer agrees with the industry', 'It uses statistics'], s: 'The writer rejects the idea flatly, showing a strong one-sided stance.' }
+      ] },
+    { title: 'Tram 28', src: 'Travel writing', text: 'Tram 28 does not so much climb Lisbon’s hills as argue with them. It groans round corners so tight that you could reach out and touch the laundry on the balconies, and on the steepest stretch it slows almost to walking pace, as though reconsidering the whole idea.\n\nTourists cling to their cameras; old women with shopping bags sit serenely, having ridden this route a thousand times. At the top, the city falls away in a jumble of terracotta roofs towards the river, and you understand why people put up with the journey.',
+      qs: [
+        { q: 'What is the main purpose of this text?', a: 'To entertain and inform readers with a vivid account of a journey', w: ['To persuade readers to ban trams', 'To give a timetable', 'To explain how trams are built'], s: 'Travel writing describes a place vividly and personally to entertain and inform.' },
+        { q: 'What is the effect of saying the tram “argues with” the hills and seems to be “reconsidering the whole idea”?', a: 'Humorous personification shows how hard the climb is', w: ['It shows the driver is angry', 'It suggests the tram is broken', 'It describes the weather'], s: 'Giving the tram human doubts makes the steep climb comic and vivid.' },
+        { q: 'What does the contrast between the tourists and the old women show?', a: 'The tram is a thrill for visitors but ordinary daily life for locals', w: ['Old women are afraid of trams', 'Tourists do not like Lisbon', 'The tram only carries tourists'], s: 'Tourists “cling”; the women sit “serenely”, having done it “a thousand times”.' },
+        { q: 'How does the final sentence work in the structure of the piece?', a: 'It rewards the reader with the view, explaining why the difficult journey is worth it', w: ['It introduces a new journey', 'It complains about the city', 'It describes the inside of the tram'], s: 'After the struggle of the climb, the view resolves the piece.' }
+      ] },
+    { title: 'Should Schools Scrap Uniforms?', src: 'Magazine article', text: 'A survey at one secondary school found pupils split almost evenly on whether uniforms should stay. Supporters say uniforms reduce pressure to wear expensive brands. “Nobody judges you for your trainers,” said one Year 10 student.\n\nOpponents argue that uniforms can be costly in their own right, since they must often be bought from particular suppliers, and that they limit self-expression. The head teacher, who favours keeping the uniform, described critics as “a vocal minority”, although the survey suggests otherwise.',
+      qs: [
+        { q: 'Which statement best synthesises (combines) both sides of the argument?', a: 'Both sides raise cost, but disagree about whether uniforms reduce it or add to it', w: ['Everyone agrees uniforms are too expensive', 'Nobody mentions cost', 'Only the head teacher has an opinion'], s: 'Supporters say uniforms reduce brand pressure; opponents say uniforms are costly themselves. Cost links both sides.' },
+        { q: 'What is the effect of the head teacher calling critics “a vocal minority”?', a: 'It dismisses critics as few in number but noisy', w: ['It praises critics for speaking up', 'It shows the head is neutral', 'It gives the survey results'], s: 'The phrase minimises the opposing view.' },
+        { q: 'How does the writer cast doubt on the head teacher’s claim?', a: 'By pointing out that the survey shows pupils almost evenly split', w: ['By calling the head teacher rude', 'By ignoring the claim', 'By agreeing with it'], s: '“Although the survey suggests otherwise” uses evidence to undercut the claim.' },
+        { q: 'Which of these is a fact rather than an opinion?', a: 'A survey at one school found pupils split almost evenly', w: ['Uniforms limit self-expression', 'Critics are a vocal minority', 'Uniforms are a good idea'], s: 'The survey result is reported information; the others are views.' }
+      ] }
+  ],
+  poems: [
+    { title: 'Demolition', poem: true, text: 'They took the old cinema down on a Tuesday,\nbrick by indifferent brick;\nthe screen where we learned how to dream out loud\ncame down in a single click.\n\nNow there’s a car park, neat as an answer,\npainted in obedient white,\nand nobody queues in the rain any longer\nto sit in the generous dark.',
+      qs: [
+        { q: 'What is the effect of “brick by indifferent brick”?', a: 'It suggests the demolition is uncaring, as if no one minds what is lost', w: ['It shows the bricks were badly made', 'It describes the colour of the bricks', 'It shows the builders worked slowly'], s: 'Bricks cannot feel; describing them as “indifferent” transfers the uncaring attitude to the whole act.' },
+        { q: 'What does the simile “neat as an answer” suggest about the car park?', a: 'It is tidy and practical but lacks the mystery and imagination of the cinema', w: ['It is the solution to all problems', 'It is very small', 'It is decorated with numbers'], s: 'An answer closes a question; the car park is orderly but has none of the cinema’s dreaming.' },
+        { q: 'What contrast is created by “obedient white” and “generous dark”?', a: 'Cold order versus the warmth and freedom of the old cinema', w: ['Day versus night shifts at work', 'Two different paint colours', 'Good weather versus bad weather'], s: 'The juxtaposition sets dull control against the welcoming darkness of the cinema.' },
+        { q: 'The final line breaks the rhyme pattern (“white” does not rhyme with “dark”). What is the effect?', a: 'It leaves the poem feeling incomplete, mirroring the sense of loss', w: ['It shows the poet made a mistake', 'It makes the poem more cheerful', 'It shows the cinema has been rebuilt'], s: 'The reader expects a rhyme and does not get one, just as the community has lost something.' },
+        { q: 'What is the main theme of the poem?', a: 'The loss of shared community spaces and the memories they held', w: ['The benefits of new car parks', 'How cinemas are built', 'The weather in winter'], s: 'The poem mourns the cinema and what it meant to people.' }
+      ] },
+    { title: 'Exam Hall', poem: true, text: 'Two hundred pens begin at once,\na rain of whispers on the page;\nthe clock above the door\nis the only thing that isn’t afraid.\n\nI write my name. I write it twice.\nThe question stares; I stare it back.\nSomewhere a window holds the sky,\nand I am learning how to wait.',
+      qs: [
+        { q: 'What does the metaphor “a rain of whispers on the page” convey?', a: 'The soft, constant sound of many pens writing at once', w: ['It is raining outside the exam hall', 'Students are talking during the exam', 'The paper is getting wet'], s: 'The pens’ scratching is compared to rain and whispers: soft, many, continuous.' },
+        { q: 'What does “I write my name. I write it twice.” suggest?', a: 'The speaker is nervous and stalling before starting', w: ['The speaker has two names', 'The exam asks for the name twice', 'The speaker is very confident'], s: 'Repeating a simple action shows anxiety and hesitation.' },
+        { q: 'What is the effect of “The question stares; I stare it back”?', a: 'Personification shows the speaker deciding to face the challenge', w: ['It shows the question is printed in large type', 'It shows the speaker cannot read', 'It is a simile about eyes'], s: 'The question is treated like an opponent; staring back shows growing determination.' },
+        { q: 'Why is it ironic that the clock is “the only thing that isn’t afraid”?', a: 'The clock, which controls the time pressure, is the one thing that feels nothing', w: ['Clocks are often broken in exams', 'The clock is very loud', 'The clock is afraid of the students'], s: 'The source of pressure is the only calm thing in the room, which highlights everyone else’s fear.' },
+        { q: 'How does the mood change by the final line?', a: 'From tension towards a calmer patience', w: ['From calm to panic', 'From sadness to anger', 'It stays exactly the same'], s: '“I am learning how to wait” suggests the speaker is settling.' }
+      ] }
+  ],
+  techniques: [
+    ['The silence was deafening.', 'Oxymoron', 'Two contradictory words are put together.'], ['As the argument grew, storm clouds gathered over the house.', 'Pathetic fallacy', 'The weather reflects the mood of the scene.'],
+    ['The snake slithered silently through the sunlit grass.', 'Sibilance', 'Repeated soft “s” sounds create a hissing effect.'], ['It was the best of times; it was the worst of times.', 'Antithesis', 'Opposite ideas are balanced in parallel phrases.'],
+    ['We need courage, commitment and compassion.', 'Tricolon (rule of three)', 'Three items are listed for rhythm and emphasis.'], ['The billionaire’s yacht sailed past the families queuing at the food bank.', 'Juxtaposition', 'Two contrasting images are placed side by side.'],
+    ['“Lovely weather,” said Tom, as the rain soaked through his shoes.', 'Irony', 'What is said is the opposite of what is meant.'], ['Imagine waking up every day without clean water to drink.', 'Direct address', 'The reader is spoken to directly to involve them.'],
+    ['Innocent animals are suffering in cruel, cramped cages.', 'Emotive language', 'Words are chosen to provoke a strong emotional response.'], ['We will fight on the beaches; we will fight in the fields; we will fight in the streets.', 'Anaphora (repetition)', 'The same words begin each clause.'],
+    ['Her voice was a blade, cutting through the chatter.', 'Metaphor', 'One thing is described as another without “like” or “as”.'], ['The sun beat down on the dusty, hopeless town as the drought dragged on.', 'Pathetic fallacy', 'The harsh weather mirrors the hopeless mood.'],
+    ['Bittersweet memories filled the empty room.', 'Oxymoron', '“Bittersweet” joins opposite tastes.'], ['Nine out of ten experts agree.', 'Statistics', 'Numbers are used to make a claim sound authoritative.']
+  ],
+  techNames: ['Oxymoron', 'Pathetic fallacy', 'Sibilance', 'Antithesis', 'Tricolon (rule of three)', 'Juxtaposition', 'Irony', 'Direct address', 'Emotive language', 'Anaphora (repetition)', 'Metaphor', 'Statistics', 'Personification', 'Hyperbole'],
+  sentences: [
+    ['The house, which had stood empty for years, was finally sold.', 'Embedded (relative) clause', 'The clause “which had stood empty for years” is inserted inside the main clause.'], ['Silence.', 'Minor sentence', 'It has no main verb but works as a sentence for effect.'],
+    ['Although she was exhausted, and despite the rain, Asha kept running.', 'Complex sentence with fronted clauses', 'Subordinate information comes before the main clause, delaying it for effect.'], ['He was not rich; he was free.', 'Antithesis', 'Two contrasting clauses are balanced either side of a semicolon.'],
+    ['Nothing.', 'Minor sentence', 'A single word without a verb, often used for impact.'], ['The letter, crumpled and stained, lay on the table.', 'Embedded (parenthetical) phrase', '“crumpled and stained” is inserted between commas.'],
+    ['They came, they saw, they left.', 'Tricolon of short clauses', 'Three short parallel clauses create pace and rhythm.']
+  ],
+  sentNames: ['Embedded (relative) clause', 'Minor sentence', 'Complex sentence with fronted clauses', 'Antithesis', 'Embedded (parenthetical) phrase', 'Tricolon of short clauses', 'Compound sentence', 'Simple sentence'],
+  standard: [
+    ['Between you and I, the plan won’t work.', 'Between you and me, the plan won’t work.'], ['There’s lots of reasons to recycle.', 'There are lots of reasons to recycle.'], ['Less people came than expected.', 'Fewer people came than expected.'],
+    ['The team have did their best.', 'The team have done their best.'], ['Who did you give it to? Me and her.', 'Who did you give it to? Her and me.'], ['Each of the students have a locker.', 'Each of the students has a locker.'],
+    ['The data was collected by myself.', 'The data was collected by me.'], ['If I was you, I would apologise.', 'If I were you, I would apologise.']
+  ],
+  roots: [['bene', 'good, well', 'benefit'], ['mal', 'bad', 'malfunction'], ['chron', 'time', 'chronological'], ['phil', 'love', 'philosophy'], ['-cide', 'killing', 'pesticide'], ['omni', 'all', 'omnivore'], ['ambi', 'both', 'ambidextrous'], ['ante', 'before', 'antenatal'], ['circum', 'around', 'circumference'], ['contra', 'against', 'contradict'], ['mono', 'one', 'monologue'], ['poly', 'many', 'polygon'], ['pseudo', 'false', 'pseudonym'], ['hyper', 'over, beyond', 'hyperactive'], ['hypo', 'under', 'hypothermia'], ['-cracy', 'rule, government', 'democracy'], ['-phobia', 'fear', 'arachnophobia'], ['-nym', 'name', 'synonym']],
+  prefixes: [],
+  context: [
+    ['Mobile phones are now <b>ubiquitous</b>; you see them everywhere.', 'Found everywhere', ['Very expensive', 'Hard to use', 'Old-fashioned']], ['The fame of most viral videos is <b>ephemeral</b>, lasting only a few days.', 'Short-lived', ['Enormous', 'Permanent', 'Dangerous']],
+    ['The <b>benevolent</b> stranger paid for the old man’s shopping.', 'Kind and generous', ['Suspicious', 'Wealthy', 'Rude']], ['She was <b>meticulous</b>, checking every detail of the plan twice.', 'Extremely careful and precise', ['Careless', 'Quick', 'Bored']],
+    ['The ending of the film was <b>ambiguous</b>, and we argued about what it meant.', 'Open to more than one meaning', ['Very happy', 'Too long', 'Predictable']], ['Rather than arguing about ideals, she took a <b>pragmatic</b> approach and found a solution that worked.', 'Practical and realistic', ['Emotional', 'Lazy', 'Theoretical']],
+    ['He was <b>candid</b> about his mistakes and admitted everything.', 'Honest and direct', ['Secretive', 'Angry', 'Confused']], ['The <b>tenacious</b> climber refused to give up despite the storm.', 'Determined and persistent', ['Frightened', 'Careless', 'Exhausted']],
+    ['After the huge lunch, everyone felt <b>lethargic</b> and wanted to nap.', 'Sluggish and lacking energy', ['Excited', 'Hungry', 'Nervous']], ['Their <b>ostentatious</b> house had gold taps and three swimming pools.', 'Showy, designed to impress', ['Modest', 'Ancient', 'Comfortable']],
+    ['Being <b>frugal</b>, she saved money by repairing her old bike rather than buying a new one.', 'Careful not to waste money', ['Generous', 'Wealthy', 'Lazy']], ['The evidence was <b>irrefutable</b>; nobody could argue with it.', 'Impossible to disprove', ['Weak', 'Secret', 'Confusing']]
+  ],
+  spelling: [['accommodate', ['accomodate', 'acommodate', 'accommadate']], ['embarrassment', ['embarassment', 'embarrasment', 'embarresment']], ['conscientious', ['conscientous', 'consciencious', 'concientious']], ['unnecessary', ['unneccessary', 'unecessary', 'unnecesary']], ['occurrence', ['occurence', 'ocurrence', 'occurrance']], ['privilege', ['priviledge', 'privelege', 'privilage']], ['questionnaire', ['questionaire', 'questionairre', 'questionnair']], ['perseverance', ['perseverence', 'perserverance', 'persevearance']], ['entrepreneur', ['entrepeneur', 'entreprenuer', 'enterpreneur']], ['millennium', ['millenium', 'milennium', 'millenniun']], ['onomatopoeia', ['onomatopeia', 'onomatapoeia', 'onomotopoeia']], ['independence', ['independance', 'indipendence', 'independense']], ['maintenance', ['maintainance', 'maintenence', 'maintanance']], ['guarantee', ['garantee', 'guarentee', 'guarantie']], ['parliament', ['parliment', 'parlament', 'parlaiment']], ['surveillance', ['surveilance', 'survaillance', 'surveillence']], ['miscellaneous', ['miscelaneous', 'miscellanous', 'misselaneous']], ['phenomenon', ['phenomenom', 'phenominon', 'phenomonon']], ['conscience', ['concience', 'consience', 'conscence']], ['exaggerate', ['exagerate', 'exaggarate', 'exxagerate']], ['irresistible', ['irresistable', 'iresistible', 'irrisistible']], ['recommend', ['reccomend', 'recomend', 'reccommend']], ['rhythm', ['rythm', 'rhythem', 'rhytm']], ['necessary', ['neccessary', 'necesary', 'neccesary']]],
+  homophones: [
+    ['The new rules will ___ everyone in the school.', 'affect', ['effect', 'afect']], ['The medicine had an immediate ___.', 'effect', ['affect', 'efect']], ['The ___ of the story is that honesty pays.', 'moral', ['morale', 'morrel']],
+    ['Team ___ was low after the defeat.', 'morale', ['moral', 'morrale']], ['She was ___ by the sudden noise.', 'startled', ['startld', 'stardled']], ['Please ___ your suitcase carefully.', 'stationary', ['stationery']],
+    ['The bus remained ___ at the lights.', 'stationary', ['stationery', 'stationairy']], ['I need some ___: pens, paper and envelopes.', 'stationery', ['stationary', 'stationory']], ['He tried to ___ the teacher that he was innocent.', 'persuade', ['pursuade', 'perswade']],
+    ['The ___ of the school welcomed the visitors.', 'principal', ['principle', 'principel']], ['Honesty is an important ___.', 'principle', ['principal', 'principel']]
+  ],
+  connectives: [
+    ['The scheme was expensive. ___, its long-term benefits were considerable.', 'Nonetheless', 'conceding a point'], ['The evidence is clear. ___, we must act now.', 'Consequently', 'cause and effect'],
+    ['Some argue that zoos protect species; ___, others claim they cause suffering.', 'conversely', 'contrast'], ['Cycling reduces pollution. ___, it improves fitness.', 'Moreover', 'adding a point'],
+    ['___ the plan has flaws, it is the best option we have.', 'Although', 'conceding a point'], ['Many species are under threat, ___ the Sumatran tiger.', 'notably', 'giving an example']
+  ],
+  connAll: ['Nonetheless', 'Consequently', 'conversely', 'Moreover', 'Although', 'notably', 'Similarly', 'In contrast', 'Thus', 'Furthermore'],
+  structures: [
+    ['A story begins in the middle of a car chase, then explains how it started.', 'In medias res', 'It opens in the middle of the action.'], ['A story ends in the same place, with the same image, as it began.', 'Cyclical structure', 'The ending returns to the opening.'],
+    ['Early in a novel, a character notices a crack in the dam. Later, the dam bursts.', 'Foreshadowing', 'An early detail hints at a later event.'], ['A narrator in the present suddenly describes a memory from childhood.', 'Flashback', 'The narrative moves back in time.'],
+    ['A chapter ends just as a character opens a mysterious door.', 'Cliffhanger', 'It stops at a moment of suspense.'], ['After a long, descriptive paragraph, the writer puts one short sentence on its own line.', 'Single-sentence paragraph for emphasis', 'Isolating the sentence makes it stand out.'],
+    ['The focus moves from a wide view of a city to one person at a window.', 'Shift in focus (zooming in)', 'The writer narrows from the general to the specific.']
+  ]
+};
+
+/* ---------------- TOPIC REGISTRATION ---------------- */
+function registerEnglish(stage) {
+  var D = stage === 7 ? E7 : E9, p = stage === 7 ? '7' : '9', id = function (x) { return 'en' + p + '-' + x; };
+  eng({ id: id('fiction'), strand: 'R', title: 'Reading fiction', codes: stage === 7 ? ['7Ri.03', '7Ri.04', '7Ri.08', '7Ri.12', '7Rv.02'] : ['9Ri.03', '9Ri.04', '9Ri.07', '9Ri.09', '9Rv.02'], calc: false,
+    blurb: stage === 7 ? 'Find information, make inferences and explain how writers create effects in short stories.' : 'Analyse layers of meaning, structure and language in literary prose.',
+    learn: { ideas: stage === 7 ? ['<b>Explicit</b> information is stated directly in the text. <b>Implicit</b> meaning has to be inferred from clues.', 'When you explain an effect, say what the words suggest and how they make the reader feel.', 'Use short quotations as evidence: “The wind shoved at her” suggests the weather is hostile.', 'Notice the narrator’s <b>voice</b>: is it humorous, serious, nervous, confident?'] : ['Good analysis explores <b>how</b> a writer creates meaning, not just what happens.', 'Look for layers of meaning: a detail can work literally and symbolically at the same time.', 'Consider structure: where a sentence is placed, how long it is, and what comes next.', 'Embed short quotations and comment on individual words and their connotations.'],
+      example: stage === 7 ? { q: '“Tom’s hands shook as he opened the envelope.” What can you infer?', steps: ['The text does not say he is nervous.', 'Shaking hands are a clue: Tom is anxious about what is inside.'] } : { q: '“The door closed behind her with a soft, final click.” What layers of meaning are there?', steps: ['Literally, a door shuts quietly.', '“Final” suggests the end of something, perhaps a relationship or a stage of life.', 'The softness makes the ending feel quiet and sad rather than dramatic.'] },
+      watch: stage === 7 ? 'Do not just retell the story. Explain what the writer’s words suggest.' : 'Avoid vague comments such as “it makes the reader want to read on”. Say exactly what effect is created and how.' },
+    gens: D.fiction.map(passageGen) });
+  eng({ id: id('nonfiction'), strand: 'R', title: 'Reading non-fiction', codes: stage === 7 ? ['7Ri.02', '7Ri.05', '7Ri.06', '7Ri.11', '7Rg.01'] : ['9Ri.04', '9Ri.05', '9Ri.10', '9Rv.03', '9Rs.02'], calc: false,
+    blurb: stage === 7 ? 'Identify purpose, viewpoint, fact and opinion, and bias in leaflets, reports and blogs.' : 'Analyse argument, bias and technique, and synthesise information across viewpoints.',
+    learn: { ideas: stage === 7 ? ['Ask: what is the text <b>for</b>? To inform, persuade, explain, describe, entertain or advise?', 'A <b>fact</b> can be proved; an <b>opinion</b> is a belief or judgement.', 'A text is <b>biased</b> when it presents only one side or uses loaded language to push a view.', 'Persuasive texts often use direct address (“you”), rhetorical questions, emotive words and a call to action.'] : ['Identify the writer’s <b>viewpoint</b> and how it is built: evidence, anecdote, counter-argument and rebuttal.', 'Bias can be hidden in word choice, in what is left out, or in how opposing views are described.', 'To <b>synthesise</b>, find links between ideas: shared concerns, contradictions, cause and effect.', 'Comment on rhetorical techniques: tricolon, antithesis, imperatives, metaphor.'],
+      example: stage === 7 ? { q: 'Is “Our town has the best park in the country” a fact or an opinion?', steps: ['“Best” is a judgement that cannot be proved.', 'So it is an opinion.'] } : { q: 'How does “Critics, unsurprisingly, have complained again” show bias?', steps: ['“Unsurprisingly” and “again” suggest the critics always complain.', 'This dismisses their view without considering it.'] },
+      watch: 'Statistics and quotations can still be used selectively. Ask who is speaking and why.' },
+    gens: D.nonfiction.map(passageGen) });
+  eng({ id: id('poetry'), strand: 'R', title: 'Reading poetry', codes: stage === 7 ? ['7Ri.01', '7Ri.09', '7Rs.01', '7Rv.03'] : ['9Ri.01', '9Ri.08', '9Rs.01', '9Rv.03'], calc: false,
+    blurb: stage === 7 ? 'Explore imagery, rhyme, mood and theme in poems.' : 'Analyse how poets use imagery, form and structure to shape meaning.',
+    learn: { ideas: stage === 7 ? ['Look for <b>imagery</b>: similes, metaphors and personification help us picture things in new ways.', 'Notice <b>rhyme</b> and rhythm, and verses (stanzas).', 'The <b>mood</b> is the feeling the poem creates; the <b>theme</b> is the big idea it explores.'] : ['Consider <b>form</b> and <b>structure</b>: stanza length, line breaks, rhyme patterns and where they are broken.', 'Explore connotations: “obedient white” suggests control, not just a colour.', 'Track shifts in tone or mood across the poem.', 'Link techniques to the poem’s themes.'],
+      example: stage === 7 ? { q: '“The moon was a silver coin.” What does the metaphor suggest?', steps: ['A coin is round, shiny and precious.', 'The moon is bright and valuable-looking in the sky.'] } : { q: 'A poem about loss ends with a line that does not rhyme, though every earlier verse does. Why?', steps: ['The broken pattern unsettles the reader.', 'It mirrors the sense that something is missing.'] },
+      watch: 'Do not mix up the poet and the speaker. The “I” in a poem may be a character.' },
+    gens: D.poems.map(passageGen) });
+  eng({ id: id('techniques'), strand: 'K', title: stage === 7 ? 'Language techniques' : 'Literary and rhetorical techniques', codes: stage === 7 ? ['7Rv.03', '7Wv.02'] : ['9Rv.03', '9Wv.02'], calc: false,
+    blurb: stage === 7 ? 'Recognise similes, metaphors, personification, alliteration and more, and explain their effects.' : 'Identify and analyse advanced literary and rhetorical techniques.',
+    learn: { ideas: stage === 7 ? ['<b>Simile</b>: a comparison using “like” or “as”. <b>Metaphor</b>: saying one thing is another.', '<b>Personification</b>: giving human qualities to things. <b>Alliteration</b>: repeated sounds at the start of words.', '<b>Onomatopoeia</b>: words that sound like their meaning. <b>Hyperbole</b>: deliberate exaggeration.', '<b>Rhetorical question</b>: a question asked for effect. <b>Repetition</b>: repeating words for emphasis.'] : ['<b>Oxymoron</b>: contradictory words together (“deafening silence”). <b>Antithesis</b>: balanced opposites.', '<b>Pathetic fallacy</b>: weather or setting reflecting mood. <b>Sibilance</b>: repeated “s” sounds.', '<b>Juxtaposition</b>: contrasting things placed side by side. <b>Irony</b>: saying the opposite of what is meant, or an outcome opposite to what is expected.', 'Rhetoric: <b>tricolon</b>, <b>anaphora</b>, <b>direct address</b>, <b>emotive language</b>, statistics.'],
+      example: stage === 7 ? { q: 'Name the technique: “The stars winked at us.”', steps: ['Stars cannot wink: they are given a human action.', 'It is personification.'] } : { q: 'Name the technique: “The clouds wept as the funeral began.”', steps: ['The weather matches the sad mood.', 'It is pathetic fallacy (with personification in “wept”).'] },
+      watch: stage === 7 ? 'A simile uses “like” or “as”. If it does not, it is probably a metaphor.' : 'Naming a technique is only the start. Always explain its effect in context.' },
+    gens: [listGen(D.techniques, function (t) { return 'Which technique is used here?<span class="quote">' + t[0] + '</span>'; }, function (t) { return t[1]; }, D.techNames, 'Look for comparisons, sounds, contrasts and how the reader is addressed.', function (t) { return t[1] + ': ' + t[2]; })] });
+  eng({ id: id('sentences'), strand: 'K', title: stage === 7 ? 'Sentence types' : 'Sentence craft', codes: stage === 7 ? ['7Rg.02', '7Rg.03', '7Wg.03', '7Wg.04'] : ['9Rg.02', '9Rg.03', '9Wg.02', '9Wg.03'], calc: false,
+    blurb: stage === 7 ? 'Simple, compound, complex and compound-complex sentences, and how they build detail.' : 'Embedded clauses, minor sentences, antithesis and balance, and their effects.',
+    learn: { ideas: stage === 7 ? ['A <b>simple</b> sentence has one main clause: “The dog barked.”', 'A <b>compound</b> sentence joins main clauses with and, but, or, so: “I ran, but I missed the bus.”', 'A <b>complex</b> sentence has a main clause and a subordinate clause (starting because, although, when, who…).', 'A <b>compound-complex</b> sentence has at least two main clauses and a subordinate clause.'] : ['<b>Embedded clauses</b> add information inside a sentence: “The letter, which arrived late, changed everything.”', 'A <b>minor sentence</b> has no main verb (“Silence.”) and creates impact.', '<b>Antithesis</b> and <b>balance</b> set ideas against each other: “He was not rich; he was free.”', 'Short sentences build tension; long, flowing ones slow the pace or overwhelm.'],
+      example: stage === 7 ? { q: 'What type is “When the film ended, we went home”?', steps: ['“When the film ended” is a subordinate clause; it cannot stand alone.', '“we went home” is a main clause.', 'So it is complex.'] } : { q: 'What is the effect of a one-word sentence after a long description?', steps: ['The sudden change in rhythm stops the reader.', 'It emphasises that word or moment.'] },
+      watch: 'A long sentence is not automatically complex. Count the clauses, not the words.' },
+    gens: [listGen(D.sentences, function (s) { return 'What kind of sentence ' + (stage === 7 ? 'is this' : 'structure is used') + '?<span class="quote">' + s[0] + '</span>'; }, function (s) { return s[1]; }, stage === 7 ? ['Simple', 'Compound', 'Complex', 'Compound-complex'] : D.sentNames, stage === 7 ? 'Count the main clauses, then look for a subordinate clause.' : 'Look for clauses inserted between commas, missing verbs, and balanced opposites.', function (s) { return s[1] + ': ' + s[2]; })].concat(stage === 7 ? [bank([
+      { q: 'Which word could join these into a complex sentence: “It was cold. We went swimming.”', a: 'Although', w: ['And', 'But', 'Or'], s: ['“Although it was cold, we went swimming” uses a subordinating conjunction.'] },
+      { q: 'Which sentence builds the most detail using an expanded noun phrase?', a: 'The rusty, creaking gate at the end of the lane swung open.', w: ['The gate opened.', 'It opened.', 'The gate swung.'], s: ['Adjectives and a prepositional phrase add detail to “gate”.'] }])] : [bank([
+      { q: 'A writer describes a calm beach in long, flowing sentences, then writes: “Then the siren.” What is the effect?', a: 'The minor sentence breaks the calm rhythm and creates sudden alarm', w: ['It shows the writer ran out of time', 'It continues the calm mood', 'It explains what a siren is'], s: ['The abrupt change in sentence length mirrors the sudden interruption.'] },
+      { q: 'Which sentence uses antithesis?', a: 'We were not defeated; we were delayed.', w: ['We walked to the station.', 'Defeat, delay and despair.', 'Were we defeated?'], s: ['Two contrasting ideas are balanced either side of the semicolon.'] }])]) });
+  eng({ id: id('punctuation'), strand: 'K', title: 'Punctuation', codes: stage === 7 ? ['7Wg.01', '7Wg.02', '7Rg.01'] : ['9Wg.01', '9Rg.01'], calc: false,
+    blurb: stage === 7 ? 'Apostrophes, speech marks, colons, semicolons, dashes, hyphens and ellipses.' : 'Use and analyse punctuation for rhetorical effect.',
+    learn: { ideas: stage === 7 ? ['<b>Apostrophes</b> show possession (the dog’s bowl; the dogs’ bowls) or missing letters (don’t, it’s = it is).', 'In <b>dialogue</b>, the spoken words and their punctuation go inside the speech marks: “Wait,” she said.', 'A <b>colon</b> introduces a list or explanation; a <b>semicolon</b> joins two closely linked main clauses.', 'A <b>hyphen</b> joins words in a compound adjective (a well-known author). A <b>dash</b> adds emphasis or an aside. An <b>ellipsis</b> (…) shows a pause or trailing off.'] : ['A <b>semicolon</b> balances two related ideas, often for contrast.', 'A <b>colon</b> creates anticipation before a reveal or explanation.', '<b>Dashes</b> and <b>brackets</b> add asides; dashes feel more dramatic, brackets more confidential.', 'An <b>ellipsis</b> can suggest hesitation, suspense or something left unsaid. Exclamation marks used sparingly add force; overused, they weaken writing.'],
+      example: stage === 7 ? { q: 'Punctuate: the girls coats were on the floor (several girls)', steps: ['The coats belong to the girls: plural possession.', 'For a plural ending in s, add the apostrophe after the s: girls’.', 'The girls’ coats were on the floor.'] } : { q: 'What is the effect of the colon in: “There was only one explanation: she had lied.”', steps: ['The colon makes the reader pause.', 'It builds anticipation, then delivers the explanation with force.'] },
+      watch: '“Its” (belonging to it) has no apostrophe. “It’s” always means “it is” or “it has”.' },
+    gens: stage === 7 ? [
+      function () { var it = pick([['dog', 'dogs', 'bowl', 'bowls'], ['teacher', 'teachers', 'desk', 'desks'], ['girl', 'girls', 'coat', 'coats'], ['cat', 'cats', 'toy', 'toys'], ['player', 'players', 'shirt', 'shirts']]), pl = Math.random() < 0.5;
+        var right = pl ? 'the ' + it[1] + '’ ' + it[3] : 'the ' + it[0] + '’s ' + it[2], wrong = pl ? ['the ' + it[1] + '’s ' + it[3], 'the ' + it[0] + 's ' + it[3], 'the ' + it[1] + 's’ ' + it[3]] : ['the ' + it[0] + 's ' + it[2], 'the ' + it[0] + 's’ ' + it[2], 'the ' + it[0] + '’ ' + it[2]];
+        return mc('Which is correct for ' + (pl ? 'the ' + it[3] + ' belonging to several ' + it[1] : 'the ' + it[2] + ' belonging to one ' + it[0]) + '?', right, wrong, { hint: pl ? 'For a plural noun ending in s, the apostrophe goes after the s.' : 'For one owner, add ’s.', steps: [pl ? 'Plural owners ending in s: add the apostrophe after the s: ' + right + '.' : 'One owner: add ’s: ' + right + '.'] }); },
+      bank([
+        { q: 'Which sentence is punctuated correctly?', a: '“Can you help me?” asked Leo.', w: ['“Can you help me” asked Leo?', '“Can you help me?,” asked Leo.', 'Can you help me? “asked Leo.”'], s: ['The question mark belongs inside the speech marks.'] },
+        { q: 'Which sentence uses a colon correctly?', a: 'You will need three things: a torch, a map and some water.', w: ['You will need: three things a torch, a map and some water.', 'You: will need three things, a torch, a map and some water.', 'You will need three things a torch: a map and some water.'], s: ['A colon introduces the list after a complete clause.'] },
+        { q: 'Which sentence uses a semicolon correctly?', a: 'The sun was setting; the birds had gone quiet.', w: ['The sun; was setting and the birds had gone quiet.', 'The sun was setting; and quiet.', 'The; sun was setting, the birds had gone quiet.'], s: ['A semicolon joins two complete, closely linked clauses.'] },
+        { q: 'Which uses a hyphen correctly?', a: 'She is a well-known author.', w: ['She is a well known-author.', 'She is-a well known author.', 'She-is a well known author.'], s: ['“Well-known” is a compound adjective before a noun, so it is hyphenated.'] },
+        { q: 'Which is correct?', a: 'It’s raining, and the dog has lost its ball.', w: ['Its raining, and the dog has lost it’s ball.', 'It’s raining, and the dog has lost it’s ball.', 'Its raining, and the dog has lost its ball.'], s: ['It’s = it is. Its = belonging to it.'] },
+        { q: 'What is the effect of the ellipsis in “I opened the door and…”?', a: 'It creates suspense by leaving the sentence unfinished', w: ['It shows a list is coming', 'It shows the sentence is a question', 'It joins two sentences'], s: ['Trailing off makes the reader wonder what happened next.'] },
+        { q: 'Why is a dash used in “I knew who it was – my brother.”?', a: 'To add emphasis to the reveal at the end', w: ['To start a list', 'To show possession', 'To join two words into one'], s: ['The dash creates a pause before the important information.'] }
+      ])] : [bank([
+        { q: '“She had one rule: never look back.” What is the effect of the colon?', a: 'It builds anticipation, then delivers the rule with emphasis', w: ['It introduces a long list', 'It shows the sentence is a question', 'It separates two unrelated ideas'], s: ['The colon creates a pause before the key idea.'] },
+        { q: 'Which sentence uses a semicolon to create a deliberate contrast?', a: 'Some saw a ruin; she saw a home.', w: ['She bought: bread; milk; eggs.', 'She walked; quickly home.', 'She saw; a ruin.'], s: ['Balanced clauses either side of the semicolon highlight the contrast.'] },
+        { q: 'What is the difference in effect between dashes and brackets for an aside?', a: 'Dashes feel more dramatic; brackets feel quieter, like a whisper to the reader', w: ['There is no difference', 'Brackets are more dramatic than dashes', 'Dashes can only be used in lists'], s: ['Writers choose between them to control tone.'] },
+        { q: 'A persuasive speech ends: “We can do this. We must do this. We will do this!” What is the effect of the single exclamation mark?', a: 'Saving it for the final clause gives the climax extra force', w: ['It shows the writer is confused', 'It turns the line into a question', 'It weakens the argument'], s: ['Used once at the climax, the exclamation mark adds energy without overuse.'] },
+        { q: 'What does the ellipsis suggest in: “I’m fine… really.”?', a: 'Hesitation, suggesting the speaker is not really fine', w: ['That the speaker is shouting', 'That a list is being shortened', 'That the speaker is certain'], s: ['The pause reveals what the words try to hide.'] },
+        { q: 'Which is correct?', a: 'The children’s books were donated to the school’s library.', w: ['The childrens’ books were donated to the schools library.', 'The children’s books were donated to the schools’ library.', 'The childrens books were donated to the school’s library.'], s: ['“Children” is already plural, so add ’s. One school: school’s.'] },
+        { q: 'Which uses a rhetorical question most effectively in an argument about plastic waste?', a: 'If not now, when?', w: ['What is plastic made from?', 'Do you have any plastic?', 'Is it Tuesday?'], s: ['It challenges the reader and implies urgency.'] }
+      ])] });
+  eng({ id: id('register'), strand: 'K', title: stage === 7 ? 'Standard English and formality' : 'Register, tone and standard English', codes: stage === 7 ? ['7Rg.04', '7Rg.05', '7Wg.05', '7Wg.06'] : ['9Rg.04', '9Wg.04', '9Wg.05'], calc: false,
+    blurb: stage === 7 ? 'Recognise non-standard English and choose formal or informal language for the situation.' : 'Control formality and tone for audience and purpose, and use standard English accurately.',
+    learn: { ideas: stage === 7 ? ['<b>Standard English</b> follows agreed grammar rules: “we were”, not “we was”; “I did”, not “I done”; “should have”, not “should of”.', 'Non-standard English is fine in speech with friends or in dialogue for a character, but not in formal writing.', '<b>Formal</b> language suits letters to strangers, reports and essays: no slang, few contractions.', '<b>Informal</b> language suits messages to friends: contractions, chatty tone.'] : ['<b>Register</b> is the level of formality chosen for an audience and purpose.', 'Formal writing uses precise vocabulary, complete sentences and often impersonal phrasing (“It is recommended that…”).', 'Common standard English traps: fewer/less, me/I, subject–verb agreement with “each” and “neither”, and the subjunctive “if I were”.', 'Writers can shift register deliberately, for example dropping into informal language to create humour or intimacy.'],
+      example: stage === 7 ? { q: 'Make this formal: “Hey, the trip was awesome, cheers for sorting it!”', steps: ['Remove slang (“awesome”, “cheers”) and the casual greeting.', '“Thank you for organising the trip. It was extremely enjoyable.”'] } : { q: 'Correct: “Less students attended than last year.”', steps: ['Students can be counted, so use “fewer”.', '“Fewer students attended than last year.”'] },
+      watch: 'Formal does not mean using long words for the sake of it. Clarity matters most.' },
+    gens: [
+      function () { var it = pick(D.standard), others = shuffle(D.standard.filter(function (x) { return x !== it; })).slice(0, 2);
+        return mc('Which version is written in standard English?', it[1], [it[0]].concat(others.map(function (o) { return o[0]; })), { hint: 'Look for verb forms, pronouns and word choices that break grammar rules.', steps: ['“' + it[0] + '” is non-standard. The standard form is “' + it[1] + '”'] }); },
+      bank(stage === 7 ? [
+        { q: 'Which is most suitable for a letter to your head teacher?', a: 'I am writing to ask whether our class could visit the museum.', w: ['Hiya! Can we go to the museum?', 'Yo, museum trip, yeah?', 'Museum. Pls.'], s: ['Formal, complete and polite language suits a letter to a head teacher.'] },
+        { q: 'Which is informal?', a: 'Can’t wait to see you later!', w: ['I look forward to meeting you.', 'Please find the report attached.', 'The meeting will begin at nine o’clock.'], s: ['The contraction and exclamation give a chatty tone.'] },
+        { q: 'Why might a writer use non-standard English in a story?', a: 'To make a character’s voice sound realistic', w: ['Because the writer does not know the rules', 'To make the story more formal', 'It is never used in stories'], s: ['Dialogue often reflects how people really speak.'] }
+      ] : [
+        { q: 'Which opening is most appropriate for a formal letter of complaint to a company?', a: 'I am writing to express my dissatisfaction with the service I received on 3 March.', w: ['You lot really messed up my order!', 'Hi there, just a quick moan…', 'OMG, worst service ever.'], s: ['It is formal, precise and controlled.'] },
+        { q: 'Which phrase is the most impersonal and formal?', a: 'It is recommended that pupils arrive by 8:30.', w: ['You lot need to get here by half eight.', 'Get here early, yeah?', 'I reckon you should come early.'], s: ['Impersonal constructions suit official writing.'] },
+        { q: 'A serious speech suddenly includes: “Let’s be honest, we’ve all been there.” What is the effect of this shift in register?', a: 'It creates a moment of closeness with the audience', w: ['It makes the speech more formal', 'It is a grammatical error', 'It confuses the argument'], s: ['A deliberate informal moment builds rapport.'] },
+        { q: 'Which is correct?', a: 'Neither of the answers is correct.', w: ['Neither of the answers are correct.', 'Neither of the answer is correct.', 'Neither of the answers were correct.'], s: ['“Neither” is singular in formal standard English, so it takes “is”.'] }
+      ])] });
+  eng({ id: id('vocabulary'), strand: 'V', title: stage === 7 ? 'Word meanings, roots and prefixes' : 'Etymology and advanced vocabulary', codes: stage === 7 ? ['7Rv.01', '7Ww.02', '7Wv.01'] : ['9Rv.01', '9Ww.02', '9Wv.01'], calc: false,
+    blurb: stage === 7 ? 'Use context, roots, prefixes and suffixes to work out what words mean.' : 'Use Greek and Latin roots and context to understand and use sophisticated vocabulary.',
+    learn: { ideas: stage === 7 ? ['Use the <b>context</b>, the words around an unfamiliar word, to work out its meaning.', 'A <b>prefix</b> goes at the start of a word and changes its meaning: un- (not), re- (again), pre- (before).', 'A <b>suffix</b> goes at the end: -less (without), -ful (full of).', 'A <b>root</b> carries the core meaning: “port” (carry) in transport, portable, import.'] : ['Many English words come from Greek and Latin <b>roots</b>: chron (time), phil (love), bene (good), mal (bad).', 'Knowing a root unlocks families of words: chronological, chronic, synchronise.', 'Context clues include definitions, examples, contrasts and synonyms nearby.', 'Choose precise words: “meticulous” says more than “careful”.'],
+      example: stage === 7 ? { q: 'What does “transatlantic” mean?', steps: ['“trans-” means across.', '“atlantic” refers to the Atlantic Ocean.', 'Across the Atlantic Ocean.'] } : { q: 'Work out “benefactor”.', steps: ['“bene” means good; “fact” comes from Latin “to do”.', 'A benefactor is someone who does good, usually by giving money or help.'] },
+      watch: 'Some words only look as if they contain a prefix: “uncle” has nothing to do with “un-”.' },
+    gens: [
+      function () { var r = pick(D.roots), others = shuffle(D.roots.filter(function (x) { return x !== r; })).slice(0, 3);
+        if (Math.random() < 0.5) return mc('The word <b>' + r[2] + '</b> contains the root “' + r[0] + '”. What does “' + r[0] + '” mean?', r[1], others.map(function (o) { return o[1]; }), { hint: 'Think of other words that contain the same root.', steps: ['“' + r[0] + '” means ' + r[1] + ', as in ' + r[2] + '.'] });
+        return mc('Which word contains a root meaning “' + r[1] + '”?', r[2], others.map(function (o) { return o[2]; }), { hint: 'Look for a part of the word that carries this meaning.', steps: [r[2] + ' contains “' + r[0] + '”, meaning ' + r[1] + '.'] }); },
+      function () { var c = pick(D.context); return mc('What does the word in bold most likely mean?<span class="quote">' + c[0] + '</span>', c[1], c[2], { hint: 'Use the rest of the sentence as a clue.', steps: ['The context shows the word means “' + c[1].toLowerCase() + '”.'] }); }
+    ].concat(D.prefixes.length ? [function () { var p2 = pick(D.prefixes), others = shuffle(D.prefixes.filter(function (x) { return x !== p2; })).slice(0, 3); return mc('What does the ' + (p2[0].charAt(0) === '-' ? 'suffix' : 'prefix') + ' <b>' + p2[0] + '</b> mean, as in “' + p2[2] + '”?', ucf(p2[1]), others.map(function (o) { return ucf(o[1]); }), { hint: 'Think of other words with the same beginning or ending.', steps: ['“' + p2[0] + '” means ' + p2[1] + ': ' + p2[2] + '.'] }); }] : []) });
+  eng({ id: id('spelling'), strand: 'V', title: 'Spelling', codes: stage === 7 ? ['7Ww.01', '7Ww.03'] : ['9Ww.01', '9Ww.03'], calc: false,
+    blurb: stage === 7 ? 'Spell commonly misspelt words and choose the right homophone.' : 'Spell complex, many-syllable words and tricky homophones correctly.',
+    learn: { ideas: stage === 7 ? ['“i before e except after c” works for many words: believe, receive (but not weird or their).', 'Break long words into syllables: Wed-nes-day, Feb-ru-ar-y.', '<b>Homophones</b> sound the same but are spelt differently: their (belonging to them), there (place), they’re (they are).', 'Learn tricky words with a memory trick: there is “a rat” in sep<b>a</b>r<b>a</b>te.'] : ['Look for double letters in tricky words: a<b>cc</b>o<b>mm</b>odate, e<b>mb</b>a<b>rr</b>a<b>ss</b>ment, o<b>cc</b>u<b>rr</b>ence.', 'Use word roots: “conscience” contains “science”; “parliament” contains “liam”.', 'Affect is usually a verb; effect is usually a noun. Principal is a head or main; principle is a rule.', 'Stationary (standing still) vs stationery (pens and paper: e for envelope).'],
+      example: stage === 7 ? { q: 'Which is right: “recieve” or “receive”?', steps: ['After c, the rule is e before i.', 'So “receive”.'] } : { q: 'Spell the word meaning “to have room for”.', steps: ['It has two Cs and two Ms: a-cc-o-mm-odate.', 'Accommodate.'] },
+      watch: 'Spellcheckers do not catch homophones. “Their” and “there” are both real words.' },
+    gens: [
+      function () { var w = pick(D.spelling); return mc('Which spelling is correct?', w[0], w[1], { hint: 'Say the word slowly in syllables.', steps: ['The correct spelling is “' + w[0] + '”.'] }); },
+      function () { var w = pick(D.spelling), bad = pick(w[1]); return { kind: 'text', prompt: 'This word is spelt wrongly: <b>' + bad + '</b>. Type the correct spelling.', answer: w[0], ans: w[0], inputLabel: 'Correct spelling', hint: 'Break it into syllables, and watch for double letters.', steps: ['The correct spelling is “' + w[0] + '”.'] }; },
+      function () { var h = pick(D.homophones); return mc('Which word fills the gap?<span class="quote">' + h[0].replace('___', '<span class="gap">?</span>') + '</span>', h[1], h[2], { hint: 'Which meaning fits this sentence?', steps: ['“' + h[0].replace('___', h[1]) + '”'] }); }
+    ] });
+  eng({ id: id('structure'), strand: 'Y', title: stage === 7 ? 'Paragraphs and connectives' : 'Structure and cohesion', codes: stage === 7 ? ['7Rs.02', '7Rs.03', '7Ws.02', '7Ws.03'] : ['9Rs.01', '9Rs.02', '9Ws.01', '9Ws.02'], calc: false,
+    blurb: stage === 7 ? 'Link ideas with the right connectives and organise writing in paragraphs.' : 'Recognise and use structural devices, and link ideas precisely.',
+    learn: { ideas: stage === 7 ? ['Start a new <b>paragraph</b> for a new time, place, topic or speaker (TiPToP).', '<b>Connectives</b> show how ideas link: adding (furthermore, also), contrasting (however, nevertheless), cause and effect (therefore, as a result), sequencing (first, meanwhile, finally), examples (for example).', 'A good opening sentence (topic sentence) tells the reader what the paragraph is about.'] : ['Structural devices: <b>in medias res</b> (starting mid-action), <b>flashback</b>, <b>foreshadowing</b>, <b>cyclical structure</b>, <b>cliffhanger</b>.', 'Shifts in focus (zooming in or out) guide the reader’s attention.', 'Precise connectives show subtle relationships: nonetheless (conceding), consequently (result), conversely (contrast).', 'Paragraph length is a choice: a single short paragraph can create emphasis.'],
+      example: stage === 7 ? { q: 'Choose a connective: “Cars cause pollution. ___, they can be dangerous.”', steps: ['The second sentence adds another point.', '“Furthermore” or “In addition”.'] } : { q: 'A story opens with a character hanging from a cliff, then goes back to the morning. Name the structure.', steps: ['It begins in the middle of the action: in medias res.', 'It then uses a flashback to explain how it happened.'] },
+      watch: '“However” shows contrast. Do not use it just to start a new sentence.' },
+    gens: [
+      function () { var c = pick(D.connectives), w = shuffle(D.connAll.filter(function (x) { return x.toLowerCase() !== c[1].toLowerCase(); })).slice(0, 3).map(function (x) { return /^[a-z]/.test(c[1]) ? x.toLowerCase() : ucf(x); });
+        return mc('Which connective best fills the gap?<span class="quote">' + c[0].replace('___', '<span class="gap">?</span>') + '</span>', c[1], w, { hint: 'Is the second idea adding, contrasting, giving a result, giving an example or showing time?', steps: ['The link here is ' + c[2] + ', so “' + c[1] + '” fits.'] }); }
+    ].concat(stage === 9 ? [listGen(E9.structures, function (s) { return 'Which structural device is described?<span class="quote">' + s[0] + '</span>'; }, function (s) { return s[1]; }, E9.structures.map(function (s) { return s[1]; }), 'Think about time order, endings and where the story begins.', function (s) { return s[1] + ': ' + s[2]; })] : [bank([
+      { q: 'When should you start a new paragraph in a story?', a: 'When there is a change of time, place, topic or speaker', w: ['After every sentence', 'Only at the end', 'Whenever you use a comma'], s: ['Remember TiPToP: Time, Place, Topic, Person.'] },
+      { q: 'What is a topic sentence?', a: 'A sentence that introduces what the paragraph is about', w: ['The last sentence of a story', 'A sentence that asks a question', 'A sentence in speech marks'], s: ['It usually comes first and guides the reader.'] },
+      { q: 'Which order is best for a set of instructions?', a: 'Equipment list, then numbered steps in time order', w: ['Steps in any order, then the equipment', 'A story about the writer, then the steps', 'The final result only'], s: ['Instructions need what you need first, then clear sequenced steps.'] }
+    ])]) });
+  eng({ id: id('writing'), strand: 'Y', title: stage === 7 ? 'Writing for purpose and audience' : 'Crafting argument and viewpoint', codes: stage === 7 ? ['7Wc.03', '7Wc.04', '7Ws.01', '7Wp.04'] : ['9Wc.03', '9Wc.04', '9Wc.05', '9Wc.06', '9Wp.04'], calc: false,
+    blurb: stage === 7 ? 'Match features to text types, write for an audience, and spot errors when editing.' : 'Build arguments, handle counter-arguments, choose features for impact, and edit precisely.',
+    learn: { ideas: stage === 7 ? ['Think <b>PAF</b>: Purpose (why?), Audience (who for?), Form (what type of text?).', 'Letters have a greeting and sign-off; reports have headings and facts; instructions use imperatives and numbered steps; persuasive writing uses emotive language, rhetorical questions and a call to action.', 'When editing, check spelling, punctuation, tense and whether each sentence makes sense.'] : ['A strong argument states a clear viewpoint, supports it with evidence and examples, and answers counter-arguments.', 'Structure: hook, clear position, developed points, counter-argument and rebuttal, powerful conclusion.', 'To present multiple viewpoints fairly, use balanced language and attribute views (“Supporters argue…”).', 'Edit for precision: cut repetition, vary sentence openings, choose exact words.'],
+      example: stage === 7 ? { q: 'Which feature belongs in instructions: a rhetorical question or imperative verbs?', steps: ['Instructions tell the reader what to do.', 'Imperative verbs: “Mix the flour.”'] } : { q: 'How should you deal with a counter-argument in a persuasive essay?', steps: ['Acknowledge it fairly: “Some argue that…”', 'Then rebut it with evidence or reasoning: “However…”'] },
+      watch: stage === 7 ? 'Do not mix forms: a formal letter should not slip into text-speak.' : 'Ignoring the other side weakens an argument; mocking it can make you seem biased.' },
+    gens: [bank(stage === 7 ? [
+      { q: 'Which feature would you most expect in a set of instructions?', a: 'Imperative verbs, such as “Cut” and “Stir”', w: ['A rhetorical question', 'A cliffhanger ending', 'A rhyme scheme'], s: ['Instructions tell readers what to do.'] },
+      { q: 'You are writing a leaflet to persuade young children to brush their teeth. Which sentence best suits the audience?', a: 'Brush twice a day to keep your smile super shiny!', w: ['Dental hygiene is essential for the maintenance of enamel.', 'It is recommended that oral care be undertaken.', 'Plaque accumulation results from bacterial activity.'], s: ['Simple, lively language suits young children.'] },
+      { q: 'Which is the best opening for a newspaper report?', a: 'Firefighters rescued a cat from a tree on Main Street yesterday afternoon.', w: ['Once upon a time, there was a cat.', 'I love cats so much!', 'Have you ever wondered about trees?'], s: ['Reports open with who, what, where and when.'] },
+      { q: 'Find the error: “Yesterday we go to the museum and saw a dinosaur.”', a: '“go” should be “went” to match the past tense', w: ['“saw” should be “see”', '“museum” is spelt wrongly', 'There is no error'], s: ['“Yesterday” shows the past, so both verbs must be past tense.'] },
+      { q: 'Find the error: “The team played there best game of the season.”', a: '“there” should be “their”', w: ['“played” should be “plays”', '“season” should have a capital letter', 'There is no error'], s: ['“Their” shows belonging.'] },
+      { q: 'What is the purpose of a diary entry?', a: 'To record personal thoughts and feelings about events', w: ['To persuade a large audience', 'To give step-by-step instructions', 'To report facts neutrally'], s: ['Diaries are personal, usually first person and informal.'] },
+      { q: 'Which ending is best for a persuasive letter about saving a local park?', a: 'Please join us at the council meeting on Friday and help save our park.', w: ['The park has trees.', 'That is all.', 'I went to the park once.'], s: ['A call to action tells the reader exactly what to do.'] }
+    ] : [
+      { q: 'Which sentence best introduces a counter-argument?', a: 'Some people argue that homework helps students develop independence.', w: ['Homework is obviously terrible.', 'Everyone agrees with me.', 'I have nothing more to say.'], s: ['It fairly presents an opposing view before it is answered.'] },
+      { q: 'Which is the strongest rebuttal to “Zoos protect endangered species”?', a: 'While some zoos run breeding programmes, many animals kept in them are not endangered at all.', w: ['Zoos are boring.', 'I don’t like zoos.', 'Zoos have gift shops.'], s: ['It concedes part of the point, then challenges it with reasoning.'] },
+      { q: 'Which opening sentence would best hook readers of a speech about climate action?', a: 'By the time you finish this speech, an area of forest the size of several football pitches will have disappeared.', w: ['Today I will talk about climate.', 'Climate is a topic.', 'Hello, my name is Sam.'], s: ['A striking, concrete image creates urgency.'] },
+      { q: 'Edit for precision: “The very big storm was very bad and very scary.”', a: 'The violent storm was terrifying.', w: ['The very, very big storm was bad.', 'The storm was big and bad and scary and loud.', 'The storm was.'], s: ['Precise words replace repeated “very”.'] },
+      { q: 'You are writing a balanced article on social media. Which sentence keeps a neutral tone?', a: 'Supporters say it connects people; critics point to its effect on attention spans.', w: ['Social media is destroying a generation.', 'Only fools use social media.', 'Social media is the best invention ever.'], s: ['Attributing views to each side keeps it balanced.'] },
+      { q: 'Why might a writer end an argument by returning to the image used in the opening?', a: 'To create a satisfying, cyclical structure that reinforces the message', w: ['Because they ran out of ideas', 'To introduce a new topic', 'To confuse the reader'], s: ['A cyclical ending feels complete and memorable.'] },
+      { q: 'Which sentence sustains a clear viewpoint?', a: 'Plastic bags should be banned because the damage they cause outweighs their convenience.', w: ['Plastic bags might be bad, or maybe not.', 'Some bags are plastic.', 'I don’t know about bags.'], s: ['It states a definite position and a reason.'] }
+    ])] });
+}
+/* ===== FRENCH: CEFR B1 (Stage 7) and C1 (Stage 9) ===== */
+function fra(t) { t.subject = 'french'; topic(t); }
+var PRON = ['je', 'tu', 'il', 'elle', 'nous', 'vous', 'ils', 'elles'], PIDX = [0, 1, 2, 2, 3, 4, 5, 5];
+var IRR = {
+  'être': { pres: ['suis', 'es', 'est', 'sommes', 'êtes', 'sont'], pp: 'été', fut: 'ser', imp: 'ét', subj: ['sois', 'sois', 'soit', 'soyons', 'soyez', 'soient'] },
+  'avoir': { pres: ['ai', 'as', 'a', 'avons', 'avez', 'ont'], pp: 'eu', fut: 'aur', subj: ['aie', 'aies', 'ait', 'ayons', 'ayez', 'aient'] },
+  'aller': { pres: ['vais', 'vas', 'va', 'allons', 'allez', 'vont'], pp: 'allé', fut: 'ir', aux: 'être', subj: ['aille', 'ailles', 'aille', 'allions', 'alliez', 'aillent'] },
+  'faire': { pres: ['fais', 'fais', 'fait', 'faisons', 'faites', 'font'], pp: 'fait', fut: 'fer', subj: ['fasse', 'fasses', 'fasse', 'fassions', 'fassiez', 'fassent'] },
+  'pouvoir': { pres: ['peux', 'peux', 'peut', 'pouvons', 'pouvez', 'peuvent'], pp: 'pu', fut: 'pourr', subj: ['puisse', 'puisses', 'puisse', 'puissions', 'puissiez', 'puissent'] },
+  'vouloir': { pres: ['veux', 'veux', 'veut', 'voulons', 'voulez', 'veulent'], pp: 'voulu', fut: 'voudr', subj: ['veuille', 'veuilles', 'veuille', 'voulions', 'vouliez', 'veuillent'] },
+  'devoir': { pres: ['dois', 'dois', 'doit', 'devons', 'devez', 'doivent'], pp: 'dû', fut: 'devr' },
+  'prendre': { pres: ['prends', 'prends', 'prend', 'prenons', 'prenez', 'prennent'], pp: 'pris' },
+  'venir': { pres: ['viens', 'viens', 'vient', 'venons', 'venez', 'viennent'], pp: 'venu', fut: 'viendr', aux: 'être' },
+  'savoir': { pres: ['sais', 'sais', 'sait', 'savons', 'savez', 'savent'], pp: 'su', fut: 'saur', subj: ['sache', 'saches', 'sache', 'sachions', 'sachiez', 'sachent'] },
+  'mettre': { pres: ['mets', 'mets', 'met', 'mettons', 'mettez', 'mettent'], pp: 'mis' },
+  'voir': { pres: ['vois', 'vois', 'voit', 'voyons', 'voyez', 'voient'], pp: 'vu', fut: 'verr' },
+  'dire': { pres: ['dis', 'dis', 'dit', 'disons', 'dites', 'disent'], pp: 'dit' },
+  'sortir': { pres: ['sors', 'sors', 'sort', 'sortons', 'sortez', 'sortent'], pp: 'sorti', aux: 'être' },
+  'partir': { pres: ['pars', 'pars', 'part', 'partons', 'partez', 'partent'], pp: 'parti', aux: 'être' },
+  'dormir': { pres: ['dors', 'dors', 'dort', 'dormons', 'dormez', 'dorment'], pp: 'dormi' },
+  'lire': { pres: ['lis', 'lis', 'lit', 'lisons', 'lisez', 'lisent'], pp: 'lu' },
+  'écrire': { pres: ['écris', 'écris', 'écrit', 'écrivons', 'écrivez', 'écrivent'], pp: 'écrit' },
+  'boire': { pres: ['bois', 'bois', 'boit', 'buvons', 'buvez', 'boivent'], pp: 'bu' },
+  'connaître': { pres: ['connais', 'connais', 'connaît', 'connaissons', 'connaissez', 'connaissent'], pp: 'connu' }
+};
+var ETRE_VERBS = ['aller', 'venir', 'partir', 'sortir', 'arriver', 'rester', 'tomber', 'entrer', 'rentrer', 'monter', 'descendre', 'retourner', 'devenir', 'revenir'];
+function fr_vtype(inf) { return IRR[inf] ? 'irr' : /er$/.test(inf) ? 'er' : /ir$/.test(inf) ? 'ir' : 're'; }
+function fr_pres(inf, p) {
+  if (IRR[inf]) return IRR[inf].pres[p];
+  var t = fr_vtype(inf), st = inf.slice(0, -2);
+  if (t === 'er') return st + ['e', 'es', 'e', 'ons', 'ez', 'ent'][p];
+  if (t === 'ir') return st + ['is', 'is', 'it', 'issons', 'issez', 'issent'][p];
+  return st + ['s', 's', '', 'ons', 'ez', 'ent'][p];
+}
+function fr_impStem(inf) { return (IRR[inf] && IRR[inf].imp) || fr_pres(inf, 3).replace(/ons$/, ''); }
+function fr_imparfait(inf, p) { return fr_impStem(inf) + ['ais', 'ais', 'ait', 'ions', 'iez', 'aient'][p]; }
+function fr_futStem(inf) { if (IRR[inf] && IRR[inf].fut) return IRR[inf].fut; return fr_vtype(inf) === 're' || /re$/.test(inf) ? inf.slice(0, -1) : inf; }
+function fr_futur(inf, p) { return fr_futStem(inf) + ['ai', 'as', 'a', 'ons', 'ez', 'ont'][p]; }
+function fr_cond(inf, p) { return fr_futStem(inf) + ['ais', 'ais', 'ait', 'ions', 'iez', 'aient'][p]; }
+function fr_subj(inf, p) {
+  if (IRR[inf] && IRR[inf].subj) return IRR[inf].subj[p];
+  if (p === 3 || p === 4) return fr_impStem(inf) + (p === 3 ? 'ions' : 'iez');
+  return fr_pres(inf, 5).replace(/ent$/, '') + ['e', 'es', 'e', '', '', 'ent'][p];
+}
+function fr_pp(inf) { if (IRR[inf]) return IRR[inf].pp; var t = fr_vtype(inf); return inf.slice(0, -2) + (t === 'er' ? 'é' : t === 'ir' ? 'i' : 'u'); }
+function fr_auxOf(inf) { return (IRR[inf] && IRR[inf].aux) || (ETRE_VERBS.indexOf(inf) >= 0 ? 'être' : 'avoir'); }
+function fr_agree(part, fem, plur) { if (/s$/.test(part) && plur && !fem) return part; return part + (fem ? 'e' : '') + (plur ? 's' : ''); }
+function fr_compound(inf, p, fem, auxTense) {
+  var aux = fr_auxOf(inf), a = auxTense === 'imp' ? fr_imparfait(aux, p) : auxTense === 'cond' ? fr_cond(aux, p) : fr_pres(aux, p);
+  var part = fr_pp(inf); if (aux === 'être') part = fr_agree(part, fem, p >= 3);
+  return a + ' ' + part;
+}
+function fr_startsVowel(w) { return /^[aeiouyéèêàâîôûh]/i.test(w); }
+function fr_subjectText(si, form, cap) { var pr = PRON[si]; if (si === 0 && fr_startsVowel(form)) pr = 'j’'; else pr += ' '; return cap ? pr.charAt(0).toUpperCase() + pr.slice(1) : pr; }
+function fr_queSubject(si, form) { if (si >= 2 && si <= 3 || si >= 6) return 'qu’' + PRON[si] + ' '; return 'que ' + fr_subjectText(si, form, false); }
+var GAP = '<span class="gap">?</span>';
+var COMP = { parler: 'français', regarder: 'la télé', jouer: 'au foot', travailler: 'le samedi', aimer: 'le chocolat', écouter: 'de la musique', habiter: 'à Luxembourg', chercher: 'mes clés', trouver: 'la réponse', arriver: 'à la gare', rester: 'à la maison', tomber: 'dans la rue', entrer: 'dans la classe', préparer: 'le dîner', visiter: 'le musée', finir: 'les devoirs', choisir: 'un livre', réussir: 'l’examen', remplir: 'le formulaire', grandir: 'vite', vendre: 'la voiture', attendre: 'le bus', répondre: 'à la question', entendre: 'un bruit', perdre: 'le match', descendre: 'l’escalier', 'être': 'à l’école', avoir: 'faim', aller: 'au cinéma', faire: 'du vélo', pouvoir: 'venir', vouloir: 'un café', devoir: 'partir', prendre: 'le train', venir: 'avec nous', savoir: 'nager', mettre: 'un manteau', voir: 'un film', dire: 'la vérité', sortir: 'ce soir', partir: 'en vacances', lire: 'un roman', 'écrire': 'une lettre', boire: 'de l’eau', dormir: 'tard', connaître: 'la ville', monter: 'dans le train', rentrer: 'tard', aider: 'ses parents' };
+var REG_V = ['parler', 'regarder', 'jouer', 'travailler', 'aimer', 'écouter', 'habiter', 'chercher', 'trouver', 'préparer', 'visiter', 'finir', 'choisir', 'réussir', 'remplir', 'vendre', 'attendre', 'répondre', 'entendre', 'perdre'];
+var IRR_V = ['être', 'avoir', 'aller', 'faire', 'pouvoir', 'vouloir', 'devoir', 'prendre', 'venir', 'savoir', 'mettre', 'voir', 'dire', 'sortir', 'partir', 'dormir', 'lire', 'écrire', 'boire'];
+var NAMES_F = ['Léa', 'Sophie', 'Inès', 'Chloé'], NAMES_M = ['Paul', 'Lucas', 'Hugo', 'Nathan'];
+function conjQ(opts) {
+  var inf = pick(opts.verbs), si = ri(0, 7), p = PIDX[si], fem = si === 3 || si === 7, form, plain = PRON[si];
+  var named = '';
+  if (opts.tense === 'pc' || opts.tense === 'pqp') { if ((si === 0 || si === 1) && fr_auxOf(inf) === 'être') { fem = Math.random() < 0.5; named = ' (' + pick(fem ? NAMES_F : NAMES_M) + ')'; } if (si === 4 && fr_auxOf(inf) === 'être') { si = 2; p = 2; fem = false; } if (si === 5 && fr_auxOf(inf) === 'être') { si = 6; p = 5; } }
+  if (opts.tense === 'pres') form = fr_pres(inf, p); else if (opts.tense === 'imp') form = fr_imparfait(inf, p); else if (opts.tense === 'fut') form = fr_futur(inf, p); else if (opts.tense === 'cond') form = fr_cond(inf, p); else if (opts.tense === 'subj') form = fr_subj(inf, p); else if (opts.tense === 'pc') form = fr_compound(inf, p, fem, 'pres'); else form = fr_compound(inf, p, fem, 'imp');
+  var lead = opts.lead || '', comp = COMP[inf] || '', sentence;
+  if (opts.tense === 'subj') sentence = (opts.lead || 'Il faut ') + fr_queSubject(si, form) + GAP + ' (' + inf + ') ' + comp + '.';
+  else sentence = lead + fr_subjectText(si, form, !lead) + (named ? '' : '') + GAP + ' (' + inf + ') ' + comp + '.';
+  sentence = sentence.replace(/\s+\./, '.'); if (named) sentence += ' <span class="small">(' + PRON[si] + ' = ' + named.trim().replace(/[()]/g, '') + ')</span>';
+  var why = { pres: 'Present tense', imp: 'Imparfait: nous-form stem (' + fr_impStem(inf) + '-) + ais, ais, ait, ions, iez, aient', fut: 'Futur simple: stem “' + fr_futStem(inf) + '” + ai, as, a, ons, ez, ont', cond: 'Conditionnel: future stem “' + fr_futStem(inf) + '” + imparfait endings', subj: 'Subjonctif', pc: 'Passé composé with ' + fr_auxOf(inf) + (fr_auxOf(inf) === 'être' ? ': the participle agrees with the subject' : ''), pqp: 'Plus-que-parfait: ' + fr_auxOf(inf) + ' in the imparfait + past participle' + (fr_auxOf(inf) === 'être' ? ', agreeing with the subject' : '') }[opts.tense];
+  return { kind: 'text', lang: 'fr', accents: true, prompt: (opts.instr || 'Type the correct form of the verb.') + '<p class="data" lang="fr">' + sentence + '</p>', answer: form, ans: '<span lang="fr">' + form + '</span>', inputLabel: 'Verbe', hint: opts.hint || why + '.', steps: [why + '.', 'Answer: <span lang="fr">' + form + '</span>.'] };
+}
+function choiceQ(instr, sentence, right, wrongs, steps, hint) { return mc(instr + '<p class="data" lang="fr">' + sentence.replace(/\s+\./, '.') + '</p>', right, uniq(wrongs).filter(function (w) { return w !== right; }).slice(0, 3), { hint: hint, steps: steps }); }
+function frPassage(p) {
+  return function () { var it = pick(p.qs); return mc('<div class="passage" lang="fr"><b>' + p.title + '</b>' + p.text.split('\n\n').map(function (x) { return '<p>' + x + '</p>'; }).join('') + (p.src ? '<span class="src">' + p.src + '</span>' : '') + '</div><p style="margin-top:12px" lang="fr">' + it.q + '</p>', it.a, it.w.slice(0, 3), { hint: it.h || 'Relisez le passage concerné.', steps: [it.s] }); };
+}
+function frBank(items) { return function () { var it = pick(items); return mc('<span lang="fr">' + gapify(it.q) + '</span>', it.a, it.w.slice(0, 3), { hint: it.h, steps: it.s }); }; }
+
+/* ---------- B1 DATA ---------- */
+var VOCAB = {
+  'school': [['timetable', 'l’emploi du temps'], ['homework', 'les devoirs'], ['break time', 'la récréation'], ['school subject', 'la matière'], ['canteen', 'la cantine'], ['exercise book', 'le cahier']],
+  'home and family': [['bedroom', 'la chambre'], ['kitchen', 'la cuisine'], ['grandparents', 'les grands-parents'], ['neighbour', 'le voisin'], ['garden', 'le jardin'], ['brother-in-law', 'le beau-frère']],
+  'food': [['bread', 'le pain'], ['cheese', 'le fromage'], ['vegetables', 'les légumes'], ['breakfast', 'le petit-déjeuner'], ['the bill (in a restaurant)', 'l’addition'], ['strawberry', 'la fraise']],
+  'town and travel': [['railway station', 'la gare'], ['ticket', 'le billet'], ['bakery', 'la boulangerie'], ['crossroads', 'le carrefour'], ['library', 'la bibliothèque'], ['bookshop', 'la librairie']],
+  'health': [['headache', 'le mal de tête'], ['doctor', 'le médecin'], ['chemist’s', 'la pharmacie'], ['to be ill', 'être malade'], ['arm', 'le bras'], ['to feel better', 'aller mieux']],
+  'environment': [['rubbish, waste', 'les déchets'], ['to recycle', 'recycler'], ['to waste', 'gaspiller'], ['the planet', 'la planète'], ['energy', 'l’énergie'], ['to protect', 'protéger']],
+  'weather': [['it is raining', 'il pleut'], ['it is cold', 'il fait froid'], ['snow', 'la neige'], ['thunderstorm', 'l’orage'], ['sunny', 'ensoleillé'], ['cloud', 'le nuage']]
+};
+var ADJ = { vert: ['vert', 'verte', 'verts', 'vertes'], blanc: ['blanc', 'blanche', 'blancs', 'blanches'], noir: ['noir', 'noire', 'noirs', 'noires'], bleu: ['bleu', 'bleue', 'bleus', 'bleues'], heureux: ['heureux', 'heureuse', 'heureux', 'heureuses'], sportif: ['sportif', 'sportive', 'sportifs', 'sportives'], français: ['français', 'française', 'français', 'françaises'], intéressant: ['intéressant', 'intéressante', 'intéressants', 'intéressantes'], cher: ['cher', 'chère', 'chers', 'chères'], délicieux: ['délicieux', 'délicieuse', 'délicieux', 'délicieuses'] };
+var ADJ_NOUNS = { colour: [['la voiture', 1], ['le pull', 0], ['les chaussures', 3], ['les murs', 2], ['la porte', 1], ['le chat', 0]], people: [['la fille', 1], ['le garçon', 0], ['les filles', 3], ['les garçons', 2], ['ma tante', 1], ['mon oncle', 0]], cher: [['la robe', 1], ['le billet', 0], ['les chaussures', 3], ['les livres', 2]], délicieux: [['la tarte', 1], ['le gâteau', 0], ['les fraises', 3], ['les plats', 2]], intéressant: [['le livre', 0], ['la question', 1], ['les idées', 3], ['les films', 2]] };
+var ADJ_GROUP = { vert: 'colour', blanc: 'colour', noir: 'colour', bleu: 'colour', heureux: 'people', sportif: 'people', français: 'people', cher: 'cher', délicieux: 'délicieux', intéressant: 'intéressant' };
+var B1_TEXTS = [
+  { title: 'Un message de Camille', src: 'E-mail', text: 'Salut Léo !\n\nJe t’écris de Lyon, où je passe une semaine chez ma tante. Il fait très chaud ici, plus de trente degrés tous les jours, alors on se lève tôt pour visiter la ville avant midi. Hier, nous sommes montés à la basilique de Fourvière : la vue sur la ville était magnifique !\n\nL’après-midi, on reste à la maison ou on va à la piscine. Ma tante cuisine super bien, mais elle met de l’ail dans tout ! Je rentre samedi en train. On se voit dimanche pour le match ?\n\nBises,\nCamille',
+    qs: [
+      { q: 'Où est Camille ?', a: 'À Lyon, chez sa tante', w: ['À Paris, chez ses grands-parents', 'Dans un hôtel à la mer', 'À la maison avec Léo'], s: '« Je t’écris de Lyon, où je passe une semaine chez ma tante. »' },
+      { q: 'Pourquoi est-ce qu’ils se lèvent tôt ?', a: 'Pour visiter la ville avant la grosse chaleur', w: ['Parce que la tante travaille tôt', 'Pour prendre le train', 'Parce qu’ils vont à la piscine le matin'], s: 'Il fait très chaud, « alors on se lève tôt pour visiter la ville avant midi ».' },
+      { q: 'Qu’est-ce qu’ils ont fait hier ?', a: 'Ils sont montés à la basilique de Fourvière', w: ['Ils sont allés au match', 'Ils ont pris le train', 'Ils ont fait la cuisine'], s: '« Hier, nous sommes montés à la basilique de Fourvière. »' },
+      { q: 'Que pense Camille de la cuisine de sa tante ?', a: 'C’est très bon, mais il y a de l’ail partout', w: ['Elle n’aime pas du tout', 'Elle ne mange jamais chez sa tante', 'Elle préfère la cantine'], s: '« Ma tante cuisine super bien, mais elle met de l’ail dans tout ! »' },
+      { q: 'Comment et quand Camille va-t-elle rentrer ?', a: 'En train, samedi', w: ['En voiture, dimanche', 'En avion, vendredi', 'En bus, lundi'], s: '« Je rentre samedi en train. »' }
+    ] },
+  { title: 'Club de théâtre (11–15 ans)', src: 'Affiche', text: 'Tu aimes jouer, chanter ou inventer des histoires ? Rejoins notre club !\n\nLes ateliers ont lieu tous les mercredis, de 14 h à 16 h, à la Maison des Jeunes. Pas besoin d’expérience : il faut juste être motivé. En juin, nous présentons un spectacle devant les familles.\n\nInscription : 40 euros par trimestre. Le premier atelier est gratuit ! Renseignements à l’accueil de la Maison des Jeunes.',
+    qs: [
+      { q: 'À qui s’adresse ce club ?', a: 'Aux jeunes de 11 à 15 ans', w: ['Aux adultes', 'Aux enfants de moins de 10 ans', 'Seulement aux acteurs professionnels'], s: 'Le titre indique « 11–15 ans ».' },
+      { q: 'Quand ont lieu les ateliers ?', a: 'Le mercredi après-midi', w: ['Le samedi matin', 'Tous les jours', 'Le mercredi soir'], s: '« Tous les mercredis, de 14 h à 16 h. »' },
+      { q: 'Faut-il avoir de l’expérience ?', a: 'Non, il faut seulement être motivé', w: ['Oui, au moins deux ans', 'Oui, il faut savoir chanter', 'Il faut passer une audition'], s: '« Pas besoin d’expérience : il faut juste être motivé. »' },
+      { q: 'Que se passe-t-il en juin ?', a: 'Les jeunes présentent un spectacle aux familles', w: ['Le club ferme', 'Les inscriptions commencent', 'Il y a un voyage à Paris'], s: '« En juin, nous présentons un spectacle devant les familles. »' },
+      { q: 'Combien coûte le premier atelier ?', a: 'Rien : il est gratuit', w: ['40 euros', '10 euros', '14 euros'], s: '« Le premier atelier est gratuit ! »' }
+    ] },
+  { title: 'Mon téléphone et moi', src: 'Blog d’Hugo, 14 ans', text: 'Depuis septembre, j’essaie de passer moins de temps sur mon téléphone. Avant, je le regardais dès le réveil et je me couchais très tard. J’étais toujours fatigué et j’avais du mal à me concentrer en classe.\n\nMaintenant, je laisse mon portable dans la cuisine le soir et j’ai acheté un vrai réveil. Au début, c’était difficile, mais je dors mieux et j’ai recommencé à lire. Mes amis se moquent un peu de moi, mais je pense que je vais continuer.',
+    qs: [
+      { q: 'Quel était le problème d’Hugo avant septembre ?', a: 'Il était fatigué et avait du mal à se concentrer', w: ['Il n’avait pas de téléphone', 'Il lisait trop', 'Il se levait trop tard pour l’école'], s: '« J’étais toujours fatigué et j’avais du mal à me concentrer en classe. »' },
+      { q: 'Où est son portable le soir maintenant ?', a: 'Dans la cuisine', w: ['Sous son oreiller', 'Dans son cartable', 'Chez un ami'], s: '« Je laisse mon portable dans la cuisine le soir. »' },
+      { q: 'Pourquoi a-t-il acheté un réveil ?', a: 'Pour ne plus avoir besoin de son téléphone le matin', w: ['Parce que son téléphone est cassé', 'Pour l’offrir à un ami', 'Pour se coucher plus tard'], s: 'Avec un vrai réveil, il n’a plus besoin de garder le téléphone près de lui.' },
+      { q: 'Quels sont les résultats ?', a: 'Il dort mieux et il lit de nouveau', w: ['Il est plus fatigué', 'Il a perdu ses amis', 'Il a acheté un nouveau téléphone'], s: '« Je dors mieux et j’ai recommencé à lire. »' },
+      { q: 'Comment réagissent ses amis ?', a: 'Ils se moquent un peu de lui', w: ['Ils font la même chose', 'Ils sont très fiers de lui', 'Ils ne remarquent rien'], s: '« Mes amis se moquent un peu de moi. »' }
+    ] }
+];
+
+/* ---------- C1 DATA ---------- */
+var C1_TEXTS = [
+  { title: 'Le télétravail, une liberté à double tranchant', src: 'Éditorial', text: 'Le télétravail, longtemps présenté comme une parenthèse imposée par la crise sanitaire, s’est installé durablement dans le paysage professionnel. Ses partisans vantent un gain de temps considérable et une meilleure conciliation entre vie privée et vie professionnelle.\n\nPourtant, cette liberté apparente n’est pas sans contrepartie : l’isolement, la difficulté à « décrocher » le soir et l’effacement progressif des échanges informels qui font la vie d’une équipe. Encore faut-il rappeler que tous les métiers ne s’y prêtent pas : l’infirmière, le boulanger ou le chauffeur de bus ne télétravailleront jamais.\n\nLe débat, s’il est légitime, risque donc de creuser une fracture entre ceux qui peuvent choisir et ceux qui ne le peuvent pas.',
+    qs: [
+      { q: 'Quelle est la thèse principale de l’auteur ?', a: 'Le télétravail a de vrais avantages, mais aussi des inconvénients et il crée des inégalités', w: ['Le télétravail doit être interdit', 'Le télétravail ne présente que des avantages', 'Le télétravail n’existe plus depuis la crise sanitaire'], s: 'L’auteur présente les avantages, puis les contreparties et le risque de « fracture ».' },
+      { q: 'Dans ce contexte, que signifie « décrocher » ?', a: 'Cesser de penser au travail, se déconnecter', w: ['Répondre au téléphone', 'Obtenir un diplôme', 'Enlever un tableau du mur'], s: 'Les guillemets signalent un emploi figuré : se détacher du travail.' },
+      { q: 'Quelle est la fonction de « Pourtant » au début du deuxième paragraphe ?', a: 'Introduire une opposition aux arguments des partisans', w: ['Ajouter un exemple', 'Conclure le texte', 'Exprimer une cause'], s: '« Pourtant » marque la concession puis l’objection.' },
+      { q: 'Que permet l’expression « Encore faut-il rappeler que… » ?', a: 'Ajouter une réserve importante qui nuance le débat', w: ['Répéter exactement l’argument précédent', 'Changer complètement de sujet', 'Donner une date'], s: 'Elle introduit une restriction : tous les métiers ne sont pas concernés.' },
+      { q: 'Quelle crainte l’auteur exprime-t-il dans la conclusion ?', a: 'Une fracture entre ceux qui peuvent télétravailler et les autres', w: ['La disparition des bureaux', 'La baisse des salaires', 'La fin de la crise sanitaire'], s: '« Creuser une fracture entre ceux qui peuvent choisir et ceux qui ne le peuvent pas. »' }
+    ] },
+  { title: 'Le retour', src: 'Extrait de récit', text: 'Il pleuvait depuis l’aube sur la petite gare de province, et Mathilde, assise sur le banc le plus éloigné du guichet, comptait machinalement les gouttes qui tombaient de l’auvent. Elle n’avait prévenu personne de son retour. À quoi bon ? Dans ce village où chacun savait tout de chacun, la nouvelle aurait précédé le train.\n\nQuand enfin le car apparut au bout de la rue, elle hésita un instant, comme si une partie d’elle-même espérait encore qu’il ne s’arrête pas.',
+    qs: [
+      { q: 'Quel est l’état d’esprit de Mathilde ?', a: 'Elle est partagée, voire réticente, à l’idée de rentrer', w: ['Elle est impatiente et joyeuse', 'Elle est en colère contre sa famille', 'Elle est indifférente à tout'], s: 'Elle hésite et espère presque que le car ne s’arrête pas.' },
+      { q: 'Pourquoi n’a-t-elle prévenu personne ?', a: 'Parce que dans ce village, tout le monde l’aurait su de toute façon', w: ['Parce qu’elle a perdu son téléphone', 'Parce qu’elle veut faire une surprise', 'Parce que personne ne la connaît'], s: '« Dans ce village où chacun savait tout de chacun, la nouvelle aurait précédé le train. »' },
+      { q: 'Que suggère l’adverbe « machinalement » ?', a: 'Elle compte sans y penser, comme pour tromper l’attente', w: ['Elle compte avec beaucoup d’attention', 'Elle utilise une machine', 'Elle compte à voix haute'], s: '« Machinalement » signifie de façon automatique.' },
+      { q: 'Pourquoi l’auteur emploie-t-il le passé simple dans « le car apparut » ?', a: 'Pour présenter une action ponctuelle au premier plan du récit', w: ['Pour décrire une habitude', 'Pour exprimer un souhait', 'Pour parler du futur'], s: 'Dans le récit littéraire, le passé simple marque les actions principales ; l’imparfait sert au décor.' },
+      { q: 'Que révèle la dernière phrase ?', a: 'Un désir caché de ne pas revenir', w: ['Sa hâte de revoir sa famille', 'Sa peur des transports', 'Son envie de voyager plus loin'], s: '« Comme si une partie d’elle-même espérait encore qu’il ne s’arrête pas. »' }
+    ] },
+  { title: 'Les adolescents sont-ils paresseux ?', src: 'Article de vulgarisation scientifique', text: 'Les adolescents sont-ils paresseux ? Les chronobiologistes répondent par la négative. À la puberté, l’horloge biologique se décale : la sécrétion de mélatonine, l’hormone qui favorise l’endormissement, intervient plus tard dans la soirée.\n\nUn adolescent qui se couche à minuit n’est donc pas forcément indiscipliné ; il obéit, en partie, à sa physiologie. C’est pourquoi certains chercheurs plaident pour que les cours commencent plus tard le matin. Les établissements qui ont tenté l’expérience font état d’une meilleure attention en classe, même si les données restent encore limitées.',
+    qs: [
+      { q: 'Quelle est la réponse des chronobiologistes à la question du titre ?', a: 'Non : leur horloge biologique est décalée', w: ['Oui, ils manquent de discipline', 'Ils ne se prononcent pas', 'Oui, à cause des écrans uniquement'], s: '« Les chronobiologistes répondent par la négative. »' },
+      { q: 'Quel est le rôle de la mélatonine ?', a: 'Elle favorise l’endormissement', w: ['Elle réveille le corps', 'Elle aide à digérer', 'Elle améliore la mémoire'], s: '« L’hormone qui favorise l’endormissement. »' },
+      { q: 'Que proposent certains chercheurs ?', a: 'Que les cours commencent plus tard le matin', w: ['Que les adolescents se couchent à 20 h', 'Que l’école soit supprimée', 'Que les cours finissent plus tôt'], s: '« Certains chercheurs plaident pour que les cours commencent plus tard le matin. »' },
+      { q: 'Quelle nuance l’auteur apporte-t-il à la fin ?', a: 'Les résultats sont encourageants, mais les données restent limitées', w: ['L’expérience a été un échec total', 'Les données sont définitives', 'Les élèves sont moins attentifs'], s: '« Même si les données restent encore limitées. »' },
+      { q: 'Pourquoi « plaident pour que » est-il suivi de « commencent » au subjonctif ?', a: 'Parce que « pour que » exprime un but et exige le subjonctif', w: ['Parce que l’action est certaine', 'Parce que c’est au passé', 'Ce n’est pas un subjonctif'], s: '« Pour que » + subjonctif.' }
+    ] }
+];
+var MOOD = [
+  ['Il faut que', 'subj'], ['Bien que', 'subj'], ['Je veux que', 'subj'], ['Il est possible que', 'subj'], ['Je ne pense pas que', 'subj'], ['Avant que', 'subj'], ['Pour que', 'subj'], ['À condition que', 'subj'], ['Je doute que', 'subj'], ['Il est dommage que', 'subj'],
+  ['Je pense que', 'ind'], ['Il est certain que', 'ind'], ['J’espère que', 'ind'], ['Il est évident que', 'ind'], ['Je sais que', 'ind'], ['Parce que', 'ind'], ['Il est probable que', 'ind']
+];
+var MOOD_V = ['faire', 'pouvoir', 'savoir', 'venir', 'aller', 'être', 'avoir', 'prendre', 'finir', 'vouloir'];
+
+function registerFrench(level) {
+  var b1 = level === 'B1', p = b1 ? '7' : '9', id = function (x) { return 'fr' + p + '-' + x; }, code = ['CEFR ' + level];
+  if (b1) {
+    fra({ id: id('present'), strand: 'F', title: 'Le présent', codes: code, calc: false, blurb: 'Regular -er, -ir and -re verbs and the most common irregular verbs in the present tense.',
+      learn: { ideas: ['-er verbs: <i lang="fr">je parle, tu parles, il parle, nous parlons, vous parlez, ils parlent</i>.', '-ir verbs like <i lang="fr">finir</i>: <i lang="fr">je finis, nous finissons, ils finissent</i>.', '-re verbs like <i lang="fr">vendre</i>: <i lang="fr">je vends, il vend, nous vendons, ils vendent</i>.', 'Learn the key irregulars by heart: <i lang="fr">être, avoir, aller, faire, pouvoir, vouloir, devoir, prendre, venir</i>.'],
+        example: { q: '<span lang="fr">Nous ___ (prendre) le bus.</span>', steps: ['<i lang="fr">Prendre</i> is irregular: <i lang="fr">je prends, nous prenons, ils prennent</i>.', '<span lang="fr">Nous prenons le bus.</span>'] }, watch: '<i lang="fr">Vous faites</i> and <i lang="fr">vous dites</i> are irregular: not “faisez” or “disez”.' },
+      gens: [function () { return conjQ({ tense: 'pres', verbs: REG_V }); }, function () { return conjQ({ tense: 'pres', verbs: IRR_V }); }, function () { return conjQ({ tense: 'pres', verbs: IRR_V }); }] });
+    fra({ id: id('passe'), strand: 'F', title: 'Le passé composé', codes: code, calc: false, blurb: 'Form the passé composé with avoir or être, and make the past participle agree.',
+      learn: { ideas: ['Passé composé = <i lang="fr">avoir</i> or <i lang="fr">être</i> in the present + past participle: <i lang="fr">j’ai mangé, elle est partie</i>.', 'Regular participles: -er → -é (<i lang="fr">parlé</i>), -ir → -i (<i lang="fr">fini</i>), -re → -u (<i lang="fr">vendu</i>).', 'Verbs of movement and change of state use <i lang="fr">être</i>: <i lang="fr">aller, venir, partir, sortir, arriver, rester, tomber, entrer, monter, descendre…</i>', 'With <i lang="fr">être</i>, the participle agrees with the subject: <i lang="fr">elle est allée, ils sont partis, elles sont venues</i>.'],
+        example: { q: '<span lang="fr">Hier, Léa ___ (sortir) avec ses amis.</span>', steps: ['<i lang="fr">Sortir</i> takes <i lang="fr">être</i>.', 'Léa is feminine singular: add -e.', '<span lang="fr">Léa est sortie.</span>'] }, watch: 'Irregular participles to learn: <i lang="fr">fait, pris, mis, dit, écrit, lu, vu, bu, eu, été, pu, voulu, venu</i>.' },
+      gens: [function () { return conjQ({ tense: 'pc', verbs: REG_V, lead: 'Hier, ', instr: 'Type the verb in the passé composé (auxiliary + participle).' }); }, function () { return conjQ({ tense: 'pc', verbs: ['aller', 'venir', 'partir', 'sortir', 'arriver', 'rester', 'tomber', 'entrer', 'monter', 'rentrer'], lead: 'Hier, ', instr: 'Type the verb in the passé composé (auxiliary + participle).' }); }, function () { return conjQ({ tense: 'pc', verbs: ['faire', 'prendre', 'mettre', 'voir', 'dire', 'lire', 'écrire', 'boire', 'avoir', 'être', 'pouvoir'], lead: 'Hier, ', instr: 'Type the verb in the passé composé (auxiliary + participle).' }); },
+        function () { var v = pick(['aller', 'venir', 'partir', 'manger', 'finir', 'arriver', 'regarder', 'tomber', 'prendre', 'rester', 'faire', 'sortir']), a = fr_auxOf(v); var q = choiceQ('Which auxiliary does this verb take in the passé composé?', v, a, [a === 'être' ? 'avoir' : 'être'], [v + ' takes <i lang="fr">' + a + '</i>.'], 'Movement and change of state usually take être.'); q.options = ['avoir', 'être']; q.correct = a === 'avoir' ? 0 : 1; return q; }] });
+    fra({ id: id('imparfait'), strand: 'F', title: 'L’imparfait et le passé composé', codes: code, calc: false, blurb: 'Form the imparfait, and choose between imparfait and passé composé when telling a story.',
+      learn: { ideas: ['Imparfait: take the <i lang="fr">nous</i> form of the present, remove -ons, add <i lang="fr">-ais, -ais, -ait, -ions, -iez, -aient</i>. Only <i lang="fr">être</i> is irregular: <i lang="fr">j’étais</i>.', 'Use the imparfait for descriptions, background and habits in the past: <i lang="fr">Il faisait beau. Je jouais au foot tous les samedis.</i>', 'Use the passé composé for single, completed actions: <i lang="fr">Soudain, le téléphone a sonné.</i>', 'Often both appear together: <i lang="fr">Je regardais la télé quand mon frère est arrivé.</i>'],
+        example: { q: '<span lang="fr">Quand j’étais petit, je ___ (habiter) à Paris.</span>', steps: ['A situation that lasted in the past: imparfait.', 'nous habitons → habit- + ais.', '<span lang="fr">J’habitais à Paris.</span>'] }, watch: 'Words like <i lang="fr">soudain, tout à coup, un jour</i> usually signal the passé composé.' },
+      gens: [function () { return conjQ({ tense: 'imp', verbs: REG_V.concat(['être', 'avoir', 'faire', 'aller', 'prendre', 'boire', 'lire']), lead: 'Autrefois, ', instr: 'Type the verb in the imparfait.' }); }, function () { return conjQ({ tense: 'imp', verbs: ['être', 'avoir', 'faire', 'aller', 'pouvoir', 'vouloir', 'dormir'], lead: 'Autrefois, ', instr: 'Type the verb in the imparfait.' }); },
+        frBank([
+          { q: 'Je ___ la télé quand le téléphone a sonné.', a: 'regardais', w: ['ai regardé', 'regarde', 'regarderai'], s: ['Background action in progress: imparfait.'], h: 'Which action was already going on?' },
+          { q: 'Quand j’avais huit ans, je ___ au foot tous les samedis.', a: 'jouais', w: ['ai joué', 'joue', 'jouerai'], s: ['A repeated habit in the past: imparfait.'] },
+          { q: 'Soudain, la lumière ___ .', a: 's’est éteinte', w: ['s’éteignait', 's’éteint', 's’éteindra'], s: ['“Soudain” signals a sudden single event: passé composé.'] },
+          { q: 'Il ___ beau, alors nous sommes allés à la plage.', a: 'faisait', w: ['a fait', 'fera', 'fait'], s: ['Weather as background description: imparfait.'] },
+          { q: 'Hier soir, nous ___ une pizza.', a: 'avons mangé', w: ['mangions', 'mangeons', 'mangerons'], s: ['A single completed action yesterday: passé composé.'] },
+          { q: 'Ma grand-mère ___ toujours des gâteaux le dimanche.', a: 'préparait', w: ['a préparé', 'prépare', 'préparera'], s: ['“Toujours … le dimanche” describes a habit: imparfait.'] }
+        ])] });
+    fra({ id: id('futur'), strand: 'F', title: 'Le futur et le conditionnel', codes: code, calc: false, blurb: 'Talk about the future with aller + infinitive and the futur simple, and make polite requests with the conditionnel.',
+      learn: { ideas: ['<b>Futur proche</b>: <i lang="fr">aller</i> + infinitive: <i lang="fr">Je vais partir.</i>', '<b>Futur simple</b>: infinitive (drop the final -e of -re verbs) + <i lang="fr">-ai, -as, -a, -ons, -ez, -ont</i>: <i lang="fr">je parlerai, nous vendrons</i>.', 'Irregular stems: <i lang="fr">être → ser-, avoir → aur-, aller → ir-, faire → fer-, pouvoir → pourr-, venir → viendr-, voir → verr-</i>.', '<b>Conditionnel</b>: future stem + imparfait endings. It is used for politeness: <i lang="fr">Je voudrais un café.</i>'],
+        example: { q: '<span lang="fr">L’année prochaine, nous ___ (aller) en Espagne.</span>', steps: ['Futur simple of <i lang="fr">aller</i>: stem ir-.', '<span lang="fr">Nous irons en Espagne.</span>'] }, watch: '<i lang="fr">Je voudrais</i> (conditionnel) is more polite than <i lang="fr">je veux</i>.' },
+      gens: [function () { return conjQ({ tense: 'fut', verbs: REG_V, lead: 'Demain, ', instr: 'Type the verb in the futur simple.' }); }, function () { return conjQ({ tense: 'fut', verbs: ['être', 'avoir', 'aller', 'faire', 'pouvoir', 'vouloir', 'venir', 'voir', 'savoir', 'devoir'], lead: 'L’année prochaine, ', instr: 'Type the verb in the futur simple.' }); },
+        frBank([
+          { q: 'Which is the most polite way to order a drink?', a: 'Je voudrais un jus d’orange, s’il vous plaît.', w: ['Je veux un jus d’orange.', 'Donne-moi un jus d’orange.', 'Un jus d’orange, vite.'], s: ['The conditionnel <i lang="fr">voudrais</i> is polite.'] },
+          { q: 'Ce soir, je ___ regarder un film. (futur proche)', a: 'vais', w: ['vas', 'irai', 'allais'], s: ['Futur proche: <i lang="fr">je vais</i> + infinitive.'] },
+          { q: '___ -vous m’aider, s’il vous plaît ? (polite request)', a: 'Pourriez', w: ['Pouvez', 'Pourrez', 'Pouviez'], s: ['Conditionnel of <i lang="fr">pouvoir</i> for a polite request: <i lang="fr">Pourriez-vous…</i>'] },
+          { q: 'Si j’ai le temps, je te ___ demain.', a: 'téléphonerai', w: ['téléphonerais', 'téléphonais', 'ai téléphoné'], s: ['Si + present → futur simple.'] }
+        ])] });
+    fra({ id: id('pronoms'), strand: 'F', title: 'Les pronoms', codes: code, calc: false, blurb: 'Replace nouns with le, la, les, lui, leur, y and en.',
+      learn: { ideas: ['Direct object (COD): <i lang="fr">le, la, l’, les</i>: <i lang="fr">Je vois Marie → Je la vois.</i>', 'Indirect object (COI, after à + person): <i lang="fr">lui, leur</i>: <i lang="fr">Je parle à mes parents → Je leur parle.</i>', '<i lang="fr">y</i> replaces à + place or thing: <i lang="fr">Je vais à la piscine → J’y vais.</i>', '<i lang="fr">en</i> replaces de + noun, or a quantity: <i lang="fr">Je veux du pain → J’en veux.</i> The pronoun goes before the verb.'],
+        example: { q: '<span lang="fr">Tu as des frères ? — Oui, j’___ ai deux.</span>', steps: ['A quantity of something: <i lang="fr">en</i>.', '<span lang="fr">J’en ai deux.</span>'] }, watch: 'In the passé composé, the pronoun goes before the auxiliary: <i lang="fr">Je l’ai vu.</i>' },
+      gens: [frBank([
+        { q: 'Tu vois Marie ce soir ? — Oui, je ___ vois.', a: 'la', w: ['lui', 'le', 'y'], s: ['Marie is a direct object, feminine: <i lang="fr">la</i>.'] }, { q: 'Tu parles à tes parents ? — Oui, je ___ parle souvent.', a: 'leur', w: ['les', 'lui', 'en'], s: ['à + people (plural): <i lang="fr">leur</i>.'] },
+        { q: 'Tu vas à la piscine ? — Oui, j’___ vais le mardi.', a: 'y', w: ['en', 'la', 'lui'], s: ['à + place: <i lang="fr">y</i>.'] }, { q: 'Tu veux du pain ? — Oui, j’___ veux bien.', a: 'en', w: ['le', 'y', 'lui'], s: ['de + noun: <i lang="fr">en</i>.'] },
+        { q: 'Tu as écrit à ton grand-père ? — Oui, je ___ ai écrit.', a: 'lui', w: ['le', 'leur', 'y'], s: ['à + one person: <i lang="fr">lui</i>.'] }, { q: 'Tu as vu le film ? — Oui, je ___ ai vu hier.', a: 'l’', w: ['lui', 'en', 'y'], s: ['Direct object before a vowel: <i lang="fr">l’</i>.'] },
+        { q: 'Vous prenez les billets ? — Oui, nous ___ prenons.', a: 'les', w: ['leur', 'en', 'la'], s: ['Plural direct object: <i lang="fr">les</i>.'] }, { q: 'Combien de pommes veux-tu ? — J’___ veux trois.', a: 'en', w: ['les', 'y', 'leur'], s: ['With a number: <i lang="fr">en</i>.'] },
+        { q: 'Tu penses à ton examen ? — Oui, j’___ pense tout le temps.', a: 'y', w: ['le', 'en', 'lui'], s: ['penser à + thing: <i lang="fr">y</i>.'] }
+      ])] });
+    fra({ id: id('accords'), strand: 'F', title: 'Accords et négation', codes: code, calc: false, blurb: 'Make adjectives agree, use du, de la, des and de after a negative, and form negatives.',
+      learn: { ideas: ['Adjectives agree with the noun: add -e for feminine and -s for plural: <i lang="fr">une robe verte, des livres verts</i>.', 'Some patterns: <i lang="fr">heureux → heureuse, sportif → sportive, blanc → blanche, cher → chère</i>.', 'Partitive articles: <i lang="fr">du pain, de la confiture, de l’eau, des fruits</i>. After a negative they become <i lang="fr">de</i>: <i lang="fr">Je n’ai pas de pain.</i>', 'Negatives go around the verb: <i lang="fr">ne … pas, ne … jamais, ne … rien, ne … personne, ne … plus</i>.'],
+        example: { q: '<span lang="fr">les filles ___ (sportif)</span>', steps: ['Feminine plural.', 'sportif → sportive → sportives.'] }, watch: 'In the passé composé, ne … pas goes around the auxiliary: <i lang="fr">Je n’ai pas mangé.</i>' },
+      gens: [function () { var adj = pick(Object.keys(ADJ)), nouns = ADJ_NOUNS[ADJ_GROUP[adj]], n = pick(nouns), form = ADJ[adj][n[1]], lab = ['masculine singular', 'feminine singular', 'masculine plural', 'feminine plural'][n[1]];
+          return { kind: 'text', lang: 'fr', accents: true, prompt: 'Make the adjective agree with the noun.<p class="data" lang="fr">' + n[0] + ' ' + GAP + ' (' + adj + ')</p>', answer: form, ans: '<span lang="fr">' + n[0] + ' ' + form + '</span>', inputLabel: 'Adjectif', hint: '“' + n[0] + '” is ' + lab + '.', steps: ['“' + n[0] + '” is ' + lab + '.', 'Answer: <span lang="fr">' + form + '</span>.'] }; },
+        frBank([
+          { q: 'Je n’ai pas ___ frères.', a: 'de', w: ['des', 'les', 'du'], s: ['After a negative, des becomes de.'] }, { q: 'Le matin, je bois ___ lait.', a: 'du', w: ['de la', 'des', 'de l’'], s: ['Lait is masculine: du.'] },
+          { q: 'Tu veux ___ eau ?', a: 'de l’', w: ['du', 'de la', 'des'], s: ['Before a vowel: de l’.'] }, { q: 'Il ne mange ___ de viande. (never)', a: 'jamais', w: ['rien', 'personne', 'pas'], s: ['ne … jamais = never.'] },
+          { q: 'Je ne vois ___ dans la rue. (nobody)', a: 'personne', w: ['rien', 'jamais', 'plus'], s: ['ne … personne = nobody.'] }, { q: 'Elle n’a ___ dit. (nothing)', a: 'rien', w: ['personne', 'jamais', 'aucun'], s: ['ne … rien = nothing.'] },
+          { q: 'Which is correct?', a: 'Je n’ai pas fini mes devoirs.', w: ['Je n’ai fini pas mes devoirs.', 'Je ne pas ai fini mes devoirs.', 'Je ai ne pas fini mes devoirs.'], s: ['ne … pas goes around the auxiliary.'] }
+        ])] });
+    fra({ id: id('vocab'), strand: 'L', title: 'Vocabulaire thématique', codes: code, calc: false, blurb: 'Everyday vocabulary for school, home, food, town, health, the environment and the weather.',
+      learn: { ideas: ['Learn nouns with their article, so you remember the gender: <i lang="fr">la gare, le billet</i>.', 'Group words by theme and use them in sentences.', 'Watch out for false friends: <i lang="fr">la librairie</i> is a bookshop; a library is <i lang="fr">la bibliothèque</i>.'],
+        example: { q: 'How do you say “the bill” in a restaurant?', steps: ['<i lang="fr">L’addition, s’il vous plaît !</i>'] }, watch: '<i lang="fr">Le médecin</i> is a doctor; <i lang="fr">le médicament</i> is a medicine.' },
+      gens: [function () { var th = pick(Object.keys(VOCAB)), w = pick(VOCAB[th]), others = shuffle(VOCAB[th].filter(function (x) { return x !== w; })).slice(0, 3);
+          if (Math.random() < 0.5) return mc('What is the French for “' + w[0] + '”? (theme: ' + th + ')', '<span lang="fr">' + w[1] + '</span>', others.map(function (o) { return '<span lang="fr">' + o[1] + '</span>'; }), { hint: 'Think of the theme: ' + th + '.', steps: ['“' + w[0] + '” = <i lang="fr">' + w[1] + '</i>.'] });
+          return mc('What does <i lang="fr">' + w[1] + '</i> mean?', ucf(w[0]), others.map(function (o) { return ucf(o[0]); }), { hint: 'Theme: ' + th + '.', steps: ['<i lang="fr">' + w[1] + '</i> = ' + w[0] + '.'] }); }] });
+    fra({ id: id('connecteurs'), strand: 'L', title: 'Connecteurs', codes: code, calc: false, blurb: 'Link ideas with parce que, donc, mais, pourtant, d’abord, ensuite, enfin and more.',
+      learn: { ideas: ['Cause: <i lang="fr">parce que, car, comme</i>. Consequence: <i lang="fr">donc, alors</i>.', 'Contrast: <i lang="fr">mais, pourtant, par contre</i>.', 'Order: <i lang="fr">d’abord, ensuite, puis, enfin</i>.', 'Time: <i lang="fr">quand, pendant que, depuis</i>.'],
+        example: { q: '<span lang="fr">Il pleuvait, ___ nous sommes restés à la maison.</span>', steps: ['The second part is the result.', '<i lang="fr">donc</i> or <i lang="fr">alors</i>.'] }, watch: '<i lang="fr">Depuis</i> + present means “for/since” for something still going on: <i lang="fr">J’habite ici depuis deux ans.</i>' },
+      gens: [frBank([
+        { q: 'Je suis fatigué ___ je me suis couché tard.', a: 'parce que', w: ['donc', 'mais', 'enfin'], s: ['Gives the cause: parce que.'] }, { q: 'Il fait beau, ___ on va à la plage.', a: 'alors', w: ['parce que', 'pourtant', 'depuis'], s: ['Gives the result: alors.'] },
+        { q: 'J’ai beaucoup travaillé, ___ j’ai raté l’examen.', a: 'pourtant', w: ['donc', 'car', 'ensuite'], s: ['An unexpected contrast: pourtant.'] }, { q: '___, je me lève. Ensuite, je prends mon petit-déjeuner.', a: 'D’abord', w: ['Enfin', 'Pourtant', 'Car'], s: ['First in a sequence: d’abord.'] },
+        { q: 'J’apprends le français ___ trois ans.', a: 'depuis', w: ['pendant que', 'quand', 'parce que'], s: ['Still going on: depuis + present.'] }, { q: 'Ma sœur adore le sport. ___, moi, je préfère lire.', a: 'Par contre', w: ['Donc', 'D’abord', 'Car'], s: ['A contrast between two people: par contre.'] },
+        { q: 'Je lisais ___ mon frère jouait aux jeux vidéo.', a: 'pendant que', w: ['depuis', 'donc', 'car'], s: ['Two actions at the same time: pendant que.'] }
+      ])] });
+    fra({ id: id('lecture'), strand: 'O', title: 'Compréhension écrite', codes: code, calc: false, blurb: 'Read short e-mails, posters and blog posts in French and answer questions.',
+      learn: { ideas: ['Read the questions first so you know what to look for.', 'Look for key words and their synonyms: <i lang="fr">gratuit</i> = free, costs nothing.', 'Use the tense of verbs to tell past, present and future events apart.'],
+        example: { q: '<span lang="fr">« Le musée est fermé le lundi. » Can you visit on Monday?</span>', steps: ['<i lang="fr">fermé</i> = closed.', 'No.'] }, watch: 'An answer can use different words from the text. Look for the same meaning, not the same words.' },
+      gens: B1_TEXTS.map(frPassage) });
+    fra({ id: id('situations'), strand: 'U', title: 'Situations de communication', codes: code, calc: false, blurb: 'Choose the right thing to say in everyday situations: shops, directions, invitations, opinions.',
+      learn: { ideas: ['Use <i lang="fr">vous</i> with adults you do not know, and <i lang="fr">tu</i> with friends and family.', 'Polite phrases: <i lang="fr">Je voudrais…, Pourriez-vous…, Excusez-moi…, Je suis désolé(e)…</i>', 'Giving opinions: <i lang="fr">À mon avis…, Je pense que…, Je trouve que…</i>'],
+        example: { q: 'How do you ask a stranger for the way to the station?', steps: ['<i lang="fr">Excusez-moi, pour aller à la gare, s’il vous plaît ?</i>'] }, watch: 'Saying <i lang="fr">tu</i> to a shopkeeper can sound rude.' },
+      gens: [frBank([
+        { q: 'You want to ask a stranger the way to the station. What do you say?', a: 'Excusez-moi, pour aller à la gare, s’il vous plaît ?', w: ['Salut, c’est où la gare ?', 'Je vais à la gare.', 'Où est ta gare ?'], s: ['Polite, with vous-form courtesy for a stranger.'] },
+        { q: 'You accept an invitation from a friend. What do you say?', a: 'Avec plaisir, merci !', w: ['Non merci, je n’ai pas le temps.', 'Je suis désolé.', 'À ton avis ?'], s: ['<i lang="fr">Avec plaisir</i> = with pleasure.'] },
+        { q: 'You want to give your opinion about a film. Which phrase do you use?', a: 'À mon avis, ce film est génial.', w: ['Je voudrais un film.', 'Excusez-moi, le film.', 'Il y a un film.'], s: ['<i lang="fr">À mon avis</i> introduces an opinion.'] },
+        { q: 'You arrive late to class. What do you say to the teacher?', a: 'Excusez-moi pour le retard, madame.', w: ['Salut, ça va ?', 'Tu es en retard.', 'Bon appétit !'], s: ['A polite apology to an adult.'] },
+        { q: 'In a shop, you want to know the price. What do you ask?', a: 'C’est combien, s’il vous plaît ?', w: ['C’est qui ?', 'C’est où ?', 'C’est quand ?'], s: ['<i lang="fr">Combien</i> = how much.'] },
+        { q: 'A friend tells you they are ill. What do you say?', a: 'Oh non ! J’espère que tu vas vite aller mieux.', w: ['Félicitations !', 'Bon voyage !', 'Je suis d’accord.'], s: ['Wishing them a quick recovery.'] },
+        { q: 'You disagree politely. What do you say?', a: 'Je ne suis pas tout à fait d’accord.', w: ['Tu as raison.', 'Exactement !', 'Bien sûr.'], s: ['<i lang="fr">Pas tout à fait d’accord</i> = not quite in agreement.'] }
+      ])] });
+  } else {
+    fra({ id: id('subjonctif'), strand: 'F', title: 'Le subjonctif', codes: code, calc: false, blurb: 'Former le subjonctif présent et savoir quand l’employer après les expressions de nécessité, de volonté, de doute et de sentiment.',
+      learn: { ideas: ['Formation : radical de la 3<sup>e</sup> personne du pluriel du présent + <i lang="fr">-e, -es, -e, -ions, -iez, -ent</i> : <i lang="fr">ils finissent → que je finisse</i>. Pour <i lang="fr">nous</i> et <i lang="fr">vous</i>, on part souvent du radical de l’imparfait : <i lang="fr">que nous prenions</i>.', 'Irréguliers : <i lang="fr">être (sois), avoir (aie), aller (aille), faire (fasse), pouvoir (puisse), savoir (sache), vouloir (veuille)</i>.', 'Le subjonctif suit la nécessité (<i lang="fr">il faut que</i>), la volonté (<i lang="fr">je veux que</i>), le doute (<i lang="fr">je doute que, je ne pense pas que</i>), le sentiment (<i lang="fr">il est dommage que</i>) et certaines conjonctions (<i lang="fr">bien que, pour que, avant que, à condition que</i>).', 'L’indicatif suit la certitude : <i lang="fr">je pense que, il est certain que, j’espère que</i>.'],
+        example: { q: '<span lang="fr">Bien qu’il ___ (pleuvoir), nous sortirons.</span>', steps: ['<i lang="fr">Bien que</i> exige le subjonctif.', '<span lang="fr">Bien qu’il pleuve, nous sortirons.</span>'] }, watch: '<i lang="fr">J’espère que</i> est suivi de l’indicatif, pas du subjonctif.' },
+      gens: [function () { return conjQ({ tense: 'subj', verbs: ['finir', 'parler', 'vendre', 'prendre', 'venir', 'dire', 'lire', 'écrire', 'partir', 'mettre'], instr: 'Conjuguez le verbe au subjonctif présent.' }); }, function () { return conjQ({ tense: 'subj', verbs: ['être', 'avoir', 'aller', 'faire', 'pouvoir', 'savoir', 'vouloir'], instr: 'Conjuguez le verbe au subjonctif présent.' }); },
+        function () { var e = pick(MOOD), v = pick(MOOD_V), si = pick([0, 1, 2, 3, 6, 7]), pi = PIDX[si], s = fr_subj(v, pi), ind = e[0] === 'J’espère que' || e[0] === 'Il est probable que' ? fr_futur(v, pi) : fr_pres(v, pi);
+          if (s === ind) { v = 'faire'; s = fr_subj(v, pi); ind = e[0] === 'J’espère que' || e[0] === 'Il est probable que' ? fr_futur(v, pi) : fr_pres(v, pi); }
+          var right = e[1] === 'subj' ? s : ind, wrong = [e[1] === 'subj' ? ind : s, fr_imparfait(v, pi), fr_cond(v, pi)];
+          var subjTxt = /que$/.test(e[0]) ? (si === 2 || si === 3 || si >= 6 ? e[0].replace(/que$/, 'qu’') + PRON[si] + ' ' : e[0] + ' ' + fr_subjectText(si, right, false)) : e[0] + ' ' + fr_subjectText(si, right, false);
+          return choiceQ('Choisissez la forme correcte.', subjTxt + GAP + ' (' + v + ') ' + (COMP[v] || '') + '.', right, wrong, ['« ' + e[0] + ' » est suivi ' + (e[1] === 'subj' ? 'du subjonctif' : 'de l’indicatif') + ' : <i lang="fr">' + right + '</i>.'], 'Nécessité, volonté, doute, sentiment → subjonctif ; certitude → indicatif.'); }] });
+    fra({ id: id('passes'), strand: 'F', title: 'Les temps du passé', codes: code, calc: false, blurb: 'Plus-que-parfait, passé simple et concordance des temps dans le récit.',
+      learn: { ideas: ['Le <b>plus-que-parfait</b> (auxiliaire à l’imparfait + participe) exprime une action antérieure à une autre action passée : <i lang="fr">Quand je suis arrivé, le film avait commencé.</i>', 'Le <b>passé simple</b> est le temps du récit littéraire pour les actions de premier plan : <i lang="fr">il entra, ils partirent, elle fit, ils vinrent</i>.', 'L’imparfait reste le temps du décor et de la description.', 'Au discours indirect au passé, le présent devient imparfait et le passé composé devient plus-que-parfait : <i lang="fr">Il a dit qu’il était fatigué et qu’il avait mal dormi.</i>'],
+        example: { q: '<span lang="fr">Elle m’a dit : « J’ai perdu mes clés. » → Elle m’a dit qu’elle ___ ses clés.</span>', steps: ['Passé composé au discours direct → plus-que-parfait au discours indirect.', '<span lang="fr">… qu’elle avait perdu ses clés.</span>'] }, watch: 'Le passé simple s’emploie surtout à l’écrit ; à l’oral, on utilise le passé composé.' },
+      gens: [function () { return conjQ({ tense: 'pqp', verbs: ['finir', 'partir', 'arriver', 'prendre', 'faire', 'lire', 'sortir', 'voir', 'venir', 'perdre', 'trouver'], lead: 'Ce jour-là, ', instr: 'Conjuguez le verbe au plus-que-parfait.' }); },
+        frBank([
+          { q: 'Dans un récit littéraire : « Il ___ la porte et sortit sans un mot. » (ouvrir)', a: 'ouvrit', w: ['ouvrait', 'a ouvert', 'ouvrira'], s: ['Action de premier plan, coordonnée à « sortit » : passé simple.'] },
+          { q: '« Ils ___ à Paris en 1900. » (arriver, passé simple)', a: 'arrivèrent', w: ['arrivaient', 'arrivent', 'arriveront'], s: ['3<sup>e</sup> personne du pluriel du passé simple des verbes en -er : -èrent.'] },
+          { q: '« Elle ___ un long silence. » (faire, passé simple)', a: 'fit', w: ['faisait', 'fera', 'fasse'], s: ['Passé simple de faire : elle fit.'] },
+          { q: 'Il a dit : « Je suis fatigué. » → Il a dit qu’il ___ fatigué.', a: 'était', w: ['est', 'sera', 'soit'], s: ['Présent → imparfait au discours indirect passé.'] },
+          { q: 'Elle a annoncé : « Je partirai demain. » → Elle a annoncé qu’elle ___ le lendemain.', a: 'partirait', w: ['partira', 'partait', 'parte'], s: ['Futur → conditionnel présent ; « demain » → « le lendemain ».'] },
+          { q: '« Quand nous sommes arrivés, le train ___ . »', a: 'était déjà parti', w: ['est déjà parti', 'partait déjà', 'partira déjà'], s: ['Action antérieure à une autre action passée : plus-que-parfait.'] },
+          { q: '« Ils ___ longtemps avant de se décider. » (hésiter, passé simple)', a: 'hésitèrent', w: ['hésitaient', 'hésitent', 'ont hésité'], s: ['Passé simple, 3<sup>e</sup> personne du pluriel : -èrent.'] }
+        ])] });
+    fra({ id: id('hypothese'), strand: 'F', title: 'L’hypothèse et le conditionnel', codes: code, calc: false, blurb: 'Les phrases avec si, le conditionnel présent et le conditionnel passé.',
+      learn: { ideas: ['Si + présent → futur : <i lang="fr">Si tu viens, nous irons au cinéma.</i>', 'Si + imparfait → conditionnel présent (hypothèse sur le présent) : <i lang="fr">Si j’avais le temps, je voyagerais.</i>', 'Si + plus-que-parfait → conditionnel passé (regret, irréel du passé) : <i lang="fr">Si nous avions su, nous serions venus.</i>', 'Jamais de conditionnel après « si » d’hypothèse : on ne dit pas « si j’aurais ».'],
+        example: { q: '<span lang="fr">Si tu m’avais prévenu, je ___ (venir).</span>', steps: ['Si + plus-que-parfait → conditionnel passé.', '<span lang="fr">… je serais venu.</span>'] }, watch: '« Si j’aurais su » est une faute très courante : on dit « si j’avais su ».' },
+      gens: [function () { var v = pick(['visiter', 'venir', 'partir', 'faire', 'aller', 'pouvoir', 'aider', 'être', 'avoir', 'finir', 'prendre', 'vendre']), si = pick([0, 1, 2, 4, 5, 6]), pi = PIDX[si], type = pick(['pres', 'passe']);
+          var right = type === 'pres' ? fr_cond(v, pi) : fr_compound(v, pi, false, 'cond'), cl = type === 'pres' ? 'Si j’avais le temps' : 'Si nous avions su';
+          var wrong = type === 'pres' ? [fr_futur(v, pi), fr_imparfait(v, pi), fr_compound(v, pi, false, 'cond')] : [fr_cond(v, pi), fr_compound(v, pi, false, 'imp'), fr_compound(v, pi, false, 'pres')];
+          return choiceQ('Complétez la phrase.', cl + ', ' + fr_subjectText(si, right, false) + GAP + ' (' + v + ') ' + (COMP[v] || '') + '.', right, wrong, [type === 'pres' ? 'Si + imparfait → conditionnel présent : <i lang="fr">' + right + '</i>.' : 'Si + plus-que-parfait → conditionnel passé : <i lang="fr">' + right + '</i>.'], 'Regardez le temps du verbe après « si ».'); },
+        function () { return conjQ({ tense: 'cond', verbs: ['aimer', 'être', 'avoir', 'aller', 'faire', 'pouvoir', 'vouloir', 'venir', 'savoir', 'devoir'], lead: 'À sa place, ', instr: 'Conjuguez le verbe au conditionnel présent.' }); },
+        frBank([
+          { q: 'Laquelle de ces phrases est correcte ?', a: 'Si j’avais su, je ne serais pas venu.', w: ['Si j’aurais su, je ne serais pas venu.', 'Si j’avais su, je ne viendrai pas.', 'Si je savais, je ne serais pas venu hier.'], s: ['Si + plus-que-parfait → conditionnel passé.'] },
+          { q: 'Selon les premières informations, l’incendie ___ par une cigarette mal éteinte.', a: 'aurait été provoqué', w: ['a été provoqué', 'sera provoqué', 'était provoqué'], s: ['Le conditionnel passé exprime une information non confirmée (style journalistique).'] }
+        ])] });
+    fra({ id: id('relatifs'), strand: 'F', title: 'Les pronoms relatifs', codes: code, calc: false, blurb: 'Qui, que, dont, où, lequel et ses composés (auquel, duquel), ce qui, ce que, ce dont.',
+      learn: { ideas: ['<i lang="fr">qui</i> = sujet ; <i lang="fr">que</i> = COD ; <i lang="fr">où</i> = lieu ou temps.', '<i lang="fr">dont</i> remplace un complément introduit par <i lang="fr">de</i> : <i lang="fr">le livre dont je parle</i> (parler de).', 'Après une préposition : <i lang="fr">lequel, laquelle, lesquels, lesquelles</i> ; avec à → <i lang="fr">auquel</i> ; avec de (dans une locution) → <i lang="fr">duquel</i> : <i lang="fr">le parc près duquel j’habite</i>.', '<i lang="fr">ce qui, ce que, ce dont</i> renvoient à une idée : <i lang="fr">Ce dont j’ai besoin, c’est de calme.</i>'],
+        example: { q: '<span lang="fr">C’est le projet ___ je t’ai parlé.</span>', steps: ['parler de quelque chose.', '<span lang="fr">dont</span>.'] }, watch: 'Pas de « dont » après une locution comme « près de » : on dit « près duquel ».' },
+      gens: [frBank([
+        { q: 'C’est le film ___ tout le monde parle.', a: 'dont', w: ['que', 'qui', 'où'], s: ['parler de → dont.'] }, { q: 'Voici la ville ___ je suis né.', a: 'où', w: ['dont', 'que', 'laquelle'], s: ['Lieu → où.'] },
+        { q: 'Le stylo avec ___ j’écris ne marche plus.', a: 'lequel', w: ['qui', 'dont', 'que'], s: ['Après une préposition (avec), chose masculine : lequel.'] }, { q: 'Ce sont des questions ___ je n’ai pas pensé.', a: 'auxquelles', w: ['dont', 'lesquelles', 'que'], s: ['penser à + féminin pluriel → auxquelles.'] },
+        { q: 'Le parc près ___ nous habitons est magnifique.', a: 'duquel', w: ['dont', 'lequel', 'où'], s: ['Locution « près de » → duquel.'] }, { q: '___ me plaît, c’est son honnêteté.', a: 'Ce qui', w: ['Ce que', 'Ce dont', 'Qui'], s: ['Sujet de « plaît » renvoyant à une idée : ce qui.'] },
+        { q: '___ j’ai besoin, c’est de repos.', a: 'Ce dont', w: ['Ce que', 'Ce qui', 'Dont'], s: ['avoir besoin de → ce dont.'] }, { q: 'Je ne comprends pas ___ il veut dire.', a: 'ce qu’', w: ['ce dont', 'ce qui', 'qu’'], s: ['COD de « vouloir dire » renvoyant à une idée : ce que.'] },
+        { q: 'C’est une amie sur ___ je peux toujours compter.', a: 'qui', w: ['lequel', 'dont', 'que'], s: ['Pour une personne après une préposition, on emploie « qui » (ou « laquelle »). « Lequel » serait masculin.'] }
+      ])] });
+    fra({ id: id('participe'), strand: 'F', title: 'L’accord du participe passé', codes: code, calc: false, blurb: 'Les règles d’accord avec être, avec avoir (COD placé avant) et avec les verbes pronominaux.',
+      learn: { ideas: ['Avec <i lang="fr">être</i>, le participe s’accorde avec le sujet : <i lang="fr">elles sont parties</i>.', 'Avec <i lang="fr">avoir</i>, il s’accorde avec le COD seulement si celui-ci est placé avant : <i lang="fr">les lettres que j’ai écrites</i>, mais <i lang="fr">j’ai écrit des lettres</i>.', 'Verbes pronominaux : accord avec le pronom s’il est COD (<i lang="fr">elle s’est lavée</i>), pas d’accord s’il est COI ou si le COD suit (<i lang="fr">elle s’est lavé les mains ; ils se sont parlé</i>).', '<i lang="fr">fait</i> suivi d’un infinitif et les verbes impersonnels restent invariables : <i lang="fr">la maison qu’ils ont fait construire ; les efforts qu’il a fallu</i>.'],
+        example: { q: '<span lang="fr">Les photos que tu as ___ (prendre) sont superbes.</span>', steps: ['COD « que » (= les photos, féminin pluriel) placé avant avoir.', '<span lang="fr">prises</span>.'] }, watch: '« Ils se sont parlé » : pas d’accord, car on parle à quelqu’un (COI).' },
+      gens: [frBank([
+        { q: 'Les lettres que j’ai ___ sont restées sans réponse.', a: 'écrites', w: ['écrit', 'écrits', 'écrite'], s: ['COD « que » (les lettres, f. pl.) placé avant : écrites.'] }, { q: 'Elle s’est ___ les mains.', a: 'lavé', w: ['lavée', 'lavés', 'lavées'], s: ['Le COD « les mains » est après le verbe : pas d’accord.'] },
+        { q: 'Ils se sont ___ pendant des heures.', a: 'parlé', w: ['parlés', 'parlée', 'parlées'], s: ['On parle à quelqu’un : « se » est COI, pas d’accord.'] }, { q: 'Elles se sont ___ tôt ce matin.', a: 'levées', w: ['levé', 'levés', 'levée'], s: ['« se » est COD : accord avec elles (f. pl.).'] },
+        { q: 'La maison qu’ils ont ___ construire est immense.', a: 'fait', w: ['faite', 'faits', 'faites'], s: ['« fait » suivi d’un infinitif reste invariable.'] }, { q: 'J’ai ___ des fleurs à ma mère.', a: 'offert', w: ['offertes', 'offerte', 'offerts'], s: ['Le COD « des fleurs » est placé après : pas d’accord.'] },
+        { q: 'Quelle chanson as-tu ___ ?', a: 'choisie', w: ['choisi', 'choisis', 'choisies'], s: ['COD « quelle chanson » (f. sg.) placé avant : choisie.'] }, { q: 'Les efforts qu’il a ___ ont été considérables.', a: 'fallu', w: ['fallus', 'fallue', 'fallues'], s: ['Verbe impersonnel : participe invariable.'] }
+      ])] });
+    fra({ id: id('registres'), strand: 'L', title: 'Registres et expressions idiomatiques', codes: code, calc: false, blurb: 'Reconnaître les niveaux de langue et comprendre les expressions idiomatiques courantes.',
+      learn: { ideas: ['Trois registres : <b>familier</b> (<i lang="fr">bouquin, bagnole, boulot</i>), <b>courant</b> (<i lang="fr">livre, voiture, travail</i>), <b>soutenu</b> (<i lang="fr">ouvrage, demeurer, se vêtir</i>).', 'Le registre dépend de la situation : on n’écrit pas une lettre de motivation comme un message à un ami.', 'Les expressions idiomatiques ne se traduisent pas mot à mot : <i lang="fr">poser un lapin</i> = ne pas venir à un rendez-vous.'],
+        example: { q: '<span lang="fr">« Il a un poil dans la main. »</span>', steps: ['Il est paresseux.'] }, watch: 'Évitez le registre familier dans un écrit formel ou un examen.' },
+      gens: [frBank([
+        { q: 'Que signifie « poser un lapin à quelqu’un » ?', a: 'Ne pas venir à un rendez-vous', w: ['Offrir un cadeau', 'Faire peur à quelqu’un', 'Cuisiner pour quelqu’un'], s: ['Expression familière : ne pas se présenter au rendez-vous.'] },
+        { q: 'Que signifie « coûter les yeux de la tête » ?', a: 'Coûter très cher', w: ['Faire mal aux yeux', 'Être gratuit', 'Être très beau'], s: ['C’est extrêmement cher.'] }, { q: 'Que signifie « tomber dans les pommes » ?', a: 'S’évanouir', w: ['Cueillir des fruits', 'Tomber amoureux', 'Échouer à un examen'], s: ['Perdre connaissance.'] },
+        { q: 'Que signifie « avoir le cafard » ?', a: 'Être triste, déprimé', w: ['Avoir un animal domestique', 'Être en retard', 'Avoir de la chance'], s: ['Avoir des idées noires.'] }, { q: 'Que signifie « se creuser la tête » ?', a: 'Réfléchir intensément', w: ['Avoir mal à la tête', 'Se couper les cheveux', 'Faire du jardinage'], s: ['Chercher longuement une solution.'] },
+        { q: 'Quel est l’équivalent courant de « bagnole » ?', a: 'voiture', w: ['vélo', 'maison', 'bateau'], s: ['« Bagnole » est familier.'] }, { q: 'Quel mot appartient au registre soutenu ?', a: 'demeurer', w: ['bosser', 'piger', 'fric'], s: ['« Demeurer » (habiter, rester) est soutenu ; les autres sont familiers.'] },
+        { q: 'Que signifie « c’est la goutte d’eau qui fait déborder le vase » ?', a: 'C’est le petit problème de trop après beaucoup d’autres', w: ['Il pleut beaucoup', 'Il faut économiser l’eau', 'Tout va bien'], s: ['Un dernier détail rend la situation insupportable.'] },
+        { q: 'Quel est l’équivalent courant de « piger » ?', a: 'comprendre', w: ['manger', 'partir', 'travailler'], s: ['« Piger » est familier.'] }
+      ])] });
+    fra({ id: id('connecteurs'), strand: 'L', title: 'Articulateurs logiques', codes: code, calc: false, blurb: 'Néanmoins, en revanche, or, dès lors, d’autant plus que, faute de, en dépit de… pour structurer une argumentation.',
+      learn: { ideas: ['Concession / opposition : <i lang="fr">néanmoins, toutefois, en revanche, en dépit de, bien que, quoique</i>.', 'Cause : <i lang="fr">dans la mesure où, d’autant plus que, faute de, étant donné que</i>.', 'Conséquence : <i lang="fr">dès lors, par conséquent, si bien que, de sorte que</i>.', '<i lang="fr">Or</i> introduit un élément nouveau qui fait avancer le raisonnement.'],
+        example: { q: '<span lang="fr">Le projet est ambitieux ; ___, il manque de financement.</span>', steps: ['Une opposition après une qualité.', '<i lang="fr">néanmoins / toutefois</i>.'] }, watch: '« Malgré que » est à éviter à l’écrit soutenu : dites « bien que » + subjonctif.' },
+      gens: [frBank([
+        { q: 'Le projet est ambitieux ; ___, il manque cruellement de financement.', a: 'néanmoins', w: ['par conséquent', 'd’autant plus que', 'dès lors'], s: ['Opposition / concession : néanmoins.'] }, { q: 'Tous les hommes sont mortels. ___, Socrate est un homme.', a: 'Or', w: ['Donc', 'Bien que', 'En revanche'], s: ['« Or » introduit une nouvelle donnée dans le raisonnement.'] },
+        { q: '___ preuves, l’accusé a été relâché.', a: 'Faute de', w: ['Grâce à', 'En dépit de', 'Dès lors'], s: ['« Faute de » = par manque de.'] }, { q: 'Il a réussi ___ ses difficultés.', a: 'en dépit de', w: ['faute de', 'or', 'd’autant plus que'], s: ['« En dépit de » = malgré.'] },
+        { q: 'Ce choix est judicieux, ___ les coûts restent maîtrisés.', a: 'dans la mesure où', w: ['bien que', 'en revanche', 'faute de'], s: ['« Dans la mesure où » introduit une justification.'] }, { q: 'Les prix ont augmenté ; ___, les ventes ont chuté.', a: 'par conséquent', w: ['néanmoins', 'or', 'quoique'], s: ['Conséquence : par conséquent.'] },
+        { q: 'Mon frère adore le froid ; ma sœur, ___, ne supporte pas l’hiver.', a: 'en revanche', w: ['par conséquent', 'dès lors', 'faute de'], s: ['Opposition entre deux personnes : en revanche.'] }, { q: 'Je suis d’___ plus inquiet qu’il ne répond pas au téléphone.', a: 'autant', w: ['ailleurs', 'abord', 'après'], s: ['« D’autant plus que » renforce une cause.'] }
+      ])] });
+    fra({ id: id('lexique'), strand: 'L', title: 'Nuances, faux amis et nominalisation', codes: code, calc: false, blurb: 'Éviter les faux amis avec l’anglais, choisir le mot juste et transformer les verbes en noms.',
+      learn: { ideas: ['Faux amis : <i lang="fr">actuellement</i> = currently, <i lang="fr">éventuellement</i> = possibly, <i lang="fr">une librairie</i> = a bookshop, <i lang="fr">sensible</i> = sensitive, <i lang="fr">assister à</i> = to attend.', 'La <b>nominalisation</b> rend un texte plus dense et plus formel : <i lang="fr">On a décidé de fermer l’usine → la décision de fermer l’usine, la fermeture de l’usine</i>.', 'Choisissez le verbe précis : <i lang="fr">faire une erreur → commettre une erreur ; dire son avis → exprimer son avis</i>.'],
+        example: { q: 'Nominalisez : <span lang="fr">« Les prix augmentent. »</span>', steps: ['<span lang="fr">L’augmentation des prix.</span>'] }, watch: '« Actuellement » ne veut pas dire « actually » (= en fait).' },
+      gens: [frBank([
+        { q: 'Que signifie « actuellement » ?', a: 'En ce moment (currently)', w: ['En fait (actually)', 'Exactement', 'Autrefois'], s: ['Faux ami : actuellement = à présent.'] }, { q: 'Que signifie « éventuellement » ?', a: 'Peut-être, le cas échéant (possibly)', w: ['Finalement (eventually)', 'Jamais', 'Immédiatement'], s: ['Faux ami : éventuellement = possiblement.'] },
+        { q: 'Comment dit-on « a library » en français ?', a: 'une bibliothèque', w: ['une librairie', 'un libraire', 'une libraire'], s: ['Une librairie est une boutique où l’on vend des livres.'] }, { q: 'Quel est le nom correspondant à « réduire » ?', a: 'la réduction', w: ['le réduit', 'la réduisance', 'le réduisement'], s: ['réduire → la réduction.'] },
+        { q: 'Quel est le nom correspondant à « choisir » ?', a: 'le choix', w: ['la choisie', 'le choisissement', 'la choisition'], s: ['choisir → le choix.'] }, { q: 'Quel est le nom correspondant à « partir » ?', a: 'le départ', w: ['la partance', 'le partement', 'la partition'], s: ['partir → le départ.'] },
+        { q: 'Quel verbe est le plus précis dans « ___ une erreur » ?', a: 'commettre', w: ['faire', 'avoir', 'mettre'], s: ['On commet une erreur, une faute, un crime.'] }, { q: 'Nominalisez : « Le gouvernement a décidé. »', a: 'la décision du gouvernement', w: ['le décidé du gouvernement', 'la décidance du gouvernement', 'le décidement du gouvernement'], s: ['décider → la décision.'] },
+        { q: 'Que signifie « assister à une conférence » ?', a: 'Être présent à une conférence', w: ['Aider le conférencier', 'Organiser une conférence', 'Refuser une conférence'], s: ['Faux ami : assister à = attend.'] }
+      ])] });
+    fra({ id: id('lecture'), strand: 'O', title: 'Compréhension de textes', codes: code, calc: false, blurb: 'Lire des textes argumentatifs, littéraires et scientifiques, et analyser thèse, nuances et procédés.',
+      learn: { ideas: ['Identifiez la <b>thèse</b> de l’auteur et les arguments qui la soutiennent.', 'Repérez les <b>connecteurs</b> qui structurent le texte (pourtant, donc, encore faut-il…).', 'Soyez attentif aux <b>nuances</b> : conditionnel, modalisateurs (<i lang="fr">peut-être, semble-t-il</i>), guillemets.', 'Dans un texte littéraire, interrogez le point de vue, les temps verbaux et le non-dit.'],
+        example: { q: '<span lang="fr">« Cette réforme, semble-t-il, ne fait pas l’unanimité. »</span> Que montre « semble-t-il » ?', steps: ['L’auteur prend de la distance : il ne présente pas l’information comme certaine.'] }, watch: 'Une réponse correcte reformule souvent le texte ; elle ne le recopie pas.' },
+      gens: C1_TEXTS.map(frPassage) });
+    fra({ id: id('style'), strand: 'U', title: 'Expression écrite et reformulation', codes: code, calc: false, blurb: 'Formules de la lettre formelle, reformulation, anglicismes à éviter et précision de l’expression.',
+      learn: { ideas: ['Lettre formelle : <i lang="fr">Madame, Monsieur,</i> … <i lang="fr">Je vous prie d’agréer, Madame, Monsieur, l’expression de mes salutations distinguées.</i>', 'Reformuler, c’est garder le sens en changeant la structure : voix passive, nominalisation, connecteurs.', 'Anglicismes à éviter : <i lang="fr">« faire du sens »</i> → <i lang="fr">avoir du sens</i> ; <i lang="fr">« réaliser »</i> au sens de « se rendre compte » → <i lang="fr">se rendre compte</i>.', 'Préférez <i lang="fr">bien que</i> + subjonctif à « malgré que ».'],
+        example: { q: 'Reformulez de manière soutenue : <span lang="fr">« Je voudrais savoir si vous pouvez m’envoyer la brochure. »</span>', steps: ['<span lang="fr">Je vous saurais gré de bien vouloir m’adresser la brochure.</span>'] }, watch: 'Ne mélangez pas les registres dans une même lettre.' },
+      gens: [frBank([
+        { q: 'Quelle formule convient pour conclure une lettre formelle ?', a: 'Je vous prie d’agréer, Madame, Monsieur, l’expression de mes salutations distinguées.', w: ['Bisous et à plus !', 'Salut, à bientôt.', 'Bon, voilà, c’est tout.'], s: ['Formule de politesse classique et soutenue.'] },
+        { q: 'Quelle phrase évite l’anglicisme ?', a: 'Cet argument a du sens.', w: ['Cet argument fait du sens.', 'Cet argument fait sens à moi.', 'Cet argument est sensible.'], s: ['« Faire du sens » est un calque de l’anglais.'] },
+        { q: 'Quelle phrase est correcte en français soutenu ?', a: 'Bien qu’il soit tard, nous continuons.', w: ['Malgré qu’il est tard, nous continuons.', 'Malgré qu’il soit tard, nous continuons.', 'Bien qu’il est tard, nous continuons.'], s: ['« Bien que » + subjonctif.'] },
+        { q: 'Quelle reformulation garde le sens de « On a annulé le concert à cause de la pluie » ?', a: 'Le concert a été annulé en raison de la pluie.', w: ['Le concert a eu lieu malgré la pluie.', 'La pluie a été annulée par le concert.', 'On a annulé la pluie.'], s: ['Voix passive + « en raison de ».'] },
+        { q: 'Comment commencer une lettre formelle à un destinataire inconnu ?', a: 'Madame, Monsieur,', w: ['Coucou,', 'Cher ami,', 'Salut à tous,'], s: ['Formule d’appel neutre et formelle.'] },
+        { q: 'Quelle phrase utilise correctement « se rendre compte » ?', a: 'Je me suis rendu compte de mon erreur.', w: ['J’ai réalisé mon erreur. (au sens de « comprendre »)', 'Je me suis rendu compte mon erreur.', 'Je me suis rendue compte de mon erreur. (dit par un homme)'], s: ['« Se rendre compte de » ; « réaliser » au sens de « comprendre » est un anglicisme critiqué.'] },
+        { q: 'Quelle phrase est la plus concise et soutenue ?', a: 'La hausse des prix inquiète les consommateurs.', w: ['Les prix, ils montent, et ça inquiète les gens qui achètent.', 'Le fait que les prix montent fait que les gens sont inquiets.', 'Les prix montent beaucoup et les gens sont pas contents.'], s: ['Nominalisation et vocabulaire précis.'] }
+      ])] });
+  }
+}
+registerEnglish(7); registerFrench('B1');
 /* ===== APP ===== */
 (function () {
   var SUBJECTS = {
     maths: { name: 'Maths', strands: [{ id: 'N', name: 'Number' }, { id: 'A', name: 'Algebra' }, { id: 'G', name: 'Geometry and measure' }, { id: 'S', name: 'Statistics and probability' }] },
-    science: { name: 'Science', strands: [{ id: 'B', name: 'Biology' }, { id: 'C', name: 'Chemistry' }, { id: 'P', name: 'Physics' }, { id: 'E', name: 'Earth and space' }, { id: 'W', name: 'Working scientifically' }] }
+    science: { name: 'Science', strands: [{ id: 'B', name: 'Biology' }, { id: 'C', name: 'Chemistry' }, { id: 'P', name: 'Physics' }, { id: 'E', name: 'Earth and space' }, { id: 'W', name: 'Working scientifically' }] },
+    english: { name: 'English', strands: [{ id: 'R', name: 'Reading' }, { id: 'K', name: 'Grammar and punctuation' }, { id: 'V', name: 'Vocabulary and spelling' }, { id: 'Y', name: 'Writing' }] },
+    french: { name: 'French', strands: [{ id: 'F', name: 'Grammaire' }, { id: 'L', name: 'Vocabulaire' }, { id: 'O', name: 'Compréhension écrite' }, { id: 'U', name: 'Expression et style' }] }
   };
   TOPICS.forEach(function (t) { if (!t.subject) t.subject = 'maths'; });
   var subj = 'maths';
   try { var sv = localStorage.getItem('stage7study.subject'); if (SUBJECTS[sv]) subj = sv; } catch (e) {}
   function STR() { return SUBJECTS[subj].strands; }
+  function subjWord() { var n = SUBJECTS[subj].name; return subj === 'english' || subj === 'french' ? n : n.toLowerCase(); }
   function TOPS() { return TOPICS.filter(function (t) { return t.subject === subj; }); }
   function setSubj(s) { subj = s; try { localStorage.setItem('stage7study.subject', s); } catch (e) {} markSubj(); }
   function markSubj() { Array.prototype.forEach.call(document.querySelectorAll('[data-subj]'), function (b) { b.setAttribute('aria-pressed', b.getAttribute('data-subj') === subj ? 'true' : 'false'); }); }
@@ -2827,7 +3589,7 @@ sci({
   }
   function strandColor(s) { return 'var(--s' + s + ')'; }
   function meter(l, s) { return '<span class="meter" data-l="' + l + '" style="--sc:' + strandColor(s) + '" aria-hidden="true"><i></i><i></i><i></i></span>'; }
-  function updateMast() { var t = totals(); mastMeta.innerHTML = t.secure + ' of ' + TOPS().length + ' ' + SUBJECTS[subj].name.toLowerCase() + ' topics secure'; }
+  function updateMast() { var t = totals(); mastMeta.innerHTML = t.secure + ' of ' + TOPS().length + ' ' + subjWord() + ' topics secure'; }
   var current = { name: 'home' };
   function rerender() { updateMast(); if (current.name === 'home') home(); else if (current.name === 'topic') topicPage(current.id, current.tab); }
   function go(fn) { window.scrollTo(0, 0); fn(); var h = view.querySelector('h1'); if (h) { h.setAttribute('tabindex', '-1'); h.focus({ preventScroll: true }); } }
@@ -2845,7 +3607,7 @@ sci({
     }
     h += '<div class="tally"><span><b>' + t.a + '</b> questions answered</span>' + (t.a ? '<span><b>' + Math.round(100 * t.c / t.a) + '%</b> correct</span>' : '') + '</div>';
     var myTests = prog.tests.filter(function (x) { return (x.subject || 'maths') === subj; }), lastT = myTests[myTests.length - 1];
-    h += '<div class="row"><button class="btn" data-go="test">Mixed ' + SUBJECTS[subj].name.toLowerCase() + ' test</button>' + (lastT ? '<span class="small">Last test: ' + lastT.score + ' out of ' + lastT.n + '</span>' : '') + '</div>';
+    h += '<div class="row"><button class="btn" data-go="test">Mixed ' + subjWord() + ' test</button>' + (lastT ? '<span class="small">Last test: ' + lastT.score + ' out of ' + lastT.n + '</span>' : '') + '</div>';
     STR().forEach(function (st) {
       var ts = TOPS().filter(function (x) { return x.strand === st.id; }), sec = ts.filter(function (x) { return level(x.id) === 3; }).length;
       h += '<section class="strand" style="--sc:' + strandColor(st.id) + '" aria-labelledby="s' + st.id + '"><div class="strandhead"><h2 id="s' + st.id + '">' + st.name + '</h2><span class="small">' + sec + ' of ' + ts.length + ' secure</span></div><div class="topics">';
@@ -2893,14 +3655,14 @@ sci({
     if (q._calcShow) box.appendChild(el('p', { class: 'calcnote' }, 'Calculator allowed'));
     box.appendChild(el('div', { class: 'prompt', id: 'qprompt' }, q.prompt));
     if (q.fig) box.appendChild(el('div', { class: 'figwrap' }, q.fig));
-    var ans = el('div', { class: 'answers' }), inputs = [], getters = [], keysNeeded = false;
-    function textInput(label, idx) {
+    var ans = el('div', { class: 'answers' }), inputs = [], getters = [], keysNeeded = false, wordsNeeded = false;
+    function textInput(label, idx, words) {
       var id = 'a' + n + '_' + idx;
       var f = el('div', { class: 'field' });
       if (label !== null) f.appendChild(el('label', { for: id }, label || 'Answer'));
-      var inp = el('input', { id: id, class: 'inp', type: 'text', inputmode: 'decimal', autocomplete: 'off', autocapitalize: 'off', spellcheck: 'false', 'aria-describedby': 'qprompt' });
+      var inp = el('input', { id: id, class: 'inp' + (words ? ' words' : ''), type: 'text', inputmode: words ? 'text' : 'decimal', autocomplete: 'off', autocapitalize: 'off', autocorrect: 'off', spellcheck: 'false', lang: q.lang || null, 'aria-describedby': 'qprompt' });
       inp.addEventListener('focus', function () { lastInput = inp; });
-      f.appendChild(inp); ans.appendChild(f); inputs.push(inp); keysNeeded = true;
+      f.appendChild(inp); ans.appendChild(f); inputs.push(inp); if (words) wordsNeeded = true; else keysNeeded = true;
       return function () { return inp.value; };
     }
     function segInput(label, options) {
@@ -2926,16 +3688,17 @@ sci({
       ans = opts; inputs = Array.prototype.slice.call(opts.children);
       getResp = function () { return sel; };
     } else if (q.kind === 'fields') {
-      q.fields.forEach(function (f, i) { getters.push(f.kind === 'select' ? segInput(f.label, f.options) : textInput(f.label, i)); });
+      q.fields.forEach(function (f, i) { getters.push(f.kind === 'select' ? segInput(f.label, f.options) : textInput(f.label, i, f.kind === 'text')); });
       getResp = function () { return getters.map(function (g) { return g(); }); };
     } else {
-      var g = textInput('Answer', 0); getResp = function () { return g(); };
+      var g = textInput(q.inputLabel || 'Answer', 0, q.kind === 'text'); getResp = function () { return g(); };
     }
     box.appendChild(ans);
-    if (keysNeeded) {
+    if (keysNeeded || (wordsNeeded && q.accents)) {
       var keys = el('div', { class: 'keys', 'aria-label': 'Symbol keys' });
-      [['−', '-'], ['/', '/'], ['.', '.'], ['space', ' '], ['×10^', '×10^']].forEach(function (k) {
-        var b = el('button', { type: 'button', 'aria-label': k[0] === 'space' ? 'space' : 'type ' + k[0] }, k[0]);
+      var keyset = keysNeeded ? [['−', '-'], ['/', '/'], ['.', '.'], ['space', ' '], ['×10^', '×10^']] : ['é', 'è', 'ê', 'à', 'â', 'ç', 'ù', 'û', 'î', 'ï', 'ô', 'ë', 'œ'].map(function (c) { return [c, c]; });
+      keyset.forEach(function (k) {
+        var b = el('button', { type: 'button', 'aria-label': k[0] === 'space' ? 'space' : 'type ' + k[0], lang: q.lang || null }, k[0]);
         b.addEventListener('mousedown', function (e) { e.preventDefault(); });
         b.addEventListener('click', function () {
           var inp = lastInput && box.contains(lastInput) ? lastInput : inputs.filter(function (x) { return x.tagName === 'INPUT'; })[0]; if (!inp || inp.disabled) return;
@@ -3003,7 +3766,7 @@ sci({
         if (checked) return;
         if (R2.empty()) { R2.after.innerHTML = '<p class="warn">Enter an answer first.</p>'; return; }
         var resp = R2.getResp(), m = mark(q, resp);
-        if (!m.ok && q.kind !== 'mc' && (m.parts || []).some(function (p) { return p.bad && !p.blank; })) { R2.after.innerHTML = '<p class="warn">That doesn’t look like a number. You can type whole numbers, decimals, fractions like 3/4, or mixed numbers like 2 1/2.</p>'; return; }
+        if (!m.ok && q.kind !== 'mc' && q.kind !== 'text' && (m.parts || []).some(function (p) { return p.bad && !p.blank; })) { R2.after.innerHTML = '<p class="warn">That doesn’t look like a number. You can type whole numbers, decimals, fractions like 3/4, or mixed numbers like 2 1/2.</p>'; return; }
         checked = true; R2.lock(); R2.showMarks(resp, m);
         record(id, m.ok); save(); results.push({ ok: m.ok, hinted: hinted });
         R2.markEl.textContent = m.ok ? '✓' : '✗'; R2.markEl.className = 'mark ' + (m.ok ? 'ok' : 'no');
@@ -3032,8 +3795,8 @@ sci({
   function testSetup() {
     current = { name: 'testsetup' };
     var scope = 'all', len = 15;
-    var h = '<div class="stack"><div><button class="back" data-go="home">All topics</button></div><h1>Mixed ' + SUBJECTS[subj].name.toLowerCase() + ' test</h1><p class="muted" style="max-width:65ch">Questions come from different topics, like an exam. You see your marks and worked solutions at the end.</p>';
-    h += '<h2>What to cover</h2><div class="choice" role="radiogroup" aria-label="What to cover" id="scope"><button type="button" role="radio" aria-checked="true" data-v="all">All of Stage 7 ' + SUBJECTS[subj].name.toLowerCase() + '<span>' + TOPS().length + ' topics</span></button>' + STR().map(function (s) { return '<button type="button" role="radio" aria-checked="false" data-v="' + s.id + '">' + s.name + '<span>' + TOPS().filter(function (t) { return t.strand === s.id; }).length + ' topics</span></button>'; }).join('') + '</div>';
+    var h = '<div class="stack"><div><button class="back" data-go="home">All topics</button></div><h1>Mixed ' + subjWord() + ' test</h1><p class="muted" style="max-width:65ch">Questions come from different topics, like an exam. You see your marks and worked solutions at the end.</p>';
+    h += '<h2>What to cover</h2><div class="choice" role="radiogroup" aria-label="What to cover" id="scope"><button type="button" role="radio" aria-checked="true" data-v="all">All of Stage 7 ' + subjWord() + '<span>' + TOPS().length + ' topics</span></button>' + STR().map(function (s) { return '<button type="button" role="radio" aria-checked="false" data-v="' + s.id + '">' + s.name + '<span>' + TOPS().filter(function (t) { return t.strand === s.id; }).length + ' topics</span></button>'; }).join('') + '</div>';
     h += '<h2>How many questions</h2><div class="choice" role="radiogroup" aria-label="How many questions" id="len"><button type="button" role="radio" aria-checked="false" data-v="10">10 questions<span>About 15 minutes</span></button><button type="button" role="radio" aria-checked="true" data-v="15">15 questions<span>About 25 minutes</span></button><button type="button" role="radio" aria-checked="false" data-v="25">25 questions<span>About 40 minutes</span></button></div>';
     h += '<div class="row"><button class="btn primary" id="start">Start the test</button></div></div>';
     view.innerHTML = h; wireGo();
