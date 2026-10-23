@@ -28,6 +28,7 @@
   --img: #13806f;
   --img-soft: rgba(19, 128, 111, 0.18);
   --sN: #2851a3; --sA: #7445c0; --sG: #13806f; --sS: #b5700c;
+  --sB: #2f8a3a; --sC: #b8456b; --sP: #2851a3; --sE: #9a6a12; --sW: #5b6478;
   --f-display: "Bricolage Grotesque", "Avenir Next", "Segoe UI", system-ui, sans-serif;
   --f-body: "Atkinson Hyperlegible", "Verdana", "Segoe UI", system-ui, sans-serif;
   --f-hand: "Caveat", "Segoe Print", "Comic Sans MS", cursive;
@@ -38,14 +39,14 @@
     --paper: #121822; --rule: rgba(150, 185, 245, 0.06); --sheet: #1a2230; --ink: #e8edf6; --ink-2: #9ba7be; --line: #2d3849;
     --accent: #93b2f6; --accent-ink: #0e1626; --accent-soft: #223152; --pen: #ff8b81; --pen-soft: #3b2426; --ok: #7fd5a1; --ok-soft: #1c3327;
     --hl: #4a421a; --margin: #6e3b3b; --fig-fill: #222c3d; --fig-fill-2: #2a3549; --fig-fill-3: #334058; --img: #5fd0bd; --img-soft: rgba(95, 208, 189, 0.2);
-    --sN: #93b2f6; --sA: #b99af0; --sG: #5fd0bd; --sS: #f0b65a; color-scheme: dark;
+    --sN: #93b2f6; --sA: #b99af0; --sG: #5fd0bd; --sS: #f0b65a; --sB: #7ccf86; --sC: #f08fb0; --sP: #93b2f6; --sE: #e2b45f; --sW: #a8b2c6; color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
   --paper: #121822; --rule: rgba(150, 185, 245, 0.06); --sheet: #1a2230; --ink: #e8edf6; --ink-2: #9ba7be; --line: #2d3849;
   --accent: #93b2f6; --accent-ink: #0e1626; --accent-soft: #223152; --pen: #ff8b81; --pen-soft: #3b2426; --ok: #7fd5a1; --ok-soft: #1c3327;
   --hl: #4a421a; --margin: #6e3b3b; --fig-fill: #222c3d; --fig-fill-2: #2a3549; --fig-fill-3: #334058; --img: #5fd0bd; --img-soft: rgba(95, 208, 189, 0.2);
-  --sN: #93b2f6; --sA: #b99af0; --sG: #5fd0bd; --sS: #f0b65a; color-scheme: dark;
+  --sN: #93b2f6; --sA: #b99af0; --sG: #5fd0bd; --sS: #f0b65a; --sB: #7ccf86; --sC: #f08fb0; --sP: #93b2f6; --sE: #e2b45f; --sW: #a8b2c6; color-scheme: dark;
 }
 html { height: 100%; }
 body {
@@ -66,7 +67,14 @@ button { cursor: pointer; }
 .brand { font-family: var(--f-display); font-weight: 800; font-size: 1.7rem; letter-spacing: -0.02em; line-height: 1; margin: 0; }
 .brand span { color: var(--accent); }
 .subjects { display: flex; gap: 6px; }
-.subj { border: 1.5px solid var(--ink); background: var(--ink); color: var(--paper); border-radius: 999px; padding: 3px 12px; font-size: 0.85rem; font-weight: 700; }
+.subj { border: 1.5px solid var(--ink); background: var(--sheet); color: var(--ink); border-radius: 999px; padding: 4px 14px; font-size: 0.88rem; font-weight: 700; }
+.subj[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+.subj:hover { background: var(--accent-soft); }
+.subj[aria-pressed="true"]:hover { background: var(--ink); }
+.figrow { display: flex; flex-wrap: wrap; gap: 8px 16px; }
+sub { font-size: 0.7em; line-height: 0; }
+.nuclide { display: inline-flex; align-items: center; gap: 2px; vertical-align: middle; font-size: 1.1em; }
+.nuclide .nm { display: inline-flex; flex-direction: column; font-size: 0.62em; line-height: 1.15; text-align: right; }
 .mastmeta { font-size: 0.85rem; color: var(--ink-2); text-align: right; font-variant-numeric: tabular-nums; }
 
 h1, h2, h3 { font-family: var(--f-display); letter-spacing: -0.015em; text-wrap: balance; margin: 0; }
@@ -263,18 +271,23 @@ svg.fig .shlbl { font-size: 13px; font-weight: 700; }
   .inp { width: 7.5em; }
 }
 .sheet > *, .stack > *, .feedback > *, .rv > * { min-width: 0; }
+
+.dkey { margin: 8px 0 0; padding-left: 0; list-style: none; display: grid; gap: 8px; }
+.dkey li { display: grid; gap: 2px; }
+.dkey li span:first-child { font-weight: 700; }
+.dkey li span + span { padding-left: 12px; color: var(--ink-2); }
 </style></head><body>
 <div class="wrap">
   <header class="mast">
     <div class="stack" style="gap:8px">
       <p class="brand">Stage 7 <span>Study</span></p>
-      <div class="subjects" aria-label="Subject"><span class="subj">Maths</span></div>
+      <div class="subjects" role="group" aria-label="Subject"><button type="button" class="subj" data-subj="maths" aria-pressed="true">Maths</button><button type="button" class="subj" data-subj="science" aria-pressed="false">Science</button></div>
     </div>
     <p class="mastmeta" id="mastmeta"></p>
   </header>
   <main id="view"></main>
   <footer>
-    <p>Topics follow the Cambridge Lower Secondary Mathematics curriculum framework (0862), Stage 7. Every question is generated fresh, so you can practise as often as you like.</p>
+    <p>Topics follow the Cambridge Lower Secondary curriculum frameworks for Stage 7: Mathematics (0862) and Science (0893). Many questions are generated fresh, so you can practise as often as you like.</p>
     <p id="syncnote"></p>
     <div class="confirm"><button class="btn quiet" id="reset" type="button">Reset my progress</button>
       <span id="confirm" hidden class="confirm"><span>This clears every topic score. Reset?</span><button class="btn" id="yesreset" type="button">Yes, reset</button><button class="btn quiet" id="nokeep" type="button">Keep my progress</button></span></div>
@@ -1883,9 +1896,844 @@ topic({
     }
   ]
 });
+/* science helpers from Stage 9 */
+/* ===== STAGE 9 SCIENCE (Cambridge Lower Secondary Science 0893) ===== */
+function sci(t) { t.subject = 'science'; topic(t); }
+function chem(f) { return f.replace(/([A-Za-z\)])(\d+)/g, '$1<sub>$2</sub>'); }
+function ion(sym, ch) { return sym + '<sup>' + (Math.abs(ch) === 1 ? '' : Math.abs(ch)) + (ch > 0 ? '+' : '−') + '</sup>'; }
+function arrow() { return ' → '; }
+
+/* ---------- figures ---------- */
+function waveFig(waves) {
+  var W = 260, H = 96, b = '', out = '';
+  waves.forEach(function (w, k) {
+    var y0 = H / 2, pts = [];
+    for (var x = 0; x <= W - 20; x += 2) pts.push((x + 10) + ',' + (y0 - w.a * Math.sin(2 * Math.PI * w.f * x / (W - 20))).toFixed(1));
+    b = L(10, y0, W - 10, y0, 'gl') + L(10, 8, 10, H - 8, 'axis') + '<polyline class="plot" fill="none" points="' + pts.join(' ') + '"/>' + T(W - 6, 14, w.label, 'lbl strong', 'end');
+    out += svgWrap(W, H, b, 'Waveform ' + w.label);
+  });
+  return '<div class="figrow">' + out + '</div>';
+}
+function cellSym(x, y) { return L(x - 4, y - 14, x - 4, y + 14, 'ln') + '<line x1="' + (x + 4) + '" y1="' + (y - 8) + '" x2="' + (x + 4) + '" y2="' + (y + 8) + '" class="ln" style="stroke-width:4"/>'; }
+function meterSym(x, y, ch, lab) { return '<circle cx="' + x + '" cy="' + y + '" r="12" class="hole"/>' + T(x, y + 1, ch, 'lbl strong') + (lab ? T(x, y - 22, lab, 'lbl') : ''); }
+function lampSym(x, y) { return '<circle cx="' + x + '" cy="' + y + '" r="11" class="hole"/>' + L(x - 8, y - 8, x + 8, y + 8, 'ln') + L(x - 8, y + 8, x + 8, y - 8, 'ln'); }
+function wire(pts) { return '<polyline class="ln" fill="none" points="' + pts.map(function (p) { return p.join(','); }).join(' ') + '"/>'; }
+function parallelCircuit(l1, l2, l3) {
+  var b = wire([[110, 40], [40, 40], [40, 180], [300, 180], [300, 40], [170, 40]]) + wire([[40, 110], [300, 110]]);
+  b += '<rect x="112" y="28" width="56" height="24" fill="var(--sheet)"/>' + L(110, 40, 136, 40, 'ln') + L(144, 40, 170, 40, 'ln') + cellSym(140, 40);
+  b += '<rect x="218" y="26" width="28" height="28" fill="var(--sheet)"/>' + meterSym(232, 40, 'A', l1);
+  b += '<rect x="96" y="96" width="28" height="28" fill="var(--sheet)"/>' + lampSym(110, 110) + '<rect x="218" y="96" width="28" height="28" fill="var(--sheet)"/>' + meterSym(232, 110, 'A', l2);
+  b += '<rect x="96" y="166" width="28" height="28" fill="var(--sheet)"/>' + lampSym(110, 180) + '<rect x="218" y="166" width="28" height="28" fill="var(--sheet)"/>' + meterSym(232, 180, 'A', l3);
+  b += '<circle cx="40" cy="110" r="3" class="dot"/><circle cx="300" cy="110" r="3" class="dot"/>';
+  return svgWrap(340, 200, b, 'Parallel circuit with three ammeters');
+}
+function seriesCircuit(n, labA) {
+  var b = wire([[40, 40], [40, 140], [300, 140], [300, 40], [40, 40]]);
+  b += '<rect x="152" y="28" width="16" height="24" fill="var(--sheet)"/>' + cellSym(160, 40);
+  for (var i = 0; i < n; i++) { var x = n === 1 ? 170 : 90 + i * 160 / (n - 1); b += '<rect x="' + (x - 14) + '" y="126" width="28" height="28" fill="var(--sheet)"/>' + lampSym(x, 140) + T(x, 166, 'Lamp ' + (i + 1), 'tick'); }
+  b += '<rect x="286" y="76" width="28" height="28" fill="var(--sheet)"/>' + meterSym(300, 90, 'A', '');
+  if (labA) b += T(322, 90, labA, 'lbl', 'start');
+  return svgWrap(370, 176, b, 'Series circuit');
+}
+
+/* ================= BIOLOGY ================= */
+
+
+
+
+
+
+
+
+
+
+/* ================= CHEMISTRY ================= */
+var ELEMENTS = [[1, 'H', 'hydrogen', 1], [2, 'He', 'helium', 4], [3, 'Li', 'lithium', 7], [4, 'Be', 'beryllium', 9], [5, 'B', 'boron', 11], [6, 'C', 'carbon', 12], [7, 'N', 'nitrogen', 14], [8, 'O', 'oxygen', 16], [9, 'F', 'fluorine', 19], [10, 'Ne', 'neon', 20], [11, 'Na', 'sodium', 23], [12, 'Mg', 'magnesium', 24], [13, 'Al', 'aluminium', 27], [14, 'Si', 'silicon', 28], [15, 'P', 'phosphorus', 31], [16, 'S', 'sulfur', 32], [17, 'Cl', 'chlorine', 35], [18, 'Ar', 'argon', 40], [19, 'K', 'potassium', 39], [20, 'Ca', 'calcium', 40]];
+function shells(z) { var a = [], cap = [2, 8, 8, 2]; for (var i = 0; z > 0; i++) { var c = Math.min(z, cap[i]); a.push(c); z -= c; } return a; }
+function groupOf(z) { var s = shells(z), o = s[s.length - 1]; if (z === 2) return 0; return o === 8 ? 0 : o; }
+function nucFig(e) { return '<span class="nuclide"><span class="nm"><span>' + e[3] + '</span><span>' + e[0] + '</span></span><b>' + e[1] + '</b></span>'; }
+
+
+
+var ION_EL = [['sodium', 'Na', 1], ['potassium', 'K', 1], ['lithium', 'Li', 1], ['magnesium', 'Mg', 2], ['calcium', 'Ca', 2], ['aluminium', 'Al', 3], ['chlorine', 'Cl', -1], ['fluorine', 'F', -1], ['oxygen', 'O', -2], ['sulfur', 'S', -2]];
+
+
+
+
+var DENS = [['cork', 0.24], ['oak wood', 0.75], ['ice', 0.92], ['olive oil', 0.92], ['water', 1.0], ['seawater', 1.03], ['glass', 2.5], ['aluminium', 2.7], ['iron', 7.9], ['copper', 8.9], ['lead', 11.3], ['gold', 19.3]];
+
+
+var FORMULAE = [['H2O', 'water', { H: 2, O: 1 }], ['CO2', 'carbon dioxide', { C: 1, O: 2 }], ['CH4', 'methane', { C: 1, H: 4 }], ['NaCl', 'sodium chloride', { Na: 1, Cl: 1 }], ['H2SO4', 'sulfuric acid', { H: 2, S: 1, O: 4 }], ['CaCO3', 'calcium carbonate', { Ca: 1, C: 1, O: 3 }], ['NH3', 'ammonia', { N: 1, H: 3 }], ['C6H12O6', 'glucose', { C: 6, H: 12, O: 6 }], ['HCl', 'hydrochloric acid', { H: 1, Cl: 1 }], ['MgO', 'magnesium oxide', { Mg: 1, O: 1 }], ['NaOH', 'sodium hydroxide', { Na: 1, O: 1, H: 1 }], ['CuSO4', 'copper sulfate', { Cu: 1, S: 1, O: 4 }], ['HNO3', 'nitric acid', { H: 1, N: 1, O: 3 }]];
+
+
+var REACT = ['magnesium', 'zinc', 'iron', 'copper', 'silver'];
+var SALT = { magnesium: 'magnesium sulfate', zinc: 'zinc sulfate', iron: 'iron sulfate', copper: 'copper sulfate', silver: 'silver nitrate' };
+function saltOf(metal, anion) { return metal + ' ' + anion; }
+
+
+var ACIDS = [['hydrochloric acid', 'chloride'], ['sulfuric acid', 'sulfate'], ['nitric acid', 'nitrate']];
+
+
+
+
+/* ================= PHYSICS ================= */
+
+
+
+
+
+
+
+
+
+
+/* ================= EARTH AND SPACE ================= */
+
+
+
+
+
+
+/* ================= WORKING SCIENTIFICALLY ================= */
+
+
+
+/* ===== STAGE 7 SCIENCE (Cambridge Lower Secondary Science 0893) ===== */
+function cap(s) { return s.charAt(0).toUpperCase() + s.slice(1); }
+
+/* ================= BIOLOGY ================= */
+var CELL_PARTS = [
+  ['nucleus', 'controls the cell and contains the genetic material', 'both'],
+  ['cell membrane', 'controls what enters and leaves the cell', 'both'],
+  ['cytoplasm', 'is where most chemical reactions happen', 'both'],
+  ['mitochondria', 'release energy from food by respiration', 'both'],
+  ['cell wall', 'strengthens the cell and keeps its shape', 'plant'],
+  ['chloroplasts', 'absorb light to make food by photosynthesis', 'plant'],
+  ['large vacuole', 'stores cell sap and keeps the cell firm', 'plant']
+];
+sci({
+  id: 's7-cells', strand: 'B', title: 'Cells and their parts', codes: ['7Bs.01', '7Bs.02', '7Bs.04'], calc: false,
+  blurb: 'All living things are made of cells. Learn the parts of plant and animal cells and what they do.',
+  learn: {
+    ideas: [
+      'All organisms are made of <b>cells</b>. Most <b>microorganisms</b>, such as bacteria and yeast, are just one cell.',
+      'Animal and plant cells both have a <b>nucleus</b> (controls the cell), a <b>cell membrane</b> (controls what goes in and out), <b>cytoplasm</b> (where reactions happen) and <b>mitochondria</b> (release energy by respiration).',
+      'Plant cells also have a <b>cell wall</b> (strength and shape), <b>chloroplasts</b> (photosynthesis) and a large permanent <b>vacuole</b> (cell sap, keeps the cell firm).',
+      'Use a microscope to see cells. Stains such as iodine make the parts easier to see.'
+    ],
+    example: { q: 'A cell has a nucleus, a cell membrane and a cell wall, but no chloroplasts. Could it be a plant cell?', steps: ['Animal cells never have a cell wall, so it is not an animal cell.', 'Plant cells that are not in the light, such as root cells, have no chloroplasts.', 'So yes, it could be a plant root cell.'] },
+    watch: 'The cell wall and the cell membrane are different. Plant cells have both; animal cells have only a membrane.'
+  },
+  gens: [
+    function () {
+      var p = pick(CELL_PARTS), byFn = Math.random() < 0.5;
+      if (byFn) return mc('Which part of a cell ' + p[1] + '?', cap(p[0]), shuffle(CELL_PARTS.filter(function (x) { return x !== p; })).slice(0, 3).map(function (x) { return cap(x[0]); }), { hint: 'Think about what each part of a cell is for.', steps: ['The ' + p[0] + ' ' + p[1] + '.'] });
+      return mc('What does the ' + p[0] + ' do?', 'It ' + p[1], shuffle(CELL_PARTS.filter(function (x) { return x !== p; })).slice(0, 3).map(function (x) { return 'It ' + x[1]; }), { hint: 'Think about what each part of a cell is for.', steps: ['The ' + p[0] + ' ' + p[1] + '.'] });
+    },
+    function () {
+      var p = pick(CELL_PARTS), both = p[2] === 'both';
+      var q = mc('Is a ' + p[0] + ' found in plant cells, animal cells or both?', both ? 'Both' : 'Plant cells only', [both ? 'Plant cells only' : 'Both', 'Animal cells only'], { hint: 'Plant cells have three extra parts that animal cells do not.', steps: [both ? 'Both plant and animal cells have a ' + p[0] + '.' : 'Only plant cells have a ' + p[0] + '. The three extras are the cell wall, chloroplasts and a large vacuole.'] });
+      q.options = ['Plant cells only', 'Animal cells only', 'Both']; q.correct = both ? 2 : 0; return q;
+    },
+    bank([
+      { q: 'Which of these is a single-celled microorganism?', a: 'A bacterium', w: ['An earthworm', 'A mushroom', 'A blade of grass'], s: ['Bacteria are made of just one cell.'] },
+      { q: 'Why can a cell from a leaf make its own food but a cheek cell cannot?', a: 'The leaf cell has chloroplasts', w: ['The leaf cell has a nucleus', 'The cheek cell has no membrane', 'The cheek cell is too small'], s: ['Chloroplasts absorb light for photosynthesis. Animal cells do not have them.'] },
+      { q: 'What piece of equipment do you need to see cells?', a: 'A microscope', w: ['A telescope', 'A thermometer', 'A measuring cylinder'], s: ['Most cells are far too small to see with the naked eye.'] },
+      { q: 'Why is iodine solution added to onion cells on a microscope slide?', a: 'To stain the cells so the parts are easier to see', w: ['To kill bacteria', 'To make the cells grow', 'To give them energy'], s: ['Stains make structures such as the nucleus show up clearly.'] }
+    ])
+  ]
+});
+
+sci({
+  id: 's7-specialised', strand: 'B', title: 'Specialised cells, tissues and organs', codes: ['7Bs.03', '7Bs.05'], calc: false,
+  blurb: 'How the shape of special cells suits their job, and how cells build tissues, organs and organ systems.',
+  learn: {
+    ideas: [
+      'Many cells are <b>specialised</b>: their structure suits their function.',
+      'Red blood cells have no nucleus and a dented disc shape, leaving room for haemoglobin to carry oxygen. Sperm cells have a tail to swim. Nerve cells are long to carry messages. Root hair cells have a large surface area to absorb water.',
+      'Similar cells working together make a <b>tissue</b> (muscle tissue). Tissues together make an <b>organ</b> (the heart). Organs working together make an <b>organ system</b> (the circulatory system).',
+      'Order: cell → tissue → organ → organ system → organism.'
+    ],
+    example: { q: 'Why do leaf palisade cells have many chloroplasts?', steps: ['Palisade cells are near the top surface of the leaf, where there is most light.', 'Many chloroplasts mean they can absorb lots of light for photosynthesis.'] },
+    watch: 'A tissue is a group of similar cells. An organ is made of several different tissues.'
+  },
+  gens: [
+    function () {
+      var c = pick([['red blood cell', 'no nucleus, so there is more room to carry oxygen'], ['sperm cell', 'a tail to swim to the egg'], ['nerve cell', 'a long shape to carry messages around the body'], ['root hair cell', 'a long thin extension that gives a large surface area for absorbing water'], ['palisade cell', 'lots of chloroplasts for photosynthesis'], ['ciliated cell', 'tiny hairs (cilia) that sweep mucus out of the airways'], ['egg cell', 'a large store of food for the early embryo']]);
+      var all = ['no nucleus, so there is more room to carry oxygen', 'a tail to swim to the egg', 'a long shape to carry messages around the body', 'a long thin extension that gives a large surface area for absorbing water', 'lots of chloroplasts for photosynthesis', 'tiny hairs (cilia) that sweep mucus out of the airways', 'a large store of food for the early embryo'];
+      return mc('Which feature helps a <b>' + c[0] + '</b> do its job?', cap(c[1]), shuffle(all.filter(function (x) { return x !== c[1]; })).slice(0, 3).map(cap), { hint: 'Think about what this cell has to do.', steps: ['A ' + c[0] + ' has ' + c[1] + '.'] });
+    },
+    function () {
+      var items = [['a muscle cell', 'Cell'], ['a red blood cell', 'Cell'], ['muscle tissue', 'Tissue'], ['the lining of the stomach', 'Tissue'], ['the heart', 'Organ'], ['a leaf', 'Organ'], ['the stomach', 'Organ'], ['the digestive system', 'Organ system'], ['the circulatory system', 'Organ system'], ['the nervous system', 'Organ system']], it = pick(items);
+      var q = mc('Is <b>' + it[0] + '</b> a cell, a tissue, an organ or an organ system?', it[1], ['Cell', 'Tissue', 'Organ', 'Organ system'].filter(function (x) { return x !== it[1]; }), { hint: 'Cells make tissues, tissues make organs, organs make organ systems.', steps: [cap(it[0]) + ' is ' + (it[1] === 'Organ system' ? 'an organ system' : it[1] === 'Organ' ? 'an organ' : 'a ' + it[1].toLowerCase()) + '.'] });
+      q.options = ['Cell', 'Tissue', 'Organ', 'Organ system']; q.correct = q.options.indexOf(it[1]); return q;
+    },
+    bank([
+      { q: 'Which list is in order from smallest to largest?', a: 'Cell, tissue, organ, organ system', w: ['Tissue, cell, organ, organ system', 'Organ, tissue, cell, organ system', 'Cell, organ, tissue, organ system'], s: ['Cells make tissues; tissues make organs; organs make organ systems.'] },
+      { q: 'What is a tissue?', a: 'A group of similar cells working together', w: ['A single cell', 'Several organs working together', 'A whole organism'], s: ['For example, muscle tissue is made of many muscle cells.'] },
+      { q: 'Why does a red blood cell have no nucleus?', a: 'It leaves more room to carry oxygen', w: ['So it can swim faster', 'So it can make food', 'So it can send messages'], s: ['More space means more haemoglobin, which carries oxygen.'] }
+    ])
+  ]
+});
+
+sci({
+  id: 's7-living', strand: 'B', title: 'Living things, viruses and species', codes: ['7Bp.01', '7Bp.02', '7Bp.03'], calc: false,
+  blurb: 'The seven characteristics of life, whether viruses are alive, and what makes a species.',
+  learn: {
+    ideas: [
+      'All living things show seven characteristics, remembered as <b>MRS GREN</b>: Movement, Respiration, Sensitivity, Growth, Reproduction, Excretion, Nutrition.',
+      '<b>Viruses</b> are not made of cells. They can only reproduce inside another living cell, and they do not feed, respire or grow on their own. So many scientists say they are not alive, but they do contain genetic material and can change over time.',
+      'A <b>species</b> is a group of organisms that can breed together to produce <b>fertile</b> offspring (young that can themselves have young).',
+      'A horse and a donkey can breed to make a mule, but mules are infertile. So horses and donkeys are different species.'
+    ],
+    example: { q: 'A car moves, uses fuel and gives out waste gases. Why is it not alive?', steps: ['It does not grow, reproduce or respond to its surroundings by itself.', 'A living thing must show all seven characteristics.'] },
+    watch: 'Plants move too, slowly: leaves turn towards light and flowers open and close.'
+  },
+  gens: [
+    function () {
+      var c = pick([['Movement', 'changing position or moving parts of the body'], ['Respiration', 'releasing energy from food'], ['Sensitivity', 'detecting and responding to changes around them'], ['Growth', 'getting bigger or more complex'], ['Reproduction', 'making more of their own kind'], ['Excretion', 'getting rid of waste made inside the body'], ['Nutrition', 'taking in or making food']]);
+      var all = ['Movement', 'Respiration', 'Sensitivity', 'Growth', 'Reproduction', 'Excretion', 'Nutrition'];
+      return mc('Which characteristic of living things means <b>' + c[1] + '</b>?', c[0], shuffle(all.filter(function (x) { return x !== c[0]; })).slice(0, 3), { hint: 'MRS GREN: Movement, Respiration, Sensitivity, Growth, Reproduction, Excretion, Nutrition.', steps: [c[0] + ' means ' + c[1] + '.'] });
+    },
+    bank([
+      { q: 'Why do many scientists say viruses are not living?', a: 'They can only reproduce inside other living cells and are not made of cells', w: ['They are too small to see', 'They do not contain any genetic material', 'They only live in animals'], s: ['Viruses cannot carry out life processes on their own; they need a host cell.'] },
+      { q: 'Which is a reason some scientists say viruses could be counted as living?', a: 'They contain genetic material and can reproduce (inside a host cell)', w: ['They respire like animals', 'They make their own food', 'They are made of many cells'], s: ['Viruses have DNA or RNA and make copies of themselves, but only using a host cell.'] },
+      { q: 'A horse and a donkey breed and produce a mule. Mules cannot reproduce. What does this show?', a: 'Horses and donkeys are different species', w: ['Horses and donkeys are the same species', 'Mules are a new species', 'Mules are not living'], s: ['Members of one species produce fertile offspring. Mules are infertile.'] },
+      { q: 'What is a species?', a: 'Organisms that can breed together to produce fertile offspring', w: ['Any animals that look alike', 'All organisms in one habitat', 'Organisms that eat the same food'], s: ['The key test is fertile offspring.'] },
+      { q: 'Which life process do plants carry out when their roots grow towards water?', a: 'Sensitivity', w: ['Excretion', 'Nutrition', 'Respiration'], s: ['The roots detect water and respond by growing towards it.'] },
+      { q: 'A fire grows, moves, uses oxygen and produces waste. Why is it not alive?', a: 'It is not made of cells and does not reproduce or respond like living things', w: ['It is too hot', 'It does not move', 'It does not use oxygen'], s: ['A fire shows some features, but living things are made of cells and show all seven characteristics.'] }
+    ])
+  ]
+});
+
+var KEYS = [
+  { title: 'Key to some invertebrates', q: [['Does it have legs?', 2, 3], ['Does it have more than 6 legs?', 'spider', 'beetle'], ['Does it have a shell?', 'snail', 'earthworm']],
+    desc: { spider: 'has 8 legs', beetle: 'has 6 legs', snail: 'has no legs but has a shell', earthworm: 'has no legs and no shell' } },
+  { title: 'Key to some vertebrates', q: [['Does it have feathers?', 2, 3], ['Can it fly?', 'pigeon', 'penguin'], ['Does it have fur?', 'rabbit', 'lizard']],
+    desc: { pigeon: 'has feathers and can fly', penguin: 'has feathers but cannot fly', rabbit: 'has no feathers but has fur', lizard: 'has no feathers and no fur' } },
+  { title: 'Key to some leaves', q: [['Is the leaf divided into smaller leaflets?', 2, 3], ['Are the leaflets arranged like fingers on a hand?', 'horse chestnut', 'ash'], ['Does the leaf have a wavy (lobed) edge?', 'oak', 'beech']],
+    desc: { 'horse chestnut': 'is divided into leaflets spread out like fingers', ash: 'is divided into leaflets in pairs along a stalk', oak: 'is a single leaf with a lobed, wavy edge', beech: 'is a single leaf with a smooth edge' } }
+];
+function keyHTML(k) { var a = function (x) { return typeof x === 'number' ? 'go to ' + x : '<b>' + cap(x) + '</b>'; }; return '<ol class="dkey">' + k.q.map(function (r, i) { return '<li><span>' + (i + 1) + '. ' + r[0] + '</span><span>Yes: ' + a(r[1]) + '</span><span>No: ' + a(r[2]) + '</span></li>'; }).join('') + '</ol>'; }
+sci({
+  id: 's7-keys', strand: 'B', title: 'Classification and keys', codes: ['7Bp.04', '7TWSc.01'], calc: false,
+  blurb: 'Use and build dichotomous keys to identify and sort organisms.',
+  learn: {
+    ideas: [
+      'Scientists sort living things into groups by their features. This is <b>classification</b>.',
+      'A <b>dichotomous key</b> is a series of questions, each with only two answers (yes or no). Each answer leads to another question or to a name.',
+      'Good key questions use features you can observe and that have a clear answer: “Does it have six legs?”, not “Is it big?”.',
+      'To build a key, split the organisms into two groups with one question, then keep splitting each group until every organism is on its own.'
+    ],
+    example: { q: 'Write a first question that splits a cat, a fish, a sparrow and a frog into two groups.', steps: ['A clear, observable feature: “Does it have fur or feathers?”', 'Yes: cat and sparrow. No: fish and frog.', 'Then ask further questions to split each pair.'] },
+    watch: 'Avoid questions with opinions, such as “Is it pretty?”. Two people might answer differently.'
+  },
+  gens: [
+    function () {
+      var k = pick(KEYS), names = Object.keys(k.desc), n = pick(names);
+      return mc('Use the key to identify an organism that ' + k.desc[n] + '.<p class="small">' + k.title + '</p>' + keyHTML(k), cap(n), names.filter(function (x) { return x !== n; }).map(cap), { hint: 'Start at question 1 and follow the answers.', steps: ['Follow the key from question 1 using the description.', 'It ends at: ' + n + '.'] });
+    },
+    function () {
+      var k = pick(KEYS), names = Object.keys(k.desc), n = pick(names), qi = pick([0, 1, 2]);
+      var row = k.q[qi], yesSide = qi === 0 ? names.slice(0, 2) : qi === 1 ? [names[0]] : [names[2]];
+      var relevant = qi === 0 ? names : qi === 1 ? names.slice(0, 2) : names.slice(2);
+      var pickN = pick(relevant), ans = yesSide.indexOf(pickN) >= 0 ? 'Yes' : 'No';
+      var q = mc('In this key, what is the answer to question ' + (qi + 1) + ' (“' + row[0] + '”) for the ' + pickN + '?<p class="small">' + k.title + '</p>' + keyHTML(k), ans, [ans === 'Yes' ? 'No' : 'Yes'], { hint: 'Work backwards from where the ' + pickN + ' appears in the key.', steps: ['The ' + pickN + ' ' + k.desc[pickN] + ', so the answer is ' + ans.toLowerCase() + '.'] });
+      q.options = ['Yes', 'No']; q.correct = ans === 'Yes' ? 0 : 1; return q;
+    },
+    bank([
+      { q: 'Which is the best question to use in a dichotomous key?', a: 'Does it have wings?', w: ['Is it nice?', 'Is it quite big?', 'Do people like it?'], s: ['A good question is about a feature you can see, with a clear yes or no answer.'] },
+      { q: 'How many answers does each question in a dichotomous key have?', a: 'Two', w: ['One', 'Three', 'As many as you like'], s: ['“Dichotomous” means splitting into two.'] },
+      { q: 'You have 4 organisms. What is the smallest number of questions a dichotomous key needs to identify all of them?', a: '3', w: ['2', '4', '1'], s: ['Each question splits one group into two. To end with 4 single organisms you need 3 splits.'] }
+    ])
+  ]
+});
+
+var CHAINS = [['grass', 'rabbit', 'fox'], ['algae', 'water flea', 'small fish', 'heron'], ['oak leaves', 'caterpillar', 'blue tit', 'sparrowhawk'], ['seaweed', 'limpet', 'crab', 'seagull'], ['wheat', 'mouse', 'owl'], ['phytoplankton', 'krill', 'penguin', 'leopard seal'], ['lettuce', 'slug', 'thrush', 'cat']];
+sci({
+  id: 's7-foodwebs', strand: 'B', title: 'Food chains, webs and decomposers', codes: ['7Be.01', '7Be.02'], calc: false,
+  blurb: 'Build and read food chains and food webs, and understand the role of decomposers.',
+  learn: {
+    ideas: [
+      'A <b>food chain</b> shows what eats what. Arrows point from the food to the animal that eats it, showing the direction energy flows.',
+      'Chains start with a <b>producer</b>, usually a green plant, which makes its own food. Then come <b>consumers</b>: primary (eats the producer), secondary, tertiary.',
+      'A <b>food web</b> is several linked food chains. If one population changes, others in the web change too.',
+      '<b>Decomposers</b>, such as bacteria and fungi, break down dead organisms and waste. They return nutrients to the soil for plants to use again.'
+    ],
+    example: { q: 'In grass → rabbit → fox, what happens to the grass if foxes are removed?', steps: ['With no foxes, more rabbits survive, so the rabbit population grows.', 'More rabbits eat more grass, so the amount of grass falls.'] },
+    watch: 'The arrow means “is eaten by”, pointing towards the eater. Grass → rabbit, not rabbit → grass.'
+  },
+  gens: [
+    function () {
+      var c = pick(CHAINS), chain = c.map(function (x) { return x; }).join(' → '), t = pick(['producer', 'primary', 'top', 'eats']);
+      if (t === 'producer') return mc('In this food chain, which is the producer?<p class="data">' + chain + '</p>', cap(c[0]), c.slice(1).map(cap).concat(['The Sun']).slice(0, 3), { hint: 'The producer makes its own food using light.', steps: ['The producer is at the start of the chain: ' + c[0] + '.'] });
+      if (t === 'primary') return mc('In this food chain, which is the primary consumer?<p class="data">' + chain + '</p>', cap(c[1]), [c[0]].concat(c.slice(2)).map(cap).slice(0, 3), { hint: 'The primary consumer eats the producer.', steps: ['The ' + c[1] + ' eats the ' + c[0] + ', so it is the primary consumer.'] });
+      if (t === 'top') return mc('In this food chain, which is the top predator?<p class="data">' + chain + '</p>', cap(c[c.length - 1]), c.slice(0, -1).map(cap).slice(-3), { hint: 'Nothing in the chain eats the top predator.', steps: ['The ' + c[c.length - 1] + ' is at the end of the chain.'] });
+      var i = ri(1, c.length - 1);
+      return mc('In this food chain, what does the ' + c[i] + ' eat?<p class="data">' + chain + '</p>', cap(c[i - 1]), c.filter(function (_, k) { return k !== i - 1 && k !== i; }).map(cap).concat(['Nothing']).slice(0, 3), { hint: 'The arrow points from the food to the eater.', steps: ['The arrow into the ' + c[i] + ' comes from the ' + c[i - 1] + '.'] });
+    },
+    function () {
+      var c = pick(CHAINS.filter(function (x) { return x.length >= 3; })), i = ri(1, c.length - 2), up = Math.random() < 0.5;
+      var prey = c[i - 1 + (up ? 0 : 0)], pred = c[i + 1];
+      if (up) return mc('In the food chain ' + c.join(' → ') + ', the ' + c[i] + ' population suddenly falls. What is most likely to happen to the amount of ' + c[i - 1] + '?', 'It increases, because less of it is eaten', ['It decreases', 'It stays exactly the same', 'It becomes a predator'], { hint: 'What eats the ' + c[i - 1] + '?', steps: ['The ' + c[i] + ' eats the ' + c[i - 1] + '.', 'With fewer of them, less ' + c[i - 1] + ' is eaten, so it increases.'] });
+      return mc('In the food chain ' + c.join(' → ') + ', the ' + c[i] + ' population suddenly falls. What is most likely to happen to the ' + pred + ' population?', 'It decreases, because it has less food', ['It increases', 'It stays exactly the same', 'It starts eating plants only'], { hint: 'What does the ' + pred + ' eat?', steps: ['The ' + pred + ' eats the ' + c[i] + '.', 'With less food, fewer survive, so the ' + pred + ' population falls.'] });
+    },
+    bank([
+      { q: 'What do decomposers do?', a: 'Break down dead organisms and waste, returning nutrients to the soil', w: ['Make food by photosynthesis', 'Hunt and eat live animals', 'Produce oxygen for animals'], s: ['Bacteria and fungi feed on dead material and release nutrients that plants can use.'] },
+      { q: 'Which of these is a decomposer?', a: 'A fungus such as a mushroom', w: ['A rabbit', 'An oak tree', 'A fox'], s: ['Fungi and bacteria are the main decomposers.'] },
+      { q: 'What would happen in a forest if there were no decomposers?', a: 'Dead material would pile up and nutrients would not return to the soil', w: ['Plants would grow faster', 'There would be more oxygen', 'Nothing would change'], s: ['Without decomposers, nutrients stay locked in dead material and plants run short.'] },
+      { q: 'Which way do the arrows point in a food chain?', a: 'From the food to the animal that eats it', w: ['From the eater to its food', 'From the largest to the smallest', 'Towards the Sun'], s: ['Arrows show the direction energy flows.'] },
+      { q: 'Where does the energy in almost every food chain come from first?', a: 'The Sun', w: ['The soil', 'The top predator', 'Water'], s: ['Producers capture light energy from the Sun to make food.'] }
+    ])
+  ]
+});
+
+/* ================= CHEMISTRY ================= */
+sci({
+  id: 's7-particles', strand: 'C', title: 'Solids, liquids, gases and particles', codes: ['7Cm.05', '7Cm.06'], calc: false,
+  blurb: 'Use the particle model to describe solids, liquids and gases, and know what a vacuum is.',
+  learn: {
+    ideas: [
+      'All matter is made of tiny <b>particles</b>.',
+      '<b>Solid</b>: particles close together in a regular pattern; they vibrate in fixed positions. Solids keep their shape.',
+      '<b>Liquid</b>: particles close together but jumbled; they move past each other. Liquids flow and take the shape of their container.',
+      '<b>Gas</b>: particles far apart, moving quickly in all directions. Gases spread out to fill any space and can be squashed.',
+      'A <b>vacuum</b> is a space with no particles at all, such as most of outer space.'
+    ],
+    example: { q: 'Why can a gas be squashed (compressed) but a liquid cannot easily?', steps: ['In a gas the particles are far apart, with lots of empty space between them.', 'Squashing pushes them closer together.', 'In a liquid the particles are already touching, so there is little space to remove.'] },
+    watch: 'Particles in a solid are not still. They vibrate in place.'
+  },
+  gens: [
+    function () {
+      var d = pick([['Particles are close together in a regular pattern and vibrate in fixed positions.', 'Solid'], ['Particles are close together but arranged randomly, and can move past each other.', 'Liquid'], ['Particles are far apart and move quickly in all directions.', 'Gas'], ['It keeps its own shape and cannot be squashed.', 'Solid'], ['It flows and takes the shape of the bottom of its container, but cannot easily be squashed.', 'Liquid'], ['It spreads out to fill its whole container and can be squashed.', 'Gas']]);
+      var q = mc('Which state of matter is described?<span class="quote">' + d[0] + '</span>', d[1], ['Solid', 'Liquid', 'Gas'].filter(function (x) { return x !== d[1]; }), { hint: 'Think about how close the particles are and how they move.', steps: ['This describes a ' + d[1].toLowerCase() + '.'] });
+      q.options = ['Solid', 'Liquid', 'Gas']; q.correct = q.options.indexOf(d[1]); return q;
+    },
+    bank([
+      { q: 'What is a vacuum?', a: 'A space with no particles at all', w: ['A space full of air', 'A very cold gas', 'A type of liquid'], s: ['A vacuum contains no matter. Most of outer space is close to a vacuum.'] },
+      { q: 'Why do liquids flow?', a: 'Their particles can move past each other', w: ['Their particles are far apart', 'Their particles are in fixed positions', 'They have no particles'], s: ['The particles stay close but can slide over one another.'] },
+      { q: 'What happens to the particles in a solid when it is heated?', a: 'They vibrate more', w: ['They stop moving', 'They get bigger', 'They disappear'], s: ['Heating gives particles more energy, so they vibrate faster. If they vibrate enough, the solid melts.'] },
+      { q: 'Why can you smell perfume from across a room?', a: 'Gas particles move quickly and spread out in all directions', w: ['The perfume is a solid', 'The air particles are still', 'Smell travels through a vacuum'], s: ['Perfume particles mix with air particles and spread through the room.'] },
+      { q: 'Why does a gas fill the whole container it is in?', a: 'Its particles move freely in all directions', w: ['Its particles are packed tightly', 'Its particles vibrate in place', 'It is heavier than a solid'], s: ['Gas particles keep moving until they are spread through all the space.'] }
+    ])
+  ]
+});
+
+var SUBST = [['oxygen', 'Element'], ['iron', 'Element'], ['copper', 'Element'], ['carbon', 'Element'], ['gold', 'Element'], ['water', 'Compound'], ['carbon dioxide', 'Compound'], ['sodium chloride (table salt)', 'Compound'], ['iron oxide (rust)', 'Compound'], ['glucose', 'Compound'], ['air', 'Mixture'], ['sea water', 'Mixture'], ['steel', 'Mixture'], ['brass', 'Mixture'], ['muddy water', 'Mixture']];
+var MNM = [['sodium', 'Metal'], ['iron', 'Metal'], ['copper', 'Metal'], ['aluminium', 'Metal'], ['magnesium', 'Metal'], ['zinc', 'Metal'], ['gold', 'Metal'], ['oxygen', 'Non-metal'], ['sulfur', 'Non-metal'], ['carbon', 'Non-metal'], ['nitrogen', 'Non-metal'], ['chlorine', 'Non-metal'], ['helium', 'Non-metal'], ['iodine', 'Non-metal']];
+sci({
+  id: 's7-elements', strand: 'C', title: 'Elements, compounds and mixtures', codes: ['7Cm.01', '7Cm.02', '7Cm.03', '7Cm.04', '7Cm.07'], calc: false,
+  blurb: 'Atoms and elements, the Periodic Table, metals and non-metals, and the difference between elements, compounds and mixtures.',
+  learn: {
+    ideas: [
+      'All matter is made of <b>atoms</b>. An <b>element</b> contains only one type of atom. There are about 118 elements, listed in order in the <b>Periodic Table</b>.',
+      'Most elements are <b>metals</b>, on the left and middle of the Periodic Table. <b>Non-metals</b> are on the right.',
+      'A <b>compound</b> has two or more different elements chemically joined, such as water (' + chem('H2O') + ').',
+      'A <b>mixture</b> has two or more substances that are not chemically joined, such as air or salt water. Mixtures can be separated by physical methods such as filtering.',
+      'An <b>alloy</b> is a mixture of a metal with other elements: steel is iron with a little carbon.'
+    ],
+    example: { q: 'Is carbon dioxide an element, a compound or a mixture?', steps: ['It contains two elements, carbon and oxygen.', 'They are chemically joined in each ' + chem('CO2') + ' particle.', 'So it is a compound.'] },
+    watch: 'Oxygen gas (' + chem('O2') + ') is an element even though its particles have two atoms. Both atoms are the same type.'
+  },
+  gens: [
+    function () {
+      var s = pick(SUBST);
+      var q = mc('Is <b>' + s[0] + '</b> an element, a compound or a mixture?', s[1], ['Element', 'Compound', 'Mixture'].filter(function (x) { return x !== s[1]; }), { hint: 'One type of atom: element. Different atoms chemically joined: compound. Not chemically joined: mixture.', steps: [cap(s[0]) + ' is ' + (s[1] === 'Element' ? 'an element: it has only one type of atom.' : s[1] === 'Compound' ? 'a compound: different elements are chemically joined.' : 'a mixture: the substances in it are not chemically joined.')] });
+      q.options = ['Element', 'Compound', 'Mixture']; q.correct = q.options.indexOf(s[1]); return q;
+    },
+    function () {
+      var e = pick(MNM), q = mc('Is <b>' + e[0] + '</b> a metal or a non-metal?', e[1], [e[1] === 'Metal' ? 'Non-metal' : 'Metal'], { hint: 'Metals are on the left and middle of the Periodic Table; non-metals are on the right.', steps: [cap(e[0]) + ' is a ' + e[1].toLowerCase() + '.'] });
+      q.options = ['Metal', 'Non-metal']; q.correct = e[1] === 'Metal' ? 0 : 1; return q;
+    },
+    function () {
+      var f = pick([['O2', 'Element', 'only oxygen atoms'], ['N2', 'Element', 'only nitrogen atoms'], ['Fe', 'Element', 'only iron atoms'], ['H2O', 'Compound', 'hydrogen and oxygen atoms joined'], ['CO2', 'Compound', 'carbon and oxygen atoms joined'], ['NaCl', 'Compound', 'sodium and chlorine joined'], ['CH4', 'Compound', 'carbon and hydrogen atoms joined'], ['He', 'Element', 'only helium atoms']]);
+      var q = mc('The formula of a substance is ' + chem(f[0]) + '. Is it an element or a compound?', f[1], [f[1] === 'Element' ? 'Compound' : 'Element'], { hint: 'Count the different symbols. A capital letter starts a new symbol.', steps: [chem(f[0]) + ' contains ' + f[2] + ', so it is ' + (f[1] === 'Element' ? 'an element' : 'a compound') + '.'] });
+      q.options = ['Element', 'Compound']; q.correct = f[1] === 'Element' ? 0 : 1; return q;
+    },
+    bank([
+      { q: 'What is an element?', a: 'A substance made of only one type of atom', w: ['Two elements chemically joined', 'A mixture of metals', 'Any liquid'], s: ['Each different type of atom is a different element.'] },
+      { q: 'How are elements arranged in the Periodic Table?', a: 'In order, with similar elements grouped in columns', w: ['In alphabetical order', 'In order of discovery', 'At random'], s: ['Elements are listed in order (by atomic number), and each column (group) holds similar elements.'] },
+      { q: 'How is a mixture different from a compound?', a: 'In a mixture the substances are not chemically joined and can be separated easily', w: ['A mixture always contains only one element', 'A compound can be separated by filtering', 'There is no difference'], s: ['Mixtures separate by physical methods. Compounds need a chemical reaction to split them.'] },
+      { q: 'Which particle diagram shows a mixture?', a: 'Two different kinds of particle moving separately, not joined', w: ['Identical single atoms', 'Identical particles each made of two different atoms joined', 'Identical pairs of the same atom'], s: ['A mixture has different substances present but not chemically joined.'] }
+    ])
+  ]
+});
+
+sci({
+  id: 's7-metals', strand: 'C', title: 'Metals, non-metals and alloys', codes: ['7Cp.01', '7Cp.05', '7Cp.06', '7Cp.07'], calc: false,
+  blurb: 'Physical and chemical properties, how metals and non-metals differ, and why alloys are harder than pure metals.',
+  learn: {
+    ideas: [
+      '<b>Physical properties</b> can be observed without making a new substance: colour, melting point, density, conductivity. <b>Chemical properties</b> describe how a substance reacts, such as whether it burns or rusts.',
+      '<b>Metals</b> are usually shiny, good conductors of heat and electricity, malleable (can be hammered into shape), ductile (can be drawn into wires), and have high melting points.',
+      '<b>Non-metals</b> are usually dull, poor conductors (insulators) and brittle when solid. Many are gases at room temperature. Graphite (carbon) is an unusual non-metal that conducts electricity.',
+      'In a pure metal, the atoms are the same size and arranged in layers that slide easily, so it is soft. In an <b>alloy</b>, different-sized atoms disrupt the layers, so they cannot slide as easily. The alloy is harder.'
+    ],
+    example: { q: 'Why is steel used for bridges rather than pure iron?', steps: ['Steel is an alloy of iron and carbon.', 'The carbon atoms are a different size and stop the layers of iron atoms sliding.', 'So steel is harder and stronger than pure iron.'] },
+    watch: 'Mercury is a metal but it is a liquid at room temperature. There are exceptions to most rules.'
+  },
+  gens: [
+    function () {
+      var p = pick([['Shiny', 'Metal'], ['Good conductor of electricity', 'Metal'], ['Can be hammered into shape (malleable)', 'Metal'], ['Can be drawn into wires (ductile)', 'Metal'], ['Makes a ringing sound when hit (sonorous)', 'Metal'], ['Dull', 'Non-metal'], ['Brittle: shatters when hit', 'Non-metal'], ['Poor conductor of heat (insulator)', 'Non-metal'], ['A gas at room temperature', 'Non-metal']]);
+      var q = mc('Which type of element usually has this property?<span class="quote">' + p[0] + '</span>', p[1] === 'Metal' ? 'Metals' : 'Non-metals', [p[1] === 'Metal' ? 'Non-metals' : 'Metals'], { hint: 'Think of copper wire compared with sulfur powder.', steps: [p[0] + ': typical of ' + (p[1] === 'Metal' ? 'metals' : 'non-metals') + '.'] });
+      q.options = ['Metals', 'Non-metals']; q.correct = p[1] === 'Metal' ? 0 : 1; return q;
+    },
+    function () {
+      var p = pick([['Melting point', 'Physical'], ['Colour', 'Physical'], ['Density', 'Physical'], ['Whether it conducts electricity', 'Physical'], ['Whether it burns in air', 'Chemical'], ['Whether it rusts', 'Chemical'], ['How it reacts with acid', 'Chemical'], ['Acidity (its pH)', 'Chemical'], ['Hardness', 'Physical']]);
+      var q = mc('Is this a physical or a chemical property?<span class="quote">' + p[0] + '</span>', p[1], [p[1] === 'Physical' ? 'Chemical' : 'Physical'], { hint: 'A chemical property is about how the substance reacts and changes into something new.', steps: [p[0] + ' is a ' + p[1].toLowerCase() + ' property.'] });
+      q.options = ['Physical', 'Chemical']; q.correct = p[1] === 'Physical' ? 0 : 1; return q;
+    },
+    bank([
+      { q: 'Why is an alloy harder than the pure metal it is made from?', a: 'Different-sized atoms stop the layers sliding over each other', w: ['The atoms are all the same size', 'Alloys contain no metal', 'Alloys are always heavier'], s: ['In a pure metal, layers of identical atoms slide easily. Mixed-size atoms disrupt the layers.'] },
+      { q: 'Brass is made from copper and zinc. What is brass?', a: 'An alloy', w: ['A compound', 'An element', 'A non-metal'], s: ['An alloy is a mixture of a metal with other elements.'] },
+      { q: 'Why are electrical wires made of copper?', a: 'Copper is a good conductor and is ductile', w: ['Copper is a good insulator', 'Copper is brittle', 'Copper is a non-metal'], s: ['It conducts electricity well and can be drawn into thin wires.'] },
+      { q: 'Which non-metal conducts electricity?', a: 'Graphite (a form of carbon)', w: ['Sulfur', 'Oxygen', 'Iodine'], s: ['Graphite is an exception: it conducts electricity, which is why it is used in electrodes.'] },
+      { q: 'Pure gold is very soft. Why is gold for jewellery usually mixed with other metals?', a: 'The alloy is harder, so the jewellery does not bend or scratch as easily', w: ['To make it shinier than pure gold', 'To make it a non-metal', 'To make it melt in your hand'], s: ['Alloys have different physical properties from the pure metal; here, greater hardness.'] }
+    ])
+  ]
+});
+
+var UI = [[0, 2, 'red'], [3, 6, 'orange or yellow'], [7, 7, 'green'], [8, 11, 'blue'], [12, 14, 'purple']];
+function uiColour(p) { return UI.filter(function (u) { return p >= u[0] && p <= u[1]; })[0][2]; }
+sci({
+  id: 's7-acids', strand: 'C', title: 'Acids, alkalis and neutralisation', codes: ['7Cp.02', '7Cp.03', '7Cc.04'], calc: false,
+  blurb: 'The pH scale, using Universal Indicator and litmus, and what happens to pH when an acid is neutralised.',
+  learn: {
+    ideas: [
+      'The <b>pH scale</b> runs from 0 to 14. Below 7 is <b>acidic</b>, 7 is <b>neutral</b>, above 7 is <b>alkaline</b>. The further from 7, the stronger the acid or alkali.',
+      '<b>Universal Indicator</b> changes colour with pH: red (strong acid), orange or yellow (weak acid), green (neutral), blue (weak alkali), purple (strong alkali).',
+      '<b>Litmus</b>: acids turn blue litmus red; alkalis turn red litmus blue.',
+      '<b>Neutralisation</b>: adding an alkali to an acid moves the pH towards 7. acid + alkali → salt + water.'
+    ],
+    example: { q: 'Sodium hydroxide solution is added slowly to hydrochloric acid containing Universal Indicator. Describe the colour changes.', steps: ['At first the acid is red (low pH).', 'As alkali is added, the pH rises: orange, yellow, then green when neutral.', 'If too much alkali is added, it turns blue then purple.'] },
+    watch: 'pH 2 is a stronger acid than pH 5. Lower pH means more acidic.'
+  },
+  gens: [
+    function () {
+      var p = ri(0, 14), cls = p < 7 ? 'Acidic' : p === 7 ? 'Neutral' : 'Alkaline';
+      if (Math.random() < 0.5) { var q = mc('A solution has a pH of ' + p + '. Is it acidic, neutral or alkaline?', cls, ['Acidic', 'Neutral', 'Alkaline'].filter(function (x) { return x !== cls; }), { hint: 'Below 7 acidic; exactly 7 neutral; above 7 alkaline.', steps: ['pH ' + p + ' is ' + cls.toLowerCase() + '.'] }); q.options = ['Acidic', 'Neutral', 'Alkaline']; q.correct = q.options.indexOf(cls); return q; }
+      var col = uiColour(p), all = ['red', 'orange or yellow', 'green', 'blue', 'purple'];
+      return mc('What colour does Universal Indicator turn in a solution of pH ' + p + '?', cap(col), shuffle(all.filter(function (x) { return x !== col; })).slice(0, 3).map(cap), { hint: 'Red for strong acids, green for neutral, purple for strong alkalis.', steps: ['pH ' + p + ' gives ' + col + '.'] });
+    },
+    function () {
+      var s = pick([['lemon juice', 2], ['vinegar', 3], ['cola', 3], ['pure water', 7], ['milk', 7], ['baking soda solution', 9], ['soap solution', 10], ['bleach', 12], ['oven cleaner', 14], ['stomach acid', 1]]), cls = s[1] < 7 ? 'acidic' : s[1] === 7 ? 'neutral' : 'alkaline';
+      var litmus = cls === 'acidic' ? 'Blue litmus turns red' : cls === 'alkaline' ? 'Red litmus turns blue' : 'Neither litmus paper changes colour';
+      var q = mc(cap(s[0]) + ' has a pH of about ' + s[1] + '. What happens when you test it with red and blue litmus paper?', litmus, ['Blue litmus turns red', 'Red litmus turns blue', 'Neither litmus paper changes colour'].filter(function (x) { return x !== litmus; }), { hint: 'Acids turn blue litmus red; alkalis turn red litmus blue.', steps: [cap(s[0]) + ' is ' + cls + ', so: ' + litmus.toLowerCase() + '.'] });
+      q.options = ['Blue litmus turns red', 'Red litmus turns blue', 'Neither litmus paper changes colour']; q.correct = q.options.indexOf(litmus); return q;
+    },
+    bank([
+      { q: 'An alkali is added to an acid. What happens to the pH?', a: 'It rises towards 7', w: ['It falls towards 0', 'It stays the same', 'It jumps to 14 straight away'], s: ['Neutralisation moves the pH towards neutral (7).'] },
+      { q: 'What are the products when an acid neutralises an alkali?', a: 'A salt and water', w: ['Hydrogen and oxygen', 'Carbon dioxide only', 'Another acid'], s: ['acid + alkali → salt + water.'] },
+      { q: 'Why do people take indigestion tablets?', a: 'They contain a base that neutralises extra stomach acid', w: ['They make the stomach more acidic', 'They add more acid to digest food', 'They change food into water'], s: ['Neutralising some of the acid raises the pH in the stomach and relieves the pain.'] },
+      { q: 'A farmer’s soil is too acidic. What could she add?', a: 'Lime, an alkaline substance, to neutralise it', w: ['Vinegar', 'Lemon juice', 'More acid rain'], s: ['An alkali raises the pH of acidic soil.'] },
+      { q: 'Which solution is the strongest acid?', a: 'pH 1', w: ['pH 4', 'pH 6', 'pH 7'], s: ['The lower the pH, the stronger the acid.'] },
+      { q: 'Acidity is a chemical property. What does that mean?', a: 'It describes how the substance reacts, for example with alkalis or metals', w: ['It describes its colour', 'It can be seen without any reaction', 'It is the same as its melting point'], s: ['Chemical properties are about how a substance reacts.'] }
+    ])
+  ]
+});
+
+sci({
+  id: 's7-reactions', strand: 'C', title: 'Chemical reactions and gas tests', codes: ['7Cc.01', '7Cc.02', '7Cc.03', '7Cp.04'], calc: false,
+  blurb: 'Spot the signs of a chemical reaction, explain precipitates, and test for hydrogen, oxygen and carbon dioxide.',
+  learn: {
+    ideas: [
+      'In a <b>chemical reaction</b>, atoms are rearranged to make new substances. It is usually hard to reverse.',
+      'Signs of a reaction: a gas is given off (fizzing), a colour change, a <b>precipitate</b> forms, or the temperature changes.',
+      'A precipitate is an insoluble solid made when two soluble substances react in solution. The mixture turns cloudy.',
+      'Gas tests: <b>hydrogen</b> makes a lit splint burn with a squeaky pop; <b>oxygen</b> relights a glowing splint; <b>carbon dioxide</b> turns limewater milky.'
+    ],
+    example: { q: 'Two clear solutions are mixed and a yellow solid appears. What has happened?', steps: ['The reactants were both soluble.', 'A new, insoluble substance has formed: a precipitate.', 'This shows a chemical reaction has taken place.'] },
+    watch: 'Melting ice or dissolving sugar is a physical change, not a chemical reaction. No new substance is made.'
+  },
+  gens: [
+    function () {
+      var all = [['Hydrogen', 'A lit splint goes out with a squeaky pop'], ['Oxygen', 'A glowing splint relights'], ['Carbon dioxide', 'Limewater turns milky (cloudy)']], g = pick(all), byGas = Math.random() < 0.5;
+      if (byGas) return mc('What is the test for ' + g[0].toLowerCase() + ', and the result?', g[1], all.filter(function (x) { return x !== g; }).map(function (x) { return x[1]; }).concat(['Damp blue litmus turns red, then white']).slice(0, 3), { hint: 'Hydrogen: pop. Oxygen: relights. Carbon dioxide: limewater.', steps: [g[0] + ': ' + g[1].toLowerCase() + '.'] });
+      return mc('A gas is tested: ' + g[1].charAt(0).toLowerCase() + g[1].slice(1) + '. Which gas is it?', g[0], all.filter(function (x) { return x !== g; }).map(function (x) { return x[0]; }).concat(['Nitrogen']), { hint: 'Hydrogen: pop. Oxygen: relights. Carbon dioxide: limewater.', steps: ['That is the test result for ' + g[0].toLowerCase() + '.'] });
+    },
+    function () {
+      var c = pick([['Iron goes rusty', true], ['Wood burns', true], ['Magnesium fizzes in acid', true], ['An egg is cooked', true], ['Two clear solutions make a cloudy solid when mixed', true], ['Bread is toasted', true], ['Ice melts', false], ['Sugar dissolves in tea', false], ['Water boils', false], ['A glass breaks', false], ['Chocolate melts in your hand', false]]);
+      var q = mc('Is this a chemical reaction?<span class="quote">' + c[0] + '.</span>', c[1] ? 'Yes: a new substance is made' : 'No: it is a physical change', [c[1] ? 'No: it is a physical change' : 'Yes: a new substance is made'], { hint: 'Is a new substance made? Can it easily be reversed?', steps: [c[1] ? 'A new substance forms, so it is a chemical reaction.' : 'No new substance forms; it is a change of state or shape, so it is a physical change.'] });
+      q.options = ['Yes: a new substance is made', 'No: it is a physical change']; q.correct = c[1] ? 0 : 1; return q;
+    },
+    bank([
+      { q: 'What is a precipitate?', a: 'An insoluble solid formed when two solutions react', w: ['A gas given off in a reaction', 'A liquid that boils', 'A solid that dissolves'], s: ['The new substance cannot dissolve, so it appears as a cloudy solid.'] },
+      { q: 'Using the particle model, what happens in a chemical reaction?', a: 'Atoms are rearranged and join in new ways to make new substances', w: ['Atoms are destroyed', 'New atoms are created', 'The particles just move further apart'], s: ['The same atoms are there before and after, but they are joined differently.'] },
+      { q: 'Which observation does NOT show that a chemical reaction has happened?', a: 'A solid changes into a liquid when heated', w: ['Bubbles of a new gas appear', 'The colour changes', 'A precipitate forms'], s: ['Melting is a change of state, a physical change.'] },
+      { q: 'Magnesium is added to acid and bubbles form. A lit splint held at the mouth of the tube makes a squeaky pop. Which gas was made?', a: 'Hydrogen', w: ['Oxygen', 'Carbon dioxide', 'Nitrogen'], s: ['The squeaky pop test shows hydrogen.'] }
+    ])
+  ]
+});
+
+/* ================= PHYSICS ================= */
+sci({
+  id: 's7-energy', strand: 'P', title: 'Energy changes', codes: ['7Pf.01', '7Pf.02'], calc: false,
+  blurb: 'Describe how energy is stored and transferred in everyday events, and why energy spreads out and becomes less useful.',
+  learn: {
+    ideas: [
+      'Energy is <b>stored</b> in different ways: chemical (food, fuel, batteries), kinetic (moving things), gravitational potential (things raised up), elastic (stretched springs), and thermal (hot things).',
+      'Energy is <b>transferred</b> by heating, by light and sound, electrically, and by forces doing work.',
+      'Example: a torch transfers chemical energy in the battery, electrically, to light and thermal energy.',
+      'Energy is never used up, but it tends to <b>dissipate</b>: it spreads out into the surroundings, usually as heat, and becomes less useful.'
+    ],
+    example: { q: 'Describe the energy changes when a ball is dropped.', steps: ['At the top, it has gravitational potential energy.', 'As it falls, this changes into kinetic energy.', 'When it hits the ground, some energy is transferred as sound and heat.'] },
+    watch: 'Wasted energy does not disappear. It spreads out, usually warming the surroundings a little.'
+  },
+  gens: [
+    function () {
+      var e = pick([['a torch is switched on', 'chemical energy in the battery → light and thermal energy'], ['a kettle boils water', 'electrical energy → thermal energy in the water'], ['a ball rolls down a hill', 'gravitational potential energy → kinetic energy'], ['a wind turbine turns', 'kinetic energy of the wind → electrical energy'], ['a person eats and then runs', 'chemical energy in food → kinetic and thermal energy'], ['a catapult is fired', 'elastic energy → kinetic energy'], ['wood burns on a fire', 'chemical energy → thermal and light energy']]);
+      var all = ['chemical energy in the battery → light and thermal energy', 'electrical energy → thermal energy in the water', 'gravitational potential energy → kinetic energy', 'kinetic energy of the wind → electrical energy', 'chemical energy in food → kinetic and thermal energy', 'elastic energy → kinetic energy', 'chemical energy → thermal and light energy'];
+      return mc('Which describes the main energy change when ' + e[0] + '?', cap(e[1]), shuffle(all.filter(function (x) { return x !== e[1]; })).slice(0, 3).map(cap), { hint: 'Where is the energy stored at the start, and where does it end up?', steps: ['When ' + e[0] + ': ' + e[1] + '.'] });
+    },
+    function () {
+      var dev = pick([['A lamp', 'light', 'heat'], ['A motor', 'kinetic energy', 'heat and sound'], ['A television', 'light and sound', 'heat'], ['An electric fan', 'kinetic energy', 'heat and sound']]), tot = ri(5, 30) * 20, use = ri(1, tot / 20 - 1) * 20;
+      return { kind: 'num', prompt: dev[0] + ' is given ' + tot + ' J of electrical energy. ' + use + ' J is transferred usefully as ' + dev[1] + '. How much energy is wasted as ' + dev[2] + '?', answer: tot - use, ans: (tot - use) + ' J', hint: 'Energy in = useful energy + wasted energy.', steps: [tot + ' − ' + use + ' = ' + (tot - use) + ' J.'] };
+    },
+    bank([
+      { q: 'What happens to the energy wasted by a machine?', a: 'It spreads out into the surroundings, mostly as heat', w: ['It is destroyed', 'It goes back into the plug', 'It turns into mass'], s: ['Energy dissipates: it spreads out and becomes less useful, but it still exists.'] },
+      { q: 'Where is energy stored in a stretched rubber band?', a: 'In an elastic store', w: ['In a chemical store', 'In a nuclear store', 'In a sound store'], s: ['Stretching or squashing something stores elastic energy.'] },
+      { q: 'Which has the most gravitational potential energy?', a: 'A book on a high shelf', w: ['The same book on the floor', 'The same book on a low table', 'All the same'], s: ['The higher an object is lifted, the more gravitational potential energy it has.'] },
+      { q: 'Why does a car engine get hot?', a: 'Some energy from the fuel is wasted as heat', w: ['The engine creates new energy', 'Heat flows in from the road', 'Petrol is hot'], s: ['Not all the chemical energy becomes kinetic energy; some dissipates as heat.'] }
+    ])
+  ]
+});
+
+sci({
+  id: 's7-gravity', strand: 'P', title: 'Gravity, mass and weight', codes: ['7Pf.03', '7Pf.04'], calc: true,
+  blurb: 'Gravity as an attractive force between masses, weight and mass, and falling with no air resistance in a vacuum.',
+  learn: {
+    ideas: [
+      '<b>Gravity</b> is a force of attraction between any two objects with mass. The bigger the masses, the stronger the pull. The further apart, the weaker it is.',
+      '<b>Mass</b> is the amount of matter in an object, in kilograms (kg). It is the same everywhere.',
+      '<b>Weight</b> is the force of gravity on an object, in newtons (N). Weight = mass × gravitational field strength. On Earth this is about 10 N/kg; on the Moon about 1.6 N/kg.',
+      'In a <b>vacuum</b> there is no air, so there is no air resistance. A feather and a hammer dropped together fall at the same rate.'
+    ],
+    example: { q: 'An astronaut has a mass of 70 kg. What is her weight on Earth and on the Moon?', steps: ['Earth: 70 × 10 = 700 N.', 'Moon: 70 × 1.6 = 112 N.', 'Her mass is still 70 kg in both places.'] },
+    watch: 'Mass and weight are different. Bathroom scales show kilograms, but your weight is a force in newtons.'
+  },
+  gens: [
+    function () {
+      var m = ri(2, 90), t = pick(['earth', 'moon', 'mass']);
+      if (t === 'earth') return { kind: 'num', prompt: 'An object has a mass of ' + m + ' kg. What is its weight on Earth, where the gravitational field strength is 10 N/kg?', answer: m * 10, ans: m * 10 + ' N', hint: 'Weight = mass × gravitational field strength.', steps: [m + ' × 10 = ' + m * 10 + ' N.'] };
+      if (t === 'moon') return { kind: 'num', prompt: 'An object has a mass of ' + m + ' kg. What is its weight on the Moon, where the gravitational field strength is 1.6 N/kg?', answer: clean(m * 1.6), ans: fmt(clean(m * 1.6)) + ' N', hint: 'Weight = mass × 1.6.', steps: [m + ' × 1.6 = ' + fmt(clean(m * 1.6)) + ' N.'] };
+      return { kind: 'num', prompt: 'A bag weighs ' + m * 10 + ' N on Earth (gravitational field strength 10 N/kg). What is its mass in kg?', answer: m, ans: m + ' kg', hint: 'Mass = weight ÷ gravitational field strength.', steps: [m * 10 + ' ÷ 10 = ' + m + ' kg.'] };
+    },
+    bank([
+      { q: 'An astronaut goes from Earth to the Moon. What happens to her mass?', a: 'It stays the same', w: ['It increases', 'It decreases', 'It becomes zero'], s: ['Mass is the amount of matter, so it does not change. Her weight is less on the Moon.'] },
+      { q: 'Why is your weight smaller on the Moon than on Earth?', a: 'The Moon has less mass, so its gravity is weaker', w: ['There is no air on the Moon', 'You have less mass on the Moon', 'The Moon is colder'], s: ['Gravity depends on mass. The Moon’s gravitational field strength is about 1.6 N/kg compared with Earth’s 10 N/kg.'] },
+      { q: 'A hammer and a feather are dropped together on the Moon. What happens?', a: 'They land at the same time', w: ['The hammer lands first', 'The feather lands first', 'They float away'], s: ['There is no air on the Moon, so there is no air resistance to slow the feather.'] },
+      { q: 'Why does a feather fall more slowly than a stone on Earth?', a: 'Air resistance has a much bigger effect on the feather', w: ['Gravity does not pull feathers', 'The feather has more mass', 'Stones are attracted by magnetism'], s: ['In a vacuum they would fall together. Here, air slows the light, spread-out feather much more.'] },
+      { q: 'Which unit is used to measure weight?', a: 'Newtons (N)', w: ['Kilograms (kg)', 'Metres (m)', 'Joules (J)'], s: ['Weight is a force, so it is measured in newtons.'] },
+      { q: 'Between which pair is the gravitational attraction strongest?', a: 'Two large masses close together', w: ['Two small masses far apart', 'Two large masses far apart', 'Two small masses close together'], s: ['Bigger masses and shorter distances both make gravity stronger.'] }
+    ])
+  ]
+});
+
+sci({
+  id: 's7-sound', strand: 'P', title: 'Sound and echoes', codes: ['7Ps.01', '7Ps.02'], calc: true,
+  blurb: 'How sound travels as vibrating particles, why it cannot cross a vacuum, and how echoes work.',
+  learn: {
+    ideas: [
+      'Sound is made by <b>vibrations</b>. The vibrations pass from particle to particle: each particle vibrates back and forth and passes the energy on.',
+      'Sound needs a material (solid, liquid or gas) to travel through. It <b>cannot travel through a vacuum</b>, because there are no particles to vibrate.',
+      'Sound travels fastest in solids and slowest in gases. In air it travels at about 340 m/s.',
+      'An <b>echo</b> is sound reflected from a hard surface. The sound travels there and back, so distance to the surface = speed × time ÷ 2.'
+    ],
+    example: { q: 'You shout at a cliff and hear the echo 2 seconds later. How far away is the cliff? (Speed of sound = 340 m/s.)', steps: ['The sound travels 340 × 2 = 680 m in total.', 'That is there and back, so the cliff is 680 ÷ 2 = 340 m away.'] },
+    watch: 'Remember to halve the distance for an echo. The sound went there and back.'
+  },
+  gens: [
+    function () {
+      var t = pick([0.5, 1, 1.5, 2, 2.5, 3, 4, 0.4, 0.8, 1.2]), d = 340 * t / 2;
+      if (Math.random() < 0.5) return { kind: 'num', prompt: 'A girl claps her hands in front of a wall and hears the echo ' + fmt(t) + ' s later. Sound travels at 340 m/s. How far away is the wall, in metres?', answer: d, dp: 1, ans: fmt(d) + ' m', hint: 'Distance travelled = speed × time. Then halve it, because the sound went there and back.', steps: ['Total distance: 340 × ' + fmt(t) + ' = ' + fmt(340 * t) + ' m.', 'Halve it: ' + fmt(d) + ' m.'] };
+      return { kind: 'num', prompt: 'A cliff is ' + fmt(d) + ' m away. Sound travels at 340 m/s. How many seconds after shouting do you hear the echo?', answer: t, dp: 1, ans: fmt(t) + ' s', hint: 'The sound travels to the cliff and back: ' + fmt(2 * d) + ' m.', steps: ['Total distance: 2 × ' + fmt(d) + ' = ' + fmt(2 * d) + ' m.', 'Time: ' + fmt(2 * d) + ' ÷ 340 = ' + fmt(t) + ' s.'] };
+    },
+    bank([
+      { q: 'An alarm clock rings inside a glass jar. The air is pumped out. What happens to the sound?', a: 'It gets quieter until you cannot hear it', w: ['It gets louder', 'It stays the same', 'It becomes higher pitched'], s: ['With no air particles left, there is nothing to carry the vibrations: sound cannot travel through a vacuum.'] },
+      { q: 'Why can astronauts not talk to each other directly in space without radios?', a: 'Space is a vacuum, so there are no particles to carry sound', w: ['It is too cold', 'Their helmets are too thick', 'Sound travels too fast in space'], s: ['Sound needs particles to vibrate. Radios use radio waves, which can travel through a vacuum.'] },
+      { q: 'Through which material does sound travel fastest?', a: 'Steel (a solid)', w: ['Air (a gas)', 'Water (a liquid)', 'A vacuum'], s: ['Particles in solids are closest together, so they pass vibrations on quickly.'] },
+      { q: 'What is an echo?', a: 'A sound reflected off a hard surface', w: ['A sound that has been absorbed', 'A sound that travels through a vacuum', 'A very high-pitched sound'], s: ['Hard, flat surfaces such as cliffs and walls reflect sound well.'] },
+      { q: 'How do the particles of air move when a sound passes through?', a: 'They vibrate backwards and forwards, passing the energy on', w: ['They travel all the way from the source to your ear', 'They stay completely still', 'They move up and down only'], s: ['Each particle vibrates around its position and bumps the next one; the energy travels, not the particles.'] },
+      { q: 'Why do concert halls have soft materials on the walls?', a: 'To absorb sound and reduce echoes', w: ['To make the sound louder', 'To reflect more sound', 'To make the room warmer'], s: ['Soft surfaces absorb sound rather than reflecting it.'] }
+    ])
+  ]
+});
+
+sci({
+  id: 's7-circuits', strand: 'P', title: 'Electric circuits', codes: ['7Pe.01', '7Pe.02', '7Pe.03', '7Pe.04', '7Pe.05'], calc: false,
+  blurb: 'Electricity as a flow of electrons, conductors and insulators, measuring current, and adding cells and lamps to a series circuit.',
+  learn: {
+    ideas: [
+      'An electric <b>current</b> is a flow of electrons around a complete circuit. The cell pushes the electrons. Current is measured in amps (A) with an <b>ammeter</b>, connected in series.',
+      '<b>Conductors</b> let electrons flow through them: metals and graphite. <b>Insulators</b> do not: plastic, rubber, glass, wood.',
+      'In a <b>series</b> circuit there is one loop, and the current is the same everywhere.',
+      'Adding more <b>cells</b> increases the current, so lamps are brighter. Adding more <b>lamps</b> decreases the current, so each lamp is dimmer.',
+      'Circuit symbols: a cell is a long thin line and a short thick line; a lamp is a circle with a cross; an ammeter is a circle with A; a switch is a break in the line with a hinged gap.'
+    ],
+    example: { q: 'A series circuit has one cell and one lamp. A second lamp is added in series. What happens?', steps: ['There is more resistance to the flow of electrons.', 'The current gets smaller.', 'Both lamps are dimmer than the single lamp was.'] },
+    watch: 'Current is not used up by a lamp. The ammeter reads the same before and after it in a series circuit.'
+  },
+  gens: [
+    function () {
+      var I = clean(ri(1, 9) / 10), n = ri(1, 3), pos = ri(1, n);
+      return { kind: 'num', fig: seriesCircuit(n, fmt(I) + ' A'), prompt: 'The ammeter in this series circuit reads ' + fmt(I) + ' A. What is the current through ' + (n === 1 ? 'the lamp' : 'lamp ' + pos) + '?', answer: I, ans: fmt(I) + ' A', hint: 'In a series circuit there is only one path for the current.', steps: ['The current is the same everywhere in a series circuit: ' + fmt(I) + ' A.'] };
+    },
+    function () {
+      var m = pick([['copper', true], ['iron', true], ['aluminium', true], ['graphite (pencil lead)', true], ['steel', true], ['plastic', false], ['rubber', false], ['glass', false], ['dry wood', false], ['wool', false]]);
+      var q = mc('Is <b>' + m[0] + '</b> an electrical conductor or an insulator?', m[1] ? 'Conductor' : 'Insulator', [m[1] ? 'Insulator' : 'Conductor'], { hint: 'Metals and graphite conduct. Most other solids insulate.', steps: [cap(m[0]) + ' is ' + (m[1] ? 'a conductor: electrons can flow through it.' : 'an insulator: it stops electrons flowing.')] });
+      q.options = ['Conductor', 'Insulator']; q.correct = m[1] ? 0 : 1; return q;
+    },
+    bank([
+      { q: 'A second cell is added in series to a circuit with one lamp. What happens to the lamp?', a: 'It gets brighter, because the current increases', w: ['It gets dimmer', 'It goes out', 'Nothing changes'], s: ['More cells push a bigger current around the circuit.'] },
+      { q: 'A third lamp is added in series to a circuit with two lamps. What happens?', a: 'All the lamps get dimmer, because the current decreases', w: ['All the lamps get brighter', 'Only the new lamp lights', 'Nothing changes'], s: ['More lamps make it harder for the current to flow.'] },
+      { q: 'What is an electric current?', a: 'A flow of electrons around a circuit', w: ['A flow of protons through the air', 'Heat moving through a wire', 'Light travelling through a lamp'], s: ['Electrons flow from the cell, through the components and back.'] },
+      { q: 'Why are wires covered in plastic?', a: 'Plastic is an insulator, so it stops the current reaching you', w: ['Plastic conducts electricity well', 'It makes the wire heavier', 'It makes the current bigger'], s: ['The copper inside conducts; the plastic outside insulates.'] },
+      { q: 'Which instrument measures current, and how is it connected?', a: 'An ammeter, in series', w: ['A voltmeter, in series', 'An ammeter, across a lamp', 'A thermometer, in series'], s: ['Current flows through the ammeter, so it goes in series.'] },
+      { q: 'Why does a lamp go out when a switch is opened?', a: 'The circuit is broken, so electrons cannot flow', w: ['The cell runs out', 'The lamp uses up all the current', 'The wires become insulators'], s: ['A current only flows around a complete circuit.'] },
+      { q: 'What is the unit of current?', a: 'Amp (A)', w: ['Volt (V)', 'Newton (N)', 'Ohm (Ω)'], s: ['Current is measured in amps.'] }
+    ])
+  ]
+});
+
+/* ================= EARTH AND SPACE ================= */
+sci({
+  id: 's7-plates', strand: 'E', title: 'Plates, earthquakes and volcanoes', codes: ['7ESp.01', '7ESp.02'], calc: false,
+  blurb: 'Earth’s moving plates and how earthquakes, volcanoes and fold mountains form near plate boundaries.',
+  learn: {
+    ideas: [
+      'Earth has a thin rocky <b>crust</b>, a thick <b>mantle</b>, and a <b>core</b> of iron and nickel.',
+      'The crust and top of the mantle are cracked into large pieces called <b>tectonic plates</b>. Slow flow of rock in the mantle moves them a few centimetres a year.',
+      '<b>Earthquakes</b> happen when plates get stuck, then suddenly slip past each other.',
+      '<b>Volcanoes</b> form where magma (molten rock) rises to the surface, often where plates move apart or one plate sinks under another.',
+      '<b>Fold mountains</b> form where two plates push into each other and the rock crumples upwards. The Himalayas formed as India pushed into Asia.'
+    ],
+    example: { q: 'Why are there many earthquakes and volcanoes in Japan?', steps: ['Japan sits where several tectonic plates meet.', 'The plates move against each other, causing earthquakes.', 'Where one plate sinks under another, magma rises and forms volcanoes.'] },
+    watch: 'Plates move very slowly, about as fast as your fingernails grow.'
+  },
+  gens: [bank([
+    { q: 'What makes tectonic plates move?', a: 'Slow flow of hot rock in the mantle', w: ['Ocean waves', 'The wind', 'Earthquakes'], s: ['Heat from inside Earth makes mantle rock flow very slowly, carrying the plates.'] },
+    { q: 'Where do most earthquakes happen?', a: 'Near the edges of tectonic plates', w: ['In the middle of plates', 'Only in deserts', 'Only near the North Pole'], s: ['Plates sticking and slipping at their boundaries cause earthquakes.'] },
+    { q: 'How do fold mountains form?', a: 'Two plates push together and the rock crumples upwards', w: ['Two plates move apart', 'A volcano erupts many times', 'Rivers wash sand into piles'], s: ['Colliding plates squeeze the rock into folds. The Himalayas are an example.'] },
+    { q: 'What comes out of an erupting volcano?', a: 'Lava, ash and gases', w: ['Only water', 'Only ice', 'Nothing: it just shakes'], s: ['Magma reaches the surface as lava, along with ash and gases.'] },
+    { q: 'Which layer of Earth do we live on?', a: 'The crust', w: ['The mantle', 'The outer core', 'The inner core'], s: ['The crust is the thin, rocky outer layer.'] },
+    { q: 'The Himalayas are still getting slightly taller. Why?', a: 'The Indian plate is still pushing into the Eurasian plate', w: ['Snow is building up on top', 'A volcano is erupting under them', 'Earth’s gravity is getting weaker'], s: ['The collision between the plates is still happening, slowly pushing the mountains up.'] },
+    { q: 'What is magma?', a: 'Molten rock under the ground', w: ['Solid rock at the surface', 'A type of earthquake', 'Water in the mantle'], s: ['Magma is called lava once it reaches the surface.'] }
+  ])]
+});
+
+var AIR = [['nitrogen', 78], ['oxygen', 21], ['argon', 0.9], ['carbon dioxide', 0.04]];
+sci({
+  id: 's7-air', strand: 'E', title: 'The air and pollution', codes: ['7ESp.03', '7SIC.05'], calc: false,
+  blurb: 'What clean, dry air is made of, and how pollution and natural events change it.',
+  learn: {
+    ideas: [
+      'Clean, dry air is about <b>78% nitrogen</b>, <b>21% oxygen</b>, almost 1% argon, and about 0.04% carbon dioxide, with tiny amounts of other gases.',
+      'Air also contains water vapour, but the amount varies, so it is left out when describing <b>dry</b> air.',
+      'Human activities change the air: burning fossil fuels adds carbon dioxide, sulfur dioxide, nitrogen oxides and soot.',
+      'Natural events change it too: volcanoes release ash and sulfur dioxide, and forest fires release smoke and carbon dioxide.'
+    ],
+    example: { q: 'About what fraction of the air is oxygen?', steps: ['Oxygen is about 21% of the air.', 'That is roughly one fifth.'] },
+    watch: 'Nitrogen, not oxygen, is the main gas in the air.'
+  },
+  gens: [
+    function () {
+      var g = pick(AIR.slice(0, 2));
+      return { kind: 'num', prompt: 'Approximately what percentage of clean, dry air is ' + g[0] + '?', answer: g[1], tol: 1, ans: 'about ' + g[1] + '%', hint: 'The two main gases are nitrogen and oxygen; together they make up about 99%.', steps: [cap(g[0]) + ' is about ' + g[1] + '% of dry air.'] };
+    },
+    function () {
+      var t = pick(['most', 'second', 'co2']);
+      if (t === 'most') return mc('Which gas makes up most of the air?', 'Nitrogen', ['Oxygen', 'Carbon dioxide', 'Argon'], { hint: 'It is about 78%.', steps: ['Nitrogen is about 78% of dry air.'] });
+      if (t === 'second') return mc('Which gas makes up about 21% of the air?', 'Oxygen', ['Nitrogen', 'Carbon dioxide', 'Argon'], { hint: 'It is the gas we need to breathe.', steps: ['Oxygen is about 21% of dry air.'] });
+      return mc('Roughly what percentage of the air is carbon dioxide?', '0.04%', ['4%', '21%', '78%'], { hint: 'It is a very small amount, much less than 1%.', steps: ['Carbon dioxide is only about 0.04% of the air.'] });
+    },
+    bank([
+      { q: 'Which human activity adds the most carbon dioxide to the air?', a: 'Burning fossil fuels', w: ['Planting trees', 'Recycling paper', 'Using solar panels'], s: ['Coal, oil and gas release carbon dioxide when they burn.'] },
+      { q: 'Which natural event releases ash and sulfur dioxide into the air?', a: 'A volcanic eruption', w: ['An earthquake under the sea', 'A solar eclipse', 'High tide'], s: ['Volcanoes release ash and gases including sulfur dioxide.'] },
+      { q: 'Why is water vapour left out when we describe the composition of dry air?', a: 'The amount of water vapour changes from place to place and day to day', w: ['Air never contains water', 'Water vapour is a solid', 'It is the same as nitrogen'], s: ['Humid air has more water vapour than dry desert air, so dry air is used as the standard.'] },
+      { q: 'Which pollutant from car exhausts can make the air look hazy and harm the lungs?', a: 'Soot and small particles', w: ['Nitrogen', 'Argon', 'Oxygen'], s: ['Tiny particles from burning fuel can be breathed in deeply.'] }
+    ])
+  ]
+});
+
+sci({
+  id: 's7-water', strand: 'E', title: 'The water cycle', codes: ['7ESc.01'], calc: false,
+  blurb: 'How water moves between oceans, the air and the land.',
+  learn: {
+    ideas: [
+      'The Sun heats water in seas, lakes and rivers (<b>open water</b>). It <b>evaporates</b> into water vapour.',
+      'Water vapour rises, cools and <b>condenses</b> into tiny droplets, forming clouds.',
+      'When droplets grow heavy, they fall as <b>precipitation</b>: rain, snow, sleet or hail.',
+      'Water flows over the land into rivers as <b>run-off</b>, or soaks into the ground to become <b>groundwater</b>. Eventually it returns to the sea, and the cycle repeats.',
+      'Plants also release water vapour from their leaves (transpiration).'
+    ],
+    example: { q: 'Why does the water cycle never run out of water?', steps: ['Water is not used up; it just changes state and place.', 'It evaporates, condenses, falls and flows back to the sea, again and again.'] },
+    watch: 'Evaporation turns liquid into gas; condensation turns gas into liquid. They are opposites.'
+  },
+  gens: [
+    function () {
+      var p = pick([['Evaporation', 'Water from the sea is heated by the Sun and turns into water vapour'], ['Condensation', 'Water vapour cools high in the sky and forms tiny droplets in clouds'], ['Precipitation', 'Water falls from clouds as rain or snow'], ['Run-off', 'Rainwater flows over the surface of the land into rivers'], ['Groundwater', 'Water soaks into the soil and is stored in rocks underground'], ['Transpiration', 'Water vapour is released from the leaves of plants']]);
+      return mc('Which part of the water cycle is described?<span class="quote">' + p[1] + '.</span>', p[0], shuffle(['Evaporation', 'Condensation', 'Precipitation', 'Run-off', 'Groundwater', 'Transpiration'].filter(function (x) { return x !== p[0]; })).slice(0, 3), { hint: 'Think about whether water is changing state, falling or moving across the land.', steps: [p[1] + ': ' + p[0].toLowerCase() + '.'] });
+    },
+    bank([
+      { q: 'What provides the energy that drives the water cycle?', a: 'The Sun', w: ['The Moon', 'Earth’s core', 'The wind'], s: ['Heat from the Sun evaporates water from the oceans.'] },
+      { q: 'Why do clouds form as warm, moist air rises?', a: 'The air cools, and water vapour condenses into droplets', w: ['The air heats up and water boils', 'Gravity pulls water upwards', 'The water freezes immediately'], s: ['Cooling causes condensation, making the tiny droplets that form clouds.'] },
+      { q: 'Which is the correct order?', a: 'Evaporation, condensation, precipitation, run-off', w: ['Condensation, evaporation, run-off, precipitation', 'Precipitation, evaporation, run-off, condensation', 'Run-off, condensation, evaporation, precipitation'], s: ['Water evaporates, condenses into clouds, falls as precipitation, and flows back as run-off.'] },
+      { q: 'Which word describes rain, snow, sleet and hail?', a: 'Precipitation', w: ['Condensation', 'Evaporation', 'Run-off'], s: ['Any water falling from clouds is precipitation.'] }
+    ])
+  ]
+});
+
+var PLANETS = ['Mercury', 'Venus', 'Earth', 'Mars', 'Jupiter', 'Saturn', 'Uranus', 'Neptune'];
+sci({
+  id: 's7-solar', strand: 'E', title: 'The Solar System and gravity', codes: ['7ESs.01', '7ESs.02'], calc: false,
+  blurb: 'How planets formed from dust and gas, and how gravity keeps the Solar System in orbit around the Sun.',
+  learn: {
+    ideas: [
+      'The Solar System formed about 4.6 billion years ago from a cloud of dust and gas. Gravity pulled most of it together to form the Sun.',
+      'The leftover dust and gas spun in a disc around the young Sun. Gravity pulled particles together into clumps, which grew into the <b>planets</b>.',
+      'The planets, in order from the Sun: Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus, Neptune. The four inner planets are rocky; the four outer planets are giants made mostly of gas or ice.',
+      'The Sun’s <b>gravity</b> holds the planets in their orbits. Moons stay in orbit around planets because of the planets’ gravity.'
+    ],
+    example: { q: 'What would happen to Earth if the Sun’s gravity suddenly disappeared?', steps: ['Earth is moving fast along its orbit.', 'Without gravity pulling it towards the Sun, it would carry on in a straight line, off into space.'] },
+    watch: 'Gravity is what keeps planets in orbit. Without it they would fly off in a straight line, not fall into the Sun.'
+  },
+  gens: [
+    function () {
+      var i = ri(0, 7), t = pick([0, 1]);
+      if (t === 0) return mc('Which planet is ' + ['closest to the Sun', 'second from the Sun', 'third from the Sun', 'fourth from the Sun', 'fifth from the Sun', 'sixth from the Sun', 'seventh from the Sun', 'furthest from the Sun'][i] + '?', PLANETS[i], shuffle(PLANETS.filter(function (_, k) { return k !== i; })).slice(0, 3), { hint: 'Order: Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus, Neptune.', steps: ['From the Sun: ' + PLANETS.join(', ') + '.', PLANETS[i] + ' is number ' + (i + 1) + '.'] });
+      return { kind: 'num', prompt: 'Counting outwards from the Sun, what position is ' + PLANETS[i] + ' in? (Mercury is 1.)', answer: i + 1, ans: '' + (i + 1), hint: 'Order: Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus, Neptune.', steps: ['From the Sun: ' + PLANETS.join(', ') + '.', PLANETS[i] + ' is number ' + (i + 1) + '.'] };
+    },
+    bank([
+      { q: 'What keeps the planets in orbit around the Sun?', a: 'The Sun’s gravity', w: ['Magnetism', 'Solar wind', 'Air pressure'], s: ['Gravity pulls each planet towards the Sun, bending its path into an orbit.'] },
+      { q: 'How did the planets form?', a: 'Gravity pulled dust and gas around the young Sun together into clumps', w: ['They broke off from the Sun', 'They were captured from another star', 'They were always there before the Sun'], s: ['Particles in the disc around the Sun clumped together and grew into planets.'] },
+      { q: 'What keeps the Moon in orbit around Earth?', a: 'Earth’s gravity', w: ['The Sun’s light', 'Earth’s magnetic field', 'The tides'], s: ['Earth’s gravity pulls on the Moon and keeps it in orbit.'] },
+      { q: 'Which planets are rocky?', a: 'Mercury, Venus, Earth and Mars', w: ['Jupiter, Saturn, Uranus and Neptune', 'Only Earth', 'All eight'], s: ['The four inner planets are rocky; the outer four are gas and ice giants.'] },
+      { q: 'Which is the largest planet in the Solar System?', a: 'Jupiter', w: ['Saturn', 'Earth', 'Neptune'], s: ['Jupiter is more than 11 times as wide as Earth.'] }
+    ])
+  ]
+});
+
+sci({
+  id: 's7-tides', strand: 'E', title: 'Tides and eclipses', codes: ['7ESs.03', '7ESs.04'], calc: false,
+  blurb: 'How the gravity of the Moon and Sun causes tides, and how solar and lunar eclipses happen.',
+  learn: {
+    ideas: [
+      'The Moon’s gravity pulls on Earth’s oceans, making the water bulge on the side facing the Moon, and on the opposite side too. As Earth spins, most coasts have <b>two high tides and two low tides</b> each day.',
+      'The Sun’s gravity also affects tides. When the Sun, Moon and Earth line up (at new moon and full moon), tides are biggest: <b>spring tides</b>. When they form a right angle, tides are smallest: <b>neap tides</b>.',
+      'A <b>solar eclipse</b> happens when the Moon passes between the Sun and Earth, and the Moon’s shadow falls on Earth. It can only happen at new moon.',
+      'A <b>lunar eclipse</b> happens when Earth passes between the Sun and the Moon, and Earth’s shadow falls on the Moon. It can only happen at full moon. The Moon often looks red.'
+    ],
+    example: { q: 'Why don’t we get a solar eclipse every new moon?', steps: ['The Moon’s orbit is slightly tilted compared with Earth’s orbit around the Sun.', 'Usually the Moon passes a little above or below the line between the Sun and Earth.', 'An eclipse only happens when all three line up exactly.'] },
+    watch: 'Solar eclipse: the Moon is in the middle. Lunar eclipse: Earth is in the middle.'
+  },
+  gens: [
+    function () {
+      var t = pick(['solar', 'lunar']);
+      var right = t === 'solar' ? 'Sun – Moon – Earth' : 'Sun – Earth – Moon';
+      return mc('Which order of bodies in a straight line causes a <b>' + t + ' eclipse</b>?', right, [t === 'solar' ? 'Sun – Earth – Moon' : 'Sun – Moon – Earth', 'Moon – Sun – Earth', 'Earth – Sun – Moon'], { hint: t === 'solar' ? 'In a solar eclipse, the Sun is blocked from Earth.' : 'In a lunar eclipse, the Moon is in Earth’s shadow.', steps: [t === 'solar' ? 'The Moon is between the Sun and Earth, casting its shadow on Earth.' : 'Earth is between the Sun and the Moon, casting its shadow on the Moon.'] });
+    },
+    bank([
+      { q: 'What mainly causes tides?', a: 'The gravity of the Moon pulling on the oceans', w: ['Wind blowing the sea', 'Earthquakes under the sea', 'Rivers flowing into the sea'], s: ['The Moon’s gravity makes the oceans bulge; Earth’s spin moves coasts through the bulges.'] },
+      { q: 'About how many high tides does a coast usually have each day?', a: 'Two', w: ['One', 'Four', 'Twelve'], s: ['There are bulges on both the near side and the far side of Earth, so two high tides a day.'] },
+      { q: 'When do spring tides, with the biggest range, happen?', a: 'When the Sun, Moon and Earth are in a line', w: ['Only in spring', 'When the Moon is at a right angle to the Sun', 'During an earthquake'], s: ['At new and full moon, the pulls of the Sun and Moon add together.'] },
+      { q: 'At which phase of the Moon can a lunar eclipse happen?', a: 'Full moon', w: ['New moon', 'Half moon', 'Any phase'], s: ['The Moon must be on the far side of Earth from the Sun to enter Earth’s shadow.'] },
+      { q: 'Why does the Moon often look red during a lunar eclipse?', a: 'Sunlight bent through Earth’s atmosphere reaches it, and mostly red light gets through', w: ['The Moon heats up and glows', 'The Moon is made of red rock', 'The Sun turns red'], s: ['Earth’s atmosphere scatters blue light and lets red light through onto the Moon.'] },
+      { q: 'Why must you never look directly at a solar eclipse?', a: 'The Sun’s light can damage your eyes permanently', w: ['The Moon is poisonous', 'It is too dark to see', 'It causes earthquakes'], s: ['Even a thin crescent of Sun can damage the retina. Use special eclipse glasses or a pinhole viewer.'] }
+    ])
+  ]
+});
+
+/* ================= WORKING SCIENTIFICALLY ================= */
+sci({
+  id: 's7-enquiry', strand: 'W', title: 'Planning investigations safely', codes: ['7TWSp.01', '7TWSp.04', '7TWSp.05', '7TWSc.02', '7TWSc.03', '7TWSc.06', '7TWSm.01', '7SIC.04'], calc: false,
+  blurb: 'Testable questions, variables and fair tests, hazard symbols, choosing equipment, repeats, bias in sources, and models.',
+  learn: {
+    ideas: [
+      'A <b>testable</b> hypothesis can be checked by collecting evidence: “Salt dissolves faster in warmer water”. “Blue is the best colour” is not testable.',
+      'In a <b>fair test</b> you change one variable (independent), measure one variable (dependent), and keep all the others the same (control variables). Some enquiries, such as surveys of wild plants, cannot be fair tests.',
+      '<b>Hazard symbols</b> warn of dangers: a flame (flammable), a skull and crossbones (toxic), a liquid eating into a hand (corrosive), an exclamation mark (harmful or irritant).',
+      'Repeat measurements to check they are reliable. Choose equipment with a suitable range and scale.',
+      'When using secondary sources, check they are relevant and look for <b>bias</b>, such as a company praising its own product. Scientists check each other’s work through peer review. Models, such as the particle model, help explain ideas but have limits.'
+    ],
+    example: { q: 'Ben tests whether the temperature of water affects how fast sugar dissolves. What should he keep the same?', steps: ['He changes the temperature (independent variable).', 'He measures the time to dissolve (dependent variable).', 'He keeps the mass of sugar, the volume of water, the type of sugar and the amount of stirring the same.'] },
+    watch: 'If two things change at once, you cannot tell which one caused the result.'
+  },
+  gens: [
+    function () {
+      var inv = pick([
+        { d: 'how the temperature of water affects how fast sugar dissolves', iv: 'The temperature of the water', dv: 'The time for the sugar to dissolve', cv: 'The mass of sugar' },
+        { d: 'how the height of a ramp affects how far a toy car travels', iv: 'The height of the ramp', dv: 'The distance the car travels', cv: 'The car used' },
+        { d: 'how the number of cells affects the brightness of a lamp', iv: 'The number of cells', dv: 'The brightness of the lamp', cv: 'The type of lamp' },
+        { d: 'how the amount of light affects how tall seedlings grow', iv: 'The amount of light', dv: 'The height of the seedlings', cv: 'The amount of water given' },
+        { d: 'how the thickness of a material affects how much sound gets through', iv: 'The thickness of the material', dv: 'The loudness of the sound measured', cv: 'The distance from the sound source' }
+      ]), kind = pick(['iv', 'dv', 'cv']), names = { iv: 'independent variable (the one you change)', dv: 'dependent variable (the one you measure)', cv: 'control variable (one you keep the same)' };
+      return mc('A student investigates ' + inv.d + '. Which is a <b>' + names[kind] + '</b>?', inv[kind], ['iv', 'dv', 'cv'].filter(function (k) { return k !== kind; }).map(function (k) { return inv[k]; }).concat(['The day of the week']), { hint: 'Change one thing, measure one thing, keep everything else the same.', steps: ['Independent: ' + inv.iv.toLowerCase() + '.', 'Dependent: ' + inv.dv.toLowerCase() + '.', 'Control: ' + inv.cv.toLowerCase() + '.'] });
+    },
+    function () {
+      var h = pick([['a flame', 'Flammable: it catches fire easily'], ['a skull and crossbones', 'Toxic: it can cause serious harm or death if swallowed, breathed in or touching skin'], ['liquid dripping onto a hand and a surface, eating into them', 'Corrosive: it can burn skin and eyes'], ['an exclamation mark', 'Harmful or irritant: it may irritate skin or eyes'], ['a flame over a circle', 'Oxidising: it can make other materials burn more fiercely'], ['a dead tree and a dead fish', 'Hazardous to the environment']]);
+      var all = ['Flammable: it catches fire easily', 'Toxic: it can cause serious harm or death if swallowed, breathed in or touching skin', 'Corrosive: it can burn skin and eyes', 'Harmful or irritant: it may irritate skin or eyes', 'Oxidising: it can make other materials burn more fiercely', 'Hazardous to the environment'];
+      return mc('A bottle has a hazard symbol showing <b>' + h[0] + '</b>. What does it mean?', h[1], shuffle(all.filter(function (x) { return x !== h[1]; })).slice(0, 3), { hint: 'The picture usually shows what the danger does.', steps: [cap(h[0]) + ': ' + h[1].toLowerCase() + '.'] });
+    },
+    bank([
+      { q: 'Which question can be tested scientifically?', a: 'Does the length of a pendulum affect how long one swing takes?', w: ['Which song is the best?', 'Are cats nicer than dogs?', 'Is blue a happy colour?'], s: ['You can measure swing times for different lengths. The others are opinions.'] },
+      { q: 'Which investigation cannot easily be a fair test?', a: 'Finding out which plants grow on a school field', w: ['Testing how temperature affects dissolving', 'Testing how ramp height affects a car’s distance', 'Testing how the number of cells affects lamp brightness'], s: ['In a field survey you cannot control all the variables. You observe and look for patterns instead.'] },
+      { q: 'A website selling a sports drink says it is the best drink for athletes. What should you think about?', a: 'The source may be biased because the company wants to sell the drink', w: ['It must be true because it is online', 'Websites are never biased', 'Sports drinks cannot be tested'], s: ['Look for independent evidence, such as a peer-reviewed study.'] },
+      { q: 'You need to measure 25 cm³ of water accurately. Which is best?', a: 'A 50 cm³ measuring cylinder', w: ['A 1 litre beaker', 'A teaspoon', 'A bucket'], s: ['Choose equipment with a suitable range and fine scale divisions.'] },
+      { q: 'Three repeat readings are 12 s, 12 s and 13 s. Are more repeats needed?', a: 'Probably not: the readings are close together', w: ['Yes, always do at least ten', 'Yes, because they are not all identical', 'No, and you should only have done one'], s: ['Close repeats suggest the results are reliable. Widely spread results would need more repeats.'] },
+      { q: 'What is one limitation of drawing particles as small circles?', a: 'Real particles are not hard coloured balls, and the drawing does not show their movement well', w: ['It shows particles exactly as they look', 'It has no limitations', 'It makes particles look too small'], s: ['Models help explain ideas, but they simplify reality.'] }
+    ])
+  ]
+});
+
+sci({
+  id: 's7-analysis', strand: 'W', title: 'Results and conclusions', codes: ['7TWSa.01', '7TWSa.02', '7TWSa.03', '7TWSa.04', '7TWSc.07'], calc: true,
+  blurb: 'Work out means, spot anomalous results, describe patterns, read values from tables and judge conclusions.',
+  learn: {
+    ideas: [
+      'An <b>anomalous result</b> does not fit the pattern of the others. Check it, and leave it out when you calculate a mean.',
+      'To find the <b>mean</b> of repeat readings, add them and divide by how many there are.',
+      'Describe a <b>pattern</b> in a sentence: “As the ramp gets higher, the car travels further.”',
+      'A <b>conclusion</b> says what the results show and whether the prediction was right. It should also say how sure you can be, for example if there were only a few readings.'
+    ],
+    example: { q: 'Repeat readings are 30 cm, 31 cm and 18 cm. Find the mean.', steps: ['18 cm is anomalous: it is far from the others.', 'Leave it out: (30 + 31) ÷ 2 = 30.5 cm.'] },
+    watch: 'Do not include an anomalous result in the mean.'
+  },
+  gens: [    function () {
+      var base = ri(15, 60), r = [base + ri(-2, 2), base + ri(-2, 2), base + ri(-2, 2)], bad = Math.random() < 0.6, an;
+      if (bad) { an = ri(0, 2); r[an] = base + pick([1, -1]) * ri(12, 20); if (r[an] < 1) r[an] = base + 15; }
+      var good = r.filter(function (_, i) { return !bad || i !== an; }), mean = good.reduce(function (s, x) { return s + x; }, 0) / good.length;
+      return { kind: 'num', prompt: 'A student times a reaction three times:' + table(['Repeat', '1', '2', '3'], [['Time (s)', r[0], r[1], r[2]]]) + 'Calculate the mean time, leaving out any anomalous result. Give your answer to 1 decimal place if needed.', answer: mean, dp: 1, ans: fmt(mean, mean % 1 ? 1 : null) + ' s', hint: 'Check whether one reading is far away from the others.', steps: (bad ? [r[an] + ' s is anomalous: it is far from the other readings, so leave it out.'] : ['The readings are all close together, so use all three.']).concat(['(' + good.join(' + ') + ') ÷ ' + good.length + ' = ' + fmt(mean, mean % 1 ? 1 : null) + ' s.']) };
+    },
+    function () {
+      var start = ri(15, 25), step = pick([4, 5, 6, 8]), xs = [0, 2, 4, 6, 8], ys = xs.map(function (x) { return start + step * x / 2; }), k = ri(0, 3), x = xs[k] + 1, y = start + step * x / 2;
+      return { kind: 'num', prompt: 'Water is heated steadily. The table shows its temperature.' + table(['Time (minutes)'].concat(xs.map(String)), [['Temperature (°C)'].concat(ys.map(String))]) + 'Estimate the temperature at ' + x + ' minutes.', answer: y, ans: y + ' °C', hint: 'The temperature rises by the same amount every 2 minutes. Find the value halfway between.', steps: ['Every 2 minutes the temperature rises by ' + step + ' °C, so ' + step / 2 + ' °C each minute.', 'At ' + x + ' minutes: ' + ys[k] + ' + ' + step / 2 + ' = ' + y + ' °C.'] };
+    },
+    function () {
+      var xs = [10, 20, 30, 40, 50], dir = pick([1, -1]), base = dir > 0 ? 20 : 90, ys = xs.map(function (x, i) { return base + dir * i * pick([12, 14]); }), ai = ri(1, 3); ys[ai] = ys[ai] + dir * -ri(18, 25);
+      return mc('A student measured how the volume of gas made changes with temperature. Which reading is anomalous?' + table(['Temperature (°C)'].concat(xs.map(String)), [['Gas (cm³)'].concat(ys.map(String))]), 'The reading at ' + xs[ai] + ' °C', xs.filter(function (_, i) { return i !== ai; }).slice(0, 3).map(function (x) { return 'The reading at ' + x + ' °C'; }), { hint: 'Look for the value that breaks the steady pattern.', steps: ['The values ' + (dir > 0 ? 'rise' : 'fall') + ' steadily, except at ' + xs[ai] + ' °C.', 'That reading (' + ys[ai] + ' cm³) does not fit the pattern, so it is anomalous.'] });
+    },
+    
+    bank([
+      { q: 'A student predicted that taller plants would have more leaves. Her results show no pattern. What should her conclusion say?', a: 'The results do not support the prediction', w: ['The prediction was correct', 'Plants have no leaves', 'She should change her results'], s: ['A conclusion compares the results honestly with the prediction.'] },
+      { q: 'How could you make an investigation’s results more reliable?', a: 'Repeat each measurement and calculate a mean', w: ['Only measure once', 'Change two variables at a time', 'Leave out results you do not like'], s: ['Repeats show whether results are consistent and help you spot anomalies.'] },
+      { q: 'Results show that as the temperature goes up, sugar dissolves faster. Which sentence describes the pattern?', a: 'The higher the temperature, the less time the sugar takes to dissolve', w: ['The higher the temperature, the more time it takes', 'Temperature has no effect', 'Sugar makes the water hotter'], s: ['Faster dissolving means a shorter time.'] },
+      { q: 'A student tested only two ramp heights. Why is her conclusion limited?', a: 'Two readings are not enough to show a reliable pattern', w: ['Ramps cannot be tested', 'She should have used three cars at once', 'Her conclusion has no limits'], s: ['Testing more heights would give stronger evidence for a pattern.'] }
+    ])
+  ]
+});
 /* ===== APP ===== */
 (function () {
-  var STRANDS = [{ id: 'N', name: 'Number' }, { id: 'A', name: 'Algebra' }, { id: 'G', name: 'Geometry and measure' }, { id: 'S', name: 'Statistics and probability' }];
+  var SUBJECTS = {
+    maths: { name: 'Maths', strands: [{ id: 'N', name: 'Number' }, { id: 'A', name: 'Algebra' }, { id: 'G', name: 'Geometry and measure' }, { id: 'S', name: 'Statistics and probability' }] },
+    science: { name: 'Science', strands: [{ id: 'B', name: 'Biology' }, { id: 'C', name: 'Chemistry' }, { id: 'P', name: 'Physics' }, { id: 'E', name: 'Earth and space' }, { id: 'W', name: 'Working scientifically' }] }
+  };
+  TOPICS.forEach(function (t) { if (!t.subject) t.subject = 'maths'; });
+  var subj = 'maths';
+  try { var sv = localStorage.getItem('stage7study.subject'); if (SUBJECTS[sv]) subj = sv; } catch (e) {}
+  function STR() { return SUBJECTS[subj].strands; }
+  function TOPS() { return TOPICS.filter(function (t) { return t.subject === subj; }); }
+  function setSubj(s) { subj = s; try { localStorage.setItem('stage7study.subject', s); } catch (e) {} markSubj(); }
+  function markSubj() { Array.prototype.forEach.call(document.querySelectorAll('[data-subj]'), function (b) { b.setAttribute('aria-pressed', b.getAttribute('data-subj') === subj ? 'true' : 'false'); }); }
   var LEVELS = ['Not started', 'Started', 'Getting there', 'Secure'];
   var byId = {}; TOPICS.forEach(function (t) { byId[t.id] = t; });
   var KEY = 'stage7study.v1';
@@ -1959,13 +2807,13 @@ topic({
   }
   function totals() {
     var a = 0, c = 0, secure = 0;
-    TOPICS.forEach(function (t) { var r = rec(t.id); a += r.a; c += r.c; if (level(t.id) === 3) secure++; });
+    TOPS().forEach(function (t) { var r = rec(t.id); a += r.a; c += r.c; if (level(t.id) === 3) secure++; });
     return { a: a, c: c, secure: secure };
   }
   function suggestion() {
-    var started = TOPICS.filter(function (t) { var l = level(t.id); return l === 1 || l === 2; });
+    var started = TOPS().filter(function (t) { var l = level(t.id); return l === 1 || l === 2; });
     if (started.length) { started.sort(function (x, y) { return recentAcc(x.id) - recentAcc(y.id) || (rec(y.id).last || 0) - (rec(x.id).last || 0); }); return { t: started[0], why: 'You have started this topic. A few more questions will make it secure.' }; }
-    var fresh = TOPICS.filter(function (t) { return level(t.id) === 0; });
+    var fresh = TOPS().filter(function (t) { return level(t.id) === 0; });
     if (fresh.length) return { t: fresh[0], why: totals().a ? 'Next topic you have not tried yet.' : 'A good place to begin. Read the key ideas, then try 10 questions.' };
     return null;
   }
@@ -1979,7 +2827,7 @@ topic({
   }
   function strandColor(s) { return 'var(--s' + s + ')'; }
   function meter(l, s) { return '<span class="meter" data-l="' + l + '" style="--sc:' + strandColor(s) + '" aria-hidden="true"><i></i><i></i><i></i></span>'; }
-  function updateMast() { var t = totals(); mastMeta.innerHTML = t.secure + ' of ' + TOPICS.length + ' topics secure'; }
+  function updateMast() { var t = totals(); mastMeta.innerHTML = t.secure + ' of ' + TOPS().length + ' ' + SUBJECTS[subj].name.toLowerCase() + ' topics secure'; }
   var current = { name: 'home' };
   function rerender() { updateMast(); if (current.name === 'home') home(); else if (current.name === 'topic') topicPage(current.id, current.tab); }
   function go(fn) { window.scrollTo(0, 0); fn(); var h = view.querySelector('h1'); if (h) { h.setAttribute('tabindex', '-1'); h.focus({ preventScroll: true }); } }
@@ -1996,9 +2844,10 @@ topic({
       h += '<section class="next"><p class="lab">All topics secure</p><h2>Keep it fresh with a mixed test</h2><p class="muted">Mixed tests pull questions from every topic, like a real exam.</p><div class="row"><button class="btn primary" data-go="test">Start a mixed test</button></div></section>';
     }
     h += '<div class="tally"><span><b>' + t.a + '</b> questions answered</span>' + (t.a ? '<span><b>' + Math.round(100 * t.c / t.a) + '%</b> correct</span>' : '') + '</div>';
-    h += '<div class="row"><button class="btn" data-go="test">Mixed test</button>' + (prog.tests.length ? '<span class="small">Last test: ' + prog.tests[prog.tests.length - 1].score + ' out of ' + prog.tests[prog.tests.length - 1].n + '</span>' : '') + '</div>';
-    STRANDS.forEach(function (st) {
-      var ts = TOPICS.filter(function (x) { return x.strand === st.id; }), sec = ts.filter(function (x) { return level(x.id) === 3; }).length;
+    var myTests = prog.tests.filter(function (x) { return (x.subject || 'maths') === subj; }), lastT = myTests[myTests.length - 1];
+    h += '<div class="row"><button class="btn" data-go="test">Mixed ' + SUBJECTS[subj].name.toLowerCase() + ' test</button>' + (lastT ? '<span class="small">Last test: ' + lastT.score + ' out of ' + lastT.n + '</span>' : '') + '</div>';
+    STR().forEach(function (st) {
+      var ts = TOPS().filter(function (x) { return x.strand === st.id; }), sec = ts.filter(function (x) { return level(x.id) === 3; }).length;
       h += '<section class="strand" style="--sc:' + strandColor(st.id) + '" aria-labelledby="s' + st.id + '"><div class="strandhead"><h2 id="s' + st.id + '">' + st.name + '</h2><span class="small">' + sec + ' of ' + ts.length + ' secure</span></div><div class="topics">';
       ts.forEach(function (x) { var l = level(x.id); h += '<button class="trow" data-go="topic" data-id="' + x.id + '"><span class="tt">' + x.title + '</span><span class="codes">' + x.codes.join(', ') + '</span><span class="st">' + meter(l, st.id) + '<span class="stl" data-l="' + l + '">' + LEVELS[l] + '</span></span></button>'; });
       h += '</div></section>';
@@ -2026,7 +2875,7 @@ topic({
     tab = tab || 'learn'; current = { name: 'topic', id: id, tab: tab };
     var l = level(id), r = rec(id);
     var h = '<div class="stack"><div><button class="back" data-go="home">All topics</button></div>';
-    h += '<header class="topichead" style="--sc:' + strandColor(t.strand) + '"><h1>' + t.title + '</h1><p class="muted">' + t.blurb + '</p><div class="chips">' + t.codes.map(function (c) { return '<span class="chip">' + c + '</span>'; }).join('') + '<span class="chip ' + (t.calc ? 'calc' : 'nocalc') + '">' + (t.calc ? 'Calculator allowed' : 'No calculator') + '</span></div>';
+    h += '<header class="topichead" style="--sc:' + strandColor(t.strand) + '"><h1>' + t.title + '</h1><p class="muted">' + t.blurb + '</p><div class="chips">' + t.codes.map(function (c) { return '<span class="chip">' + c + '</span>'; }).join('') + (t.subject === 'maths' || t.calc ? '<span class="chip ' + (t.calc ? 'calc' : 'nocalc') + '">' + (t.calc ? 'Calculator allowed' : 'No calculator') + '</span>' : '') + '</div>';
     h += '<div class="row">' + meter(l, t.strand) + '<span class="small">' + LEVELS[l] + (r.a ? '. ' + r.c + ' of ' + r.a + ' answered correctly so far.' : '.') + '</span></div></header>';
     h += '<div class="ex stack"><h2>Key ideas</h2><ul class="ideas">' + t.learn.ideas.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ul>';
     h += '<h2>Worked example</h2><div class="sheet"><p class="prompt">' + t.learn.example.q + '</p><ol class="steps">' + t.learn.example.steps.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ol></div>';
@@ -2183,8 +3032,8 @@ topic({
   function testSetup() {
     current = { name: 'testsetup' };
     var scope = 'all', len = 15;
-    var h = '<div class="stack"><div><button class="back" data-go="home">All topics</button></div><h1>Mixed test</h1><p class="muted" style="max-width:65ch">Questions come from different topics, like an exam. You see your marks and worked solutions at the end.</p>';
-    h += '<h2>What to cover</h2><div class="choice" role="radiogroup" aria-label="What to cover" id="scope"><button type="button" role="radio" aria-checked="true" data-v="all">All of Stage 7<span>' + TOPICS.length + ' topics</span></button>' + STRANDS.map(function (s) { return '<button type="button" role="radio" aria-checked="false" data-v="' + s.id + '">' + s.name + '<span>' + TOPICS.filter(function (t) { return t.strand === s.id; }).length + ' topics</span></button>'; }).join('') + '</div>';
+    var h = '<div class="stack"><div><button class="back" data-go="home">All topics</button></div><h1>Mixed ' + SUBJECTS[subj].name.toLowerCase() + ' test</h1><p class="muted" style="max-width:65ch">Questions come from different topics, like an exam. You see your marks and worked solutions at the end.</p>';
+    h += '<h2>What to cover</h2><div class="choice" role="radiogroup" aria-label="What to cover" id="scope"><button type="button" role="radio" aria-checked="true" data-v="all">All of Stage 7 ' + SUBJECTS[subj].name.toLowerCase() + '<span>' + TOPS().length + ' topics</span></button>' + STR().map(function (s) { return '<button type="button" role="radio" aria-checked="false" data-v="' + s.id + '">' + s.name + '<span>' + TOPS().filter(function (t) { return t.strand === s.id; }).length + ' topics</span></button>'; }).join('') + '</div>';
     h += '<h2>How many questions</h2><div class="choice" role="radiogroup" aria-label="How many questions" id="len"><button type="button" role="radio" aria-checked="false" data-v="10">10 questions<span>About 15 minutes</span></button><button type="button" role="radio" aria-checked="true" data-v="15">15 questions<span>About 25 minutes</span></button><button type="button" role="radio" aria-checked="false" data-v="25">25 questions<span>About 40 minutes</span></button></div>';
     h += '<div class="row"><button class="btn primary" id="start">Start the test</button></div></div>';
     view.innerHTML = h; wireGo();
@@ -2194,7 +3043,7 @@ topic({
   }
   function runTest(scope, len) {
     current = { name: 'test' };
-    var pool = TOPICS.filter(function (t) { return scope === 'all' || t.strand === scope; }).map(function (t) { return t.id; });
+    var pool = TOPS().filter(function (t) { return scope === 'all' || t.strand === scope; }).map(function (t) { return t.id; });
     var order = []; while (order.length < len) order = order.concat(shuffle(pool)); order = order.slice(0, len);
     var make = maker(pool), qs = order.map(function (id) { return make(id); }), resp = new Array(len), i = 0;
     view.innerHTML = '<div class="stack"><div class="practhead"><h1 style="font-size:1.35rem">Mixed test</h1><div class="dots" id="dots" aria-hidden="true"></div></div><p class="small" id="pcount"></p><div id="qhost"></div><div class="row"><button class="btn quiet" id="quit">Stop and mark what I have done</button></div></div>';
@@ -2224,7 +3073,7 @@ topic({
         record(q._topic, m.ok);
         items += '<div class="rv"><div class="rvh"><span class="m ' + (m.ok ? 'ok' : 'no') + '" aria-label="' + (m.ok ? 'correct' : 'incorrect') + '">' + (m.ok ? '✓' : '✗') + '</span><b>Question ' + (k + 1) + '</b><span class="small">' + byId[q._topic].title + '</span></div><div class="prompt">' + q.prompt + '</div>' + (q.fig ? '<div class="figwrap">' + q.fig + '</div>' : '') + '<p><b>Your answer:</b> ' + (r === null ? 'skipped' : respText(q, r)) + '</p>' + (m.ok ? '' : '<p><b>Correct answer:</b> ' + q.ans + '</p>') + solutionHTML(q, false) + '</div>';
       });
-      if (done) { prog.tests.push({ at: Date.now(), n: done, score: score, scope: scope }); prog.tests = prog.tests.slice(-12); save(); }
+      if (done) { prog.tests.push({ at: Date.now(), n: done, score: score, scope: scope, subject: subj }); prog.tests = prog.tests.slice(-12); save(); }
       var weakList = Object.keys(weak).sort(function (a, b) { return weak[b] - weak[a]; }).slice(0, 4);
       var h = '<div class="stack"><div><button class="back" data-go="home">All topics</button></div><h1>Test results</h1><div class="sheet"><span class="score">' + score + '/' + done + '</span><p>' + (done ? (score / done >= 0.8 ? 'A strong result.' : score / done >= 0.5 ? 'A solid base. Focus on the topics below.' : 'Work through the topics below one at a time, starting with the key ideas.') : 'You did not answer any questions, so there is nothing to mark.') + '</p></div>';
       if (weakList.length) h += '<h2>Topics to practise next</h2><div class="topics">' + weakList.map(function (id) { var t = byId[id]; return '<button class="trow" style="--sc:' + strandColor(t.strand) + '" data-go="topic" data-id="' + id + '"><span class="tt">' + t.title + '</span><span class="codes">' + weak[id] + ' wrong in this test</span><span class="st">' + meter(level(id), t.strand) + '<span class="stl" data-l="' + level(id) + '">' + LEVELS[level(id)] + '</span></span></button>'; }).join('') + '</div>';
@@ -2243,7 +3092,9 @@ topic({
   document.getElementById('yesreset').addEventListener('click', function () { prog = blank(); save(); confirmBox.hidden = true; resetBtn.hidden = false; go(home); });
 
   /* ---------- start ---------- */
+  Array.prototype.forEach.call(document.querySelectorAll('[data-subj]'), function (b) { b.addEventListener('click', function () { setSubj(b.getAttribute('data-subj')); go(home); }); });
   var startHash = (location.hash || '').replace('#', '');
+  if (byId[startHash]) setSubj(byId[startHash].subject); else if (startHash === 'science' || startHash === 'maths') setSubj(startHash); else markSubj();
   if (byId[startHash]) topicPage(startHash); else if (startHash === 'test') testSetup(); else home();
   updateMast();
 })();
