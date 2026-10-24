@@ -284,12 +284,15 @@ svg.fig .shlbl { font-size: 13px; font-weight: 700; }
 .passage.poem { white-space: pre-line; font-style: italic; }
 .passage mark { background: var(--hl); color: inherit; padding: 0 2px; }
 .gap { display: inline-block; min-width: 4em; border-bottom: 2px solid var(--ink-2); text-align: center; color: var(--ink-2); font-size: 0.85em; }
+.testnote { border: 2px dashed var(--ink); border-radius: var(--r); padding: 12px 16px; display: grid; gap: 6px; max-width: 70ch; }
+.testnote .lab { font-size: 0.8rem; font-weight: 700; color: var(--ink-2); }
+.subj.subjtest { border-style: dashed; }
 </style></head><body>
 <div class="wrap">
   <header class="mast">
     <div class="stack" style="gap:8px">
       <p class="brand">Stage 9 <span>Study</span></p>
-      <div class="subjects" role="group" aria-label="Subject"><button type="button" class="subj" data-subj="maths" aria-pressed="true">Maths</button><button type="button" class="subj" data-subj="science" aria-pressed="false">Science</button><button type="button" class="subj" data-subj="english" aria-pressed="false">English</button><button type="button" class="subj" data-subj="french" aria-pressed="false">French</button></div>
+      <div class="subjects" role="group" aria-label="Subject"><button type="button" class="subj" data-subj="maths" aria-pressed="true">Maths</button><button type="button" class="subj" data-subj="science" aria-pressed="false">Science</button><button type="button" class="subj" data-subj="english" aria-pressed="false">English</button><button type="button" class="subj" data-subj="french" aria-pressed="false">French</button><button type="button" class="subj subjtest" data-subj="scitest" aria-pressed="false">Science test · Oct</button></div>
     </div>
     <p class="mastmeta" id="mastmeta"></p>
   </header>
@@ -3572,23 +3575,188 @@ function registerFrench(level) {
       ])] });
   }
 }
+/* ===== SCIENCE TEST TAB: Year 9 revision checklist, Learner's Book pp. 1-65 (20-mark test, October 2026) ===== */
+function st(t) { t.subject = 'scitest'; topic(t); }
+function tempGraph(years, temps) {
+  var W = 300, H = 240, pl = 42, pb = 30, lo = Math.floor(Math.min.apply(null, temps) * 2) / 2 - 0.5, hi = Math.ceil(Math.max.apply(null, temps) * 2) / 2 + 0.5;
+  var X0 = function (i) { return pl + i * (W - pl - 14) / (years.length - 1); }, Y0 = function (t) { return H - pb - (t - lo) / (hi - lo) * (H - pb - 12); }, b = '';
+  for (var k = 0; lo + k * 0.1 <= hi + 1e-9; k++) { var t = clean(lo + k * 0.1); b += '<line x1="' + X0(0) + '" y1="' + Y0(t).toFixed(1) + '" x2="' + X0(years.length - 1) + '" y2="' + Y0(t).toFixed(1) + '" class="gl"' + (k % 5 ? ' style="opacity:.45"' : '') + '/>' + (k % 5 ? '' : T(pl - 6, Y0(t), fmt(t, 1), 'tick', 'end')); }
+  years.forEach(function (y, i) { b += T(X0(i), H - pb + 12, y, 'tick'); });
+  b += L(X0(0), Y0(lo), X0(years.length - 1), Y0(lo), 'axis') + L(X0(0), Y0(lo), X0(0), Y0(hi), 'axis');
+  b += '<polyline class="plot" fill="none" points="' + temps.map(function (t, i) { return X0(i).toFixed(1) + ',' + Y0(t).toFixed(1); }).join(' ') + '"/>';
+  temps.forEach(function (t, i) { b += '<circle cx="' + X0(i).toFixed(1) + '" cy="' + Y0(t).toFixed(1) + '" r="3" class="dot"/>'; });
+  b += T(X0((years.length - 1) / 2), H - 4, 'Year', 'axl') + '<text class="axl" transform="translate(11 ' + (H / 2 - 12) + ') rotate(-90)" text-anchor="middle">Mean temperature (°C)</text>';
+  return svgWrap(W, H, b, 'Line graph of mean temperature by year');
+}
+var G1 = [['lithium', 'Li', 181, 152], ['sodium', 'Na', 98, 186], ['potassium', 'K', 63, 227], ['rubidium', 'Rb', 39, 248], ['caesium', 'Cs', 29, 265]];
+var HAL = [['fluorine', 'F', 'pale yellow gas'], ['chlorine', 'Cl', 'pale green gas'], ['bromine', 'Br', 'red-brown liquid'], ['iodine', 'I', 'grey-black solid']];
+
+function registerSciTest() {
+  st({ id: 'st-photosynthesis', strand: 'B', title: '1. Photosynthesis and plant growth', codes: ['pp. 8–23'], calc: false,
+    blurb: 'The word equation, chlorophyll and chloroplasts, testing for oxygen and starch, how gases enter a leaf, minerals, and photosynthesis compared with respiration.',
+    learn: { ideas: ['<b>carbon dioxide + water → glucose + oxygen</b> (using light energy, absorbed by chlorophyll in the chloroplasts).', '<b>Oxygen</b> is made. Collect it from pondweed by trapping the bubbles in an upside-down test tube of water. Test: it <b>relights a glowing splint</b>.', 'Carbon dioxide enters the leaf by <b>diffusion</b> through the <b>stomata</b>, from where it is more concentrated (the air) to where it is less concentrated (inside the leaf, where it is being used up). Oxygen diffuses out the same way.', '<b>Starch test</b>: boil the leaf in water (kills and softens it), warm it in ethanol in a hot-water bath to remove the green chlorophyll, rinse it, then add iodine. Starch turns it <b>blue-black</b>.', 'Plants need <b>magnesium</b> to make chlorophyll (without it leaves go yellow) and <b>nitrates</b> to make proteins for growth.', '<b>Respiration</b>: glucose + oxygen → carbon dioxide + water. It happens in all living cells all the time. Photosynthesis takes in CO₂ and gives out O₂; respiration does the opposite.'],
+      example: { q: 'Why is the leaf put in hot ethanol before testing it with iodine?', steps: ['Ethanol removes the green chlorophyll.', 'Without the green colour, it is easy to see whether iodine turns blue-black.'] }, watch: 'Ethanol is flammable: heat it in a water bath, never directly over a flame.' },
+    gens: [
+      function () { var parts = [['carbon dioxide', 'reactant'], ['water', 'reactant'], ['glucose', 'product'], ['oxygen', 'product']], i = ri(0, 3), resp = Math.random() < 0.35;
+        if (resp) { var rp = [['glucose', 'reactant'], ['oxygen', 'reactant'], ['carbon dioxide', 'product'], ['water', 'product']], j = ri(0, 3), sh = rp.map(function (p, k) { return k === j ? '<span class="blank">?</span>' : p[0]; });
+          return mc('Which substance is missing from the word equation for <b>respiration</b>?<p class="data">' + sh[0] + ' + ' + sh[1] + ' → ' + sh[2] + ' + ' + sh[3] + '</p>', rp[j][0], shuffle(['glucose', 'oxygen', 'carbon dioxide', 'water', 'starch', 'nitrogen'].filter(function (x) { return x !== rp[j][0]; })).slice(0, 3), { hint: 'Respiration is the reverse of photosynthesis.', steps: ['glucose + oxygen → carbon dioxide + water.'] }); }
+        var sh2 = parts.map(function (p, k) { return k === i ? '<span class="blank">?</span>' : p[0]; });
+        return mc('Which substance is missing from the word equation for <b>photosynthesis</b>?<p class="data">' + sh2[0] + ' + ' + sh2[1] + ' → ' + sh2[2] + ' + ' + sh2[3] + '</p>', parts[i][0], shuffle(['carbon dioxide', 'water', 'glucose', 'oxygen', 'starch', 'nitrogen'].filter(function (x) { return x !== parts[i][0]; })).slice(0, 3), { hint: 'Plants take in a gas and water, and make a sugar and a gas.', steps: ['carbon dioxide + water → glucose + oxygen.'] }); },
+      function () { var steps = ['Boil the leaf in water', 'Warm the leaf in ethanol in a hot-water bath', 'Rinse the leaf in water', 'Add iodine solution and look for a blue-black colour'], why = ['to kill it and soften it', 'to remove the green chlorophyll', 'to soften it and wash off the ethanol', 'starch turns iodine blue-black'], k = ri(0, 3);
+        if (Math.random() < 0.5) return mc('You are testing a leaf for starch. Which step comes ' + ['first', 'second', 'third', 'last'][k] + '?', steps[k], steps.filter(function (_, i) { return i !== k; }), { hint: 'Kill the leaf, remove the colour, rinse, then test.', steps: steps.map(function (s, i) { return (i + 1) + '. ' + s + ' (' + why[i] + ').'; }) });
+        return mc('In the starch test, why do you <b>' + steps[k].charAt(0).toLowerCase() + steps[k].slice(1) + '</b>?', ucf(why[k]), why.filter(function (_, i) { return i !== k; }).map(ucf), { hint: 'Think about what each step is for.', steps: [steps[k] + ': ' + why[k] + '.'] }); },
+      bank([
+        { q: 'Where in a leaf cell does photosynthesis take place?', a: 'In the chloroplasts', w: ['In the nucleus', 'In the cell wall', 'In the vacuole'], s: ['Chloroplasts contain chlorophyll, which absorbs light energy.'] },
+        { q: 'What is the job of chlorophyll?', a: 'To absorb light energy for photosynthesis', w: ['To store starch', 'To let carbon dioxide into the leaf', 'To carry water up the stem'], s: ['Chlorophyll captures light energy.'] },
+        { q: 'How can you show that pondweed gives off oxygen?', a: 'Collect the bubbles in a test tube and see if they relight a glowing splint', w: ['Add iodine to the water', 'Bubble the gas through limewater', 'Hold a lit splint to the gas and listen for a pop'], s: ['Oxygen relights a glowing splint. Limewater tests for carbon dioxide; a squeaky pop shows hydrogen.'] },
+        { q: 'How does carbon dioxide get into a leaf?', a: 'By diffusion through the stomata', w: ['By osmosis through the roots', 'It is pumped in by the xylem', 'It is made inside the leaf'], s: ['CO₂ moves from higher concentration in the air to lower concentration inside the leaf, through the stomata.'] },
+        { q: 'Why does carbon dioxide keep diffusing into a leaf in the light?', a: 'It is used up in photosynthesis, so its concentration inside stays lower than outside', w: ['The leaf sucks it in', 'There is more CO₂ inside the leaf than outside', 'Light pushes the gas in'], s: ['Diffusion goes from high to low concentration. Photosynthesis keeps the inside concentration low.'] },
+        { q: 'A plant has yellow leaves. Which mineral is it most likely short of?', a: 'Magnesium', w: ['Nitrates', 'Oxygen', 'Glucose'], s: ['Magnesium is needed to make chlorophyll, so a shortage turns leaves yellow.'] },
+        { q: 'A plant is small with weak growth. Which mineral is it most likely short of?', a: 'Nitrates', w: ['Magnesium', 'Carbon dioxide', 'Starch'], s: ['Nitrates are needed to make proteins for growth.'] },
+        { q: 'Which statement compares photosynthesis and respiration correctly?', a: 'Photosynthesis takes in carbon dioxide and gives out oxygen; respiration takes in oxygen and gives out carbon dioxide', w: ['Both take in oxygen', 'Photosynthesis happens all the time; respiration only in light', 'Only animals respire'], s: ['They are opposite processes. Plants do both, but respiration happens all the time.'] },
+        { q: 'When do plant cells respire?', a: 'All the time, day and night', w: ['Only in the dark', 'Only in the light', 'Never: only animals respire'], s: ['All living cells respire continuously to release energy.'] },
+        { q: 'What colour does iodine turn if a leaf contains starch?', a: 'Blue-black', w: ['Orange-brown', 'Green', 'Milky white'], s: ['Iodine stays orange-brown if there is no starch.'] }
+      ])] });
+
+  st({ id: 'st-carbon', strand: 'E', title: '2. The carbon cycle and climate change', codes: ['pp. 24–47'], calc: false,
+    blurb: 'How carbon moves, fossil fuels, greenhouse gases, reading temperature graphs, the effects of climate change, sea level, and asteroid impacts.',
+    learn: { ideas: ['Carbon moves between the atmosphere, plants, animals, decomposers and fossil fuels. <b>Photosynthesis</b> removes CO₂ from the air; <b>respiration</b>, <b>decomposition</b> and <b>combustion</b> put it back; <b>feeding</b> passes carbon along food chains.', '<b>Fossil fuels</b> (coal, oil, gas) formed over millions of years from the remains of dead organisms buried and squashed underground. Burning them releases the stored carbon as CO₂.', '<b>Greenhouse gases</b>, including carbon dioxide and <b>methane</b>, trap heat in the atmosphere, so more of them makes Earth warmer.', 'Effects of climate change: rising sea levels, droughts, wildfires, extreme weather and changes to where living things can survive.', 'Sea level rises when <b>land ice</b> (glaciers, ice sheets) melts and runs into the sea, and when warmer water <b>expands</b>. Melting <b>floating sea ice</b> hardly changes sea level, because the ice was already displacing its own weight of water.', 'An <b>asteroid impact</b> throws dust into the air, blocking sunlight: less photosynthesis, so food chains collapse, and the climate cools.'],
+      example: { q: 'Why does melting Arctic sea ice not raise sea level much, while melting Greenland’s ice sheet does?', steps: ['Sea ice is already floating, displacing its own weight of water.', 'Greenland’s ice is on land; when it melts, extra water flows into the sea.'] }, watch: 'Describe a graph’s trend with data: “It rose from 13.8 °C in 1980 to 14.6 °C in 2020”, not just “it went up”.' },
+    gens: [
+      function () { var p = pick([['Photosynthesis', 'removes'], ['Respiration', 'adds'], ['Combustion of fossil fuels', 'adds'], ['Decomposition', 'adds']]);
+        var q = mc(p[0] + ': does this add carbon dioxide to the atmosphere or remove it?', p[1] === 'adds' ? 'Adds carbon dioxide' : 'Removes carbon dioxide', [p[1] === 'adds' ? 'Removes carbon dioxide' : 'Adds carbon dioxide'], { hint: 'Only one process in the carbon cycle takes CO₂ out of the air.', steps: [p[1] === 'adds' ? p[0] + ' releases carbon dioxide.' : 'Photosynthesis uses carbon dioxide to make glucose.'] });
+        q.options = ['Adds carbon dioxide', 'Removes carbon dioxide']; q.correct = p[1] === 'adds' ? 0 : 1; return q; },
+      function () { var start = ri(130, 138) / 10, years = [1980, 1990, 2000, 2010, 2020], temps = [start]; for (var i = 1; i < 5; i++) temps.push(clean(temps[i - 1] + ri(0, 4) / 10)); if (temps[4] === temps[0]) temps[4] = clean(temps[0] + 0.5);
+        var a = ri(0, 3), b = ri(a + 1, 4), t = pick(['diff', 'trend', 'read']);
+        if (t === 'diff') return { kind: 'num', fig: tempGraph(years, temps), prompt: 'The graph shows the mean global temperature. By how many °C did it rise between ' + years[a] + ' and ' + years[b] + '?', answer: clean(temps[b] - temps[a]), tol: 0.11, ans: fmt(clean(temps[b] - temps[a])) + ' °C', hint: 'Read both values carefully, then subtract.', steps: [years[b] + ': ' + fmt(temps[b]) + ' °C. ' + years[a] + ': ' + fmt(temps[a]) + ' °C.', fmt(temps[b]) + ' − ' + fmt(temps[a]) + ' = ' + fmt(clean(temps[b] - temps[a])) + ' °C.'] };
+        if (t === 'read') { var k = ri(0, 4); return { kind: 'num', fig: tempGraph(years, temps), prompt: 'Use the graph. What was the mean temperature in ' + years[k] + '?', answer: temps[k], tol: 0.11, ans: fmt(temps[k]) + ' °C', hint: 'Go up from ' + years[k] + ' to the point, then across to the scale.', steps: ['In ' + years[k] + ' the point is at ' + fmt(temps[k]) + ' °C.'] }; }
+        return mc('Which sentence best describes the trend shown on the graph?', 'The temperature increased overall, from ' + fmt(temps[0]) + ' °C in 1980 to ' + fmt(temps[4]) + ' °C in 2020', ['The temperature decreased steadily', 'The temperature stayed the same', 'The temperature rose, then fell back to where it started'], { fig: tempGraph(years, temps), hint: 'Compare the start and end, and use numbers from the graph.', steps: ['Overall the line goes up: ' + fmt(temps[0]) + ' °C → ' + fmt(temps[4]) + ' °C.'] }); },
+      bank([
+        { q: 'How did fossil fuels form?', a: 'From the remains of dead organisms buried and compressed over millions of years', w: ['From volcanic lava cooling quickly', 'From carbon dioxide freezing underground', 'From rocks melting in the mantle'], s: ['Coal formed from ancient plants; oil and gas mostly from tiny sea organisms.'] },
+        { q: 'Why does burning fossil fuels increase carbon dioxide in the atmosphere?', a: 'It releases carbon that was locked away underground for millions of years', w: ['Fossil fuels contain no carbon', 'Burning removes oxygen from the air only', 'It increases photosynthesis'], s: ['Combustion turns the stored carbon into carbon dioxide.'] },
+        { q: 'Which two gases are named as greenhouse gases in this topic?', a: 'Carbon dioxide and methane', w: ['Oxygen and nitrogen', 'Helium and argon', 'Hydrogen and oxygen'], s: ['Both trap heat in the atmosphere.'] },
+        { q: 'How do greenhouse gases affect Earth’s temperature?', a: 'They trap heat in the atmosphere, so more of them makes Earth warmer', w: ['They reflect all sunlight back to space', 'They make Earth cooler', 'They have no effect'], s: ['They absorb heat given off by Earth’s surface.'] },
+        { q: 'Which of these would make sea level rise?', a: 'Glaciers on land melting into the sea', w: ['Floating sea ice melting', 'Ice cubes melting in a full glass of water', 'More icebergs forming'], s: ['Land ice adds new water to the sea. Floating ice was already displacing its own weight of water.'] },
+        { q: 'Why does warmer sea water raise sea level, even with no extra ice melting?', a: 'Water expands as it warms', w: ['Warm water is heavier', 'Warm water evaporates more slowly', 'Warm water freezes'], s: ['Thermal expansion makes the same water take up more space.'] },
+        { q: 'Which is a likely effect of climate change?', a: 'More droughts and wildfires in some regions', w: ['Earth’s gravity getting stronger', 'No more weather', 'The Sun getting smaller'], s: ['Higher temperatures make droughts and wildfires more likely in some places.'] },
+        { q: 'How could a large asteroid impact cause animals far from the crater to die?', a: 'Dust blocks sunlight, so plants photosynthesise less and food chains collapse', w: ['The impact makes the oceans boil everywhere', 'It adds more oxygen to the air', 'It only affects animals near the crater'], s: ['Less light means less photosynthesis, less food for every level of the food chain, and a cooler climate.'] },
+        { q: 'How does carbon move from a rabbit back into the atmosphere after it dies?', a: 'Decomposers break it down and release carbon dioxide by respiration', w: ['By photosynthesis', 'It turns straight into oxygen', 'It stays in the rabbit forever'], s: ['Bacteria and fungi respire as they feed on dead material.'] },
+        { q: 'How does carbon pass from grass to a cow?', a: 'By feeding: the cow eats the grass', w: ['By combustion', 'By photosynthesis', 'Through the soil'], s: ['Carbon compounds in the grass become part of the cow.'] }
+      ])] });
+
+  st({ id: 'st-atoms', strand: 'C', title: '3. Atomic structure and the Periodic Table', codes: ['pp. 48–52'], calc: false,
+    blurb: 'Protons, neutrons and electrons; atomic and mass numbers; electronic structure; reading the Periodic Table.',
+    learn: { ideas: ['<b>Protons</b>: charge +1, in the nucleus. <b>Neutrons</b>: charge 0, in the nucleus. <b>Electrons</b>: charge −1, in shells around the nucleus.', '<b>Atomic number</b> = number of protons. <b>Mass number</b> = protons + neutrons, so neutrons = mass number − atomic number.', 'In a neutral atom, electrons = protons.', 'Electronic structure: 2 electrons in the first shell, then 8, then 8. Sodium (11) is 2,8,1.', 'In the Periodic Table, the <b>group</b> (column) number for the groups studied equals the number of outer-shell electrons. Elements in the same group have related properties.'],
+      example: { q: 'Magnesium has atomic number 12 and mass number 24. Give protons, neutrons, electrons and electronic structure.', steps: ['Protons = 12; electrons = 12.', 'Neutrons = 24 − 12 = 12.', 'Electronic structure: 2,8,2.'] }, watch: 'Do not add electrons to the mass number. Their mass is tiny.' },
+    gens: [
+      function () { var e = pick(ELEMENTS.slice(2)), what = pick(['protons', 'neutrons', 'electrons']), ans = what === 'neutrons' ? e[3] - e[0] : e[0];
+        return { kind: 'num', prompt: 'An atom of ' + e[2] + ' is shown as ' + nucFig(e) + '. How many <b>' + what + '</b> does it have?', answer: ans, ans: '' + ans, hint: 'Bottom number: atomic number (protons). Top number: mass number (protons + neutrons).', steps: ['Atomic number ' + e[0] + ', mass number ' + e[3] + '.', what === 'neutrons' ? 'Neutrons = ' + e[3] + ' − ' + e[0] + ' = ' + ans + '.' : what === 'protons' ? 'Protons = atomic number = ' + ans + '.' : 'Neutral atom: electrons = protons = ' + ans + '.'] }; },
+      function () { var e = pick(ELEMENTS.slice(2)), s = shells(e[0]).join(',');
+        return { kind: 'text', prompt: e[2].charAt(0).toUpperCase() + e[2].slice(1) + ' has atomic number ' + e[0] + '. Write its electronic structure, with commas between the shells (for example 2,8,1).', answer: s, also: [s.replace(/,/g, ', '), s.replace(/,/g, '.'), s.replace(/,/g, ' ')], ans: s, inputLabel: 'Structure', hint: 'Fill the shells in order: 2, then 8, then 8.', steps: [e[0] + ' electrons: ' + s + '.'] }; },
+      function () { var e = pick(ELEMENTS.slice(2).filter(function (x) { return [1, 2, 7, 0].indexOf(groupOf(x[0])) >= 0; })), g = groupOf(e[0]), gl = g === 0 ? 'Group 8 (also called Group 0)' : 'Group ' + g;
+        var all = ['Group 1', 'Group 2', 'Group 7', 'Group 8 (also called Group 0)'];
+        return mc(e[2].charAt(0).toUpperCase() + e[2].slice(1) + ' (atomic number ' + e[0] + ') has the electronic structure ' + shells(e[0]).join(',') + '. Which group is it in?', gl, all.filter(function (x) { return x !== gl; }), { hint: 'Look at the number of electrons in the outer shell.', steps: [g === 0 ? 'The outer shell is full, so it is a noble gas: Group 8 (0).' : 'It has ' + g + ' outer-shell electron' + (g === 1 ? '' : 's') + ', so it is in Group ' + g + '.'] }); },
+      bank([
+        { q: 'Which particle has no charge?', a: 'Neutron', w: ['Proton', 'Electron', 'Ion'], s: ['Protons +1, electrons −1, neutrons 0.'] },
+        { q: 'Where are the electrons in an atom?', a: 'In shells around the nucleus', w: ['Inside the nucleus', 'Joined to the neutrons', 'Only on the outside of the Periodic Table'], s: ['Protons and neutrons are in the nucleus; electrons are in shells around it.'] },
+        { q: 'What is the charge on a proton?', a: '+1', w: ['−1', '0', '+2'], s: ['Protons are positive.'] },
+        { q: 'Why do lithium, sodium and potassium have related properties?', a: 'They are in the same group, with one electron in the outer shell', w: ['They have the same mass number', 'They have the same number of neutrons', 'They are all gases'], s: ['Same group, same number of outer electrons, similar reactions.'] },
+        { q: 'An atom has 17 protons and 18 neutrons. What is its mass number?', a: '35', w: ['17', '18', '1'], s: ['Mass number = protons + neutrons = 35.'] }
+      ])] });
+
+  st({ id: 'st-groups', strand: 'C', title: '4. Trends in groups', codes: ['pp. 53–59'], calc: false,
+    blurb: 'Group 1 alkali metals (data tables, atomic radius, melting point, reactivity), Group 7 halogens and Group 8 noble gases.',
+    learn: { ideas: ['<b>Group 1</b> (alkali metals): soft metals with one outer electron. Down the group: <b>atomic radius increases</b>, <b>melting point decreases</b>, <b>reactivity increases</b>.', 'To predict a missing value, look at how the numbers change from one element to the next and continue the pattern.', '<b>Group 7</b> (halogens): fluorine (pale yellow gas), chlorine (pale green gas), bromine (red-brown liquid), iodine (grey-black solid). Down the group, melting and boiling points increase, so the state changes from gas to liquid to solid.', '<b>Group 8 noble gases</b> (also called Group 0): helium, neon, argon. They have a <b>full outer shell</b>, so they are very unreactive.'],
+      example: { q: 'Melting points: lithium 181 °C, sodium 98 °C, potassium 63 °C. Predict rubidium.', steps: ['The values fall down the group, by smaller amounts each time.', 'A sensible prediction is about 40 °C (the actual value is 39 °C).'] }, watch: 'Group 1 and Group 7 have opposite reactivity trends: Group 1 gets more reactive down the group; Group 7 gets less reactive.' },
+    gens: [
+      function () { var hide = ri(1, 3), prop = pick(['mp', 'radius']), col = prop === 'mp' ? 2 : 3, rows = G1.slice(0, 4).map(function (r, i) { return [r[0].charAt(0).toUpperCase() + r[0].slice(1), i === hide ? '?' : String(r[col])]; });
+        var v = G1[hide][col], prev = G1[hide - 1][col], next = hide < 3 ? G1[hide + 1][col] : null;
+        var w = prop === 'mp' ? [prev + 40, Math.round(v * 3), 300] : [prev - 30, Math.round(v / 3), 400];
+        if (hide === 3) w = prop === 'mp' ? [120, 75, 250] : [200, 140, 400];
+        return mc('The table shows data for some Group 1 metals. What is the most likely value for the missing ' + (prop === 'mp' ? 'melting point' : 'atomic radius') + '?' + table(['Element', prop === 'mp' ? 'Melting point (°C)' : 'Atomic radius (pm)'], rows), String(v), w.map(String), { hint: 'Is the value going up or down the group? It must fit between its neighbours.', steps: [prop === 'mp' ? 'Melting point decreases down Group 1.' : 'Atomic radius increases down Group 1.', 'The missing value must fit the pattern: ' + v + (prop === 'mp' ? ' °C.' : ' pm.')] }); },
+      function () { var h = pick(HAL), t = pick(['state', 'which']);
+        if (t === 'state') return mc('What is ' + h[0] + ' like at room temperature?', ucf(h[2]), HAL.filter(function (x) { return x !== h; }).map(function (x) { return ucf(x[2]); }), { hint: 'Down Group 7: gas, gas, liquid, solid.', steps: [ucf(h[0]) + ' is a ' + h[2] + '.'] });
+        return mc('Which halogen is a <b>' + h[2] + '</b> at room temperature?', ucf(h[0]), HAL.filter(function (x) { return x !== h; }).map(function (x) { return ucf(x[0]); }), { hint: 'Down Group 7: fluorine, chlorine, bromine, iodine.', steps: [ucf(h[0]) + ' is a ' + h[2] + '.'] }); },
+      function () { var a = pick(G1.slice(0, 4)), b = pick(G1.slice(0, 4).filter(function (x) { return x !== a; })), lower = G1.indexOf(a) > G1.indexOf(b) ? a : b, ask = pick(['more reactive', 'larger atom', 'lower melting point']);
+        var win = lower, lose = lower === a ? b : a;
+        return mc('Which has the ' + ask + ': ' + a[0] + ' or ' + b[0] + '?', ucf(win[0]), [ucf(lose[0]), 'They are the same'], { hint: 'Order down Group 1: lithium, sodium, potassium, rubidium.', steps: [ucf(win[0]) + ' is lower in Group 1.', 'Down the group: more reactive, larger atoms, lower melting points.'] }); },
+      bank([
+        { q: 'Why are the noble gases very unreactive?', a: 'Their atoms have a full outer shell of electrons', w: ['They have no electrons', 'They are metals', 'They have no protons'], s: ['A full outer shell is stable, so they do not need to gain, lose or share electrons.'] },
+        { q: 'Why do Group 1 metals become more reactive down the group?', a: 'The single outer electron is further from the nucleus, so it is lost more easily', w: ['They gain more outer electrons', 'They get smaller', 'Their melting points rise'], s: ['Larger atoms hold their outer electron less tightly.'] },
+        { q: 'How do the melting points of the halogens change down Group 7?', a: 'They increase', w: ['They decrease', 'They stay the same', 'They go up and down at random'], s: ['That is why they change from gases to a liquid to a solid.'] },
+        { q: 'How many electrons are in the outer shell of a halogen atom?', a: '7', w: ['1', '8', '2'], s: ['Group 7: seven outer electrons.'] },
+        { q: 'Which is a noble gas?', a: 'Argon', w: ['Chlorine', 'Sodium', 'Oxygen'], s: ['Helium, neon and argon are noble gases.'] },
+        { q: 'Which statement about Group 1 metals is correct?', a: 'They are soft and can be cut with a knife', w: ['They are very hard', 'They are all liquids', 'They do not react with water'], s: ['They are soft and react with water.'] }
+      ])] });
+
+  st({ id: 'st-ions', strand: 'C', title: '5. Why elements react to form compounds', codes: ['pp. 60–65'], calc: false,
+    blurb: 'Full outer shells, how metals and non-metals form ions, ion symbols, ionic bonds and how sodium chloride forms.',
+    learn: { ideas: ['Atoms react to get a <b>full outer shell</b> of electrons, like the noble gases.', 'A <b>metal</b> atom <b>loses</b> electron(s) to form a <b>positive ion</b>. A <b>non-metal</b> atom <b>gains</b> electron(s) to form a <b>negative ion</b>.', 'Compare protons and electrons: more protons than electrons → positive ion; more electrons than protons → negative ion; equal → neutral atom.', 'Symbols: Na⁺ (sodium ion), Cl⁻ (chloride ion), Mg²⁺, O²⁻. The symbol without a charge (Na) is the atom.', 'An <b>ionic bond</b> is the strong <b>electrostatic attraction</b> between oppositely charged ions.', '<b>Sodium chloride</b>: sodium (2,8,1) gives its outer electron to chlorine (2,8,7). Both get full outer shells: Na⁺ (2,8) and Cl⁻ (2,8,8). The oppositely charged ions attract.'],
+      example: { q: 'A particle has 12 protons and 10 electrons. Is it an atom or an ion, and what is its charge?', steps: ['Two more protons than electrons.', 'It is a positive ion with a charge of 2+: Mg²⁺.'] }, watch: 'Losing electrons makes a positive ion. Electrons are negative, so taking them away leaves more positive charge.' },
+    gens: [
+      function () { var e = pick(ION_EL), z = ELEMENTS.filter(function (x) { return x[1] === e[1]; })[0][0], k = Math.abs(e[2]), lose = e[2] > 0, t = pick([0, 1, 2]);
+        if (t === 0) return { kind: 'num', prompt: 'A ' + e[0] + ' atom ' + (lose ? 'loses ' : 'gains ') + plural(k, 'electron') + '. What is the charge on the ion? Use a negative number for a negative charge.', answer: e[2], ans: (e[2] > 0 ? '+' : '') + sn(e[2]) + ' (' + ion(e[1], e[2]) + ')', hint: 'Electrons are negative.', steps: [(lose ? 'Losing ' : 'Gaining ') + plural(k, 'electron') + ' gives a charge of ' + (e[2] > 0 ? '+' : '') + sn(e[2]) + ': ' + ion(e[1], e[2]) + '.'] };
+        if (t === 1) { var el = z - e[2]; var q = mc('A particle has ' + z + ' protons and ' + el + ' electrons. What is it?', e[2] > 0 ? 'A positive ion' : 'A negative ion', [e[2] > 0 ? 'A negative ion' : 'A positive ion', 'A neutral atom'], { hint: 'Compare the number of protons with the number of electrons.', steps: [z + ' protons and ' + el + ' electrons: ' + (e[2] > 0 ? 'more protons, so positive' : 'more electrons, so negative') + '. It is ' + ion(e[1], e[2]) + '.'] }); q.options = ['A positive ion', 'A negative ion', 'A neutral atom']; q.correct = e[2] > 0 ? 0 : 1; return q; }
+        return mc('Does a ' + e[0] + ' atom gain or lose electrons when it forms an ion, and why?', lose ? 'It loses ' + plural(k, 'electron') + ' to get a full outer shell' : 'It gains ' + plural(k, 'electron') + ' to get a full outer shell', [lose ? 'It gains ' + plural(8 - k, 'electron') + ' to get a full outer shell' : 'It loses ' + plural(8 - k, 'electron') + ' to get a full outer shell', 'It shares electrons with another atom', 'It does not form ions'], { hint: (lose ? 'Metals' : 'Non-metals') + ' ' + (lose ? 'lose' : 'gain') + ' electrons. How many outer electrons does it have?', steps: [ucf(e[0]) + ' is a ' + (lose ? 'metal' : 'non-metal') + ' with ' + (lose ? k : 8 - k) + ' outer electron' + ((lose ? k : 8 - k) === 1 ? '' : 's') + '.', 'It ' + (lose ? 'loses ' : 'gains ') + plural(k, 'electron') + ' to form ' + ion(e[1], e[2]) + '.'] }); },
+      function () { var e = pick(ION_EL), z = ELEMENTS.filter(function (x) { return x[1] === e[1]; })[0][0];
+        return { kind: 'num', prompt: 'How many electrons does the ion ' + ion(e[1], e[2]) + ' have? (' + e[0] + ' has atomic number ' + z + '.)', answer: z - e[2], ans: '' + (z - e[2]), hint: 'Start from the number of electrons in the atom (' + z + ').', steps: [e[2] > 0 ? 'It has lost ' + plural(e[2], 'electron') + ': ' + z + ' − ' + e[2] + ' = ' + (z - e[2]) + '.' : 'It has gained ' + plural(-e[2], 'electron') + ': ' + z + ' + ' + (-e[2]) + ' = ' + (z - e[2]) + '.'] }; },
+      bank([
+        { q: 'Why do atoms react to form ions?', a: 'To get a full outer shell of electrons', w: ['To gain more protons', 'To lose their nucleus', 'To become noble gases with new protons'], s: ['A full outer shell is stable, like a noble gas.'] },
+        { q: 'What is an ionic bond?', a: 'The electrostatic attraction between oppositely charged ions', w: ['A shared pair of electrons', 'A bond between two neutral atoms', 'The attraction between two nuclei'], s: ['Positive and negative ions attract each other strongly.'] },
+        { q: 'When sodium reacts with chlorine, what happens to the electrons?', a: 'Sodium gives one electron to chlorine', w: ['Chlorine gives one electron to sodium', 'They share a pair of electrons', 'Both atoms lose an electron'], s: ['Na (2,8,1) loses its outer electron; Cl (2,8,7) gains it.'] },
+        { q: 'What is the electronic structure of a sodium ion, Na⁺?', a: '2,8', w: ['2,8,1', '2,8,8', '2,7'], s: ['It has lost the single electron from its third shell.'] },
+        { q: 'What is the electronic structure of a chloride ion, Cl⁻?', a: '2,8,8', w: ['2,8,7', '2,8', '2,8,8,1'], s: ['It has gained one electron to fill its third shell.'] },
+        { q: 'Which symbol shows a sodium atom rather than a sodium ion?', a: 'Na', w: ['Na⁺', 'Na²⁺', 'Na⁻'], s: ['An atom has no charge, so no + or − sign.'] },
+        { q: 'Which pair would form an ionic compound?', a: 'Magnesium and oxygen', w: ['Neon and argon', 'Oxygen and oxygen', 'Helium and neon'], s: ['A metal (magnesium) and a non-metal (oxygen) transfer electrons.'] }
+      ])] });
+
+  st({ id: 'st-skills', strand: 'W', title: '6. Scientific enquiry and data skills', codes: ['Throughout'], calc: false,
+    blurb: 'Variables, fair methods, repeats and means, drawing good graphs, describing patterns and supporting conclusions.',
+    learn: { ideas: ['The <b>independent variable</b> is what you change. The <b>dependent variable</b> is what you measure. <b>Control variables</b> are kept the same so the test is fair.', 'Repeat measurements and calculate a <b>mean</b>, leaving out any anomalous result.', 'A good graph: the independent variable on the x-axis, both axes labelled <b>with units</b>, a sensible even scale that uses most of the grid, points plotted accurately, and a <b>line or curve of best fit</b> (not dot-to-dot).', 'Describe the pattern (“as the light intensity increases, the number of bubbles increases”) and back up your conclusion with numbers from the data.'],
+      example: { q: 'Bubbles from pondweed are counted with a lamp at 10, 20, 30 and 40 cm. Name the variables.', steps: ['Independent: the distance of the lamp (light intensity).', 'Dependent: the number of bubbles per minute.', 'Control: the type and size of pondweed, the water temperature, the time of each count.'] }, watch: 'Do not join the points dot-to-dot. Draw one smooth line or curve of best fit.' },
+    gens: [
+      function () { var inv = pick([
+          { d: 'how the distance of a lamp affects the rate of photosynthesis in pondweed', iv: 'The distance of the lamp from the pondweed', dv: 'The number of bubbles produced per minute', cv: 'The temperature of the water' },
+          { d: 'how temperature affects how quickly magnesium reacts with acid', iv: 'The temperature of the acid', dv: 'The time taken for the magnesium to react', cv: 'The concentration of the acid' },
+          { d: 'how the amount of nitrate fertiliser affects the height of seedlings', iv: 'The amount of nitrate fertiliser', dv: 'The height of the seedlings', cv: 'The amount of light each seedling gets' },
+          { d: 'how the amount of carbon dioxide affects the rate of photosynthesis', iv: 'The amount of carbon dioxide', dv: 'The volume of oxygen produced', cv: 'The light intensity' }
+        ]), kind = pick(['iv', 'dv', 'cv']), names = { iv: 'variable changed (independent)', dv: 'variable measured (dependent)', cv: 'variable kept the same (control)' };
+        return mc('A student investigates ' + inv.d + '. Which is the <b>' + names[kind] + '</b>?', inv[kind], ['iv', 'dv', 'cv'].filter(function (k) { return k !== kind; }).map(function (k) { return inv[k]; }).concat(['The colour of the bench']), { hint: 'Change one thing, measure one thing, keep everything else the same.', steps: ['Changed: ' + inv.iv.toLowerCase() + '.', 'Measured: ' + inv.dv.toLowerCase() + '.', 'Kept the same: ' + inv.cv.toLowerCase() + '.'] }); },
+      function () { var base = ri(12, 40), r = [base + ri(-2, 2), base + ri(-2, 2), base + ri(-2, 2)], bad = Math.random() < 0.6, an;
+        if (bad) { an = ri(0, 2); r[an] = base + pick([1, -1]) * ri(10, 15); if (r[an] < 1) r[an] = base + 12; }
+        var good = r.filter(function (_, i) { return !bad || i !== an; }), mean = good.reduce(function (s, x) { return s + x; }, 0) / good.length;
+        return { kind: 'num', prompt: 'A student counts the bubbles given off by pondweed in one minute, three times:' + table(['Repeat', '1', '2', '3'], [['Bubbles', r[0], r[1], r[2]]]) + 'Calculate the mean, leaving out any anomalous result. Give your answer to 1 decimal place if needed.', answer: mean, dp: 1, ans: fmt(mean, mean % 1 ? 1 : null), hint: 'Is one reading far away from the other two?', steps: (bad ? [r[an] + ' is anomalous, so leave it out.'] : ['The readings are close together, so use all three.']).concat(['(' + good.join(' + ') + ') ÷ ' + good.length + ' = ' + fmt(mean, mean % 1 ? 1 : null) + '.']) }; },
+      bank([
+        { q: 'Which axis label is best for a graph of temperature against time?', a: 'Temperature (°C)', w: ['Temperature', 'Hotness', '°C only'], s: ['Axis labels need the quantity and its unit.'] },
+        { q: 'Which variable should go on the x-axis?', a: 'The independent variable (the one you changed)', w: ['The dependent variable', 'The control variable', 'It does not matter'], s: ['The variable you change goes on the x-axis; what you measure goes on the y-axis.'] },
+        { q: 'Points on a graph roughly follow a smooth curve, with one point well off it. What should you do?', a: 'Draw a smooth curve of best fit and ignore the anomalous point', w: ['Join every point with straight lines', 'Draw the line through the anomalous point', 'Leave the graph without a line'], s: ['A line or curve of best fit shows the overall pattern.'] },
+        { q: 'Which is the best scale for plotting values from 0 to 46 on an axis with 10 large squares?', a: '5 per square', w: ['7 per square', '1 per square', '20 per square'], s: ['5 per square fits 0–50 on the grid and is easy to read. 7 is awkward; 1 does not fit; 20 squashes the data.'] },
+        { q: 'Which conclusion is best supported by data?', a: 'As the lamp moved from 10 cm to 40 cm away, the bubbles per minute fell from 32 to 8, so less light means less photosynthesis', w: ['Light affects plants', 'Plants are interesting', 'The experiment worked'], s: ['A good conclusion describes the pattern and quotes data as evidence.'] },
+        { q: 'Why do scientists repeat measurements?', a: 'To spot anomalous results and make the mean more reliable', w: ['To make the experiment longer', 'To change the variables', 'Because the first result is always wrong'], s: ['Repeats show whether results are consistent.'] },
+        { q: 'What makes a method a fair test?', a: 'Only the independent variable is changed; the control variables are kept the same', w: ['Everything is changed at once', 'Only one measurement is taken', 'The result is decided before starting'], s: ['Then any change in the result must be caused by the independent variable.'] }
+      ])] });
+}
 registerEnglish(9); registerFrench('C1');
+
+registerSciTest();
 /* ===== APP ===== */
 (function () {
   var SUBJECTS = {
     maths: { name: 'Maths', strands: [{ id: 'N', name: 'Number' }, { id: 'A', name: 'Algebra' }, { id: 'G', name: 'Geometry and measure' }, { id: 'S', name: 'Statistics and probability' }] },
     science: { name: 'Science', strands: [{ id: 'B', name: 'Biology' }, { id: 'C', name: 'Chemistry' }, { id: 'P', name: 'Physics' }, { id: 'E', name: 'Earth and space' }, { id: 'W', name: 'Working scientifically' }] },
     english: { name: 'English', strands: [{ id: 'R', name: 'Reading' }, { id: 'K', name: 'Grammar and punctuation' }, { id: 'V', name: 'Vocabulary and spelling' }, { id: 'Y', name: 'Writing' }] },
-    french: { name: 'French', strands: [{ id: 'F', name: 'Grammaire' }, { id: 'L', name: 'Vocabulaire' }, { id: 'O', name: 'Compréhension écrite' }, { id: 'U', name: 'Expression et style' }] }
+    french: { name: 'French', strands: [{ id: 'F', name: 'Grammaire' }, { id: 'L', name: 'Vocabulaire' }, { id: 'O', name: 'Compréhension écrite' }, { id: 'U', name: 'Expression et style' }] },
+    scitest: { name: 'Science test', strands: [{ id: 'B', name: 'Photosynthesis and plant growth' }, { id: 'E', name: 'Carbon cycle and climate change' }, { id: 'C', name: 'Atoms, groups and ions' }, { id: 'W', name: 'Enquiry and data skills' }] }
   };
   TOPICS.forEach(function (t) { if (!t.subject) t.subject = 'maths'; });
   var subj = 'maths';
-  try { var sv = localStorage.getItem('stage9study.subject'); if (SUBJECTS[sv]) subj = sv; } catch (e) {}
+  try { var sv = localStorage.getItem('stage9study.subject'); if (SUBJECTS[sv] && TOPICS.some(function (t) { return t.subject === sv; })) subj = sv; } catch (e) {}
   function STR() { return SUBJECTS[subj].strands; }
   function subjWord() { var n = SUBJECTS[subj].name; return subj === 'english' || subj === 'french' ? n : n.toLowerCase(); }
+  function testName() { return subj === 'scitest' ? 'October practice test' : 'Mixed ' + subjWord() + ' test'; }
   function TOPS() { return TOPICS.filter(function (t) { return t.subject === subj; }); }
   function setSubj(s) { subj = s; try { localStorage.setItem('stage9study.subject', s); } catch (e) {} markSubj(); }
-  function markSubj() { Array.prototype.forEach.call(document.querySelectorAll('[data-subj]'), function (b) { b.setAttribute('aria-pressed', b.getAttribute('data-subj') === subj ? 'true' : 'false'); }); }
+  function markSubj() { Array.prototype.forEach.call(document.querySelectorAll('[data-subj]'), function (b) { var k = b.getAttribute('data-subj'); if (!TOPICS.some(function (t) { return t.subject === k; })) b.hidden = true; b.setAttribute('aria-pressed', b.getAttribute('data-subj') === subj ? 'true' : 'false'); }); }
   var LEVELS = ['Not started', 'Started', 'Getting there', 'Secure'];
   var byId = {}; TOPICS.forEach(function (t) { byId[t.id] = t; });
   var KEY = 'stage9study.v1';
@@ -3698,9 +3866,10 @@ registerEnglish(9); registerFrench('C1');
     } else {
       h += '<section class="next"><p class="lab">All topics secure</p><h2>Keep it fresh with a mixed test</h2><p class="muted">Mixed tests pull questions from every topic, like a real exam.</p><div class="row"><button class="btn primary" data-go="test">Start a mixed test</button></div></section>';
     }
+    if (subj === 'scitest') h += '<section class="testnote" aria-label="About this test"><p class="lab">October 2026 science test</p><p>A 20-mark test on Learner’s Book pages 1 to 65, built from the revision checklist. <b>Covalent bonding is not in this test.</b> Work through the six sections below, then sit a 20-question practice test.</p></section>';
     h += '<div class="tally"><span><b>' + t.a + '</b> questions answered</span>' + (t.a ? '<span><b>' + Math.round(100 * t.c / t.a) + '%</b> correct</span>' : '') + '</div>';
     var myTests = prog.tests.filter(function (x) { return (x.subject || 'maths') === subj; }), lastT = myTests[myTests.length - 1];
-    h += '<div class="row"><button class="btn" data-go="test">Mixed ' + subjWord() + ' test</button>' + (lastT ? '<span class="small">Last test: ' + lastT.score + ' out of ' + lastT.n + '</span>' : '') + '</div>';
+    h += '<div class="row"><button class="btn" data-go="test">' + testName() + '</button>' + (lastT ? '<span class="small">Last test: ' + lastT.score + ' out of ' + lastT.n + '</span>' : '') + '</div>';
     STR().forEach(function (st) {
       var ts = TOPS().filter(function (x) { return x.strand === st.id; }), sec = ts.filter(function (x) { return level(x.id) === 3; }).length;
       h += '<section class="strand" style="--sc:' + strandColor(st.id) + '" aria-labelledby="s' + st.id + '"><div class="strandhead"><h2 id="s' + st.id + '">' + st.name + '</h2><span class="small">' + sec + ' of ' + ts.length + ' secure</span></div><div class="topics">';
@@ -3887,10 +4056,10 @@ registerEnglish(9); registerFrench('C1');
   /* ---------- mixed test ---------- */
   function testSetup() {
     current = { name: 'testsetup' };
-    var scope = 'all', len = 15;
-    var h = '<div class="stack"><div><button class="back" data-go="home">All topics</button></div><h1>Mixed ' + subjWord() + ' test</h1><p class="muted" style="max-width:65ch">Questions come from different topics, like an exam. You see your marks and worked solutions at the end.</p>';
-    h += '<h2>What to cover</h2><div class="choice" role="radiogroup" aria-label="What to cover" id="scope"><button type="button" role="radio" aria-checked="true" data-v="all">All of Stage 9 ' + subjWord() + '<span>' + TOPS().length + ' topics</span></button>' + STR().map(function (s) { return '<button type="button" role="radio" aria-checked="false" data-v="' + s.id + '">' + s.name + '<span>' + TOPS().filter(function (t) { return t.strand === s.id; }).length + ' topics</span></button>'; }).join('') + '</div>';
-    h += '<h2>How many questions</h2><div class="choice" role="radiogroup" aria-label="How many questions" id="len"><button type="button" role="radio" aria-checked="false" data-v="10">10 questions<span>About 15 minutes</span></button><button type="button" role="radio" aria-checked="true" data-v="15">15 questions<span>About 25 minutes</span></button><button type="button" role="radio" aria-checked="false" data-v="25">25 questions<span>About 40 minutes</span></button></div>';
+    var scope = 'all', len = subj === 'scitest' ? 20 : 15;
+    var h = '<div class="stack"><div><button class="back" data-go="home">All topics</button></div><h1>' + testName() + '</h1><p class="muted" style="max-width:65ch">Questions come from different topics, like an exam. You see your marks and worked solutions at the end.</p>';
+    h += '<h2>What to cover</h2><div class="choice" role="radiogroup" aria-label="What to cover" id="scope"><button type="button" role="radio" aria-checked="true" data-v="all">' + (subj === 'scitest' ? 'Everything in the test (pp. 1–65)' : 'All of Stage 9 ' + subjWord()) + '<span>' + TOPS().length + ' topics</span></button>' + STR().map(function (s) { return '<button type="button" role="radio" aria-checked="false" data-v="' + s.id + '">' + s.name + '<span>' + plural(TOPS().filter(function (t) { return t.strand === s.id; }).length, 'topic') + '</span></button>'; }).join('') + '</div>';
+    h += '<h2>How many questions</h2><div class="choice" role="radiogroup" aria-label="How many questions" id="len">' + (subj === 'scitest' ? [[10, 'Quick check, about 12 minutes'], [20, 'Same as the real test: 20 marks']] : [[10, 'About 15 minutes'], [15, 'About 25 minutes'], [25, 'About 40 minutes']]).map(function (o) { return '<button type="button" role="radio" aria-checked="' + (o[0] === len) + '" data-v="' + o[0] + '">' + o[0] + ' questions<span>' + o[1] + '</span></button>'; }).join('') + '</div>';
     h += '<div class="row"><button class="btn primary" id="start">Start the test</button></div></div>';
     view.innerHTML = h; wireGo();
     function radio(gid, set) { var g = document.getElementById(gid); Array.prototype.forEach.call(g.children, function (b) { b.addEventListener('click', function () { Array.prototype.forEach.call(g.children, function (c) { c.setAttribute('aria-checked', c === b ? 'true' : 'false'); }); set(b.getAttribute('data-v')); }); }); }
@@ -3950,7 +4119,7 @@ registerEnglish(9); registerFrench('C1');
   /* ---------- start ---------- */
   Array.prototype.forEach.call(document.querySelectorAll('[data-subj]'), function (b) { b.addEventListener('click', function () { setSubj(b.getAttribute('data-subj')); go(home); }); });
   var startHash = (location.hash || '').replace('#', '');
-  if (byId[startHash]) setSubj(byId[startHash].subject); else if (startHash === 'science' || startHash === 'maths') setSubj(startHash); else markSubj();
+  if (byId[startHash]) setSubj(byId[startHash].subject); else if (SUBJECTS[startHash]) setSubj(startHash); else markSubj();
   if (byId[startHash]) topicPage(startHash); else if (startHash === 'test') testSetup(); else home();
   updateMast();
 })();
