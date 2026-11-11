@@ -28,7 +28,7 @@
   --img: #13806f;
   --img-soft: rgba(19, 128, 111, 0.18);
   --sN: #2851a3; --sA: #7445c0; --sG: #13806f; --sS: #b5700c;
-  --sB: #2f8a3a; --sC: #b8456b; --sP: #2851a3; --sE: #9a6a12; --sW: #5b6478;
+  --sB: #2f8a3a; --sC: #b8456b; --sP: #2851a3; --sE: #9a6a12; --sW: #5b6478; --sJ: #c2410c;
   --sR: #2851a3; --sK: #7445c0; --sV: #13806f; --sY: #b5700c; --sF: #2851a3; --sL: #b8456b; --sO: #13806f; --sU: #9a6a12;
   --f-display: "Bricolage Grotesque", "Avenir Next", "Segoe UI", system-ui, sans-serif;
   --f-body: "Atkinson Hyperlegible", "Verdana", "Segoe UI", system-ui, sans-serif;
@@ -40,14 +40,14 @@
     --paper: #121822; --rule: rgba(150, 185, 245, 0.06); --sheet: #1a2230; --ink: #e8edf6; --ink-2: #9ba7be; --line: #2d3849;
     --accent: #93b2f6; --accent-ink: #0e1626; --accent-soft: #223152; --pen: #ff8b81; --pen-soft: #3b2426; --ok: #7fd5a1; --ok-soft: #1c3327;
     --hl: #4a421a; --margin: #6e3b3b; --fig-fill: #222c3d; --fig-fill-2: #2a3549; --fig-fill-3: #334058; --img: #5fd0bd; --img-soft: rgba(95, 208, 189, 0.2);
-    --sN: #93b2f6; --sA: #b99af0; --sG: #5fd0bd; --sS: #f0b65a; --sB: #7ccf86; --sC: #f08fb0; --sP: #93b2f6; --sE: #e2b45f; --sW: #a8b2c6; --sR: #93b2f6; --sK: #b99af0; --sV: #5fd0bd; --sY: #f0b65a; --sF: #93b2f6; --sL: #f08fb0; --sO: #5fd0bd; --sU: #e2b45f; color-scheme: dark;
+    --sN: #93b2f6; --sA: #b99af0; --sG: #5fd0bd; --sS: #f0b65a; --sB: #7ccf86; --sC: #f08fb0; --sP: #93b2f6; --sE: #e2b45f; --sW: #a8b2c6; --sJ: #fb9a5b; --sR: #93b2f6; --sK: #b99af0; --sV: #5fd0bd; --sY: #f0b65a; --sF: #93b2f6; --sL: #f08fb0; --sO: #5fd0bd; --sU: #e2b45f; color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
   --paper: #121822; --rule: rgba(150, 185, 245, 0.06); --sheet: #1a2230; --ink: #e8edf6; --ink-2: #9ba7be; --line: #2d3849;
   --accent: #93b2f6; --accent-ink: #0e1626; --accent-soft: #223152; --pen: #ff8b81; --pen-soft: #3b2426; --ok: #7fd5a1; --ok-soft: #1c3327;
   --hl: #4a421a; --margin: #6e3b3b; --fig-fill: #222c3d; --fig-fill-2: #2a3549; --fig-fill-3: #334058; --img: #5fd0bd; --img-soft: rgba(95, 208, 189, 0.2);
-  --sN: #93b2f6; --sA: #b99af0; --sG: #5fd0bd; --sS: #f0b65a; --sB: #7ccf86; --sC: #f08fb0; --sP: #93b2f6; --sE: #e2b45f; --sW: #a8b2c6; --sR: #93b2f6; --sK: #b99af0; --sV: #5fd0bd; --sY: #f0b65a; --sF: #93b2f6; --sL: #f08fb0; --sO: #5fd0bd; --sU: #e2b45f; color-scheme: dark;
+  --sN: #93b2f6; --sA: #b99af0; --sG: #5fd0bd; --sS: #f0b65a; --sB: #7ccf86; --sC: #f08fb0; --sP: #93b2f6; --sE: #e2b45f; --sW: #a8b2c6; --sJ: #fb9a5b; --sR: #93b2f6; --sK: #b99af0; --sV: #5fd0bd; --sY: #f0b65a; --sF: #93b2f6; --sL: #f08fb0; --sO: #5fd0bd; --sU: #e2b45f; color-scheme: dark;
 }
 html { height: 100%; }
 body {
@@ -239,6 +239,11 @@ table.stem td:last-child { text-align: left; letter-spacing: 0.35em; }
 
 /* svg figures */
 svg.fig { display: block; max-width: 100%; height: auto; }
+.gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; }
+.gcard { margin: 0; background: var(--sheet); border: 1.5px solid var(--line); border-radius: var(--r); padding: 10px; display: grid; gap: 8px; align-content: start; }
+.gcard svg.art, .figwrap svg.art { width: 100%; border-radius: 6px; }
+.gcard figcaption { font-size: 0.88rem; line-height: 1.4; color: var(--ink-2); }
+.gcard figcaption b { display: block; color: var(--ink); font-size: 0.95rem; margin-bottom: 2px; }
 svg.fig .gl { stroke: var(--line); stroke-width: 1; }
 svg.fig .axis { stroke: var(--ink); stroke-width: 1.5; }
 svg.fig .ln { stroke: var(--ink); stroke-width: 1.8; fill: none; }
@@ -2386,17 +2391,130 @@ sci({
 });
 
 /* ================= PHYSICS ================= */
+/* ================= ENERGY AND GRAVITY ================= */
+function fArrow(x1, y1, x2, y2, lab, ly, col) {
+  col = col || 'var(--ink)';
+  var a = Math.atan2(y2 - y1, x2 - x1), s = 9, p1 = [x2 - s * Math.cos(a - 0.45), y2 - s * Math.sin(a - 0.45)], p2 = [x2 - s * Math.cos(a + 0.45), y2 - s * Math.sin(a + 0.45)];
+  return '<line x1="' + x1.toFixed(1) + '" y1="' + y1.toFixed(1) + '" x2="' + x2.toFixed(1) + '" y2="' + y2.toFixed(1) + '" style="stroke:' + col + ';stroke-width:3"/><polygon points="' + x2.toFixed(1) + ',' + y2.toFixed(1) + ' ' + p1[0].toFixed(1) + ',' + p1[1].toFixed(1) + ' ' + p2[0].toFixed(1) + ',' + p2[1].toFixed(1) + '" style="fill:' + col + '"/>' + (lab ? T((x1 + x2) / 2, ly, lab, 'lbl') : '');
+}
+function bodiesFig(r1, r2, gap, n1, n2, len) {
+  var W = 320, H = 130, cy = 62, x1 = 20 + r1, x2 = x1 + r1 + gap + r2, b = '';
+  if (x2 + r2 > W - 10) { var sh = x2 + r2 - (W - 10); x1 -= sh / 2; x2 -= sh / 2; }
+  b += '<circle cx="' + x1.toFixed(1) + '" cy="' + cy + '" r="' + r1 + '" class="shape"/><circle cx="' + x2.toFixed(1) + '" cy="' + cy + '" r="' + r2 + '" class="shape2"/>';
+  len = Math.min(len || 34, (gap - 8) / 2);
+  b += fArrow(x1 + r1 + 3, cy, x1 + r1 + 3 + len, cy) + fArrow(x2 - r2 - 3, cy, x2 - r2 - 3 - len, cy);
+  b += T(x1, cy + r1 + 14, n1, 'lbl') + T(x2, cy + r2 + 14, n2, 'lbl');
+  return svgWrap(W, H, b, 'Two bodies pulling on each other with equal and opposite gravitational forces');
+}
+
+/* ---- illustrations ---- */
+function art(body, label) { return '<svg class="fig art" viewBox="0 0 160 120" role="img" aria-label="' + label + '">' + body + '</svg>'; }
+var INK = 'stroke="var(--ink)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"';
+function person(x, y, s, shirt) { s = s || 1; shirt = shirt || '#2f6fd6';
+  return '<g transform="translate(' + x + ' ' + y + ') scale(' + s + ')"><circle cx="0" cy="-34" r="7" fill="#f2c48d" ' + INK + '/><line x1="0" y1="-27" x2="0" y2="-8" stroke="' + shirt + '" stroke-width="6" stroke-linecap="round"/><line x1="0" y1="-22" x2="-9" y2="-14" ' + INK + '/><line x1="0" y1="-22" x2="9" y2="-14" ' + INK + '/><line x1="0" y1="-8" x2="-6" y2="8" ' + INK + '/><line x1="0" y1="-8" x2="6" y2="8" ' + INK + '/></g>'; }
+var ART = {
+  kinetic: art('<line x1="0" y1="104" x2="160" y2="104" ' + INK + '/>' +
+    [52, 64, 76].map(function (y, i) { return '<line x1="' + (12 + i * 6) + '" y1="' + y + '" x2="' + (42 + i * 4) + '" y2="' + y + '" stroke="#e0533d" stroke-width="3.5" stroke-linecap="round"/>'; }).join('') +
+    '<g transform="rotate(-6 85 70)"><circle cx="84" cy="30" r="9" fill="#f2c48d" ' + INK + '/><line x1="84" y1="39" x2="80" y2="66" stroke="#2f6fd6" stroke-width="8" stroke-linecap="round"/><line x1="82" y1="46" x2="64" y2="54" ' + INK + '/><line x1="82" y1="46" x2="102" y2="38" ' + INK + '/><line x1="80" y1="66" x2="68" y2="88" ' + INK + '/><line x1="80" y1="66" x2="96" y2="86" ' + INK + '/></g>' +
+    '<rect x="52" y="89" width="62" height="6" rx="3" fill="#d9822b" ' + INK + '/><circle cx="62" cy="99" r="5" fill="#555"/><circle cx="104" cy="99" r="5" fill="#555"/>' + fArrow(120, 20, 150, 20, '', 0, '#e0533d'), 'A skateboarder speeding along'),
+  gpe: art('<path d="M0 112 L20 112 Q45 112 58 40 Q70 14 86 40 Q100 112 125 112 L160 112" fill="none" stroke="#7a4fb3" stroke-width="4"/>' +
+    '<g transform="rotate(4 72 22)"><rect x="60" y="10" width="26" height="14" rx="4" fill="#e0533d" ' + INK + '/><circle cx="66" cy="26" r="3.5" fill="#555"/><circle cx="80" cy="26" r="3.5" fill="#555"/><circle cx="68" cy="5" r="4" fill="#f2c48d" ' + INK + '/><circle cx="78" cy="5" r="4" fill="#f2c48d" ' + INK + '/></g>' +
+    '<line x1="88" y1="14" x2="142" y2="14" stroke="var(--ink-2)" stroke-dasharray="4 3"/>' + fArrow(142, 110, 142, 18, '', 0, '#7a4fb3') + fArrow(142, 18, 142, 110, '', 0, '#7a4fb3') + '<text x="132" y="64" class="lbl" style="font-size:12px" text-anchor="middle" transform="rotate(-90 132 64)">high up</text>', 'A roller coaster car at the top of the track'),
+  elastic: art('<path d="M58 10 Q18 60 58 110" fill="none" stroke="#8b5a2b" stroke-width="6" stroke-linecap="round"/><polyline points="58,10 30,60 58,110" fill="none" stroke="var(--ink)" stroke-width="1.6"/>' +
+    '<line x1="30" y1="60" x2="138" y2="60" stroke="#8b5a2b" stroke-width="3"/><polygon points="150,60 136,53 136,67" fill="#e0533d"/><path d="M30 60 l-8 -7 M30 60 l-8 7 M36 60 l-8 -7 M36 60 l-8 7" stroke="#2f6fd6" stroke-width="2.5"/>' +
+    [40, 80].map(function (y) { return '<path d="M' + (y === 40 ? '26 30 q-6 4 -2 10' : '26 90 q-6 -4 -2 -10') + '" fill="none" stroke="#e0533d" stroke-width="2"/>'; }).join(''), 'A bow with its string pulled back'),
+  chemical: art('<rect x="10" y="48" width="70" height="36" rx="5" fill="#f4c430" ' + INK + '/><rect x="10" y="48" width="24" height="36" rx="5" fill="#333"/><rect x="80" y="59" width="7" height="14" rx="2" fill="#999" ' + INK + '/><text x="60" y="67" class="lbl" style="font-size:18px;font-weight:700;fill:#333">+</text>' +
+    '<circle cx="124" cy="72" r="22" fill="#e0533d" ' + INK + '/><path d="M124 50 q2 -10 6 -14" fill="none" ' + INK + '/><ellipse cx="135" cy="40" rx="9" ry="5" fill="#5cae5c" transform="rotate(-25 135 40)" ' + INK + '/><ellipse cx="116" cy="64" rx="4" ry="7" fill="#fff" opacity=".5"/>', 'A battery and an apple'),
+  thermal: art('<path d="M52 28 q-8 -8 0 -16 q8 -8 0 -16 M72 28 q-8 -8 0 -16 q8 -8 0 -16 M92 28 q-8 -8 0 -16 q8 -8 0 -16" transform="translate(0 14)" fill="none" stroke="var(--ink-2)" stroke-width="2.5" stroke-linecap="round"/>' +
+    '<path d="M104 58 q22 0 22 18 q0 18 -22 18" fill="none" stroke="#2f6fd6" stroke-width="7"/><rect x="40" y="48" width="66" height="60" rx="8" fill="#2f6fd6" ' + INK + '/><path d="M48 60 h50" stroke="#fff" stroke-width="2" opacity=".5"/>' +
+    '<rect x="136" y="18" width="12" height="76" rx="6" fill="#fff" ' + INK + '/><rect x="139" y="34" width="6" height="66" fill="#e0533d"/><circle cx="142" cy="102" r="9" fill="#e0533d" ' + INK + '/>', 'A steaming mug of hot tea and a thermometer'),
+  electrical: art('<rect x="6" y="44" width="30" height="42" rx="5" fill="#e8e8e8" ' + INK + '/><rect x="14" y="55" width="4" height="10" fill="#333"/><rect x="24" y="55" width="4" height="10" fill="#333"/><circle cx="21" cy="74" r="3" fill="#333"/>' +
+    '<path d="M36 65 C70 105 78 25 108 66" fill="none" stroke="var(--ink)" stroke-width="3"/><polygon points="66,52 58,66 66,66 60,80 76,62 68,62 74,52" fill="#f4c430" ' + INK + '/>' +
+    [[0, -34], [24, -24], [-24, -24], [34, 0], [-34, 0]].map(function (d) { return '<line x1="' + (124 + d[0] * 0.8) + '" y1="' + (48 + d[1] * 0.8) + '" x2="' + (124 + d[0]) + '" y2="' + (48 + d[1]) + '" stroke="#f4a300" stroke-width="3" stroke-linecap="round"/>'; }).join('') +
+    '<circle cx="124" cy="48" r="18" fill="#ffd84d" ' + INK + '/><rect x="116" y="64" width="16" height="12" rx="2" fill="#999" ' + INK + '/>', 'A plug sending an electric current to a glowing bulb'),
+  apple: art('<rect x="0" y="104" width="160" height="16" fill="#5cae5c"/><rect x="20" y="44" width="14" height="62" fill="#8b5a2b" ' + INK + '/><circle cx="27" cy="34" r="27" fill="#3f9b4a" ' + INK + '/><circle cx="16" cy="30" r="4" fill="#e0533d"/><circle cx="36" cy="42" r="4" fill="#e0533d"/>' +
+    '<path d="M76 30 v10 M90 26 v12" stroke="var(--ink-2)" stroke-width="2" stroke-dasharray="3 3"/><circle cx="84" cy="54" r="9" fill="#e0533d" ' + INK + '/><line x1="84" y1="45" x2="86" y2="40" ' + INK + '/>' + fArrow(84, 66, 84, 98, '', 0, '#e0533d') + '<text x="96" y="84" class="lbl" style="font-size:12px" text-anchor="start">Earth pulls</text>', 'An apple falling from a tree, pulled down by gravity'),
+  orbit: art('<rect width="160" height="120" rx="8" fill="#16203a"/>' + [[12, 14], [140, 20], [30, 100], [120, 104], [70, 10], [150, 80], [8, 60]].map(function (p) { return '<circle cx="' + p[0] + '" cy="' + p[1] + '" r="1.3" fill="#fff"/>'; }).join('') +
+    '<ellipse cx="72" cy="60" rx="64" ry="38" fill="none" stroke="#9fb3d9" stroke-dasharray="4 4"/><circle cx="72" cy="60" r="20" fill="#2f6fd6"/><path d="M60 50 q8 -6 12 2 q-4 8 -12 4z M76 66 q8 -4 10 4 q-6 6 -10 0z" fill="#5cae5c"/><circle cx="136" cy="60" r="8" fill="#c9c9c9"/>' +
+    fArrow(126, 60, 106, 60, '', 0, '#ffd84d') + fArrow(94, 60, 114, 60, '', 0, '#ffd84d'), 'The Moon orbiting Earth, with equal and opposite gravitational pulls'),
+  moonman: art('<rect x="0" y="0" width="80" height="120" fill="#bfe1ff"/><rect x="80" y="0" width="80" height="120" fill="#16203a"/><rect x="0" y="96" width="80" height="24" fill="#5cae5c"/><rect x="80" y="96" width="80" height="24" fill="#a9a9a9"/><circle cx="104" cy="106" r="4" fill="#8a8a8a"/><circle cx="140" cy="110" r="3" fill="#8a8a8a"/>' +
+    person(38, 90, 1, '#e0533d') + person(118, 72, 1, '#e0533d') + '<path d="M110 82 q8 6 16 0" fill="none" stroke="#fff" stroke-dasharray="2 3"/>' + fArrow(56, 60, 56, 100, '', 0, '#e0533d') + fArrow(136, 62, 136, 72, '', 0, '#ffd84d') +
+    '<text x="40" y="10" class="lbl" style="font-size:11px;fill:#1b2a44">Earth</text><text x="120" y="10" class="lbl" style="font-size:11px;fill:#fff">Moon</text>', 'The same astronaut on Earth and on the Moon'),
+  hammer: art('<rect width="160" height="120" rx="8" fill="#16203a"/><rect x="0" y="100" width="160" height="20" fill="#a9a9a9"/>' +
+    '<rect x="40" y="20" width="5" height="30" fill="#8b5a2b"/><rect x="30" y="14" width="25" height="10" rx="2" fill="#bbb" stroke="#fff"/>' +
+    '<path d="M112 46 q-6 -18 4 -32 q8 14 -4 32z" fill="#fff"/><line x1="114" y1="50" x2="114" y2="18" stroke="#ccc" stroke-width="1.2"/>' +
+    fArrow(42, 56, 42, 92, '', 0, '#ffd84d') + fArrow(114, 56, 114, 92, '', 0, '#ffd84d') + '<line x1="20" y1="54" x2="140" y2="54" stroke="#9fb3d9" stroke-dasharray="3 4"/>', 'A hammer and a feather falling side by side on the Moon')
+};
+function gallery(items) { return items.map(function (x) { return { svg: ART[x[0]], title: x[1], text: x[2] }; }); }
+
+var STORES = [
+  ['kinetic', 'a moving object', ['a car driving along a road', 'a footballer running', 'wind blowing', 'a spinning fan', 'a flying bird']],
+  ['gravitational potential', 'an object raised up high', ['a book on a high shelf', 'a skier at the top of a slope', 'water held behind a dam', 'a roller coaster car at the top of the track']],
+  ['elastic', 'something stretched or squashed', ['a stretched rubber band', 'a squashed spring', 'a drawn bow', 'a bent diving board']],
+  ['chemical', 'food, fuels and batteries', ['a sandwich', 'petrol in a car’s tank', 'a phone battery', 'a piece of coal', 'wood for a fire']],
+  ['thermal', 'hot objects', ['a cup of hot tea', 'a radiator that is switched on', 'a bowl of hot soup']],
+  ['nuclear', 'the centres (nuclei) of atoms', ['uranium fuel in a power station', 'the centre of the Sun']]
+];
+var TRANSFERS = ['light', 'sound', 'electrical (an electric current)', 'heating', 'a force doing work (mechanical)'];
+
 sci({
-  id: 's7-energy', strand: 'P', title: 'Energy changes', codes: ['7Pf.01', '7Pf.02'], calc: false,
-  blurb: 'Describe how energy is stored and transferred in everyday events, and why energy spreads out and becomes less useful.',
+  id: 's7-energytypes', strand: 'J', title: 'Types of energy', codes: ['7Pf.01'], calc: false,
+  blurb: 'The different ways energy is stored, and the ways it moves from one store to another.',
   learn: {
     ideas: [
-      'Energy is <b>stored</b> in different ways: chemical (food, fuel, batteries), kinetic (moving things), gravitational potential (things raised up), elastic (stretched springs), and thermal (hot things).',
-      'Energy is <b>transferred</b> by heating, by light and sound, electrically, and by forces doing work.',
-      'Example: a torch transfers chemical energy in the battery, electrically, to light and thermal energy.',
-      'Energy is never used up, but it tends to <b>dissipate</b>: it spreads out into the surroundings, usually as heat, and becomes less useful.'
+      'Energy is what makes things happen. It is measured in <b>joules (J)</b>.',
+      'Energy is held in <b>stores</b>:<br><b>kinetic</b> (anything moving)<br><b>gravitational potential</b> (anything raised up)<br><b>elastic</b> (anything stretched or squashed)<br><b>chemical</b> (food, fuels, batteries)<br><b>thermal</b> (hot objects)<br><b>nuclear</b> (inside atoms)',
+      'Energy moves between stores by <b>transfers</b>: <b>light</b>, <b>sound</b>, <b>electrically</b> (a current), by <b>heating</b>, and by a <b>force doing work</b> (pushing, pulling, lifting).',
+      'Light and sound are ways energy <b>travels</b>, not places it is kept. When a lamp is switched off, the light is gone.',
+      'The faster something moves, the more kinetic energy it has. The higher it is lifted, the more gravitational potential energy it has.'
     ],
-    example: { q: 'Describe the energy changes when a ball is dropped.', steps: ['At the top, it has gravitational potential energy.', 'As it falls, this changes into kinetic energy.', 'When it hits the ground, some energy is transferred as sound and heat.'] },
+    gallery: gallery([['kinetic', 'Kinetic', 'Anything that moves. Faster means more kinetic energy.'], ['gpe', 'Gravitational potential', 'Anything lifted up. Higher means more.'], ['elastic', 'Elastic', 'Stretched or squashed: springs, bows, rubber bands.'], ['chemical', 'Chemical', 'Food, fuels and batteries. Released by reactions.'], ['thermal', 'Thermal (heat)', 'Hot objects. Hotter means more thermal energy.'], ['electrical', 'Electrical (a transfer)', 'A current carries energy from the plug to the bulb, which gives out light.']]),
+    example: { q: 'Which energy store is full in a stretched catapult, and which store fills when it is released?', steps: ['The stretched band holds energy in its <b>elastic</b> store.', 'When released, the stone speeds up, so energy moves to its <b>kinetic</b> store.'] },
+    watch: '“Electrical energy”, “light energy” and “sound energy” describe energy being transferred. A battery stores chemical energy, not electricity.'
+  },
+  gens: [
+    function () {
+      var p = pick([['kinetic', 'Kinetic'], ['gpe', 'Gravitational potential'], ['elastic', 'Elastic'], ['chemical', 'Chemical'], ['thermal', 'Thermal']]);
+      var why = { kinetic: 'The skateboarder is moving.', gpe: 'The car is raised high up the track.', elastic: 'The bow string is stretched.', chemical: 'Batteries and food are chemical stores.', thermal: 'The tea is hot.' };
+      return mc('Which energy store does the picture mainly show?', p[1], ['Kinetic', 'Gravitational potential', 'Elastic', 'Chemical', 'Thermal'].filter(function (x) { return x !== p[1]; }).slice(0, 3), { fig: '<div style="max-width:240px">' + ART[p[0]] + '</div>', hint: 'Moving? Raised up? Stretched? Food or fuel? Hot?', steps: [why[p[0]]] });
+    },
+    function () {
+      var s = pick(STORES), ex = pick(s[2]);
+      return mc('Which energy store is mainly involved here?<span class="quote">' + cap(ex) + '</span>', cap(s[0]), shuffle(STORES.filter(function (x) { return x !== s; }).map(function (x) { return cap(x[0]); })).slice(0, 3), { hint: 'Is it moving, raised up, stretched, hot, a fuel or food, or inside atoms?', steps: [cap(ex) + ': ' + s[1] + ', so the ' + s[0] + ' store.'] });
+    },
+    function () {
+      var s = pick(STORES);
+      return mc('Which object has energy in a <b>' + s[0] + '</b> store?', cap(pick(s[2])), shuffle(STORES.filter(function (x) { return x !== s; })).slice(0, 3).map(function (x) { return cap(pick(x[2])); }), { hint: cap(s[0]) + ' store: ' + s[1] + '.', steps: ['The ' + s[0] + ' store is ' + s[1] + '.'] });
+    },
+    function () {
+      var all = STORES.map(function (x) { return [cap(x[0]), 'store']; }).concat(TRANSFERS.map(function (x) { return [cap(x), 'transfer']; })), it = pick(all);
+      var q = mc('Is <b>' + it[0].toLowerCase() + '</b> an energy store or a way of transferring energy?', it[1] === 'store' ? 'An energy store' : 'A way of transferring energy', [it[1] === 'store' ? 'A way of transferring energy' : 'An energy store'], { hint: 'A store holds energy. A transfer moves energy from one store to another.', steps: [it[1] === 'store' ? cap(it[0].toLowerCase()) + ' energy is kept in a store.' : cap(it[0].toLowerCase()) + ' moves energy from one store to another; it is a transfer.'] });
+      q.options = ['An energy store', 'A way of transferring energy']; q.correct = it[1] === 'store' ? 0 : 1; return q;
+    },
+    bank([
+      { q: 'Two identical cars drive along a road. Car A goes at 30 km/h and car B at 60 km/h. Which has more kinetic energy?', a: 'Car B', w: ['Car A', 'They have the same', 'Neither has any'], s: ['The faster an object moves, the more kinetic energy it has.'] },
+      { q: 'A ball is carried from the ground floor to the top floor of a building. Which store increases?', a: 'Its gravitational potential store', w: ['Its elastic store', 'Its nuclear store', 'Its chemical store'], s: ['Raising an object higher fills its gravitational potential store.'] },
+      { q: 'Which store does the energy in food come from?', a: 'Chemical', w: ['Kinetic', 'Thermal', 'Elastic'], s: ['Food, fuels and batteries are chemical stores.'] },
+      { q: 'What is the unit of energy?', a: 'The joule (J)', w: ['The newton (N)', 'The kilogram (kg)', 'The metre (m)'], s: ['All energy, in any store, is measured in joules.'] },
+      { q: 'Where does the energy of the Sun come from?', a: 'Its nuclear store', w: ['Its elastic store', 'Its kinetic store only', 'Batteries'], s: ['Nuclear reactions in the Sun’s core release energy, transferred to us by light and heating.'] },
+      { q: 'How does energy reach Earth from the Sun?', a: 'By light (radiation)', w: ['By sound', 'Through the air by conduction', 'Electrically'], s: ['Space is mostly a vacuum, so sound and conduction cannot carry energy across it. Light can.'] },
+      { q: 'A guitar string is plucked. How is energy transferred to your ear?', a: 'By sound', w: ['By light', 'Electrically', 'By the nuclear store'], s: ['The vibrating string transfers energy to the air as sound.'] }
+    ])
+  ]
+});
+
+sci({
+  id: 's7-energy', strand: 'J', title: 'Energy changes', codes: ['7Pf.01', '7Pf.02'], calc: false,
+  blurb: 'Follow energy from one store to another in everyday events, and why energy spreads out and becomes less useful.',
+  learn: {
+    ideas: [
+      'Energy is <b>never created or destroyed</b>. It only moves from one store to another. This is the <b>law of conservation of energy</b>.',
+      'Describe an energy change as <b>start store → transfer → end store(s)</b>. Example: a torch. Chemical store in the battery → electrically → light and the thermal store of the bulb and surroundings.',
+      'Some energy is always <b>wasted</b>: it goes where we do not want it, usually heating the surroundings.',
+      'Wasted energy <b>dissipates</b>: it spreads out into the surroundings and becomes less useful. It has not disappeared.',
+      'Energy in = useful energy out + wasted energy.'
+    ],
+    example: { q: 'Describe the energy changes when a ball is dropped.', steps: ['At the top, it has energy in its gravitational potential store.', 'As it falls, energy moves to its kinetic store.', 'When it hits the ground, energy is transferred by sound and by heating.'] },
     watch: 'Wasted energy does not disappear. It spreads out, usually warming the surroundings a little.'
   },
   gens: [
@@ -2407,44 +2525,164 @@ sci({
     },
     function () {
       var dev = pick([['A lamp', 'light', 'heat'], ['A motor', 'kinetic energy', 'heat and sound'], ['A television', 'light and sound', 'heat'], ['An electric fan', 'kinetic energy', 'heat and sound']]), tot = ri(5, 30) * 20, use = ri(1, tot / 20 - 1) * 20;
-      return { kind: 'num', prompt: dev[0] + ' is given ' + tot + ' J of electrical energy. ' + use + ' J is transferred usefully as ' + dev[1] + '. How much energy is wasted as ' + dev[2] + '?', answer: tot - use, ans: (tot - use) + ' J', hint: 'Energy in = useful energy + wasted energy.', steps: [tot + ' − ' + use + ' = ' + (tot - use) + ' J.'] };
+      if (Math.random() < 0.5) return { kind: 'num', prompt: dev[0] + ' is given ' + tot + ' J of electrical energy. ' + use + ' J is transferred usefully as ' + dev[1] + '. How much energy is wasted as ' + dev[2] + '? (in J)', answer: tot - use, ans: (tot - use) + ' J', hint: 'Energy in = useful energy + wasted energy.', steps: [tot + ' − ' + use + ' = ' + (tot - use) + ' J.'] };
+      return { kind: 'num', prompt: dev[0] + ' transfers ' + use + ' J usefully as ' + dev[1] + ' and wastes ' + (tot - use) + ' J as ' + dev[2] + '. How much electrical energy was it given? (in J)', answer: tot, ans: tot + ' J', hint: 'Energy is not created or destroyed, so add up where it all went.', steps: [use + ' + ' + (tot - use) + ' = ' + tot + ' J.'] };
     },
     bank([
       { q: 'What happens to the energy wasted by a machine?', a: 'It spreads out into the surroundings, mostly as heat', w: ['It is destroyed', 'It goes back into the plug', 'It turns into mass'], s: ['Energy dissipates: it spreads out and becomes less useful, but it still exists.'] },
-      { q: 'Where is energy stored in a stretched rubber band?', a: 'In an elastic store', w: ['In a chemical store', 'In a nuclear store', 'In a sound store'], s: ['Stretching or squashing something stores elastic energy.'] },
-      { q: 'Which has the most gravitational potential energy?', a: 'A book on a high shelf', w: ['The same book on the floor', 'The same book on a low table', 'All the same'], s: ['The higher an object is lifted, the more gravitational potential energy it has.'] },
-      { q: 'Why does a car engine get hot?', a: 'Some energy from the fuel is wasted as heat', w: ['The engine creates new energy', 'Heat flows in from the road', 'Petrol is hot'], s: ['Not all the chemical energy becomes kinetic energy; some dissipates as heat.'] }
+      { q: 'What does the law of conservation of energy say?', a: 'Energy cannot be created or destroyed, only transferred', w: ['Energy is used up when we use it', 'Machines make energy', 'Energy always turns into light'], s: ['The total amount of energy stays the same.'] },
+      { q: 'Why does a car engine get hot?', a: 'Some energy from the fuel is wasted by heating', w: ['The engine creates new energy', 'Heat flows in from the road', 'Petrol is hot'], s: ['Not all the chemical energy goes to the kinetic store; some dissipates as heat.'] },
+      { q: 'A swinging pendulum slowly stops. Where has its energy gone?', a: 'It has heated the air and the pivot slightly', w: ['It has been destroyed', 'It is stored in the string', 'It has turned into mass'], s: ['Air resistance and friction transfer the energy by heating, so it dissipates.'] }
     ])
   ]
 });
 
 sci({
-  id: 's7-gravity', strand: 'P', title: 'Gravity, mass and weight', codes: ['7Pf.03', '7Pf.04'], calc: true,
-  blurb: 'Gravity as an attractive force between masses, weight and mass, and falling with no air resistance in a vacuum.',
+  id: 's7-joules', strand: 'J', title: 'Measuring energy: joules', codes: ['7Pf.01', '7Pf.02'], calc: true,
+  blurb: 'The joule and kilojoule, energy on food labels, and the energy needed to push or lift something.',
   learn: {
     ideas: [
-      '<b>Gravity</b> is a force of attraction between any two objects with mass. The bigger the masses, the stronger the pull. The further apart, the weaker it is.',
-      '<b>Mass</b> is the amount of matter in an object, in kilograms (kg). It is the same everywhere.',
-      '<b>Weight</b> is the force of gravity on an object, in newtons (N). Weight = mass × gravitational field strength. On Earth this is about 10 N/kg; on the Moon about 1.6 N/kg.',
-      'In a <b>vacuum</b> there is no air, so there is no air resistance. A feather and a hammer dropped together fall at the same rate.'
+      'Energy is measured in <b>joules (J)</b>. One joule is about the energy needed to lift an apple (weight about 1 N) up by 1 metre.',
+      '<b>1 kilojoule (kJ) = 1000 J</b>. <b>1 megajoule (MJ) = 1 000 000 J</b>. kJ to J: multiply by 1000. J to kJ: divide by 1000.',
+      'Food labels show energy in <b>kJ</b> (and in kcal, the “calories” on the label).',
+      'When a force moves something, energy is transferred. <b>Energy transferred (J) = force (N) × distance moved (m)</b>. This is called <b>work done</b>.',
+      'Lifting: the force needed is the object’s <b>weight</b>, so energy (J) = weight (N) × height (m).'
     ],
-    example: { q: 'An astronaut has a mass of 70 kg. What is her weight on Earth and on the Moon?', steps: ['Earth: 70 × 10 = 700 N.', 'Moon: 70 × 1.6 = 112 N.', 'Her mass is still 70 kg in both places.'] },
-    watch: 'Mass and weight are different. Bathroom scales show kilograms, but your weight is a force in newtons.'
+    example: { q: 'A crate weighing 200 N is lifted 1.5 m onto a lorry. How much energy is transferred to its gravitational potential store?', steps: ['Energy = force × distance.', '200 N × 1.5 m = 300 J.'] },
+    watch: 'Check the units before you calculate: force in newtons, distance in metres (not cm), answer in joules.'
+  },
+  gens: [
+    function () {
+      var t = Math.random() < 0.5, kj = t ? pick([2, 3.5, 4, 12, 0.5, 1.2, 25, 7.5]) : null, j = t ? null : pick([3000, 4500, 250, 12000, 800, 60000, 1500]);
+      if (t) return { kind: 'num', prompt: 'Convert ' + fmt(kj) + ' kJ into joules.', answer: clean(kj * 1000), ans: fmt(clean(kj * 1000)) + ' J', hint: '1 kJ = 1000 J.', steps: [fmt(kj) + ' × 1000 = ' + fmt(clean(kj * 1000)) + ' J.'] };
+      return { kind: 'num', prompt: 'Convert ' + fmt(j) + ' J into kilojoules.', answer: clean(j / 1000), ans: fmt(clean(j / 1000)) + ' kJ', hint: '1 kJ = 1000 J, so divide by 1000.', steps: [fmt(j) + ' ÷ 1000 = ' + fmt(clean(j / 1000)) + ' kJ.'] };
+    },
+    function () {
+      var c = pick([['pushes a box', 'along the floor', 'push'], ['pulls a sledge', 'across the snow', 'pull'], ['pushes a shopping trolley', 'along an aisle', 'push']]), F = ri(2, 30) * 5, d = ri(2, 20), ask = pick(['E', 'E', 'F', 'd']), E = F * d;
+      if (ask === 'E') return { kind: 'num', prompt: 'A student ' + c[0] + ' ' + d + ' m ' + c[1] + ' with a force of ' + F + ' N. How much energy is transferred? (in J)', answer: E, ans: E + ' J', hint: 'Energy transferred = force × distance.', steps: [F + ' N × ' + d + ' m = ' + E + ' J.'] };
+      if (ask === 'F') return { kind: 'num', prompt: 'A student ' + c[0] + ' ' + d + ' m ' + c[1] + '. ' + E + ' J of energy is transferred. What force did they use? (in N)', answer: F, ans: F + ' N', hint: 'Force = energy ÷ distance.', steps: [E + ' J ÷ ' + d + ' m = ' + F + ' N.'] };
+      return { kind: 'num', prompt: 'A student ' + c[0] + ' ' + c[1] + ' with a force of ' + F + ' N, transferring ' + E + ' J. How far did it move? (in m)', answer: d, ans: d + ' m', hint: 'Distance = energy ÷ force.', steps: [E + ' J ÷ ' + F + ' N = ' + d + ' m.'] };
+    },
+    function () {
+      var m = ri(2, 60), h = pick([0.5, 1, 1.5, 2, 3, 4, 5, 10]), W = m * 10, E = clean(W * h);
+      return { kind: 'num', prompt: 'A ' + m + ' kg bag is lifted ' + fmt(h) + ' m onto a shelf. Gravitational field strength is 10 N/kg. How much energy is transferred to its gravitational potential store? (in J)', answer: E, ans: fmt(E) + ' J', hint: 'First find the weight (mass × 10). Then energy = weight × height.', steps: ['Weight = ' + m + ' × 10 = ' + W + ' N.', 'Energy = ' + W + ' N × ' + fmt(h) + ' m = ' + fmt(E) + ' J.'] };
+    },
+    function () {
+      var foods = [['a slice of bread', 330], ['an apple', 220], ['a chocolate bar', 1050], ['a banana', 400], ['a bowl of cereal with milk', 900], ['a glass of orange juice', 380]], a = pick(foods), b = pick(foods.filter(function (x) { return x !== a; })), t = pick(['diff', 'total', 'J']);
+      var lab = table(['Food', 'Energy (kJ)'], [[cap(a[0]), a[1]], [cap(b[0]), b[1]]]);
+      if (t === 'diff') return { kind: 'num', prompt: 'Use the food label values.' + lab + 'How many more kilojoules are in the food with more energy?', answer: Math.abs(a[1] - b[1]), ans: Math.abs(a[1] - b[1]) + ' kJ', hint: 'Subtract the smaller value from the larger.', steps: [Math.max(a[1], b[1]) + ' − ' + Math.min(a[1], b[1]) + ' = ' + Math.abs(a[1] - b[1]) + ' kJ.'] };
+      if (t === 'total') return { kind: 'num', prompt: 'Use the food label values.' + lab + 'Someone eats both. How much energy is that in kJ?', answer: a[1] + b[1], ans: (a[1] + b[1]) + ' kJ', hint: 'Add them.', steps: [a[1] + ' + ' + b[1] + ' = ' + (a[1] + b[1]) + ' kJ.'] };
+      return { kind: 'num', prompt: 'Use the food label values.' + lab + 'How many <b>joules</b> are in ' + a[0] + '?', answer: a[1] * 1000, ans: fmt(a[1] * 1000) + ' J', hint: '1 kJ = 1000 J.', steps: [a[1] + ' × 1000 = ' + fmt(a[1] * 1000) + ' J.'] };
+    },
+    bank([
+      { q: 'How many joules are in 1 kilojoule?', a: '1000', w: ['10', '100', '1 000 000'], s: ['Kilo means a thousand.'] },
+      { q: 'Which unit would you find on a food label for energy?', a: 'kJ', w: ['N', 'kg', 'N/kg'], s: ['Food energy is given in kilojoules (and kilocalories).'] },
+      { q: 'Which equation is correct?', a: 'Energy transferred = force × distance', w: ['Energy transferred = force ÷ distance', 'Energy transferred = mass × distance', 'Energy transferred = force + distance'], s: ['Newtons × metres gives joules.'] },
+      { q: 'A box is pushed with a force, but it does not move. How much energy is transferred to the box’s kinetic store?', a: 'None, because it did not move', w: ['Force × 1 m', 'It depends on the box’s mass', '10 J'], s: ['If the distance moved is 0, then force × 0 = 0 J.'] }
+    ])
+  ]
+});
+
+sci({
+  id: 's7-attraction', strand: 'J', title: 'Gravity: how bodies attract', codes: ['7Pf.03'], calc: false,
+  blurb: 'Gravity is a pull between any two masses. What makes it stronger or weaker, and how it holds the Moon and planets in orbit.',
+  learn: {
+    ideas: [
+      '<b>Gravity</b> is a force of <b>attraction</b> between <b>any two objects that have mass</b>. It always pulls; it never pushes.',
+      'The pull acts on <b>both</b> objects, <b>equally</b> and in <b>opposite directions</b>. Earth pulls you down with your weight, and you pull Earth up with the same size of force. Earth is so massive that it hardly moves.',
+      '<b>More mass → stronger pull.</b> If either mass is doubled, the force doubles.',
+      '<b>Further apart → weaker pull.</b> (In fact, doubling the distance makes the force four times smaller.)',
+      'Two pencils on a desk do attract each other, but their masses are so small that the force is far too tiny to notice. You need a huge mass, like a planet, to feel gravity.',
+      'Gravity keeps the <b>Moon</b> in orbit around Earth and the <b>planets</b> in orbit around the Sun. The Moon’s pull on Earth’s oceans causes the <b>tides</b>.',
+      'Isaac Newton described gravity in 1687. He realised the same force that makes an apple fall also keeps the Moon in orbit.'
+    ],
+    gallery: gallery([['apple', 'Newton’s apple', 'Earth’s mass pulls the apple down. The apple pulls Earth up just as hard, but Earth is far too massive to move.'], ['orbit', 'Earth and Moon', 'Equal and opposite pulls. Gravity bends the Moon’s path into an orbit.']]),
+    example: { q: 'Earth pulls the Moon with a gravitational force. How does the Moon’s pull on Earth compare?', steps: ['Gravity acts on both objects.', 'The forces are equal in size and opposite in direction.', 'The Moon pulls Earth just as hard as Earth pulls the Moon. This pull is what raises the tides.'] },
+    watch: 'Gravity is not caused by air or spin. Astronauts in orbit are still pulled by Earth’s gravity; they float because they are falling around Earth all the time.'
+  },
+  gens: [
+    function () {
+      var change = pick([
+        ['the mass of one object is doubled', 'It gets stronger (it doubles)'],
+        ['the two objects are moved further apart', 'It gets weaker'],
+        ['the two objects are moved closer together', 'It gets stronger'],
+        ['the mass of one object is halved', 'It gets weaker (it halves)'],
+        ['both objects are given more mass', 'It gets stronger']
+      ]);
+      var opts = ['It gets stronger (it doubles)', 'It gets weaker', 'It gets stronger', 'It gets weaker (it halves)', 'It stays the same'];
+      return mc('Two objects attract each other by gravity. What happens to the force if ' + change[0] + '?', change[1], shuffle(opts.filter(function (x) { return x !== change[1] && x.indexOf(change[1]) !== 0 && change[1].indexOf(x) !== 0; })).slice(0, 3), { hint: 'More mass → stronger. Further apart → weaker.', steps: ['If ' + change[0] + ': ' + change[1].toLowerCase() + '.'] });
+    },
+    function () {
+      var cases = shuffle([['big', 'near'], ['big', 'far'], ['small', 'near'], ['small', 'far']]), L4 = ['A', 'B', 'C', 'D'], b = '', strong = Math.random() < 0.5;
+      cases.forEach(function (c, i) { var rr = c[0] === 'big' ? 15 : 6, gap = c[1] === 'near' ? 40 : 170, y = 24 + i * 46, x1 = 50 + rr;
+        b += T(16, y, L4[i], 'lbl') + '<circle cx="' + x1 + '" cy="' + y + '" r="' + rr + '" class="shape"/><circle cx="' + (x1 + rr + gap + rr) + '" cy="' + y + '" r="' + rr + '" class="shape"/>'; });
+      var k = cases.findIndex(function (c) { return strong ? c[0] === 'big' && c[1] === 'near' : c[0] === 'small' && c[1] === 'far'; });
+      return mc('Each pair of balls is made of the same material. Which pair, A, B, C or D, has the <b>' + (strong ? 'strongest' : 'weakest') + '</b> gravitational attraction?', 'Pair ' + L4[k], L4.filter(function (_, i) { return i !== k; }).map(function (x) { return 'Pair ' + x; }), { fig: svgWrap(320, 190, b, 'Four pairs of balls of different sizes and distances'), hint: 'Bigger masses and shorter distances make gravity stronger.', steps: [strong ? 'Pair ' + L4[k] + ' has the largest masses and the shortest distance.' : 'Pair ' + L4[k] + ' has the smallest masses and the longest distance.'] });
+    },
+    function () {
+      var w = ri(3, 90) * 10;
+      return { kind: 'num', fig: bodiesFig(44, 12, 120, 'Earth', 'you', 36), prompt: 'Earth pulls you down with a force of ' + w + ' N (your weight). With what size of force do you pull Earth? (in N)', answer: w, ans: w + ' N', hint: 'Gravity is a pair of equal and opposite forces.', steps: ['The forces are equal in size and opposite in direction: ' + w + ' N.', 'Earth barely moves because its mass is enormous.'] };
+    },
+    bank([
+      { q: 'Which statement about gravity is correct?', a: 'Any two objects with mass attract each other', w: ['Only planets have gravity', 'Gravity can push objects apart', 'Gravity only works where there is air'], s: ['Every mass attracts every other mass, but you only notice it when one mass is huge.'] },
+      { q: 'Why don’t two books on a table move towards each other?', a: 'Their masses are so small that the attraction is far too weak to notice', w: ['Books have no gravity', 'Gravity only works between planets', 'The books repel each other'], s: ['The pull exists but is tiny compared with friction.'] },
+      { q: 'What keeps the Moon in orbit around Earth?', a: 'The gravitational attraction between Earth and the Moon', w: ['Magnetism', 'Air pressure', 'The Sun pushing it'], s: ['Without gravity the Moon would fly off in a straight line.'] },
+      { q: 'What keeps Earth in orbit around the Sun?', a: 'The Sun’s gravity', w: ['The Moon’s gravity', 'Earth’s magnetic field', 'The solar wind'], s: ['The Sun has by far the most mass in the Solar System.'] },
+      { q: 'What causes the tides on Earth?', a: 'Mainly the Moon’s gravity pulling on the oceans', w: ['Wind blowing the water', 'Earth’s magnetism', 'Rivers flowing into the sea'], s: ['The Moon’s pull makes the oceans bulge, giving high and low tides.'] },
+      { q: 'Who first explained that the same force makes apples fall and keeps the Moon in orbit?', a: 'Isaac Newton', w: ['Albert Einstein', 'Charles Darwin', 'Marie Curie'], s: ['Newton published his law of gravitation in 1687. The unit of force, the newton, is named after him.'] },
+      { q: 'Why is the gravitational field strength on Jupiter much bigger than on Earth?', a: 'Jupiter has much more mass', w: ['Jupiter is further from the Sun', 'Jupiter spins more slowly', 'Jupiter has no atmosphere'], s: ['More mass means a stronger pull.'] }
+    ])
+  ]
+});
+
+var G_PLACES = [['Earth', 10], ['the Moon', 1.6], ['Mars', 3.7], ['Jupiter', 25], ['Mercury', 3.7], ['Neptune', 11]];
+sci({
+  id: 's7-gravity', strand: 'J', title: 'Weight, mass and the equations', codes: ['7Pf.03', '7Pf.04'], calc: true,
+  blurb: 'Mass in kilograms, weight in newtons, gravitational field strength in N/kg, and using W = m × g.',
+  learn: {
+    ideas: [
+      '<b>Mass</b> is the amount of matter in an object. Unit: <b>kilograms (kg)</b>. Your mass is the same everywhere: on Earth, on the Moon or in space.',
+      '<b>Weight</b> is the force of gravity pulling on a mass. It is a force, so its unit is the <b>newton (N)</b>. Weight is measured with a <b>newton meter</b> (a spring balance).',
+      '<b>Gravitational field strength (g)</b> is the pull on each kilogram. Unit: <b>newtons per kilogram (N/kg)</b>. On Earth g ≈ <b>10 N/kg</b> (more precisely 9.8 N/kg). On the Moon g ≈ 1.6 N/kg.',
+      '<b>Weight = mass × gravitational field strength</b>, or <b>W = m × g</b>. Rearranged: <b>m = W ÷ g</b> and <b>g = W ÷ m</b>.',
+      'Units: <b>N = kg × N/kg</b>. Mass must be in kg: change grams to kg by dividing by 1000 (500 g = 0.5 kg).',
+      'In a <b>vacuum</b> there is no air resistance, so all objects fall at the same rate. A hammer and a feather dropped together on the Moon land together.'
+    ],
+    gallery: gallery([['moonman', 'Same mass, different weight', 'A 60 kg astronaut weighs 600 N on Earth but only 96 N on the Moon. Her mass stays 60 kg.'], ['hammer', 'Hammer and feather', 'On the Moon there is no air, so both land at the same time. Astronaut David Scott tested this in 1971.']]),
+    example: { q: 'An astronaut has a mass of 70 kg. What is her weight on Earth and on the Moon?', steps: ['Earth: W = m × g = 70 × 10 = 700 N.', 'Moon: W = 70 × 1.6 = 112 N.', 'Her mass is still 70 kg in both places.'] },
+    watch: 'The letter g means gravitational field strength (N/kg), not grams. Always turn grams into kilograms first.'
   },
   gens: [
     function () {
       var m = ri(2, 90), t = pick(['earth', 'moon', 'mass']);
-      if (t === 'earth') return { kind: 'num', prompt: 'An object has a mass of ' + m + ' kg. What is its weight on Earth, where the gravitational field strength is 10 N/kg?', answer: m * 10, ans: m * 10 + ' N', hint: 'Weight = mass × gravitational field strength.', steps: [m + ' × 10 = ' + m * 10 + ' N.'] };
-      if (t === 'moon') return { kind: 'num', prompt: 'An object has a mass of ' + m + ' kg. What is its weight on the Moon, where the gravitational field strength is 1.6 N/kg?', answer: clean(m * 1.6), ans: fmt(clean(m * 1.6)) + ' N', hint: 'Weight = mass × 1.6.', steps: [m + ' × 1.6 = ' + fmt(clean(m * 1.6)) + ' N.'] };
-      return { kind: 'num', prompt: 'A bag weighs ' + m * 10 + ' N on Earth (gravitational field strength 10 N/kg). What is its mass in kg?', answer: m, ans: m + ' kg', hint: 'Mass = weight ÷ gravitational field strength.', steps: [m * 10 + ' ÷ 10 = ' + m + ' kg.'] };
+      if (t === 'earth') return { kind: 'num', prompt: 'An object has a mass of ' + m + ' kg. What is its weight on Earth, where g = 10 N/kg? (in N)', answer: m * 10, ans: m * 10 + ' N', hint: 'W = m × g.', steps: ['W = ' + m + ' × 10 = ' + m * 10 + ' N.'] };
+      if (t === 'moon') return { kind: 'num', prompt: 'An object has a mass of ' + m + ' kg. What is its weight on the Moon, where g = 1.6 N/kg? (in N)', answer: clean(m * 1.6), ans: fmt(clean(m * 1.6)) + ' N', hint: 'W = m × g.', steps: ['W = ' + m + ' × 1.6 = ' + fmt(clean(m * 1.6)) + ' N.'] };
+      return { kind: 'num', prompt: 'A bag weighs ' + m * 10 + ' N on Earth (g = 10 N/kg). What is its mass? (in kg)', answer: m, ans: m + ' kg', hint: 'm = W ÷ g.', steps: ['m = ' + m * 10 + ' ÷ 10 = ' + m + ' kg.'] };
+    },
+    function () {
+      var p = pick(G_PLACES.slice(1)), m = ri(3, 80), W = clean(m * p[1]), t = pick(['W', 'g', 'm']);
+      var tab = table(['Place', 'g (N/kg)'], G_PLACES.map(function (x) { return [cap(x[0]), fmt(x[1])]; }));
+      if (t === 'W') return { kind: 'num', prompt: 'Use the table.' + tab + 'A rover has a mass of ' + m + ' kg. What is its weight on ' + p[0] + '? (in N)', answer: W, ans: fmt(W) + ' N', hint: 'Find g for ' + p[0] + ' in the table, then W = m × g.', steps: ['g on ' + p[0] + ' = ' + fmt(p[1]) + ' N/kg.', 'W = ' + m + ' × ' + fmt(p[1]) + ' = ' + fmt(W) + ' N.'] };
+      if (t === 'm') return { kind: 'num', prompt: 'Use the table.' + tab + 'A rock weighs ' + fmt(W) + ' N on ' + p[0] + '. What is its mass? (in kg)', answer: m, ans: m + ' kg', hint: 'm = W ÷ g.', steps: ['m = ' + fmt(W) + ' ÷ ' + fmt(p[1]) + ' = ' + m + ' kg.'] };
+      return { kind: 'num', prompt: 'On an unknown planet, an object with a mass of ' + m + ' kg weighs ' + fmt(W) + ' N. What is the gravitational field strength there? (in N/kg)', answer: p[1], ans: fmt(p[1]) + ' N/kg', hint: 'g = W ÷ m.', steps: ['g = ' + fmt(W) + ' ÷ ' + m + ' = ' + fmt(p[1]) + ' N/kg.'] };
+    },
+    function () {
+      var g = pick([200, 250, 400, 500, 750, 800, 1500, 2500]);
+      return { kind: 'num', prompt: 'A bag of flour has a mass of ' + g + ' g. What is its weight on Earth (g = 10 N/kg)? (in N)', answer: clean(g / 1000 * 10), ans: fmt(clean(g / 1000 * 10)) + ' N', hint: 'Change grams to kilograms first (÷ 1000).', steps: [g + ' g = ' + fmt(clean(g / 1000)) + ' kg.', 'W = ' + fmt(clean(g / 1000)) + ' × 10 = ' + fmt(clean(g / 1000 * 10)) + ' N.'] };
+    },
+    function () {
+      var u = pick([['mass', 'kilograms (kg)'], ['weight', 'newtons (N)'], ['gravitational field strength', 'newtons per kilogram (N/kg)'], ['energy', 'joules (J)']]);
+      var all = ['kilograms (kg)', 'newtons (N)', 'newtons per kilogram (N/kg)', 'joules (J)'];
+      return mc('What is the unit of <b>' + u[0] + '</b>?', cap(u[1]), all.filter(function (x) { return x !== u[1]; }).map(cap), { hint: 'Weight is a force. Mass is an amount of matter.', steps: [cap(u[0]) + ' is measured in ' + u[1] + '.'] });
     },
     bank([
       { q: 'An astronaut goes from Earth to the Moon. What happens to her mass?', a: 'It stays the same', w: ['It increases', 'It decreases', 'It becomes zero'], s: ['Mass is the amount of matter, so it does not change. Her weight is less on the Moon.'] },
-      { q: 'Why is your weight smaller on the Moon than on Earth?', a: 'The Moon has less mass, so its gravity is weaker', w: ['There is no air on the Moon', 'You have less mass on the Moon', 'The Moon is colder'], s: ['Gravity depends on mass. The Moon’s gravitational field strength is about 1.6 N/kg compared with Earth’s 10 N/kg.'] },
+      { q: 'Why is your weight smaller on the Moon than on Earth?', a: 'The Moon has less mass, so its gravity is weaker', w: ['There is no air on the Moon', 'You have less mass on the Moon', 'The Moon is colder'], s: ['The Moon’s gravitational field strength is about 1.6 N/kg compared with Earth’s 10 N/kg.'] },
       { q: 'A hammer and a feather are dropped together on the Moon. What happens?', a: 'They land at the same time', w: ['The hammer lands first', 'The feather lands first', 'They float away'], s: ['There is no air on the Moon, so there is no air resistance to slow the feather.'] },
-      { q: 'Why does a feather fall more slowly than a stone on Earth?', a: 'Air resistance has a much bigger effect on the feather', w: ['Gravity does not pull feathers', 'The feather has more mass', 'Stones are attracted by magnetism'], s: ['In a vacuum they would fall together. Here, air slows the light, spread-out feather much more.'] },
-      { q: 'Which unit is used to measure weight?', a: 'Newtons (N)', w: ['Kilograms (kg)', 'Metres (m)', 'Joules (J)'], s: ['Weight is a force, so it is measured in newtons.'] },
-      { q: 'Between which pair is the gravitational attraction strongest?', a: 'Two large masses close together', w: ['Two small masses far apart', 'Two large masses far apart', 'Two small masses close together'], s: ['Bigger masses and shorter distances both make gravity stronger.'] }
+      { q: 'Which instrument measures weight?', a: 'A newton meter (spring balance)', w: ['A thermometer', 'A measuring cylinder', 'A ruler'], s: ['The spring stretches more when the force pulling on it is bigger.'] },
+      { q: 'Which equation is correct?', a: 'Weight = mass × gravitational field strength', w: ['Mass = weight × gravitational field strength', 'Weight = mass ÷ gravitational field strength', 'Weight = mass + gravitational field strength'], s: ['W = m × g. Rearranged: m = W ÷ g, and g = W ÷ m.'] },
+      { q: 'What does “g = 10 N/kg” mean?', a: 'Each kilogram is pulled down with a force of 10 newtons', w: ['Everything weighs 10 kg', 'Each newton has a mass of 10 kg', 'Objects fall 10 metres'], s: ['Gravitational field strength is the force on each kilogram of mass.'] },
+      { q: 'Kitchen scales say 2 kg. What are they really measuring?', a: 'Mass (they use your weight and convert to kg)', w: ['Weight in newtons', 'Energy in joules', 'Volume in litres'], s: ['Scales sense the weight force but show the mass, assuming g = 10 N/kg (Earth).'] }
     ])
   ]
 });
@@ -3484,7 +3722,7 @@ registerEnglish(7); registerFrench('B1');
 (function () {
   var SUBJECTS = {
     maths: { name: 'Maths', strands: [{ id: 'N', name: 'Number' }, { id: 'A', name: 'Algebra' }, { id: 'G', name: 'Geometry and measure' }, { id: 'S', name: 'Statistics and probability' }] },
-    science: { name: 'Science', strands: [{ id: 'B', name: 'Biology' }, { id: 'C', name: 'Chemistry' }, { id: 'P', name: 'Physics' }, { id: 'E', name: 'Earth and space' }, { id: 'W', name: 'Working scientifically' }] },
+    science: { name: 'Science', strands: [{ id: 'B', name: 'Biology' }, { id: 'C', name: 'Chemistry' }, { id: 'P', name: 'Physics' }, { id: 'J', name: 'Energy and gravity' }, { id: 'E', name: 'Earth and space' }, { id: 'W', name: 'Working scientifically' }] },
     english: { name: 'English', strands: [{ id: 'R', name: 'Reading' }, { id: 'K', name: 'Grammar and punctuation' }, { id: 'V', name: 'Vocabulary and spelling' }, { id: 'Y', name: 'Writing' }] },
     french: { name: 'French', strands: [{ id: 'F', name: 'Grammaire' }, { id: 'L', name: 'Vocabulaire' }, { id: 'O', name: 'Compréhension écrite' }, { id: 'U', name: 'Expression et style' }] }
   };
@@ -3639,7 +3877,7 @@ registerEnglish(7); registerFrench('B1');
     var h = '<div class="stack"><div><button class="back" data-go="home">All topics</button></div>';
     h += '<header class="topichead" style="--sc:' + strandColor(t.strand) + '"><h1>' + t.title + '</h1><p class="muted">' + t.blurb + '</p><div class="chips">' + t.codes.map(function (c) { return '<span class="chip">' + c + '</span>'; }).join('') + (t.subject === 'maths' || t.calc ? '<span class="chip ' + (t.calc ? 'calc' : 'nocalc') + '">' + (t.calc ? 'Calculator allowed' : 'No calculator') + '</span>' : '') + '</div>';
     h += '<div class="row">' + meter(l, t.strand) + '<span class="small">' + LEVELS[l] + (r.a ? '. ' + r.c + ' of ' + r.a + ' answered correctly so far.' : '.') + '</span></div></header>';
-    h += '<div class="ex stack"><h2>Key ideas</h2><ul class="ideas">' + t.learn.ideas.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ul>';
+    h += '<div class="ex stack"><h2>Key ideas</h2><ul class="ideas">' + t.learn.ideas.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ul>' + (t.learn.gallery ? '<div class="gallery">' + t.learn.gallery.map(function (g) { return '<figure class="gcard">' + g.svg + '<figcaption><b>' + g.title + '</b>' + g.text + '</figcaption></figure>'; }).join('') + '</div>' : '');
     h += '<h2>Worked example</h2><div class="sheet"><p class="prompt">' + t.learn.example.q + '</p><ol class="steps">' + t.learn.example.steps.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ol></div>';
     h += '<p class="watch"><b>Watch out.</b> ' + t.learn.watch + '</p></div>';
     h += '<div class="row"><button class="btn primary" data-go="practise" data-id="' + id + '">Practise 10 questions</button></div></div>';
