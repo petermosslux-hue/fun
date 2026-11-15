@@ -29,7 +29,7 @@
   --img-soft: rgba(19, 128, 111, 0.18);
   --sN: #2851a3; --sA: #7445c0; --sG: #13806f; --sS: #b5700c;
   --sB: #2f8a3a; --sC: #b8456b; --sP: #2851a3; --sE: #9a6a12; --sW: #5b6478; --sJ: #c2410c;
-  --sR: #2851a3; --sK: #7445c0; --sV: #13806f; --sY: #b5700c; --sF: #2851a3; --sL: #b8456b; --sO: #13806f; --sU: #9a6a12;
+  --sR: #2851a3; --sK: #7445c0; --sV: #13806f; --sY: #b5700c; --sF: #2851a3; --sL: #b8456b; --sO: #13806f; --sU: #9a6a12; --sD: #b0413e; --sM: #13806f; --sH: #2851a3; --sX: #7445c0;
   --f-display: "Bricolage Grotesque", "Avenir Next", "Segoe UI", system-ui, sans-serif;
   --f-body: "Atkinson Hyperlegible", "Verdana", "Segoe UI", system-ui, sans-serif;
   --f-hand: "Caveat", "Segoe Print", "Comic Sans MS", cursive;
@@ -40,14 +40,14 @@
     --paper: #121822; --rule: rgba(150, 185, 245, 0.06); --sheet: #1a2230; --ink: #e8edf6; --ink-2: #9ba7be; --line: #2d3849;
     --accent: #93b2f6; --accent-ink: #0e1626; --accent-soft: #223152; --pen: #ff8b81; --pen-soft: #3b2426; --ok: #7fd5a1; --ok-soft: #1c3327;
     --hl: #4a421a; --margin: #6e3b3b; --fig-fill: #222c3d; --fig-fill-2: #2a3549; --fig-fill-3: #334058; --img: #5fd0bd; --img-soft: rgba(95, 208, 189, 0.2);
-    --sN: #93b2f6; --sA: #b99af0; --sG: #5fd0bd; --sS: #f0b65a; --sB: #7ccf86; --sC: #f08fb0; --sP: #93b2f6; --sE: #e2b45f; --sW: #a8b2c6; --sJ: #fb9a5b; --sR: #93b2f6; --sK: #b99af0; --sV: #5fd0bd; --sY: #f0b65a; --sF: #93b2f6; --sL: #f08fb0; --sO: #5fd0bd; --sU: #e2b45f; color-scheme: dark;
+    --sN: #93b2f6; --sA: #b99af0; --sG: #5fd0bd; --sS: #f0b65a; --sB: #7ccf86; --sC: #f08fb0; --sP: #93b2f6; --sE: #e2b45f; --sW: #a8b2c6; --sJ: #fb9a5b; --sR: #93b2f6; --sK: #b99af0; --sV: #5fd0bd; --sY: #f0b65a; --sF: #93b2f6; --sL: #f08fb0; --sO: #5fd0bd; --sU: #e2b45f; --sD: #f2938f; --sM: #5fd0bd; --sH: #93b2f6; --sX: #b99af0; color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
   --paper: #121822; --rule: rgba(150, 185, 245, 0.06); --sheet: #1a2230; --ink: #e8edf6; --ink-2: #9ba7be; --line: #2d3849;
   --accent: #93b2f6; --accent-ink: #0e1626; --accent-soft: #223152; --pen: #ff8b81; --pen-soft: #3b2426; --ok: #7fd5a1; --ok-soft: #1c3327;
   --hl: #4a421a; --margin: #6e3b3b; --fig-fill: #222c3d; --fig-fill-2: #2a3549; --fig-fill-3: #334058; --img: #5fd0bd; --img-soft: rgba(95, 208, 189, 0.2);
-  --sN: #93b2f6; --sA: #b99af0; --sG: #5fd0bd; --sS: #f0b65a; --sB: #7ccf86; --sC: #f08fb0; --sP: #93b2f6; --sE: #e2b45f; --sW: #a8b2c6; --sJ: #fb9a5b; --sR: #93b2f6; --sK: #b99af0; --sV: #5fd0bd; --sY: #f0b65a; --sF: #93b2f6; --sL: #f08fb0; --sO: #5fd0bd; --sU: #e2b45f; color-scheme: dark;
+  --sN: #93b2f6; --sA: #b99af0; --sG: #5fd0bd; --sS: #f0b65a; --sB: #7ccf86; --sC: #f08fb0; --sP: #93b2f6; --sE: #e2b45f; --sW: #a8b2c6; --sJ: #fb9a5b; --sR: #93b2f6; --sK: #b99af0; --sV: #5fd0bd; --sY: #f0b65a; --sF: #93b2f6; --sL: #f08fb0; --sO: #5fd0bd; --sU: #e2b45f; --sD: #f2938f; --sM: #5fd0bd; --sH: #93b2f6; --sX: #b99af0; color-scheme: dark;
 }
 html { height: 100%; }
 body {
@@ -284,6 +284,9 @@ svg.fig .shlbl { font-size: 13px; font-weight: 700; }
 .dkey li span + span { padding-left: 12px; color: var(--ink-2); }
 
 .inp.words { width: 15em; }
+.field { flex-wrap: wrap; min-width: 0; max-width: 100%; }
+.answers { min-width: 0; max-width: 100%; }
+.inp.words { width: auto; flex: 1 1 9em; min-width: 0; max-width: 15em; }
 .passage { background: var(--paper); border-left: 3px solid var(--line); padding: 10px 14px; border-radius: 4px; max-width: 65ch; display: grid; gap: 8px; font-size: 1rem; line-height: 1.6; }
 .passage .src { font-size: 0.8rem; color: var(--ink-2); }
 .passage.poem { white-space: pre-line; font-style: italic; }
@@ -294,13 +297,13 @@ svg.fig .shlbl { font-size: 13px; font-weight: 700; }
   <header class="mast">
     <div class="stack" style="gap:8px">
       <p class="brand">Stage 7 <span>Study</span></p>
-      <div class="subjects" role="group" aria-label="Subject"><button type="button" class="subj" data-subj="maths" aria-pressed="true">Maths</button><button type="button" class="subj" data-subj="science" aria-pressed="false">Science</button><button type="button" class="subj" data-subj="english" aria-pressed="false">English</button><button type="button" class="subj" data-subj="french" aria-pressed="false">French</button></div>
+      <div class="subjects" role="group" aria-label="Subject"><button type="button" class="subj" data-subj="maths" aria-pressed="true">Maths</button><button type="button" class="subj" data-subj="science" aria-pressed="false">Science</button><button type="button" class="subj" data-subj="english" aria-pressed="false">English</button><button type="button" class="subj" data-subj="french" aria-pressed="false">French</button><button type="button" class="subj" data-subj="german" aria-pressed="false">German</button></div>
     </div>
     <p class="mastmeta" id="mastmeta"></p>
   </header>
   <main id="view"></main>
   <footer>
-    <p>Maths, Science and English follow the Cambridge Lower Secondary curriculum frameworks for Stage 7: Mathematics (0862), Science (0893) and English (0861). French is pitched at CEFR level B1. Reading passages are original texts written for this app.</p>
+    <p>Maths, Science and English follow the Cambridge Lower Secondary curriculum frameworks for Stage 7: Mathematics (0862), Science (0893) and English (0861). French is pitched at CEFR level B1. German follows the class workbook at level A1. Reading passages are original texts written for this app.</p>
     <p id="syncnote"></p>
     <div class="confirm"><button class="btn quiet" id="reset" type="button">Reset my progress</button>
       <span id="confirm" hidden class="confirm"><span>This clears every topic score. Reset?</span><button class="btn" id="yesreset" type="button">Yes, reset</button><button class="btn quiet" id="nokeep" type="button">Keep my progress</button></span></div>
@@ -441,13 +444,18 @@ function close(x, ans, f) {
 }
 /* mark one answer spec against one response; returns {ok, note} */
 function normText(s) { return String(s == null ? '' : s).replace(/[\u2018\u2019\u02bc`]/g, "'").replace(/[\u201c\u201d]/g, '"').replace(/\s+/g, ' ').replace(/\s*'\s*/g, "'").trim().replace(/[.!?;,]+$/, '').toLowerCase().normalize('NFC').replace(/\u0153/g, 'oe').replace(/\u00e6/g, 'ae'); }
-function stripAccents(s) { return s.normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\u0153/g, 'oe').replace(/\u00e6/g, 'ae'); }
+function stripAccents(s) { return s.normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\u0153/g, 'oe').replace(/\u00e6/g, 'ae').replace(/\u00df/g, 'ss'); }
+function deDigraph(s) { return stripAccents(s.replace(/\u00e4/g, 'ae').replace(/\u00f6/g, 'oe').replace(/\u00fc/g, 'ue')); }
+function rawText(s) { return String(s == null ? '' : s).replace(/\s+/g, ' ').trim().replace(/[.!?;,]+$/, '').normalize('NFC'); }
 function markText(f, resp) {
   var r = normText(resp); if (!r) return { ok: false, blank: true };
   var accepts = [].concat(f.answer).concat(f.also || []).map(normText);
-  if (accepts.indexOf(r) >= 0) return { ok: true };
-  var bare = stripAccents(r);
-  for (var i = 0; i < accepts.length; i++) if (stripAccents(accepts[i]) === bare) return { ok: false, note: 'Nearly: the letters are right, but check the accents.' };
+  if (accepts.indexOf(r) >= 0) {
+    if (f.caseCheck) { var raws = [].concat(f.answer).concat(f.also || []).map(rawText); if (raws.indexOf(rawText(resp)) < 0) return { ok: false, note: 'Nearly: check your capital letters. German nouns always start with a capital letter.' }; }
+    return { ok: true };
+  }
+  var bare = stripAccents(r), accNote = f.lang === 'de' ? 'Nearly: the letters are right, but check the umlauts (ä, ö, ü) and ß.' : 'Nearly: the letters are right, but check the accents.';
+  for (var i = 0; i < accepts.length; i++) if (stripAccents(accepts[i]) === bare || (f.lang === 'de' && deDigraph(accepts[i]) === stripAccents(r))) return { ok: false, note: accNote };
   return { ok: false };
 }
 function markOne(f, resp) {
@@ -3717,20 +3725,249 @@ function registerFrench(level) {
       ])] });
   }
 }
-registerEnglish(7); registerFrench('B1');
+/* ===== GERMAN (A1, Stage 7): based on the class workbook units "Sich vorstellen", "Meine Klasse", "Meine Freizeit" ===== */
+function ger(t) { t.subject = 'german'; topic(t); }
+function de(s) { return '<span lang="de">' + s + '</span>'; }
+function deTable(head, rows) { return table(head, rows.map(function (r) { return r.map(function (c, i) { return i === 0 ? de(c) : c; }); })); }
+/* typed German answer: umlaut keys, optional capital-letter check for nouns */
+function deText(prompt, answer, o) { o = o || {}; return { kind: 'text', lang: 'de', accents: true, caseCheck: !!o.caseCheck, prompt: prompt, answer: answer, also: o.also || [], ans: de(answer), inputLabel: o.label || 'Deutsch', hint: o.hint, steps: o.steps || ['Answer: ' + de(answer) + '.'] }; }
+
+/* ---------- DATA ---------- */
+var DE_GREET = [['Hallo!', 'hello!'], ['Guten Morgen!', 'good morning!'], ['Guten Tag!', 'hello! (good day)'], ['Guten Abend!', 'good evening!'], ['Gute Nacht!', 'good night!'], ['Auf Wiedersehen!', 'goodbye!'], ['Tschüss!', 'bye!'], ['Bis später!', 'see you later!'], ['Danke!', 'thank you!'], ['Wie bitte?', 'pardon?']];
+var DE_SMALL = [['Woher?', 'where from?'], ['Wo?', 'where?'], ['Wie?', 'how?'], ['aus', 'from'], ['jetzt', 'now'], ['und', 'and'], ['aber', 'but'], ['auch', 'also / too'], ['nein', 'no'], ['nicht', 'not'], ['nur', 'only'], ['viel', 'a lot / much'], ['zusammen', 'together'], ['gern', 'gladly / like to'], ['heute', 'today'], ['morgen', 'tomorrow'], ['keine Ahnung', 'no idea'], ['alt', 'old'], ['langweilig', 'boring'], ['super', 'great / super'], ['toll', 'great / fantastic'], ['blöd', 'stupid / silly']];
+var DE_SUBJ = [['Chemie', 'Chemistry'], ['Biologie', 'Biology'], ['Mathe', 'Maths'], ['Englisch', 'English'], ['Deutsch', 'German'], ['Erdkunde', 'Geography'], ['Geschichte', 'History'], ['Physik', 'Physics'], ['Französisch', 'French'], ['Ökonomie', 'Economics'], ['Musik', 'Music'], ['Kunst', 'Art'], ['Sport', 'Sport (PE)'], ['Informatik', 'Computer Science']];
+var DE_SCHOOL = [['der', 'Spitzer', 'the pencil sharpener'], ['der', 'Computer', 'the computer'], ['das', 'Buch', 'the book'], ['der', 'Laptop', 'the laptop'], ['das', 'Wörterbuch', 'the dictionary'], ['der', 'Bleistift', 'the pencil'], ['das', 'Heft', 'the exercise book'], ['das', 'Tablet', 'the tablet'], ['der', 'Schreibblock', 'the notepad'], ['das', 'Lineal', 'the ruler'], ['die', 'Brille', 'the glasses'], ['der', 'Kleber', 'the glue'], ['der', 'Taschenrechner', 'the calculator'], ['das', 'Smartphone', 'the smartphone'], ['der', 'Rucksack', 'the backpack'], ['der', 'Kuli', 'the pen'], ['die', 'Uhr', 'the clock'], ['der', 'Radiergummi', 'the eraser / rubber'], ['die', 'Sporttasche', 'the sports bag'], ['die', 'Schere', 'the scissors'], ['der', 'USB-Stick', 'the USB stick'], ['die', 'Brotdose', 'the lunchbox']];
+var DE_CLASS = [['die', 'Klasse', 'the class'], ['die', 'Pause', 'the break'], ['der', 'Freund', 'the friend (boy)'], ['die', 'Freundin', 'the friend (girl)'], ['der', 'Nachmittag', 'the afternoon'], ['die', 'Handynummer', 'the phone number'], ['die', 'Postleitzahl', 'the postcode'], ['die', 'Hausnummer', 'the house number'], ['die', 'Adresse', 'the address'], ['die', 'Straße', 'the street'], ['der', 'Wohnort', 'the place where you live'], ['das', 'Land', 'the country'], ['die', 'Musik', 'the music'], ['die', 'Anmeldung', 'the registration'], ['der', 'Vorname', 'the first name'], ['der', 'Nachname', 'the last name'], ['die', 'Gitarre', 'the guitar'], ['das', 'Hobby', 'the hobby']];
+var DE_HOBBY = [['Fußball', 'football'], ['Judo', 'judo'], ['Schwimmen', 'swimming'], ['Tennis', 'tennis'], ['Karate', 'karate'], ['Surfen', 'surfing'], ['Basketball', 'basketball'], ['Radfahren', 'cycling'], ['Volleyball', 'volleyball'], ['Inliner fahren', 'inline skating']];
+var DE_VERBS_EN = [['heißen', 'to be called'], ['sein', 'to be'], ['kommen', 'to come'], ['wohnen', 'to live (somewhere)'], ['essen', 'to eat'], ['schreiben', 'to write'], ['machen', 'to do / to make'], ['spielen', 'to play'], ['mögen', 'to like'], ['lernen', 'to learn / to study'], ['hören', 'to hear / to listen to'], ['singen', 'to sing'], ['sprechen', 'to speak']];
+var DE_COUNTRY = [['Deutschland', 'Germany', 'aus Deutschland'], ['Österreich', 'Austria', 'aus Österreich'], ['die Schweiz', 'Switzerland', 'aus der Schweiz'], ['Frankreich', 'France', 'aus Frankreich'], ['Belgien', 'Belgium', 'aus Belgien'], ['Luxemburg', 'Luxembourg', 'aus Luxemburg'], ['Italien', 'Italy', 'aus Italien'], ['Spanien', 'Spain', 'aus Spanien'], ['Dänemark', 'Denmark', 'aus Dänemark'], ['Schweden', 'Sweden', 'aus Schweden'], ['Norwegen', 'Norway', 'aus Norwegen'], ['England', 'England', 'aus England'], ['die Türkei', 'Turkey', 'aus der Türkei'], ['die Slowakei', 'Slovakia', 'aus der Slowakei'], ['die USA', 'the USA', 'aus den USA'], ['die Niederlande', 'the Netherlands', 'aus den Niederlanden']];
+var DE_DAYS = [['Montag', 'Monday', 'Mo'], ['Dienstag', 'Tuesday', 'Di'], ['Mittwoch', 'Wednesday', 'Mi'], ['Donnerstag', 'Thursday', 'Do'], ['Freitag', 'Friday', 'Fr'], ['Samstag', 'Saturday', 'Sa'], ['Sonntag', 'Sunday', 'So']];
+var DE_MONTHS = [['Januar', 'January'], ['Februar', 'February'], ['März', 'March'], ['April', 'April'], ['Mai', 'May'], ['Juni', 'June'], ['Juli', 'July'], ['August', 'August'], ['September', 'September'], ['Oktober', 'October'], ['November', 'November'], ['Dezember', 'December']];
+var DE_SEASON = [['der Winter', 'winter', [11, 0, 1]], ['das Frühjahr', 'spring', [2, 3, 4]], ['der Sommer', 'summer', [5, 6, 7]], ['der Herbst', 'autumn', [8, 9, 10]]];
+
+/* numbers */
+var DE_U = ['null', 'eins', 'zwei', 'drei', 'vier', 'fünf', 'sechs', 'sieben', 'acht', 'neun', 'zehn', 'elf', 'zwölf', 'dreizehn', 'vierzehn', 'fünfzehn', 'sechzehn', 'siebzehn', 'achtzehn', 'neunzehn'];
+var DE_T = ['', '', 'zwanzig', 'dreißig', 'vierzig', 'fünfzig', 'sechzig', 'siebzig', 'achtzig', 'neunzig'];
+function deNum(n) { if (n === 100) return 'hundert'; if (n < 20) return DE_U[n]; var t = Math.floor(n / 10), u = n % 10; return u ? (u === 1 ? 'ein' : DE_U[u]) + 'und' + DE_T[t] : DE_T[t]; }
+function deOrd(n) { var x = { 1: 'erste', 3: 'dritte', 7: 'siebte', 8: 'achte' }; if (x[n]) return x[n]; return n < 20 ? deNum(n) + 'te' : deNum(n) + 'ste'; }
+
+/* verbs: ich, du, er/sie/es, wir, ihr, sie/Sie */
+var DE_PRON = [['ich', 0], ['du', 1], ['er', 2], ['sie (she)', 2], ['es', 2], ['wir', 3], ['ihr', 4], ['sie (they)', 5], ['Sie (polite)', 5]];
+var DE_IRR = { heißen: ['heiße', 'heißt', 'heißt', 'heißen', 'heißt', 'heißen'], sprechen: ['spreche', 'sprichst', 'spricht', 'sprechen', 'sprecht', 'sprechen'], essen: ['esse', 'isst', 'isst', 'essen', 'esst', 'essen'], mögen: ['mag', 'magst', 'mag', 'mögen', 'mögt', 'mögen'], sein: ['bin', 'bist', 'ist', 'sind', 'seid', 'sind'], haben: ['habe', 'hast', 'hat', 'haben', 'habt', 'haben'] };
+function deConj(v, i) { if (DE_IRR[v]) return DE_IRR[v][i]; var st = v.slice(0, -2); return st + ['e', 'st', 't', 'en', 't', 'en'][i]; }
+var DE_REG = ['spielen', 'wohnen', 'machen', 'hören', 'leben', 'singen', 'kommen', 'schreiben', 'lernen'];
+var DE_COMP = { spielen: 'gern Fußball', wohnen: 'in Berlin', machen: 'heute Sport', hören: 'gern Musik', leben: 'in Luxemburg', singen: 'zusammen', kommen: 'aus Spanien', schreiben: 'eine E-Mail', lernen: 'Deutsch', heißen: 'Müller', sprechen: 'Deutsch und Englisch', essen: 'gern Pizza', mögen: 'Tennis', sein: 'in der Klasse 7', haben: 'im Mai Geburtstag' };
+var DE_PRONTXT = ['Ich', 'Du', 'Er', 'Sie (she)', 'Es', 'Wir', 'Ihr', 'Sie (they)', 'Sie (polite)'];
+
+/* possessives */
+var DE_POSS = [['ich', 'mein'], ['du', 'dein'], ['er', 'sein'], ['sie (she)', 'ihr'], ['es', 'sein'], ['wir', 'unser'], ['ihr', 'euer'], ['sie (they)', 'ihr'], ['Sie (polite)', 'Ihr']];
+function dePossForm(base, art) { if (art === 'der' || art === 'das') return base; return base === 'euer' ? 'eure' : base + 'e'; }
+var DE_POSS_NOUNS = [['der', 'Bleistift', 'ist blau'], ['der', 'Rucksack', 'ist schwarz'], ['die', 'Sporttasche', 'ist rot'], ['das', 'Heft', 'ist grün'], ['der', 'Laptop', 'ist alt'], ['die', 'Brille', 'ist neu'], ['das', 'Lineal', 'ist lang'], ['das', 'Tablet', 'ist neu'], ['die', 'Brotdose', 'ist gelb'], ['die', 'Uhr', 'ist kaputt'], ['pl', 'Bücher', 'sind neu'], ['pl', 'Hefte', 'sind grün']];
+
+/* word order */
+var DE_ORDER = [
+  { w: ['Frau Richert', 'ist', '34 Jahre alt'], v: 1, en: 'Mrs Richert is 34 years old.' },
+  { w: ['Sie', 'wohnt', 'in Münster'], v: 1, en: 'She lives in Münster.' },
+  { w: ['Sie', 'spielt', 'gern', 'Volleyball'], v: 1, en: 'She likes playing volleyball.' },
+  { w: ['Ich', 'heiße', 'Paul'], v: 1, en: 'My name is Paul.' },
+  { w: ['Mein Freund', 'hört', 'gern', 'Musik'], v: 1, en: 'My friend likes listening to music.' },
+  { w: ['Heute', 'spielen', 'wir', 'Tennis'], v: 1, en: 'Today we are playing tennis.' },
+  { w: ['Morgen', 'lernen', 'wir', 'zusammen'], v: 1, en: 'Tomorrow we are studying together.' },
+  { w: ['Am Montag', 'habe', 'ich', 'Deutsch'], v: 1, en: 'On Monday I have German.' },
+  { w: ['Woher', 'kommt', 'Frau Richert', '?'], v: 1, en: 'Where does Mrs Richert come from?' },
+  { w: ['Wo', 'wohnst', 'du', '?'], v: 1, en: 'Where do you live?' },
+  { w: ['Wie alt', 'bist', 'du', '?'], v: 1, en: 'How old are you?' },
+  { w: ['Spielst', 'du', 'Gitarre', '?'], v: 0, en: 'Do you play the guitar?' },
+  { w: ['Anna', 'mag', 'Sport'], v: 1, en: 'Anna likes sport.' },
+  { w: ['Wir', 'spielen', 'in der Pause', 'Fußball'], v: 1, en: 'We play football at break time.' }
+];
+function deJoin(a) { return a.join(' ').replace(/ \?$/, '?') + (a[a.length - 1] === '?' ? '' : '.'); }
+
+/* conversation */
+var DE_QA = [['Wie heißt du?', 'Ich heiße Lena.'], ['Wie alt bist du?', 'Ich bin zwölf Jahre alt.'], ['Woher kommst du?', 'Ich komme aus Österreich.'], ['Wo wohnst du?', 'Ich wohne in Luxemburg.'], ['Was machst du gern?', 'Ich spiele gern Basketball.'], ['Wann hast du Geburtstag?', 'Am dritten Mai.'], ['Wie ist deine Handynummer?', 'Null, sechs, neun, eins …'], ['Was ist dein Hobby?', 'Mein Hobby ist Schwimmen.'], ['Welche Sprachen sprichst du?', 'Ich spreche Deutsch und Französisch.']];
+var DE_TEXTS = [
+  { title: 'Hallo, ich bin Jonas!', text: 'Hallo! Ich heiße Jonas und ich bin zwölf Jahre alt. Ich komme aus der Schweiz, aber jetzt wohne ich in Luxemburg. Ich spreche Deutsch, Französisch und ein bisschen Englisch.\n\nIn der Schule mag ich Informatik und Sport. Mathe finde ich langweilig! In der Pause spiele ich mit Leo Fußball. Leo ist mein Freund.\n\nIch habe im März Geburtstag, am elften März. Mein Hobby ist Musik: ich spiele Gitarre und ich singe gern.',
+    qs: [{ q: 'How old is Jonas?', a: '12', w: ['11', '13', '20'], s: '“Ich bin zwölf Jahre alt.”' }, { q: 'Where does Jonas come from?', a: 'Switzerland', w: ['Luxembourg', 'Sweden', 'Germany'], s: '“Ich komme aus der Schweiz.” He lives in Luxembourg now.' }, { q: 'Where does Jonas live now?', a: 'Luxembourg', w: ['Switzerland', 'Spain', 'Austria'], s: '“… aber jetzt wohne ich in Luxemburg.”' }, { q: 'Which subject does Jonas find boring?', a: 'Maths', w: ['Computer Science', 'Sport', 'Music'], s: '“Mathe finde ich langweilig!”' }, { q: 'When is Jonas’s birthday?', a: '11 March', w: ['1 March', '11 May', '7 March'], s: '“am elften März”: elf + te + n.' }, { q: 'What does Jonas do at break time?', a: 'He plays football with Leo', w: ['He plays the guitar', 'He does his homework', 'He goes swimming'], s: '“In der Pause spiele ich mit Leo Fußball.”' }] },
+  { title: 'Das ist Sophie', text: 'Das ist Sophie. Sie ist dreizehn Jahre alt und kommt aus Frankreich. Jetzt wohnt sie in Köln, in Deutschland. Ihre Adresse ist Schulstraße 24.\n\nSophie mag Biologie und Kunst, aber sie mag Physik nicht. Ihr Hobby ist Schwimmen. Am Samstag spielt sie auch Tennis mit ihrer Freundin Mia.\n\nSophie hat im Herbst Geburtstag, am einunddreißigsten Oktober.',
+    qs: [{ q: 'Where is Sophie from?', a: 'France', w: ['Germany', 'Belgium', 'Austria'], s: '“… und kommt aus Frankreich.”' }, { q: 'What is Sophie’s house number?', a: '24', w: ['42', '14', '34'], s: '“Schulstraße 24”: vierundzwanzig.' }, { q: 'Which subject does Sophie not like?', a: 'Physics', w: ['Biology', 'Art', 'Sport'], s: '“… aber sie mag Physik nicht.” Nicht means not.' }, { q: 'What does Sophie do on Saturday?', a: 'She plays tennis with Mia', w: ['She goes swimming with Mia', 'She plays football', 'She goes to school'], s: '“Am Samstag spielt sie auch Tennis mit ihrer Freundin Mia.”' }, { q: 'When is Sophie’s birthday?', a: '31 October', w: ['13 October', '31 August', '30 October'], s: '“am einunddreißigsten Oktober”: einunddreißig + ste + n.' }, { q: 'How old is Sophie?', a: '13', w: ['12', '30', '3'], s: '“Sie ist dreizehn Jahre alt.”' }] }
+];
+
+/* ---------- generic vocab question builders ---------- */
+function deVocabGens(list, opts) {
+  opts = opts || {};
+  var deOf = opts.deOf || function (x) { return x[0]; }, enOf = opts.enOf || function (x) { return x[1]; };
+  return [
+    function () { var it = pick(list), d = deOf(it); return mc('What does ' + de('<b>' + d + '</b>') + ' mean?', enOf(it), shuffle(list.filter(function (x) { return x !== it; })).slice(0, 3).map(enOf), { hint: opts.hint, steps: [de(d) + ' = ' + enOf(it) + '.'] }); },
+    function () { var it = pick(list), d = deOf(it); var q = mc('How do you say <b>' + enOf(it) + '</b> in German?', d, shuffle(list.filter(function (x) { return x !== it; })).slice(0, 3).map(deOf), { hint: opts.hint, steps: [enOf(it) + ' = ' + de(d) + '.'] }); q.lang = 'de'; return q; },
+    function () { var it = pick(list), d = deOf(it); return deText('Type the German for <b>' + enOf(it) + '</b>.' + (opts.typeNote || ''), d, { caseCheck: !!opts.caseCheck, also: opts.also ? opts.also(it) : [], hint: opts.typeHint ? opts.typeHint(it) : 'It starts with “' + d.charAt(0) + '”.', steps: [enOf(it) + ' = ' + de(d) + '.'].concat(opts.extra ? [opts.extra(it)] : []) }); }
+  ];
+}
+function nounDE(x) { return x[0] + ' ' + x[1]; }
+
+function registerGerman() {
+  ger({ id: 'de7-greetings', strand: 'D', title: 'Hallo! Greetings and small words', codes: ['A1 · Sich vorstellen'], calc: false,
+    blurb: 'Saying hello and goodbye, question words like Wo? Woher? Wie?, and the small words that hold sentences together.',
+    learn: { ideas: ['Greetings by time of day: ' + de('Guten Morgen') + ' (morning), ' + de('Guten Tag') + ' (daytime), ' + de('Guten Abend') + ' (evening), ' + de('Gute Nacht') + ' (going to bed). ' + de('Hallo') + ' works any time with friends.', 'Saying goodbye: ' + de('Auf Wiedersehen') + ' (polite), ' + de('Tschüss') + ' (friends), ' + de('Bis später') + ' (see you later).', 'Question words: ' + de('Wo?') + ' = where? ' + de('Woher?') + ' = where from? ' + de('Wie?') + ' = how? ' + de('Wie alt?') + ' = how old?',
+        'Greetings and question words' + deTable(['Deutsch', 'English'], DE_GREET.concat(DE_SMALL.slice(0, 3))), 'Small words' + deTable(['Deutsch', 'English'], DE_SMALL.slice(3))],
+      example: { q: 'You meet your teacher at 8 o’clock in the morning. What do you say?', steps: [de('Guten Morgen!') + ' It is morning and she is your teacher, so not ' + de('Hallo') + '.'] }, watch: de('Wo?') + ' asks where you are. ' + de('Woher?') + ' asks where you come from: ' + de('Woher kommst du? Ich komme aus Luxemburg.') },
+    gens: deVocabGens(DE_GREET.concat(DE_SMALL)).concat([
+      bank([{ q: 'It is 9 pm and you are going to bed. What do you say?', a: 'Gute Nacht!', w: ['Guten Abend!', 'Guten Morgen!', 'Guten Tag!'], s: ['Gute Nacht is for bedtime. Guten Abend is a greeting in the evening.'] },
+        { q: 'You arrive at a friend’s house at 7 pm. Which greeting fits best?', a: 'Guten Abend!', w: ['Gute Nacht!', 'Guten Morgen!', 'Auf Wiedersehen!'], s: ['Guten Abend = good evening (hello in the evening).'] },
+        { q: 'Which question word means “where from?”', a: 'Woher?', w: ['Wo?', 'Wie?', 'Wer?'], s: ['Woher kommst du? = Where do you come from?'] },
+        { q: 'You did not hear what the teacher said. What do you say?', a: 'Wie bitte?', w: ['Danke!', 'Tschüss!', 'Keine Ahnung!'], s: ['Wie bitte? = Pardon?'] },
+        { q: 'Which is the polite way to say goodbye to your head teacher?', a: 'Auf Wiedersehen!', w: ['Tschüss!', 'Hallo!', 'Bis später!'], s: ['Auf Wiedersehen is polite; Tschüss is for friends and family.'] }])]) });
+
+  ger({ id: 'de7-subjects', strand: 'D', title: 'Die Schulfächer: school subjects', codes: ['A1 · Meine Klasse'], calc: false,
+    blurb: 'The names of school subjects, and saying which ones you like.',
+    learn: { ideas: ['School subjects' + deTable(['Deutsch', 'English'], DE_SUBJ.map(function (x) { return [x[0] === 'Mathe' ? 'Mathe (Mathematik)' : x[0], x[1]]; })), 'Like all German nouns, subjects start with a capital letter: ' + de('Ich mag Kunst und Musik.'), 'Spelling traps: ' + de('Physik') + ' (k at the end), ' + de('Französisch') + ' (ö and sch), ' + de('Ökonomie') + ' (capital Ö), ' + de('Erdkunde') + ' (“earth knowledge”).'],
+      example: { q: 'How do you say “I like History and Geography”?', steps: [de('Ich mag Geschichte und Erdkunde.')] }, watch: 'English “Physics” ends in -ics, but German is ' + de('Physik') + '. The same pattern: ' + de('Mathematik, Informatik') + '.' },
+    gens: deVocabGens(DE_SUBJ, { caseCheck: true, typeNote: ' (Remember the capital letter.)', also: function (x) { return x[0] === 'Mathe' ? ['Mathematik'] : []; }, typeHint: function (x) { return 'It starts with “' + x[0].charAt(0) + '” and has ' + x[0].length + ' letters.'; } }) });
+
+  ger({ id: 'de7-school', strand: 'D', title: 'Das Schulmaterial: der, die, das', codes: ['A1 · Meine Klasse'], calc: false,
+    blurb: 'Things in your school bag, learnt with their article: der, die or das.',
+    learn: { ideas: ['Every German noun is <b>masculine</b> (' + de('der') + '), <b>feminine</b> (' + de('die') + ') or <b>neuter</b> (' + de('das') + '). Always learn the article with the noun.', 'Masculine (der)' + deTable(['Deutsch', 'English'], DE_SCHOOL.filter(function (x) { return x[0] === 'der'; }).map(function (x) { return [nounDE(x), x[2]]; })), 'Feminine (die)' + deTable(['Deutsch', 'English'], DE_SCHOOL.filter(function (x) { return x[0] === 'die'; }).map(function (x) { return [nounDE(x), x[2]]; })), 'Neuter (das)' + deTable(['Deutsch', 'English'], DE_SCHOOL.filter(function (x) { return x[0] === 'das'; }).map(function (x) { return [nounDE(x), x[2]]; }))],
+      example: { q: 'Write “the dictionary” in German.', steps: ['It is a neuter noun.', de('das Wörterbuch') + ': Wort (word) + Buch (book), with ö.'] }, watch: 'Spelling traps: ' + de('der Spitzer, der Radiergummi, der Taschenrechner, der Schreibblock, das Wörterbuch, die Brotdose, die Sporttasche') + '. Nouns always take a capital letter.' },
+    gens: deVocabGens(DE_SCHOOL, { deOf: nounDE, enOf: function (x) { return x[2]; }, caseCheck: true, typeNote: ' Include <b>der</b>, <b>die</b> or <b>das</b>.', typeHint: function (x) { return 'The article is ' + x[0] + '. The noun starts with “' + x[1].charAt(0) + '”.'; } }).concat([
+      function () { var it = pick(DE_SCHOOL); var q = mc('Which article goes with ' + de('<b>' + it[1] + '</b>') + ' (' + it[2].replace('the ', '') + ')?', it[0], ['der', 'die', 'das'].filter(function (a) { return a !== it[0]; }), { steps: [de(nounDE(it)) + '.'] }); q.options = ['der', 'die', 'das']; q.correct = ['der', 'die', 'das'].indexOf(it[0]); return q; },
+      function () { var it = pick(DE_SCHOOL); return deText('Write the article: ' + de('<b>___ ' + it[1] + '</b>') + ' (' + it[2] + ')', it[0], { label: 'Artikel', hint: 'der (masculine), die (feminine) or das (neuter)?', steps: [de(nounDE(it)) + '.'] }); }]) });
+
+  ger({ id: 'de7-hobbies', strand: 'D', title: 'Hobbys, Freunde und Angaben', codes: ['A1 · Meine Freizeit'], calc: false,
+    blurb: 'Sports and hobbies, words about friends and class, and personal details like first name, address and phone number.',
+    learn: { ideas: ['Hobbies' + deTable(['Deutsch', 'English'], DE_HOBBY), 'Say what you like doing with <b>gern</b> after the verb: ' + de('Ich spiele gern Fußball.') + ' ' + de('Ich höre gern Musik.') + ' ' + de('Ich gehe gern schwimmen.'), 'People, class and personal details' + deTable(['Deutsch', 'English'], DE_CLASS.map(function (x) { return [nounDE(x), x[2]]; })), 'Plural of das Hobby: ' + de('die Hobbys') + '. Plural of der Vorname: ' + de('die Vornamen') + '.'],
+      example: { q: 'Say “My hobby is cycling.”', steps: [de('Mein Hobby ist Radfahren.')] }, watch: '“I like playing football” is ' + de('Ich spiele gern Fußball') + ', not “Ich mag spielen Fußball”. Use ' + de('mögen') + ' with a noun: ' + de('Ich mag Fußball.') },
+    gens: deVocabGens(DE_HOBBY, { caseCheck: true, typeHint: function (x) { return 'It starts with “' + x[0].charAt(0) + '”.'; } }).slice(0, 2).concat(deVocabGens(DE_CLASS, { deOf: nounDE, enOf: function (x) { return x[2]; }, caseCheck: true, typeNote: ' Include <b>der</b>, <b>die</b> or <b>das</b>.', typeHint: function (x) { return 'The article is ' + x[0] + '.'; } })).concat([
+      bank([{ q: 'Which sentence means “I like playing tennis”?', a: 'Ich spiele gern Tennis.', w: ['Ich mag spielen Tennis.', 'Ich gern spiele Tennis.', 'Ich spielen gern Tennis.'], s: ['Verb second (spiele), then gern.'] },
+        { q: 'Which word means “boring”?', a: 'langweilig', w: ['toll', 'super', 'blöd'], s: ['langweilig = boring; toll = great.'] },
+        { q: 'On a form, what do you write next to “Vorname”?', a: 'Your first name', w: ['Your last name', 'Your address', 'Your age'], s: ['Vorname = first name. Nachname or Familienname = last name.'] },
+        { q: 'Which word is the friend who is a girl?', a: 'die Freundin', w: ['der Freund', 'die Freunde', 'das Freund'], s: ['-in makes the female form: der Freund → die Freundin.'] },
+        { q: 'What is “die Postleitzahl”?', a: 'The postcode', w: ['The phone number', 'The house number', 'The street'], s: ['Post + leit (guide) + Zahl (number).'] }])]) });
+
+  ger({ id: 'de7-countries', strand: 'D', title: 'Länder: Woher kommst du?', codes: ['A1 · Sich vorstellen'], calc: false,
+    blurb: 'European countries in German, and saying where you come from with “Ich komme aus …”.',
+    learn: { ideas: ['Countries' + deTable(['Deutsch', 'English'], DE_COUNTRY.map(function (x) { return [x[0], x[1]]; })), 'Most countries have no article: ' + de('Ich komme aus Spanien. Ich wohne in Italien.'), 'A few have an article, and it changes after ' + de('aus') + ': ' + de('die Schweiz → aus der Schweiz') + ', ' + de('die Türkei → aus der Türkei') + ', ' + de('die USA → aus den USA') + ', ' + de('die Niederlande → aus den Niederlanden') + '.', de('Woher kommst du?') + ' → ' + de('Ich komme aus …') + '. ' + de('Wo wohnst du?') + ' → ' + de('Ich wohne in …') + '.'],
+      example: { q: 'Paolo is from Switzerland. Write the sentence.', steps: ['Switzerland has an article: die Schweiz.', de('Paolo kommt aus der Schweiz.')] }, watch: 'Spelling: ' + de('Norwegen') + ' (not Norwegan), ' + de('Deutschland') + ' (tsch), ' + de('Dänemark') + ' (ä).' },
+    gens: deVocabGens(DE_COUNTRY, { caseCheck: true, typeHint: function (x) { return 'It starts with “' + x[0].replace('die ', '').charAt(0) + '”.'; } }).concat([
+      function () { var it = pick(DE_COUNTRY); return deText('Complete: ' + de('Ich komme ___.') + ' (from ' + it[1] + ')', it[2], { caseCheck: true, label: 'aus …', hint: it[0].indexOf('die ') === 0 ? 'This country has an article. After aus, die becomes der (or den for plurals).' : 'aus + the country name.', steps: [de('Ich komme ' + it[2] + '.')] }); },
+      function () { var it = pick(DE_COUNTRY.filter(function (x) { return x[0].indexOf('die ') === 0; })), w = it[0].replace('die ', ''); return mc('Which is correct?', 'Ich komme ' + it[2] + '.', ['Ich komme aus ' + w + '.', 'Ich komme aus die ' + w + '.', 'Ich komme von ' + w + '.'], { steps: [de(it[0]) + ' has an article, so: ' + de(it[2]) + '.'] }); }]) });
+
+  ger({ id: 'de7-numbers', strand: 'M', title: 'Die Zahlen: 0 bis 100', codes: ['A1 · Wie alt bist du?'], calc: false,
+    blurb: 'Counting and writing numbers to 100, including the “backwards” two-digit numbers like einundzwanzig.',
+    learn: { ideas: ['0–12 to learn by heart: ' + de('null, eins, zwei, drei, vier, fünf, sechs, sieben, acht, neun, zehn, elf, zwölf') + '.', '13–19: number + zehn: ' + de('dreizehn, vierzehn, fünfzehn') + ', but ' + de('sechzehn') + ' and ' + de('siebzehn') + ' drop letters.', 'Tens: ' + de('zwanzig, dreißig, vierzig, fünfzig, sechzig, siebzig, achtzig, neunzig, hundert') + '. Only 30 has ß.', 'For 21–99, say the <b>units first</b>, then <b>und</b>, then the tens, all as one word: 82 = 2 + 80 = ' + de('zweiundachtzig') + '.', '1 becomes <b>ein</b> in a compound: 21 = ' + de('einundzwanzig') + ', 81 = ' + de('einundachtzig') + ' (not einsundachtzig).'],
+      example: { q: 'Write 79 in German.', steps: ['Units first: neun.', 'Then und, then the tens: siebzig.', de('neunundsiebzig') + '. Note siebzig, not siebenzig.'] }, watch: 'Tricky ones: ' + de('sechzehn, sechzig, siebzehn, siebzig, dreißig') + '. And 1 is ' + de('eins') + ' alone but ' + de('ein') + ' in ' + de('einundzwanzig') + '.' },
+    gens: [
+      function () { var n = Math.random() < 0.3 ? pick([16, 17, 21, 30, 31, 60, 61, 70, 71, 81, 91, 67, 76]) : ri(0, 100); return deText('Write the number <b>' + n + '</b> in German, as one word.', deNum(n), { label: 'Zahl', hint: n > 20 && n % 10 ? 'Units first, then und, then the tens.' : 'Check the list in the key ideas.', steps: n > 20 && n % 10 ? [n + ' = ' + (n % 10) + ' + ' + (n - n % 10) + '.', de(deNum(n)) + '.'] : [de(deNum(n)) + '.'] }); },
+      function () { var n = ri(13, 99); return { kind: 'num', prompt: 'Which number is ' + de('<b>' + deNum(n) + '</b>') + '?', answer: n, ans: '' + n, hint: 'If you see “und”, the first part is the units.', steps: [de(deNum(n)) + ' = ' + n + '.'] }; },
+      function () { var n = pick([21, 31, 41, 51, 61, 71, 81, 91, 16, 17, 60, 70, 30, 36, 37, 66, 77]), right = deNum(n), wrong = uniq([right.replace(/^ein/, 'eins'), right.replace('sech', 'sechs').replace('sieb', 'sieben'), right.replace('ß', 'ss').replace('dreißig', 'dreizig'), (n % 10 ? deNum(n - n % 10) + 'und' + (n % 10 === 1 ? 'eins' : DE_U[n % 10]) : right + 'e')]).filter(function (x) { return x !== right; });
+        while (wrong.length < 3) wrong.push(deNum(n + wrong.length + 1));
+        var q = mc('Which is the correct spelling of <b>' + n + '</b>?', right, wrong.slice(0, 3), { steps: [n + ' = ' + de(right) + '.'] }); return q; },
+      function () { var a = ri(2, 9), b = ri(2, 9); return deText('Was ist ' + de(deNum(a)) + ' plus ' + de(deNum(b * 10)) + '? Write the answer in German.', deNum(a + b * 10), { label: 'Zahl', hint: (a + b * 10) + ': units first.', steps: [a + ' + ' + b * 10 + ' = ' + (a + b * 10) + ' = ' + de(deNum(a + b * 10)) + '.'] }); }] });
+
+  ger({ id: 'de7-calendar', strand: 'M', title: 'Tage, Monate, Jahreszeiten', codes: ['A1 · Meine Klasse'], calc: false,
+    blurb: 'Days of the week, months and seasons, with their short forms and spellings.',
+    learn: { ideas: ['Days' + deTable(['Deutsch', 'English', 'Short'], DE_DAYS), 'Months' + deTable(['Deutsch', 'English'], DE_MONTHS), 'Seasons: ' + de('der Winter') + ' (Dec–Feb), ' + de('das Frühjahr') + ' (also ' + de('der Frühling') + ', Mar–May), ' + de('der Sommer') + ' (Jun–Aug), ' + de('der Herbst') + ' (Sep–Nov).', 'Use ' + de('am') + ' with days and ' + de('im') + ' with months and seasons: ' + de('am Montag, im Mai, im Winter') + '.'],
+      example: { q: 'Say “My birthday is in November.”', steps: [de('Ich habe im November Geburtstag.')] }, watch: 'Spelling: ' + de('Dienstag') + ' (st, not d), ' + de('Mittwoch') + ' (tt), ' + de('Donnerstag') + ', ' + de('März') + ' (one ä, no e), ' + de('Mai') + ', ' + de('Juni, Juli') + ', ' + de('Oktober, Dezember') + ' (k and z).' },
+    gens: [
+      function () { var d = pick(DE_DAYS); return deText('Type the German for <b>' + d[1] + '</b>.', d[0], { caseCheck: true, label: 'Tag', hint: 'Short form: ' + d[2] + '.', steps: [d[1] + ' = ' + de(d[0]) + '.'] }); },
+      function () { var m = pick(DE_MONTHS); return deText('Type the German for <b>' + m[1] + '</b>.', m[0], { caseCheck: true, label: 'Monat', also: m[0] === 'März' ? [] : [], hint: 'It starts with “' + m[0].charAt(0) + '”.', steps: [m[1] + ' = ' + de(m[0]) + '.'] }); },
+      function () { var i = ri(0, 6), d = DE_DAYS[i], t = pick(['after', 'before']), ans = DE_DAYS[(i + (t === 'after' ? 1 : 6)) % 7][0]; return mc('Which day comes ' + t + ' ' + de('<b>' + d[0] + '</b>') + '?', ans, shuffle(DE_DAYS.map(function (x) { return x[0]; }).filter(function (x) { return x !== ans && x !== d[0]; })).slice(0, 3), { steps: ['The week: ' + de(DE_DAYS.map(function (x) { return x[0]; }).join(', ')) + '.'] }); },
+      function () { var m = ri(0, 11), s = DE_SEASON.filter(function (x) { return x[2].indexOf(m) >= 0; })[0]; var q = mc('Which season is ' + de('<b>' + DE_MONTHS[m][0] + '</b>') + ' in?', s[0], DE_SEASON.filter(function (x) { return x !== s; }).map(function (x) { return x[0]; }), { steps: [DE_MONTHS[m][1] + ' is in ' + s[1] + ': ' + de(s[0]) + '.'] }); q.options = DE_SEASON.map(function (x) { return x[0]; }); q.correct = DE_SEASON.indexOf(s); return q; },
+      function () { var d = pick(DE_DAYS); return mc('What is the short form ' + de('<b>' + d[2] + '</b>') + '?', d[0], shuffle(DE_DAYS.filter(function (x) { return x !== d; })).slice(0, 3).map(function (x) { return x[0]; }), { steps: [de(d[2] + ' = ' + d[0]) + '.'] }); },
+      bank([{ q: 'Which is correct?', a: 'im Juli', w: ['am Juli', 'in Juli', 'um Juli'], s: ['Months take im: im Juli.'] }, { q: 'Which is correct?', a: 'am Freitag', w: ['im Freitag', 'in Freitag', 'um Freitag'], s: ['Days take am: am Freitag.'] }, { q: 'What does “Herbst” mean?', a: 'Autumn', w: ['Spring', 'Summer', 'Winter'], s: ['der Herbst = autumn (September to November).'] }, { q: 'What does “Frühjahr” mean?', a: 'Spring', w: ['Autumn', 'Early morning', 'Winter'], s: ['früh = early; das Frühjahr (or der Frühling) = spring.'] }])] });
+
+  ger({ id: 'de7-dates', strand: 'M', title: 'Das Datum: der erste, der zweite …', codes: ['A1 · Meine Klasse'], calc: false,
+    blurb: 'Ordinal numbers (first, second, third …), writing the date, and saying when your birthday is.',
+    learn: { ideas: ['Up to 19th, add <b>-te</b> to the number: ' + de('zweite, vierte, fünfte, zehnte, neunzehnte') + '.', 'From 20th, add <b>-ste</b>: ' + de('zwanzigste, dreiundzwanzigste, einunddreißigste') + '.', 'Exceptions: ' + de('1. erste') + ', ' + de('3. dritte') + ', ' + de('7. siebte') + ', ' + de('8. achte') + ' (only one t).', 'Writing the date: <b>Di, 17.11.</b> → ' + de('Dienstag, der siebzehnte November') + '. In German the day comes before the month.', 'Saying “on” a date: ' + de('am') + ' + ordinal + <b>n</b>: ' + de('Ich habe am dreiundzwanzigsten November Geburtstag.')],
+      example: { q: 'Write Fr, 25.12. in words.', steps: ['25 = fünfundzwanzig; from 20, add -ste.', de('Freitag, der fünfundzwanzigste Dezember.')] }, watch: '7th is ' + de('siebte') + ' (ie, like siebzehn), not seibte. 31st is ' + de('einunddreißigste') + '. And 12.03. is 12 <b>March</b>, not 3 December.' },
+    gens: [
+      function () { var n = Math.random() < 0.35 ? pick([1, 3, 7, 8, 21, 31, 13, 17]) : ri(1, 31); return deText('Write the ordinal for <b>' + n + '.</b> (' + n + (n % 10 === 1 && n !== 11 ? 'st' : n % 10 === 2 && n !== 12 ? 'nd' : n % 10 === 3 && n !== 13 ? 'rd' : 'th') + ') in the form used in “der ___ Mai”.', deOrd(n), { label: 'Ordinalzahl', hint: [1, 3, 7, 8].indexOf(n) >= 0 ? 'This is one of the exceptions.' : n < 20 ? 'Up to 19: add -te.' : 'From 20: add -ste.', steps: [[1, 3, 7, 8].indexOf(n) >= 0 ? 'Exception: ' + de(deOrd(n)) + '.' : de(deNum(n)) + ' + ' + (n < 20 ? '-te' : '-ste') + ' = ' + de(deOrd(n)) + '.', de('der ' + deOrd(n) + ' Mai') + '.'] }); },
+      function () { var d = ri(1, 28), m = ri(0, 11), dy = pick(DE_DAYS), right = dy[0] + ', der ' + deOrd(d) + ' ' + DE_MONTHS[m][0], m2 = d <= 12 && d - 1 !== m ? d - 1 : (m + 3) % 12;
+        var w = uniq([dy[0] + ', der ' + deNum(d) + ' ' + DE_MONTHS[m][0], dy[0] + ', der ' + deOrd(d) + ' ' + DE_MONTHS[m2][0], dy[0] + ', der ' + deOrd(d === 28 ? 27 : d + 1) + ' ' + DE_MONTHS[m][0]]).filter(function (x) { return x !== right; });
+        var q = mc('Which is <b>' + dy[2] + ', ' + (d < 10 ? '0' : '') + d + '.' + (m < 9 ? '0' : '') + (m + 1) + '.</b> written in words?', right, w, { steps: ['Day ' + d + ' → ' + de(deOrd(d)) + '; month ' + (m + 1) + ' → ' + de(DE_MONTHS[m][0]) + '.', de(right) + '.'] }); q.lang = 'de'; return q; },
+      function () { var d = ri(1, 31), m = ri(0, 11), f = deOrd(d) + 'n'; return deText('Complete: ' + de('Ich habe am <b>___</b> ' + DE_MONTHS[m][0] + ' Geburtstag.') + ' (' + d + '.)', f, { label: 'Ordinalzahl', hint: 'After am, the ordinal ends in -n: ' + de('am zweiten, am zwanzigsten') + '.', steps: [d + '. = ' + de(deOrd(d)) + '.', 'After ' + de('am') + ', add -n: ' + de('am ' + f + ' ' + DE_MONTHS[m][0]) + '.'] }); },
+      function () { var d = ri(1, 31), m = ri(0, 11); return { kind: 'fields', prompt: 'Read the date and write it in numbers:<p class="data" lang="de">der ' + deOrd(d) + ' ' + DE_MONTHS[m][0] + '</p>', fields: [{ label: 'Day', kind: 'num', answer: d }, { label: 'Month (1–12)', kind: 'num', answer: m + 1 }], ans: d + '.' + (m + 1) + '.', hint: 'In German the day comes first.', steps: [de(deOrd(d)) + ' = ' + d + '; ' + de(DE_MONTHS[m][0]) + ' = month ' + (m + 1) + '.'] }; }] });
+
+  ger({ id: 'de7-verbs', strand: 'H', title: 'Verben im Präsens', codes: ['A1 · Grammatik'], calc: false,
+    blurb: 'Present-tense verb endings for ich, du, er/sie/es, wir, ihr and sie/Sie, plus the irregular verbs sein, haben, mögen, sprechen, essen and heißen.',
+    learn: { ideas: ['Take the infinitive, remove <b>-en</b> to get the stem, then add the ending: ' + de('spielen → spiel-') + '.' + deTable(['Person', 'Ending', 'spielen', 'wohnen'], [['ich', '-e', 'spiele', 'wohne'], ['du', '-st', 'spielst', 'wohnst'], ['er / sie / es', '-t', 'spielt', 'wohnt'], ['wir', '-en', 'spielen', 'wohnen'], ['ihr', '-t', 'spielt', 'wohnt'], ['sie / Sie', '-en', 'spielen', 'wohnen']]),
+        'Irregular verbs to learn' + deTable(['Person', 'sein', 'haben', 'mögen'], [['ich', 'bin', 'habe', 'mag'], ['du', 'bist', 'hast', 'magst'], ['er / sie / es', 'ist', 'hat', 'mag'], ['wir', 'sind', 'haben', 'mögen'], ['ihr', 'seid', 'habt', 'mögt'], ['sie / Sie', 'sind', 'haben', 'mögen']]),
+        'Vowel change for du and er/sie/es: ' + de('sprechen → du sprichst, er spricht') + '; ' + de('essen → du isst, er isst') + '.', 'Stems ending in ß or s just add -t for du: ' + de('heißen → du heißt') + ' (not heißst).', 'The “ie” in ' + de('spielen') + ' sounds like English “ee”. Spell it i then e.'],
+      example: { q: 'Complete: ' + de('Du ___ (sprechen) Deutsch.'), steps: ['sprechen changes e → i for du.', de('Du sprichst Deutsch.')] }, watch: 'Spelling: ' + de('spielen, spiele, spielst, spielt') + ' (ie, not ei). ' + de('Ihr seid') + ' (you all are) is different from ' + de('seit') + ' (since).' },
+    gens: [
+      function () { var v = pick(Math.random() < 0.55 ? DE_REG : Object.keys(DE_IRR)), p = pick(DE_PRON), f = deConj(v, p[1]), subj = DE_PRONTXT[DE_PRON.indexOf(p)];
+        return deText('Type the correct form of the verb.<p class="data" lang="de">' + subj + ' <b>___</b> ' + DE_COMP[v] + '. (' + v + ')</p>', f, { label: 'Verb', hint: DE_IRR[v] ? v + ' is irregular: check the table.' : 'Stem ' + v.slice(0, -2) + '- + ending for ' + p[0].replace(/ \(.*/, '') + '.', steps: [DE_IRR[v] ? v + ' is irregular.' : 'Stem: ' + de(v.slice(0, -2) + '-') + '; ending for ' + p[0] + ': ' + de(['-e', '-st', '-t', '-en', '-t', '-en'][p[1]]) + '.', de(subj.replace(/ \(.*/, '') + ' ' + f + ' ' + DE_COMP[v] + '.')] }); },
+      function () { var v = pick(DE_REG.concat(Object.keys(DE_IRR))), p = pick(DE_PRON), f = deConj(v, p[1]), w = uniq([0, 1, 2, 3, 4, 5].map(function (i) { return deConj(v, i); }).concat(v === 'spielen' ? ['speilt', 'speilst'] : [])).filter(function (x) { return x !== f; });
+        var q = mc('Which form is correct? ' + de('<b>' + p[0].replace(/ \(.*/, '') + '</b>') + (p[0].indexOf('(') > 0 ? ' ' + p[0].replace(/^[^(]*/, '') : '') + ' + ' + de(v), f, shuffle(w).slice(0, 3), { steps: [de(p[0].replace(/ \(.*/, '') + ' ' + f) + '.'] }); q.lang = 'de'; return q; },
+      function () { var v = pick(['sein', 'haben', 'mögen']), i = ri(0, 5), f = DE_IRR[v][i], pr = ['ich', 'du', 'er', 'wir', 'ihr', 'sie (they)'][i];
+        return deText('Type the form of ' + de('<b>' + v + '</b>') + ' for ' + de('<b>' + pr + '</b>') + '.', f, { label: v, hint: 'An irregular verb. ' + v + ': ' + DE_IRR[v].slice(0, 2).join(', ') + ' …', steps: [de(pr.replace(/ \(.*/, '') + ' ' + f) + '.'] }); },
+      listGen(DE_VERBS_EN, function (it) { return 'What does ' + de('<b>' + it[0] + '</b>') + ' mean?'; }, function (it) { return it[1]; }, DE_VERBS_EN.map(function (x) { return x[1]; }), 'Think of a sentence using the verb.', function (it) { return de(it[0]) + ' = ' + it[1] + '.'; })] });
+
+  ger({ id: 'de7-articles', strand: 'H', title: 'Artikel: der, ein, mein', codes: ['A1 · Meine Klasse'], calc: false,
+    blurb: 'Definite (der, die, das), indefinite (ein, eine) and possessive articles (mein, meine) with school things.',
+    learn: { ideas: ['The article changes with the gender of the noun' + deTable(['', 'Masculine', 'Feminine', 'Neuter'], [['the', 'der Rucksack', 'die Sporttasche', 'das Heft'], ['a', 'ein Rucksack', 'eine Sporttasche', 'ein Heft'], ['my', 'mein Rucksack', 'meine Sporttasche', 'mein Heft']]), 'Pattern: masculine and neuter share the same form (' + de('ein, mein') + '); feminine adds <b>-e</b> (' + de('eine, meine') + ').', 'Plural: ' + de('die Bücher, meine Bücher') + '. There is no plural of ein.'],
+      example: { q: 'Write “a ruler” and “my ruler”.', steps: ['das Lineal is neuter.', de('ein Lineal') + ', ' + de('mein Lineal') + '.'] }, watch: 'It is ' + de('mein') + ' (m-e-i-n), not mien. Say “my” and think “mine”.' },
+    gens: [
+      function () { var it = pick(DE_SCHOOL), k = pick(['ein', 'mein', 'dein']), f = it[0] === 'die' ? k + 'e' : k; return deText('Write the article: ' + de('<b>___ ' + it[1] + '</b>') + ' (' + { ein: 'a', mein: 'my', dein: 'your' }[k] + ' ' + it[2].replace('the ', '') + ')', f, { label: 'Artikel', hint: 'First: is it der, die or das?', steps: [de(nounDE(it)) + ' → ' + de(f + ' ' + it[1]) + (it[0] === 'die' ? ' (feminine: add -e).' : ' (no -e for der and das).')] }); },
+      function () { var it = pick(DE_SCHOOL), k = pick(['ein', 'mein']), f = it[0] === 'die' ? k + 'e' : k; var q = mc('Which is correct?', f + ' ' + it[1], [(it[0] === 'die' ? k : k + 'e') + ' ' + it[1], it[0] === 'die' ? 'der ' + it[1] : 'die ' + it[1], k === 'mein' ? 'mien ' + it[1] : 'einen ' + it[1]], { steps: [de(nounDE(it)) + ', so ' + de(f + ' ' + it[1]) + '.'] }); q.lang = 'de'; return q; },
+      function () { var it = pick(DE_SCHOOL), t = ri(0, 2), forms = [it[0], it[0] === 'die' ? 'eine' : 'ein', it[0] === 'die' ? 'meine' : 'mein'], w = ['der', 'die', 'das', 'ein', 'eine', 'mein', 'meine'].filter(function (x) { return x !== forms[t]; });
+        var q = mc('Pick the right word: ' + de('<b>___ ' + it[1] + '</b>') + ' means “' + ['the', 'a', 'my'][t] + ' ' + it[2].replace('the ', '') + '”.', forms[t], shuffle(w).slice(0, 3), { steps: [de(nounDE(it)) + ': ' + de(forms.join(' / ') + ' ' + it[1]) + '.'] }); q.lang = 'de'; return q; }] });
+
+  ger({ id: 'de7-possessives', strand: 'H', title: 'Possessivartikel: mein, dein, sein …', codes: ['A1 · Meine Klasse'], calc: false,
+    blurb: 'Saying whose something is: my, your, his, her, our, your (all), their, and polite Your.',
+    learn: { ideas: ['Possessive articles' + deTable(['Pronoun', 'der / das', 'die / plural'], [['ich', 'mein', 'meine'], ['du', 'dein', 'deine'], ['er / es', 'sein', 'seine'], ['sie (she)', 'ihr', 'ihre'], ['wir', 'unser', 'unsere'], ['ihr', 'euer', 'eure'], ['sie (they)', 'ihr', 'ihre'], ['Sie (polite)', 'Ihr', 'Ihre']]), 'Same rule as ' + de('ein') + ': add <b>-e</b> for feminine and plural nouns. ' + de('euer') + ' drops an e: ' + de('eure') + '.', de('ihr') + ' can mean “her” or “their”. Polite ' + de('Ihr') + ' (Your) always has a capital I.'],
+      example: { q: 'Complete: ' + de('___ Sporttasche ist rot.') + ' (du)', steps: ['du → dein.', 'die Sporttasche is feminine: add -e.', de('Deine Sporttasche ist rot.')] }, watch: 'Anna’s bag is ' + de('ihr Rucksack') + ' (her), Paul’s is ' + de('sein Rucksack') + ' (his). Do not mix them up.' },
+    gens: [
+      function () { var p = pick(DE_POSS), n = pick(DE_POSS_NOUNS), f = dePossForm(p[1], n[0]); return deText('Fill in the possessive article.<p class="data" lang="de"><b>___</b> ' + n[1] + ' ' + n[2] + '. (' + p[0] + ')</p>', f, { label: 'Possessiv', also: [cap(f)], hint: p[0] + ' → ' + p[1] + '. Then: is ' + n[1] + ' der, die, das or plural?', steps: [p[0] + ' → ' + de(p[1]) + '.', n[0] === 'pl' ? 'Plural: add -e.' : de(n[0] + ' ' + n[1]) + (n[0] === 'die' ? ': feminine, add -e.' : ': no -e.'), de(cap(f) + ' ' + n[1] + ' ' + n[2] + '.')] }); },
+      function () { var p = pick(DE_POSS), n = pick(DE_POSS_NOUNS), f = dePossForm(p[1], n[0]), w = uniq(DE_POSS.map(function (x) { return dePossForm(x[1], n[0]); }).concat([n[0] === 'der' || n[0] === 'das' ? p[1] + 'e' : p[1]]).filter(function (x) { return x !== f && x.toLowerCase() !== f.toLowerCase(); }));
+        var q = mc(de('<b>___</b> ' + n[1] + ' ' + n[2] + '.') + ' Whose? <b>' + p[0] + '</b>', cap(f), shuffle(uniq(w.map(cap)).filter(function (x) { return x !== cap(f); })).slice(0, 3), { steps: [p[0] + ' → ' + de(p[1]) + (n[0] === 'die' || n[0] === 'pl' ? ' + e = ' + de(f) : '') + '.'] }); q.lang = 'de'; return q; },
+      bank([{ q: 'Paul has a bag. “___ Rucksack ist braun.”', a: 'Sein', w: ['Ihr', 'Seine', 'Mein'], s: ['Paul → er → sein. Rucksack is der, so no -e.'] }, { q: 'Anna has a sports bag. “___ Sporttasche ist neu.”', a: 'Ihre', w: ['Seine', 'Ihr', 'Sein'], s: ['Anna → sie → ihr. Sporttasche is die: ihre.'] }, { q: 'You talk to two friends: “Is that your (all) ruler?” “Ist das ___ Lineal?”', a: 'euer', w: ['eure', 'dein', 'unser'], s: ['ihr (you all) → euer. Lineal is das, so no -e.'] }, { q: 'You talk to your teacher politely: “Is that your book?” “Ist das ___ Buch?”', a: 'Ihr', w: ['dein', 'ihr', 'Ihre'], s: ['Polite Sie → Ihr, with a capital I.'] }])] });
+
+  ger({ id: 'de7-wordorder', strand: 'X', title: 'Satzbau: das Verb an Position 2', codes: ['A1 · Sätze'], calc: false,
+    blurb: 'Putting words in the right order: the verb is always the second idea in a statement or W-question, and first in a yes/no question.',
+    learn: { ideas: ['In a statement, the verb is always the <b>second idea</b>: ' + de('Ich <b>spiele</b> Fußball.'), 'If something else comes first, the subject moves after the verb: ' + de('Heute <b>spiele</b> ich Fußball.') + ' ' + de('Am Montag <b>habe</b> ich Deutsch.'), 'W-questions: question word first, verb second: ' + de('Woher <b>kommst</b> du? Wo <b>wohnst</b> du?'), 'Yes/no questions start with the verb: ' + de('<b>Spielst</b> du Gitarre?'), de('gern') + ' comes after the verb: ' + de('Sie spielt gern Volleyball.')],
+      example: { q: 'Put in order: wohnt · in Münster · sie', steps: ['Subject first, verb second.', de('Sie wohnt in Münster.')] }, watch: 'An idea can be several words: ' + de('Am Montag') + ' or ' + de('Frau Richert') + ' counts as one place.' },
+    gens: [
+      function () { var s = pick(DE_ORDER), right = deJoin(s.w), words = s.w.filter(function (x) { return x !== '?'; }), isQ = s.w[s.w.length - 1] === '?', vb = s.w[s.v];
+        var rest = words.filter(function (x) { return x !== vb; }), wr = [];
+        wr.push(deJoin(rest.concat([vb]).concat(isQ ? ['?'] : [])));
+        if (rest.length > 1) wr.push(deJoin(rest.slice(0, 2).concat([vb]).concat(rest.slice(2)).concat(isQ ? ['?'] : [])));
+        wr.push(deJoin((s.v === 0 ? [rest[0], vb] : [vb]).concat(s.v === 0 ? rest.slice(1) : rest).concat(isQ ? ['?'] : [])));
+        wr.push(deJoin(shuffle(words).concat(isQ ? ['?'] : [])));
+        wr = uniq(wr).filter(function (x) { return x !== right; });
+        var q = mc('Put the words in the right order.<p class="data" lang="de">' + shuffle(words).join(' · ') + (isQ ? ' · ?' : ' · .') + '</p>', right, wr.slice(0, 3), { hint: isQ && s.v === 0 ? 'A yes/no question starts with the verb.' : 'The verb (' + vb + ') is the second idea.', steps: ['Verb: ' + de(vb) + '.', de(right) + ' = ' + s.en] });
+        q.lang = 'de'; return q; },
+      function () { var s = pick(DE_ORDER.filter(function (x) { return x.v === 1; })), vb = s.w[1]; var q = mc('Which word is the verb in this sentence?<p class="data" lang="de">' + deJoin(s.w) + '</p>', vb, shuffle(s.w.filter(function (x) { return x !== vb && x !== '?'; })).slice(0, 3), { steps: [de(vb) + ' is the verb, in second place.'] }); q.lang = 'de'; return q; },
+      bank([{ q: 'Which sentence is correct?', a: 'Heute spielen wir Tennis.', w: ['Heute wir spielen Tennis.', 'Heute wir Tennis spielen.', 'Wir Tennis spielen heute.'], s: ['Heute is the first idea, so the verb comes next, then wir.'] },
+        { q: 'Which sentence is correct?', a: 'Sie spielt gern Volleyball.', w: ['Sie spielt mag Volleyball.', 'Sie gern spielt Volleyball.', 'Sie mag spielt Volleyball.'], s: ['Verb second, then gern. Do not add mag.'] },
+        { q: 'Which question is correct?', a: 'Woher kommst du?', w: ['Woher du kommst?', 'Du kommst woher?', 'Kommst woher du?'], s: ['Question word first, verb second.'] },
+        { q: 'Which is a correct yes/no question?', a: 'Wohnst du in Berlin?', w: ['Du wohnst in Berlin?', 'In Berlin du wohnst?', 'Wohnst in Berlin du?'], s: ['Yes/no questions start with the verb, then the subject.'] },
+        { q: 'Which sentence is correct?', a: 'Am Montag habe ich Deutsch.', w: ['Am Montag ich habe Deutsch.', 'Ich am Montag habe Deutsch.', 'Am Montag Deutsch ich habe.'], s: ['Am Montag is one idea, so habe is second.'] }])] });
+
+  ger({ id: 'de7-talk', strand: 'X', title: 'Sich vorstellen: Fragen und Texte', codes: ['A1 · Sich vorstellen'], calc: false,
+    blurb: 'Answering questions about yourself and reading short texts about other students.',
+    learn: { ideas: ['Questions and answers' + deTable(['Frage', 'Antwort'], DE_QA), 'A model introduction: ' + de('Hallo! Ich heiße Mia. Ich bin zwölf Jahre alt. Ich komme aus Belgien, aber jetzt wohne ich in Luxemburg. Ich spreche Französisch und Deutsch. Mein Hobby ist Tennis und ich höre gern Musik. Ich habe am dritten Mai Geburtstag.'), 'Use ' + de('aber') + ' (but) and ' + de('auch') + ' (also) to join ideas: ' + de('Ich mag Kunst, aber ich mag Mathe nicht.')],
+      example: { q: 'Answer: ' + de('Wie alt bist du?') + ' (12)', steps: [de('Ich bin zwölf Jahre alt.') + ' Use bin (sein), not habe.'] }, watch: 'German uses “be” for age: ' + de('Ich bin zwölf') + ' (I am twelve), not “Ich habe zwölf”.' },
+    gens: [
+      function () { var it = pick(DE_QA); var q = mc('Which is the best answer to ' + de('<b>' + it[0] + '</b>') + '?', it[1], shuffle(DE_QA.filter(function (x) { return x !== it; })).slice(0, 3).map(function (x) { return x[1]; }), { steps: [de(it[0] + ' → ' + it[1])] }); q.lang = 'de'; return q; },
+      function () { var it = pick(DE_QA.slice(0, 6)); var q = mc('Which question goes with this answer? ' + de('<b>' + it[1] + '</b>'), it[0], shuffle(DE_QA.filter(function (x) { return x !== it; })).slice(0, 3).map(function (x) { return x[0]; }), { steps: [de(it[0] + ' → ' + it[1])] }); q.lang = 'de'; return q; },
+      function () { var p = pick(DE_TEXTS), it = pick(p.qs); return mc('<div class="passage" lang="de"><b>' + p.title + '</b>' + p.text.split('\n\n').map(function (x) { return '<p>' + x + '</p>'; }).join('') + '</div><p style="margin-top:12px">' + it.q + '</p>', it.a, it.w.slice(0, 3), { hint: 'Find the sentence in the text.', steps: [it.s] }); },
+      function () { var p = pick(DE_TEXTS), it = pick(p.qs); return mc('<div class="passage" lang="de"><b>' + p.title + '</b>' + p.text.split('\n\n').map(function (x) { return '<p>' + x + '</p>'; }).join('') + '</div><p style="margin-top:12px">' + it.q + '</p>', it.a, it.w.slice(0, 3), { hint: 'Find the sentence in the text.', steps: [it.s] }); }] });
+}
+
+registerEnglish(7); registerFrench('B1'); registerGerman();
 /* ===== APP ===== */
 (function () {
   var SUBJECTS = {
     maths: { name: 'Maths', strands: [{ id: 'N', name: 'Number' }, { id: 'A', name: 'Algebra' }, { id: 'G', name: 'Geometry and measure' }, { id: 'S', name: 'Statistics and probability' }] },
     science: { name: 'Science', strands: [{ id: 'B', name: 'Biology' }, { id: 'C', name: 'Chemistry' }, { id: 'P', name: 'Physics' }, { id: 'J', name: 'Energy and gravity' }, { id: 'E', name: 'Earth and space' }, { id: 'W', name: 'Working scientifically' }] },
     english: { name: 'English', strands: [{ id: 'R', name: 'Reading' }, { id: 'K', name: 'Grammar and punctuation' }, { id: 'V', name: 'Vocabulary and spelling' }, { id: 'Y', name: 'Writing' }] },
-    french: { name: 'French', strands: [{ id: 'F', name: 'Grammaire' }, { id: 'L', name: 'Vocabulaire' }, { id: 'O', name: 'Compréhension écrite' }, { id: 'U', name: 'Expression et style' }] }
+    french: { name: 'French', strands: [{ id: 'F', name: 'Grammaire' }, { id: 'L', name: 'Vocabulaire' }, { id: 'O', name: 'Compréhension écrite' }, { id: 'U', name: 'Expression et style' }] },
+    german: { name: 'German', strands: [{ id: 'D', name: 'Wortschatz (vocabulary)' }, { id: 'M', name: 'Zahlen und Daten (numbers and dates)' }, { id: 'H', name: 'Grammatik (grammar)' }, { id: 'X', name: 'Sätze und Texte (sentences and texts)' }] }
   };
   TOPICS.forEach(function (t) { if (!t.subject) t.subject = 'maths'; });
   var subj = 'maths';
   try { var sv = localStorage.getItem('stage7study.subject'); if (SUBJECTS[sv]) subj = sv; } catch (e) {}
   function STR() { return SUBJECTS[subj].strands; }
-  function subjWord() { var n = SUBJECTS[subj].name; return subj === 'english' || subj === 'french' ? n : n.toLowerCase(); }
+  function subjWord() { var n = SUBJECTS[subj].name; return subj === 'english' || subj === 'french' || subj === 'german' ? n : n.toLowerCase(); }
   function TOPS() { return TOPICS.filter(function (t) { return t.subject === subj; }); }
   function setSubj(s) { subj = s; try { localStorage.setItem('stage7study.subject', s); } catch (e) {} markSubj(); }
   function markSubj() { Array.prototype.forEach.call(document.querySelectorAll('[data-subj]'), function (b) { b.setAttribute('aria-pressed', b.getAttribute('data-subj') === subj ? 'true' : 'false'); }); }
@@ -3934,7 +4171,7 @@ registerEnglish(7); registerFrench('B1');
     box.appendChild(ans);
     if (keysNeeded || (wordsNeeded && q.accents)) {
       var keys = el('div', { class: 'keys', 'aria-label': 'Symbol keys' });
-      var keyset = keysNeeded ? [['−', '-'], ['/', '/'], ['.', '.'], ['space', ' '], ['×10^', '×10^']] : ['é', 'è', 'ê', 'à', 'â', 'ç', 'ù', 'û', 'î', 'ï', 'ô', 'ë', 'œ'].map(function (c) { return [c, c]; });
+      var keyset = keysNeeded ? [['−', '-'], ['/', '/'], ['.', '.'], ['space', ' '], ['×10^', '×10^']] : (q.lang === 'de' ? ['ä', 'ö', 'ü', 'ß', 'Ä', 'Ö', 'Ü'] : ['é', 'è', 'ê', 'à', 'â', 'ç', 'ù', 'û', 'î', 'ï', 'ô', 'ë', 'œ']).map(function (c) { return [c, c]; });
       keyset.forEach(function (k) {
         var b = el('button', { type: 'button', 'aria-label': k[0] === 'space' ? 'space' : 'type ' + k[0], lang: q.lang || null }, k[0]);
         b.addEventListener('mousedown', function (e) { e.preventDefault(); });
